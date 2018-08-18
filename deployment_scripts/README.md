@@ -6,5 +6,5 @@ Run the scripts in the Azure cloud shell:
 [Link to shell](https://shell.azure.com/)
 
 ## Scripts
-* DeployWebApp.sh
+* deploy.sh
   * Deploys a web app on Azure
