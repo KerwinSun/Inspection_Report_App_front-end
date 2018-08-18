@@ -1,9 +1,13 @@
 # Inspection_Report_App_front-end
 
-An Inspection Report Automation tool for generating building inspection reports from templates
+## Build Status
+Master branch: [![Build Status](https://travis-ci.com/Karim-C/Inspection_Report_App_front-end.svg?token=aUW8TwnwNhqKCHbwaCXT&branch=master)](https://travis-ci.com/Karim-C/Inspection_Report_App_front-end)
 
-Team members:
-- Jonathan Soulsby 
+## Description
+An Inspection Report Automation tool for generating building inspection reports from templates.
+
+## Team members:
+- Jonathan Soulsby
 - Pulkit Kalra
 - Victor Lian
 - Mike Lee
