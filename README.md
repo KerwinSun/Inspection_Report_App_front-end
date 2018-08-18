@@ -1,4 +1,4 @@
-# Inspection_Report__App
+# Inspection_Report_App_front-end
 
 An Inspection Report Automation tool for generating building inspection reports from templates
 
