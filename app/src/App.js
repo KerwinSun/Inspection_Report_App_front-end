@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-const API = 'http://inspection-report-app-server.azurewebsites.net/api/todo';
+const API = 'https://inspection-report-app-server.azurewebsites.net/api/todo';
 
 class App extends Component {
   constructor(props) {
