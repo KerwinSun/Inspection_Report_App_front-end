@@ -9,7 +9,6 @@ import {
   Table,
   Alert,
   Progress,
-  colors,
   Dropdown,
   Button,
   StampCard,
@@ -17,7 +16,6 @@ import {
   ProgressCard,
   Badge,
 } from "tabler-react";
-import C3Chart from "react-c3js";
 import SiteWrapper from "./SiteWrapper";
 
 function Home() {
@@ -63,94 +61,6 @@ function Home() {
               <Card.Header>
                 <Card.Title>Development Activity</Card.Title>
               </Card.Header>
-              <C3Chart
-                style={{ height: "10rem" }}
-                data={{
-                  columns: [
-                    // each columns data
-                    [
-                      "data1",
-                      0,
-                      5,
-                      1,
-                      2,
-                      7,
-                      5,
-                      6,
-                      8,
-                      24,
-                      7,
-                      12,
-                      5,
-                      6,
-                      3,
-                      2,
-                      2,
-                      6,
-                      30,
-                      10,
-                      10,
-                      15,
-                      14,
-                      47,
-                      65,
-                      55,
-                    ],
-                  ],
-                  type: "area", // default type of chart
-                  groups: [["data1", "data2", "data3"]],
-                  colors: {
-                    data1: colors["blue"],
-                  },
-                  names: {
-                    // name of each serie
-                    data1: "Purchases",
-                  },
-                }}
-                axis={{
-                  y: {
-                    padding: {
-                      bottom: 0,
-                    },
-                    show: false,
-                    tick: {
-                      outer: false,
-                    },
-                  },
-                  x: {
-                    padding: {
-                      left: 0,
-                      right: 0,
-                    },
-                    show: false,
-                  },
-                }}
-                legend={{
-                  position: "inset",
-                  padding: 0,
-                  inset: {
-                    anchor: "top-left",
-                    x: 20,
-                    y: 8,
-                    step: 10,
-                  },
-                }}
-                tooltip={{
-                  format: {
-                    title: function(x) {
-                      return "";
-                    },
-                  },
-                }}
-                padding={{
-                  bottom: 0,
-                  left: -1,
-                  right: -1,
-                }}
-                point={{
-                  show: false,
-                }}
-              />
               <Table
                 cards={true}
                 striped={true}
@@ -250,33 +160,6 @@ function Home() {
                     <Card.Title>Chart title</Card.Title>
                   </Card.Header>
                   <Card.Body>
-                    <C3Chart
-                      style={{ height: "12rem" }}
-                      data={{
-                        columns: [
-                          // each columns data
-                          ["data1", 63],
-                          ["data2", 37],
-                        ],
-                        type: "donut", // default type of chart
-                        colors: {
-                          data1: colors["green"],
-                          data2: colors["green-light"],
-                        },
-                        names: {
-                          // name of each serie
-                          data1: "Maximum",
-                          data2: "Minimum",
-                        },
-                      }}
-                      legend={{
-                        show: false, //hide legend
-                      }}
-                      padding={{
-                        bottom: 0,
-                        top: 0,
-                      }}
-                    />
                   </Card.Body>
                 </Card>
               </Grid.Col>
@@ -286,39 +169,6 @@ function Home() {
                     <Card.Title>Chart title</Card.Title>
                   </Card.Header>
                   <Card.Body>
-                    <C3Chart
-                      style={{ height: "12rem" }}
-                      data={{
-                        columns: [
-                          // each columns data
-                          ["data1", 63],
-                          ["data2", 44],
-                          ["data3", 12],
-                          ["data4", 14],
-                        ],
-                        type: "pie", // default type of chart
-                        colors: {
-                          data1: colors["blue-darker"],
-                          data2: colors["blue"],
-                          data3: colors["blue-light"],
-                          data4: colors["blue-lighter"],
-                        },
-                        names: {
-                          // name of each serie
-                          data1: "A",
-                          data2: "B",
-                          data3: "C",
-                          data4: "D",
-                        },
-                      }}
-                      legend={{
-                        show: false, //hide legend
-                      }}
-                      padding={{
-                        bottom: 0,
-                        top: 0,
-                      }}
-                    />
                   </Card.Body>
                 </Card>
               </Grid.Col>
@@ -496,29 +346,33 @@ function Home() {
           <Grid.Col sm={6} lg={4}>
             <Card title="Browser Stats">
               <Table className="card-table">
-                <Table.Row>
-                  <Table.Col>
-                    <Icon prefix="fa" name="chrome" className="text-muted" />
-                  </Table.Col>
-                  <Table.Col>Google Chrome</Table.Col>
-                  <Table.Col className="text-right">
-                    <Text RootComponent="span" muted>
-                      23%
-                    </Text>
-                  </Table.Col>
-                </Table.Row>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Col>
+                      <Icon prefix="fa" name="chrome" className="text-muted" />
+                    </Table.Col>
+                    <Table.Col>Google Chrome</Table.Col>
+                    <Table.Col className="text-right">
+                      <Text RootComponent="span" muted>
+                        23%
+                      </Text>
+                    </Table.Col>
+                  </Table.Row>
+                </Table.Body>
               </Table>
             </Card>
           </Grid.Col>
           <Grid.Col sm={6} lg={4}>
             <Card title="Projects">
               <Table cards>
-                <Table.Row>
-                  <Table.Col>Admin Template</Table.Col>
-                  <Table.Col alignContent="right">
-                    <Badge color="default">65%</Badge>
-                  </Table.Col>
-                </Table.Row>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Col>Admin Template</Table.Col>
+                    <Table.Col alignContent="right">
+                      <Badge color="default">65%</Badge>
+                    </Table.Col>
+                  </Table.Row>
+                </Table.Body>
               </Table>
             </Card>
           </Grid.Col>
@@ -576,252 +430,12 @@ function Home() {
           <Grid.Col md={6} lg={12}>
             <Grid.Row>
               <Grid.Col sm={6} lg={3}>
-                <StatsCard
-                  layout={2}
-                  movement={5}
-                  total="423"
-                  label="Users online"
-                  chart={
-                    <C3Chart
-                      style={{ height: "100%" }}
-                      padding={{
-                        bottom: -10,
-                        left: -1,
-                        right: -1,
-                      }}
-                      data={{
-                        names: {
-                          data1: "Users online",
-                        },
-                        columns: [["data1", 30, 40, 10, 40, 12, 22, 40]],
-                        type: "area",
-                      }}
-                      legend={{
-                        show: false,
-                      }}
-                      transition={{
-                        duration: 0,
-                      }}
-                      point={{
-                        show: false,
-                      }}
-                      tooltip={{
-                        format: {
-                          title: function(x) {
-                            return "";
-                          },
-                        },
-                      }}
-                      axis={{
-                        y: {
-                          padding: {
-                            bottom: 0,
-                          },
-                          show: false,
-                          tick: {
-                            outer: false,
-                          },
-                        },
-                        x: {
-                          padding: {
-                            left: 0,
-                            right: 0,
-                          },
-                          show: false,
-                        },
-                      }}
-                      color={{
-                        pattern: ["#467fcf"],
-                      }}
-                    />
-                  }
-                />
               </Grid.Col>
               <Grid.Col sm={6} lg={3}>
-                <StatsCard
-                  layout={2}
-                  movement={-3}
-                  total="423"
-                  label="Users online"
-                  chart={
-                    <C3Chart
-                      style={{ height: "100%" }}
-                      padding={{
-                        bottom: -10,
-                        left: -1,
-                        right: -1,
-                      }}
-                      data={{
-                        names: {
-                          data1: "Users online",
-                        },
-                        columns: [["data1", 30, 40, 10, 40, 12, 22, 40]],
-                        type: "area",
-                      }}
-                      legend={{
-                        show: false,
-                      }}
-                      transition={{
-                        duration: 0,
-                      }}
-                      point={{
-                        show: false,
-                      }}
-                      tooltip={{
-                        format: {
-                          title: function(x) {
-                            return "";
-                          },
-                        },
-                      }}
-                      axis={{
-                        y: {
-                          padding: {
-                            bottom: 0,
-                          },
-                          show: false,
-                          tick: {
-                            outer: false,
-                          },
-                        },
-                        x: {
-                          padding: {
-                            left: 0,
-                            right: 0,
-                          },
-                          show: false,
-                        },
-                      }}
-                      color={{
-                        pattern: ["#e74c3c"],
-                      }}
-                    />
-                  }
-                />
               </Grid.Col>
               <Grid.Col sm={6} lg={3}>
-                <StatsCard
-                  layout={2}
-                  movement={-3}
-                  total="423"
-                  label="Users online"
-                  chart={
-                    <C3Chart
-                      style={{ height: "100%" }}
-                      padding={{
-                        bottom: -10,
-                        left: -1,
-                        right: -1,
-                      }}
-                      data={{
-                        names: {
-                          data1: "Users online",
-                        },
-                        columns: [["data1", 30, 40, 10, 40, 12, 22, 40]],
-                        type: "area",
-                      }}
-                      legend={{
-                        show: false,
-                      }}
-                      transition={{
-                        duration: 0,
-                      }}
-                      point={{
-                        show: false,
-                      }}
-                      tooltip={{
-                        format: {
-                          title: function(x) {
-                            return "";
-                          },
-                        },
-                      }}
-                      axis={{
-                        y: {
-                          padding: {
-                            bottom: 0,
-                          },
-                          show: false,
-                          tick: {
-                            outer: false,
-                          },
-                        },
-                        x: {
-                          padding: {
-                            left: 0,
-                            right: 0,
-                          },
-                          show: false,
-                        },
-                      }}
-                      color={{
-                        pattern: ["#5eba00"],
-                      }}
-                    />
-                  }
-                />
               </Grid.Col>
               <Grid.Col sm={6} lg={3}>
-                <StatsCard
-                  layout={2}
-                  movement={9}
-                  total="423"
-                  label="Users online"
-                  chart={
-                    <C3Chart
-                      style={{ height: "100%" }}
-                      padding={{
-                        bottom: -10,
-                        left: -1,
-                        right: -1,
-                      }}
-                      data={{
-                        names: {
-                          data1: "Users online",
-                        },
-                        columns: [["data1", 30, 40, 10, 40, 12, 22, 40]],
-                        type: "area",
-                      }}
-                      legend={{
-                        show: false,
-                      }}
-                      transition={{
-                        duration: 0,
-                      }}
-                      point={{
-                        show: false,
-                      }}
-                      tooltip={{
-                        format: {
-                          title: function(x) {
-                            return "";
-                          },
-                        },
-                      }}
-                      axis={{
-                        y: {
-                          padding: {
-                            bottom: 0,
-                          },
-                          show: false,
-                          tick: {
-                            outer: false,
-                          },
-                        },
-                        x: {
-                          padding: {
-                            left: 0,
-                            right: 0,
-                          },
-                          show: false,
-                        },
-                      }}
-                      color={{
-                        pattern: ["#f1c40f"],
-                      }}
-                    />
-                  }
-                />
               </Grid.Col>
             </Grid.Row>
           </Grid.Col>
@@ -830,67 +444,61 @@ function Home() {
               <Table
                 responsive
                 className="card-table table-vcenter text-nowrap"
-                headerItems={[
-                  { content: "No.", className: "w-1" },
-                  { content: "Invoice Subject" },
-                  { content: "Client" },
-                  { content: "VAT No." },
-                  { content: "Created" },
-                  { content: "Status" },
-                  { content: "Price" },
-                  { content: null },
-                  { content: null },
-                ]}
-                bodyItems={[
-                  [
-                    {
-                      content: (
-                        <Text RootComponent="span" muted>
-                          001401
-                        </Text>
-                      ),
-                    },
-                    {
-                      content: (
-                        <a href="invoice.html" className="text-inherit">
-                          Design Works
-                        </a>
-                      ),
-                    },
-                    { content: "Carlson Limited" },
-                    { content: "87956621" },
-                    { content: "15 Dec 2017" },
-                    {
-                      content: (
-                        <React.Fragment>
-                          <span className="status-icon bg-success" /> Paid
-                        </React.Fragment>
-                      ),
-                    },
-                    { content: "$887" },
-                    {
-                      alignContent: "right",
-                      content: (
-                        <React.Fragment>
-                          <Button size="sm" color="secondary">
-                            Manage
+              >
+                <Table.Header>
+                  <Table.Row>
+                    <Table.ColHeader className="w-1">No.</Table.ColHeader>
+                    <Table.ColHeader>Invoice Subject</Table.ColHeader>
+                    <Table.ColHeader>Client</Table.ColHeader>
+                    <Table.ColHeader>VAT No.</Table.ColHeader>
+                    <Table.ColHeader>Created</Table.ColHeader>
+                    <Table.ColHeader>Status</Table.ColHeader>
+                    <Table.ColHeader>Price</Table.ColHeader>
+                    <Table.ColHeader></Table.ColHeader>
+                    <Table.ColHeader></Table.ColHeader>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  <Table.Row>
+                    <Table.Col>
+                      <Text RootComponent="span" muted>
+                        001401
+                      </Text>
+                    </Table.Col>
+                    <Table.Col>
+                      <a href="invoice.html" className="text-inherit">
+                        Design Works
+                      </a>
+                    </Table.Col>
+                    <Table.Col>Carlson Limited</Table.Col>
+                    <Table.Col>87956621</Table.Col>
+                    <Table.Col>15 Dec 2017</Table.Col>
+                    <Table.Col>
+                      <React.Fragment>
+                        <span className="status-icon bg-success" /> Paid
+                      </React.Fragment>
+                    </Table.Col>
+                    <Table.Col>$887</Table.Col>
+                    <Table.Col alignContent="right">
+                      <React.Fragment>
+                        <Button size="sm" color="secondary">
+                          Manage
+                        </Button>
+                        <div className="dropdown">
+                          <Button
+                            color="secondary"
+                            size="sm"
+                            isDropdownToggle
+                          >
+                            Actions
                           </Button>
-                          <div className="dropdown">
-                            <Button
-                              color="secondary"
-                              size="sm"
-                              isDropdownToggle
-                            >
-                              Actions
-                            </Button>
-                          </div>
-                        </React.Fragment>
-                      ),
-                    },
-                    { content: <Icon link name="edit" /> },
-                  ],
-                ]}
-              />
+                        </div>
+                      </React.Fragment>
+                    </Table.Col>
+                    <Table.Col><Icon link name="edit" /></Table.Col>
+                  </Table.Row>
+                </Table.Body>
+              </Table>
             </Card>
           </Grid.Col>
         </Grid.Row>
