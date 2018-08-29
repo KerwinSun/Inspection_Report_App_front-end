@@ -25,7 +25,6 @@ const navBarItems = [
     value: "Components",
     icon: "calendar",
     subItems: [
-      { value: "Maps", to: "/maps", LinkComponent: NavLink },
       { value: "Icons", to: "/icons", LinkComponent: NavLink },
       { value: "Store", to: "/store", LinkComponent: NavLink },
       { value: "Blog", to: "/blog", LinkComponent: NavLink },

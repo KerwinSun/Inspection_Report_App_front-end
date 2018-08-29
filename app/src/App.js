@@ -23,7 +23,6 @@ import StoreCardsPage from "./components/StoreCardsPage";
 import IconPage from "./components/IconPage";
 import ChartsPage from "./interface/ChartsPage";
 import GalleryPage from "./GalleryPage";
-import MapCardsPage from "./components/MapCardsPage";
 import BlogPage from "./components/BlogPage";
 
 import "tabler-react/dist/Tabler.css";
@@ -49,7 +48,6 @@ function App() {
         <Route exact path="/gallery" component={GalleryPage} />
         <Route exact path="/icons" component={IconPage} />
         <Route exact path="/login" component={LoginPage} />
-        <Route exact path="/maps" component={MapCardsPage} />
         <Route exact path="/pricing-cards" component={PricingCardsPage} />
         <Route exact path="/profile" component={ProfilePage} />
         <Route exact path="/register" component={RegisterPage} />
