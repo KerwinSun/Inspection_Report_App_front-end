@@ -33,8 +33,6 @@ An Inspection Report Automation tool for generating building inspection reports 
 
 PRs for features and changes (other person reviews and tests on device before merging)
 
-Note that [Prettier](https://github.com/prettier/prettier) will automatically format your code pre-commit if you have installed dependencies correctly.
-
 ## Additional info
 
 Project was boostrapped with [Create React App](https://github.com/facebook/create-react-app).
