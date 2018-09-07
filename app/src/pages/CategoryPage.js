@@ -1,15 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Page, Card, Grid, Form, Button, Dropdown, Site } from "tabler-react";
+import { Page, Card, Grid, Form, Button, Dropdown } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 
 function CategoryPage() {
-  const navBarItems = [
-    { value: "Home", to: "/", icon: "home", active: true, LinkComponent: NavLink },
-    { value: "New Inspection", to: "/empty", icon: "check-square", active: false, LinkComponent: NavLink },
-    { value: "Inspections", to: "/empty", icon: "image", active: false, LinkComponent: NavLink },
-  ];
-
   return (
     <SiteWrapper>
       <Page.Card

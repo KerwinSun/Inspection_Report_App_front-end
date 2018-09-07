@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import HomePage from "./pages/HomePage";
 import EmptyPage from "./pages/EmptyPage";
-import ProfilePage from "./pages/ProfilePage";
 import CategoryPage from "./pages/CategoryPage";
 
 import "tabler-react/dist/Tabler.css";
