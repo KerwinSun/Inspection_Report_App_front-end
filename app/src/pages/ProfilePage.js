@@ -1,16 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Grid,
-  Card,
-  Button,
-  Form,
-  Avatar,
-  Profile,
-  List,
-  Media,
-  Text,
-} from "tabler-react";
+import { Container, Grid, Card, Button, Form, Avatar } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 
 function ProfilePage() {
@@ -20,33 +9,6 @@ function ProfilePage() {
         <Container>
           <Grid.Row>
             <Grid.Col lg={4}>
-              <Profile
-                name="Peter Richards"
-                backgroundURL="demo/photos/eberhard-grossgasteiger-311213-500.jpg"
-                avatarURL="demo/faces/male/16.jpg"
-                twitterURL="test"
-              >
-                Big belly rude boy, million dollar hustler. Unemployed.
-              </Profile>
-              <Card>
-                <Card.Body>
-                  <Media>
-                    <Avatar
-                      size="xxl"
-                      className="mr-5"
-                      imageURL="demo/faces/male/21.jpg"
-                    />
-                    <Media.BodySocial
-                      name="Juan Hernandez"
-                      workTitle="Webdeveloper"
-                      facebook="Facebook"
-                      twitter="Twitter"
-                      phone="1234567890"
-                      skype="@skypename"
-                    />
-                  </Media>
-                </Card.Body>
-              </Card>
               <Card>
                 <Card.Header>
                   <Card.Title>My Profile</Card.Title>
@@ -66,9 +28,7 @@ function ProfilePage() {
                     </Grid.Row>
                     <Form.Group>
                       <Form.Label>Bio</Form.Label>
-                      <Form.Textarea rows={5}>
-                        Big belly rude boy, million dollar hustler. Unemployed.
-                      </Form.Textarea>
+                      <Form.Textarea rows={5} defaultValue="Big belly rude boy, million dollar hustler. Unemployed." />
                     </Form.Group>
                     <Form.Group>
                       <Form.Label>Email-Address</Form.Label>
@@ -76,7 +36,7 @@ function ProfilePage() {
                     </Form.Group>
                     <Form.Group>
                       <Form.Label>Password</Form.Label>
-                      <Form.Input type="password" value="Password" />
+                      <Form.Input type="password" defaultValue="Password" />
                     </Form.Group>
                     <Form.Footer>
                       <Button color="primary" block>
@@ -88,147 +48,6 @@ function ProfilePage() {
               </Card>
             </Grid.Col>
             <Grid.Col lg={8}>
-              <Card>
-                <Card.Header>
-                  <Form.InputGroup>
-                    <Form.Input type="text" placeholder="Message" />
-                    <Form.InputGroup append>
-                      <Button icon="camera" color="secondary" />
-                    </Form.InputGroup>
-                  </Form.InputGroup>
-                </Card.Header>
-                <List.Group className="card-list-group">
-                  <List.GroupItem className="py-5">
-                    <Media>
-                      <Media.Object
-                        avatar
-                        objectURL="demo/faces/male/16.jpg"
-                        size="md"
-                        className="mr-4"
-                      />
-                      <Media.Body>
-                        <Media.Heading>
-                          <small className="float-right text-muted">
-                            4 min
-                          </small>
-                          <h5>Peter Richards</h5>
-                        </Media.Heading>
-                        <Text>
-                          Aenean lacinia bibendum nulla sed consectetur.
-                          Vestibulum id ligula porta felis euismod semper. Morbi
-                          leo risus, porta ac consectetur ac, vestibulum at
-                          eros. Cras justo odio, dapibus ac facilisis in,
-                          egestas eget quam. Vestibulum id ligula porta felis
-                          euismod semper. Cum sociis natoque penatibus et magnis
-                          dis parturient montes, nascetur ridiculus mus.
-                        </Text>
-                        <Media.List>
-                          <Media.ListItem>
-                            <Media.Object
-                              avatar
-                              objectURL="demo/faces/female/17.jpg"
-                              className="mr-4"
-                            />
-                            <Media.Body>
-                              <strong>Debra Beck: </strong>
-                              Donec id elit non mi porta gravida at eget metus.
-                              Vivamus sagittis lacus vel augue laoreet rutrum
-                              faucibus dolor auctor. Donec ullamcorper nulla non
-                              metus auctor fringilla. Praesent commodo cursus
-                              magna, vel scelerisque nisl consectetur et. Sed
-                              posuere consectetur est at lobortis.
-                            </Media.Body>
-                          </Media.ListItem>
-                          <Media.ListItem>
-                            <Media.Object
-                              avatar
-                              objectURL="demo/faces/male/32.jpg"
-                              className="mr-4"
-                            />
-                            <Media.Body>
-                              <strong>Jack Ruiz: </strong>
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit. Fusce dapibus, tellus ac cursus commodo,
-                              tortor mauris condimentum nibh, ut fermentum massa
-                              justo sit amet risus.
-                            </Media.Body>
-                          </Media.ListItem>
-                        </Media.List>
-                      </Media.Body>
-                    </Media>
-                  </List.GroupItem>
-                  <List.GroupItem className="py-5">
-                    <Media>
-                      <Media.Object
-                        avatar
-                        size="md"
-                        objectURL="demo/faces/male/16.jpg"
-                        className="mr-4"
-                      />
-                      <Media.Body>
-                        <Media.Heading>
-                          <small className="float-right text-muted">
-                            12 min
-                          </small>
-                          <h5>Peter Richards</h5>
-                        </Media.Heading>
-                        <Text>
-                          Donec id elit non mi porta gravida at eget metus.
-                          Integer posuere erat a ante venenatis dapibus posuere
-                          velit aliquet. Cum sociis natoque penatibus et magnis
-                          dis parturient montes, nascetur ridiculus mus. Morbi
-                          leo risus, porta ac consectetur ac, vestibulum at
-                          eros. Lorem ipsum dolor sit amet, consectetur
-                          adipiscing elit.
-                        </Text>
-                      </Media.Body>
-                    </Media>
-                  </List.GroupItem>
-                  <List.GroupItem className="py-5">
-                    <Media>
-                      <Media.Object
-                        avatar
-                        size="md"
-                        objectURL="demo/faces/male/16.jpg"
-                        className="mr-4"
-                      />
-                      <Media.Body>
-                        <Media.Heading>
-                          <small className="float-right text-muted">
-                            34 min
-                          </small>
-                          <h5>Peter Richards</h5>
-                        </Media.Heading>
-                        <Text>
-                          Donec ullamcorper nulla non metus auctor fringilla.
-                          Vestibulum id ligula porta felis euismod semper.
-                          Aenean eu leo quam. Pellentesque ornare sem lacinia
-                          quam venenatis vestibulum. Etiam porta sem malesuada
-                          magna mollis euismod. Donec sed odio dui.
-                        </Text>
-                        <Media.List>
-                          <Media.ListItem>
-                            <Media.Object
-                              avatar
-                              objectURL="demo/faces/male/26.jpg"
-                              className="mr-4"
-                            />
-                            <Media.Body>
-                              <strong>Wayne Holland: </strong>
-                              Donec id elit non mi porta gravida at eget metus.
-                              Vivamus sagittis lacus vel augue laoreet rutrum
-                              faucibus dolor auctor. Donec ullamcorper nulla non
-                              metus auctor fringilla. Praesent commodo cursus
-                              magna, vel scelerisque nisl consectetur et. Sed
-                              posuere consectetur est at lobortis.
-                            </Media.Body>
-                          </Media.ListItem>
-                        </Media.List>
-                      </Media.Body>
-                    </Media>
-                  </List.GroupItem>
-                </List.Group>
-              </Card>
               <Form className="card">
                 <Card.Body>
                   <Card.Title>Edit Profile</Card.Title>
@@ -240,7 +59,7 @@ function ProfilePage() {
                           type="text"
                           disabled
                           placeholder="Company"
-                          value="Creative Code Inc."
+                          defaultValue="Creative Code Inc."
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -250,7 +69,7 @@ function ProfilePage() {
                         <Form.Input
                           type="text"
                           placeholder="Username"
-                          value="michael23"
+                          defaultValue="michael23"
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -266,7 +85,7 @@ function ProfilePage() {
                         <Form.Input
                           type="text"
                           placeholder="First Name"
-                          value="Chet"
+                          defaultValue="Chet"
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -276,7 +95,7 @@ function ProfilePage() {
                         <Form.Input
                           type="text"
                           placeholder="Last Name"
-                          value="Faker"
+                          defaultValue="Faker"
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -286,7 +105,7 @@ function ProfilePage() {
                         <Form.Input
                           type="text"
                           placeholder="Home Address"
-                          value="Melbourne, Australia"
+                          defaultValue="Melbourne, Australia"
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -296,7 +115,7 @@ function ProfilePage() {
                         <Form.Input
                           type="text"
                           placeholder="City"
-                          value="Melbourne"
+                          defaultValue="Melbourne"
                         />
                       </Form.Group>
                     </Grid.Col>
@@ -319,10 +138,8 @@ function ProfilePage() {
                         <Form.Textarea
                           rows={5}
                           placeholder="Here can be your description"
+                          defaultValue={`Oh so, your weak rhyme You doubt I'll bother, reading into it I'll probably won't, left to my own devices But that's the difference in our opinions.`}
                         >
-                          Oh so, your weak rhyme You doubt I'll bother, reading
-                          into it I'll probably won't, left to my own devices
-                          But that's the difference in our opinions.
                         </Form.Textarea>
                       </Form.Group>
                     </Grid.Col>
