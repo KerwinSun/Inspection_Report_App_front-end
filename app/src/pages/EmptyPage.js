@@ -1,14 +1,16 @@
-import React from "react";
+import React, { Component } from "react";
 import { Page } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 
-function Empty() {
-  return (
-    <SiteWrapper>
-      <Page.Content title="This is an empty page">
-      </Page.Content>
-    </SiteWrapper>
-  );
+class Empty extends Component {
+  render() {
+    return (
+      <SiteWrapper>
+        <Page.Content title="This is an empty page">
+        </Page.Content>
+      </SiteWrapper>
+    );  
+  }
 }
 
 export default Empty;

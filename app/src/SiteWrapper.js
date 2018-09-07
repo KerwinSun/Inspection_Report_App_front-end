@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Site } from "tabler-react";
 
@@ -18,7 +18,7 @@ const accountDropdownProps = {
   ],
 };
 
-class SiteWrapper extends React.Component {
+class SiteWrapper extends Component {
   render() {
     return (
       <Site.Wrapper
