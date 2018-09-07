@@ -29,12 +29,6 @@ https://github.com/Karim-C/Inspection_Report_App_back-end
 
 https://inspection-report-app.azurewebsites.net
 
-## Execution
-To run the front end locally clone this repository and navigate to this repositories root file. Then use the following commands:
-1. run `cd ./app`
-2. run `npm install`
-3. run `npm run start`
-
 ## Code guidelines
 
 PRs for features and changes (other person reviews and tests on the device before merging)
