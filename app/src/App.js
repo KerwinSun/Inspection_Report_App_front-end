@@ -12,6 +12,7 @@ class App extends Component {
     return (
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
+          <Route exact path="/" component={HomePage} />
           <Route exact path="/home" component={HomePage} />
           <Route exact path="/login" component={EmptyPage} />
           <Route exact path="/new-inspection" component={EmptyPage} />
