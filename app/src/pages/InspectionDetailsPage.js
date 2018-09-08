@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Table, Button, Progress, Form } from "tabler-react";
+import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 
 class InspectionDetailsPage extends Component {
