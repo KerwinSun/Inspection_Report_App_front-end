@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import axios from 'axios';
+// import axios from 'axios';
 import { Page, Grid, Card, Table, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
-import { server } from '../config';
+// import { server } from '../config';
 
 class Home extends Component {
   constructor(props) {
