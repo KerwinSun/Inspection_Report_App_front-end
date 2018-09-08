@@ -29,7 +29,7 @@ const Feature = (props) => (
       <Form.Group label={<Form.Label>Comments</Form.Label>}>
         <Form.Textarea 
           name="comments"
-          placeholder="Looks good"
+          placeholder="Add comment"
           rows={4}
         />
       </Form.Group>
