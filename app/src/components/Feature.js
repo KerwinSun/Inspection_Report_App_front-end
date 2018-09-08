@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form } from "tabler-react";
+import { Card, Form, Button, Icon } from "tabler-react";
 
 const Feature = (props) => (
   <Card title={props.name} isCollapsed={true} isClosable isCollapsible>
@@ -26,7 +26,22 @@ const Feature = (props) => (
           value="4"
         />
       </Form.Group>
-      <Form.Input label="Comments" placeholder="Looks good" />
+      <Form.Group label={<Form.Label>Comments</Form.Label>}>
+        <Form.Textarea 
+          name="comments"
+          placeholder="Looks good"
+          rows={4}
+        />
+      </Form.Group>
+      <Form.Group className="form-inline">
+        <Button
+          RootComponent="a"
+          href="/camera"
+          color="secondary"
+        >
+          <Icon prefix="fe" name="camera" />        
+        </Button>
+      </Form.Group>
     </Card.Body>
   </Card>
 );
