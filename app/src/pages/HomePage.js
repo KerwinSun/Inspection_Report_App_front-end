@@ -82,7 +82,7 @@ class Home extends Component {
                     {this.state.wipHouses.map(house => (
                       <Table.Row key={house.id}>
                         <Table.Col>
-                          <a href={house.id}>{house.address}</a>
+                          <a href={"/inspect/"+ house.id}>{house.address}</a>
                         </Table.Col>
                       </Table.Row>                    
                     ))}
@@ -107,7 +107,7 @@ class Home extends Component {
                     {this.state.completedHouses.map(house => (
                       <Table.Row key={house.id}>
                         <Table.Col>
-                          <a href={house.id}>{house.address}</a>
+                          <a href={"/inspect/"+ house.id}>{house.address}</a>
                         </Table.Col>
                       </Table.Row>                    
                     ))}
