@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import axios from 'axios';
 import { Page, Grid, Card, Table, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
+import { server } from '../config';
 
 class Home extends Component {
   constructor(props) {
@@ -41,20 +43,23 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    //fetch using user's id
-    // axios
-    //   .get(url, { withCredentials: true })
-    //   .then(res => {
-    //     //handle response
-    //     var houses = res.inspected;
-    //     var wipHouses = [];
-    //     var completedHouses = [];
-    //     houses.map(value => { value.completed ? completedHouses.push(value) : wipHouses.push(value) })
-    //   })
-    //   .catch(res => {
-    //     //handle response error
-    //     console.log(res);
-    //   })
+    /*
+    var id = 0; //set user id
+    axios
+      .get(server + "/user/" + id, { withCredentials: true })
+      .then(res => {
+        //handle response
+        var houses = res.inspected;
+        var wipHouses = [];
+        var completedHouses = [];
+        houses.map(value => { value.completed ? completedHouses.push(value) : wipHouses.push(value) });
+        this.setState({ wipHouses: wipHouses, completedHouses: completedHouses });
+      })
+      .catch(res => {
+        //handle response error
+        console.log(res);
+      })
+      */
   }
 
   render() {
@@ -75,7 +80,7 @@ class Home extends Component {
                   </Table.Header>
                   <Table.Body>
                     {this.state.wipHouses.map(house => (
-                      <Table.Row>
+                      <Table.Row key={house.id}>
                         <Table.Col>
                           <a href={house.id}>{house.address}</a>
                         </Table.Col>
@@ -100,7 +105,7 @@ class Home extends Component {
                   </Table.Header>
                   <Table.Body>
                     {this.state.completedHouses.map(house => (
-                      <Table.Row>
+                      <Table.Row key={house.id}>
                         <Table.Col>
                           <a href={house.id}>{house.address}</a>
                         </Table.Col>
