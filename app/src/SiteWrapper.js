@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Site } from "tabler-react";
+import header from "./resources/logo_with_text.png";
+import profileImage from "./resources/logo.png";
 
 const navBarItems = [
   { value: "Home", to: "/home", icon: "home", LinkComponent: NavLink },
@@ -9,13 +11,13 @@ const navBarItems = [
 ];
 
 const accountDropdownProps = {
-  avatarURL: "./demo/faces/female/25.jpg",
-  name: "Jane Pearson",
+  avatarURL: profileImage,
+  name: "Inspector_1",
   description: "Administrator",
   options: [
     { icon: "user", value: "Profile", to: "/profile" },
-    { icon: "log-out", value: "Sign out" },
-  ],
+    { icon: "log-out", value: "Sign out" }
+  ]
 };
 
 class SiteWrapper extends Component {
@@ -23,19 +25,19 @@ class SiteWrapper extends Component {
     return (
       <Site.Wrapper
         headerProps={{
-          href: "/home",
+          href: "/",
           alt: "Hitch Building Inspections",
-          imageURL: "./demo/brand/tabler.svg",
-          accountDropdown: accountDropdownProps,
+          imageURL: header,
+          accountDropdown: accountDropdownProps
         }}
         navProps={{ itemsObjects: navBarItems }}
-        footerProps={{
-          copyright: (
-            <React.Fragment>
-              Do we want a footer?
-            </React.Fragment>
-          ),
-        }}
+        footerProps={
+          {
+            /* ADD FOOTER HERE
+          copyright: <React.Fragment>Do we want a footer?</React.Fragment>
+          */
+          }
+        }
       >
         {this.props.children}
       </Site.Wrapper>
