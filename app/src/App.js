@@ -22,6 +22,7 @@ class App extends Component {
           <Route exact path="/register" component={EmptyPage} />
           <Route exact path="/feature" component={FeaturePage} />
           <Route exact path="/empty" component={EmptyPage} />
+          
         </Switch>
       </Router>
     );  

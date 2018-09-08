@@ -1,8 +1,67 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Table, Button, Progress } from "tabler-react";
+// import axios from 'axios';
+import { Page, Grid, Card, Table, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
+// import { server } from '../config';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wipHouses: [{
+        "id": 1,
+        "completed": false,
+        "address": "21 Symonds Street",
+        "date": "2018-08-28T00:00:00",
+        "constructionType": "old",
+        "categories": null
+      },
+      {
+        "id": 2,
+        "completed": false,
+        "address": "23 Symonds Street",
+        "date": "2018-08-28T00:00:00",
+        "constructionType": "new ",
+        "categories": null
+      }],
+      completedHouses: [{
+        "id": 1,
+        "completed": true,
+        "address": "21 Symonds Street",
+        "date": "2018-08-28T00:00:00",
+        "constructionType": "old",
+        "categories": null
+      }, {
+        "id": 2,
+        "completed": true,
+        "address": "23 Symonds Street",
+        "date": "2018-08-28T00:00:00",
+        "constructionType": "new ",
+        "categories": null
+      }]
+    }
+  }
+
+  componentDidMount() {
+    /*
+    var id = 0; //set user id
+    axios
+      .get(server + "/user/" + id, { withCredentials: true })
+      .then(res => {
+        //handle response
+        var houses = res.inspected;
+        var wipHouses = [];
+        var completedHouses = [];
+        houses.map(value => { value.completed ? completedHouses.push(value) : wipHouses.push(value) });
+        this.setState({ wipHouses: wipHouses, completedHouses: completedHouses });
+      })
+      .catch(res => {
+        //handle response error
+        console.log(res);
+      })
+      */
+  }
+
   render() {
     return (
       <SiteWrapper>
@@ -17,40 +76,16 @@ class Home extends Component {
                   <Table.Header>
                     <Table.Row>
                       <Table.ColHeader>Address</Table.ColHeader>
-                      <Table.ColHeader>Progress</Table.ColHeader>
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/1">35 Symonds Street</a>
-                      </Table.Col>
-                      <Table.Col>
-                        <Progress size="xs">
-                          <Progress.Bar color="blue" width={42} />
-                        </Progress>
-                      </Table.Col>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/2">35 Symonds Street</a>
-                      </Table.Col>
-                      <Table.Col>
-                        <Progress size="xs">
-                          <Progress.Bar color="blue" width={30} />
-                        </Progress>
-                      </Table.Col>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/3">35 Symonds Street</a>
-                      </Table.Col>
-                      <Table.Col>
-                        <Progress size="xs">
-                          <Progress.Bar color="blue" width={99} />
-                        </Progress>
-                      </Table.Col>
-                    </Table.Row>
+                    {this.state.wipHouses.map(house => (
+                      <Table.Row key={house.id}>
+                        <Table.Col>
+                          <a href={"/inspect/"+ house.id}>{house.address}</a>
+                        </Table.Col>
+                      </Table.Row>                    
+                    ))}
                   </Table.Body>
                 </Table>
               </Card>
@@ -69,21 +104,13 @@ class Home extends Component {
                     </Table.Row>
                   </Table.Header>
                   <Table.Body>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/4">35 Symonds Street</a>
-                      </Table.Col>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/5">35 Symonds Street</a>
-                      </Table.Col>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Col>
-                        <a href="/inspect/6">35 Symonds Street</a>
-                      </Table.Col>
-                    </Table.Row>
+                    {this.state.completedHouses.map(house => (
+                      <Table.Row key={house.id}>
+                        <Table.Col>
+                          <a href={"/inspect/"+ house.id}>{house.address}</a>
+                        </Table.Col>
+                      </Table.Row>                    
+                    ))}
                   </Table.Body>
                 </Table>
               </Card>
