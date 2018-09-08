@@ -90,7 +90,7 @@ class Home extends Component {
             </Grid.Col>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Col xs={6} offset={3}>
+            <Grid.Col xs={6} md={6} lg={6} offset={3}>
               <Button
                 RootComponent="a"
                 href="/new-inspection"
