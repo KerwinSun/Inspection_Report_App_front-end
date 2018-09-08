@@ -33,7 +33,7 @@ const Feature = (props) => (
           rows={4}
         />
       </Form.Group>
-      <Form.Group className="form-inline">
+      <Form.Group>
         <Button
           RootComponent="a"
           href="/camera"
