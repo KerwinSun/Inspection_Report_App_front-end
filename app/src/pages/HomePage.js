@@ -22,7 +22,9 @@ class Home extends Component {
                   </Table.Header>
                   <Table.Body>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/1">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/1">35 Symonds Street</a>
+                      </Table.Col>
                       <Table.Col>
                         <Progress size="xs">
                           <Progress.Bar color="blue" width={42} />
@@ -30,7 +32,9 @@ class Home extends Component {
                       </Table.Col>
                     </Table.Row>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/2">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/2">35 Symonds Street</a>
+                      </Table.Col>
                       <Table.Col>
                         <Progress size="xs">
                           <Progress.Bar color="blue" width={30} />
@@ -38,7 +42,9 @@ class Home extends Component {
                       </Table.Col>
                     </Table.Row>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/3">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/3">35 Symonds Street</a>
+                      </Table.Col>
                       <Table.Col>
                         <Progress size="xs">
                           <Progress.Bar color="blue" width={99} />
@@ -64,13 +70,19 @@ class Home extends Component {
                   </Table.Header>
                   <Table.Body>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/4">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/4">35 Symonds Street</a>
+                      </Table.Col>
                     </Table.Row>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/5">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/5">35 Symonds Street</a>
+                      </Table.Col>
                     </Table.Row>
                     <Table.Row>
-                      <Table.Col><a href="/inspect/6">35 Symonds Street</a></Table.Col>
+                      <Table.Col>
+                        <a href="/inspect/6">35 Symonds Street</a>
+                      </Table.Col>
                     </Table.Row>
                   </Table.Body>
                 </Table>
@@ -78,22 +90,21 @@ class Home extends Component {
             </Grid.Col>
           </Grid.Row>
           <Grid.Row>
-            <Grid.Col xs={4} />
-            <Grid.Col xs={4}>
+            <Grid.Col xs={6} offset={3}>
               <Button
                 RootComponent="a"
                 href="/new-inspection"
                 block={true}
                 color="secondary"
               >
-              Begin New Inspection
+                Begin New Inspection
               </Button>
             </Grid.Col>
-            <Grid.Col xs={4} />
+            <Grid.Col xs={3} />
           </Grid.Row>
         </Page.Content>
       </SiteWrapper>
-    );  
+    );
   }
 }
 
