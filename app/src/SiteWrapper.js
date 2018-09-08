@@ -5,8 +5,8 @@ import header from "./resources/logo_with_text.png";
 import profileImage from "./resources/logo.png";
 
 const navBarItems = [
-  { value: "Home", to: "/", icon: "home", LinkComponent: NavLink },
-  { value: "New Inspection", to: "/empty", icon: "check-square", LinkComponent: NavLink },
+  { value: "Home", to: "/home", icon: "home", LinkComponent: NavLink },
+  { value: "New Inspection", to: "/new-inspection", icon: "check-square", LinkComponent: NavLink },
   { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink },
 ];
 
