@@ -8,7 +8,7 @@ class FeaturePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      features: [ "Kitchen", "Bedroom" ]
+      features: [ "General", "Benchtops" ]
     }
   }
 
