@@ -5,14 +5,9 @@ import header from "./resources/logo_with_text.png";
 import profileImage from "./resources/logo.png";
 
 const navBarItems = [
-  { value: "Home", to: "/home", icon: "home", LinkComponent: NavLink },
-  {
-    value: "New Inspection",
-    to: "/empty",
-    icon: "check-square",
-    LinkComponent: NavLink
-  },
-  { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink }
+  { value: "Home", to: "/", icon: "home", LinkComponent: NavLink },
+  { value: "New Inspection", to: "/empty", icon: "check-square", LinkComponent: NavLink },
+  { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink },
 ];
 
 const accountDropdownProps = {
@@ -30,7 +25,7 @@ class SiteWrapper extends Component {
     return (
       <Site.Wrapper
         headerProps={{
-          href: "/home",
+          href: "/",
           alt: "Hitch Building Inspections",
           imageURL: header,
           accountDropdown: accountDropdownProps
