@@ -8,7 +8,6 @@ const navBarItems = [
   { value: "Home", to: "/", icon: "home", LinkComponent: NavLink },
   { value: "New Inspection", to: "/new-inspection", icon: "check-square", LinkComponent: NavLink },
   { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink },
-  { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink }
 ];
 
 const accountDropdownProps = {

@@ -116,19 +116,15 @@ class Home extends Component {
               </Card>
             </Grid.Col>
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Col xs={6} md={6} lg={6} offset={3}>
-              <Button
-                RootComponent="a"
-                href="/new-inspection"
-                block={true}
-                color="secondary"
-              >
-                Begin New Inspection
-              </Button>
-            </Grid.Col>
-            <Grid.Col xs={3} />
-          </Grid.Row>
+          <Button.List align="center">
+            <Button
+              RootComponent="a"
+              href="/new-inspection"
+              color="secondary"
+            >
+              Begin New Inspection
+            </Button>
+          </Button.List>
         </Page.Content>
       </SiteWrapper>
     );
