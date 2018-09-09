@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Card, Form } from "tabler-react";
 
-
 class FeatureItem extends Component {
   state = {
     featureList: {},

@@ -3,7 +3,6 @@ import { Page, Card, Form, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryList from "../components/CategoryList";
 
-
 class CategoryPage extends Component {
   state = {
     categories: ""
@@ -12,6 +11,8 @@ class CategoryPage extends Component {
     //alert("hello world");
     this.setState(
       {
+        houseId: this.props.match.params.id, //house id. Use this for getting data from backend
+
         categories: {
           id: 1,
           inspectedBy: null,
@@ -99,13 +100,12 @@ class CategoryPage extends Component {
       }
     );
   }
-
   render() {
     console.log(this.state.categories);
     return (
       <SiteWrapper>
         <Page.Card
-          title="Categories"
+          title="Category Page"
           RootComponent={Form}
           footer={
             <Card.Footer>
@@ -118,7 +118,6 @@ class CategoryPage extends Component {
             </Card.Footer>
           }
         >
-
           <CategoryList categories={this.state.categories} />
         </Page.Card>
       </SiteWrapper>

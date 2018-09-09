@@ -33,7 +33,7 @@ const Feature = (props) => (
           rows={4}
         />
       </Form.Group>
-      <Form.Group>
+      <Button.List align="center">
         <Button
           RootComponent="a"
           href="/camera"
@@ -41,7 +41,7 @@ const Feature = (props) => (
         >
           <Icon prefix="fe" name="camera" />        
         </Button>
-      </Form.Group>
+      </Button.List>
     </Card.Body>
   </Card>
 );

@@ -89,20 +89,15 @@ class InspectionDetailsPage extends Component {
                     </Card>
                 </Grid.Col>
             </Grid.Row>
-            <Grid.Row>
-                <Grid.Col xs={4} />
-                <Grid.Col xs={4}>
-                <Button
-                    RootComponent="a"
-                    href="/new-inspection"
-                    block={true}
-                    color="secondary"
-                >
-                Begin Inspection
-                </Button>
-                </Grid.Col>
-                <Grid.Col xs={4} />
-            </Grid.Row>
+            <Button.List align="center">
+            <Button
+              RootComponent="a"
+              href="/inspect/1" /* TODO: change 1 to id from backend */
+              color="secondary"
+            >
+              Begin Inspection
+            </Button>
+          </Button.List>
         </Page.Content>
       </SiteWrapper>
     );  

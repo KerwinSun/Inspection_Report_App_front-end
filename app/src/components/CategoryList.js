@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Card} from "tabler-react";
+import { Card } from "tabler-react";
 import FeatureItem from "./FeatureItem";
 
 class CategoryList extends Component {
