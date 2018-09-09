@@ -2,18 +2,23 @@ import React, { Component } from "react";
 import { Page, Card, Form, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryList from "../components/CategoryList";
+// import axios from 'axios';
+// import { server } from '../config';
 
 class CategoryPage extends Component {
   state = {
-    categories: ""
+    house: ""
   };
   componentWillMount() {
-    //alert("hello world");
-    this.setState(
-      {
-        houseId: this.props.match.params.id, //house id. Use this for getting data from backend
-
-        categories: {
+    // axios.get(server + "/house/" + this.props.match.params.id)
+    //   .then(res => {
+    //     this.setState({ categories: res })
+    //   })
+    //   .catch(res => {
+    //     console.log(res);
+    //   })   
+    this.setState({ 
+      house: {
           id: 1,
           inspectedBy: null,
           address: "21 Symonds Street",
@@ -94,14 +99,10 @@ class CategoryPage extends Component {
             }
           ]
         }
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
+    });
   }
+
   render() {
-    console.log(this.state.categories);
     return (
       <SiteWrapper>
         <Page.Card
@@ -118,7 +119,7 @@ class CategoryPage extends Component {
             </Card.Footer>
           }
         >
-          <CategoryList categories={this.state.categories} />
+          <CategoryList categories={this.state.house.categories} />
         </Page.Card>
       </SiteWrapper>
     );
