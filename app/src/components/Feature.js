@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Form, Button, Icon } from "tabler-react";
 
 const Feature = (props) => (
-  <Card title={props.name} isCollapsed={true} isClosable isCollapsible>
+  <Card title={props.name} isCollapsed={true} isCollapsible>
     <Card.Body>
       <Form.Group label="Rating">
         <Form.Radio
