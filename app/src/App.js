@@ -17,13 +17,18 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={EmptyPage} />
-          <Route exact path="/new-inspection" component={InspectionDetailsPage} />
+          <Route
+            exact
+            path="/new-inspection"
+            component={InspectionDetailsPage}
+          />
           <Route exact path={`/inspect/:id(\\d+)`} component={CategoryPage} />
           <Route exact path="/profile" component={EmptyPage} />
           <Route exact path="/register" component={EmptyPage} />
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/empty" component={EmptyPage} />
           <Route exact path="/camera" component={CameraPage} />
+          <Route component={HomePage} />
         </Switch>
       </Router>
     );
