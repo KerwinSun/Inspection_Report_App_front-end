@@ -4,37 +4,24 @@ import { Card, Form, Button, Icon } from "tabler-react";
 class FeatureItem extends Component {
   state = {
     featureList: {},
-    categories: {}
   };
   componentWillMount() {
-    this.setState(
-      {
-        featureList: this.props.features
-      },
-      () => {
-        console.log(this.state.featureList);
-      }
-    );
+    this.setState({ featureList: this.props.features });
   }
 
   render() {
     return this.state.featureList.map((dynamicData, i) => (
-      <div key={dynamicData.id.toString()}>
+      <div key={dynamicData.id}>
         <Card
           title={dynamicData.name}
           isCollapsed={true}
-          isClosable
           isCollapsible
         >
           <Card.Body>
             <Form.Group label="Rating">
               <Form.Radio name="rating" label="Good" value="1" />
               <Form.Radio name="rating" label="Will need attention" value="2" />
-              <Form.Radio
-                name="rating"
-                label="Need immediate attention"
-                value="3"
-              />
+              <Form.Radio name="rating" label="Need immediate attention" value="3" />
               <Form.Radio name="rating" label="N/A" value="4" />
             </Form.Group>
             <Form.Group label={<Form.Label>Comments</Form.Label>}>
