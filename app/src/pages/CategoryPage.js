@@ -20,6 +20,42 @@ class CategoryPage extends Component {
           constructionType: "old",
           categories: [
             {
+              id: 4,
+              name: "test",
+              features: [
+                {
+                  id: 1,
+                  name: "lamp",
+                  grade: "will need attention",
+                  comments: "looks a bit old"
+                },
+                {
+                  id: 2,
+                  name: "wardrobe",
+                  grade: "good",
+                  comments: "good"
+                }
+              ]
+            },
+            {
+              id: 3,
+              name: "bedtest",
+              features: [
+                {
+                  id: 1,
+                  name: "lamp",
+                  grade: "will need attention",
+                  comments: "looks a bit old"
+                },
+                {
+                  id: 2,
+                  name: "wardrobe",
+                  grade: "good",
+                  comments: "good"
+                }
+              ]
+            },
+            {
               id: 1,
               name: "bedroom1",
               features: [
