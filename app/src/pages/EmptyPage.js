@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Page } from "tabler-react";
+import { Page, Card } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 
 class Empty extends Component {
@@ -7,6 +7,7 @@ class Empty extends Component {
     return (
       <SiteWrapper>
         <Page.Content title="This is an empty page">
+          <Card title="hi there" isCollapsible />
         </Page.Content>
       </SiteWrapper>
     );  
