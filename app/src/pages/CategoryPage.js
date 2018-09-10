@@ -111,7 +111,9 @@ class CategoryPage extends Component {
           footer={
             <Card.Footer>
               <div className="d-flex">
-                <Button link>Cancel</Button>
+                <Button link onClick={() => this.props.history.push("/home")}>
+                  Cancel
+                </Button>
                 <Button type="submit" color="primary" className="ml-auto">
                   Send data
                 </Button>

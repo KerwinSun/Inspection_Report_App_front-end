@@ -3,22 +3,21 @@ import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 // import axios from 'axios';
 // import { server, jsonHouse } from '../config';
-import { jsonHouse } from '../config';
+import { jsonHouse } from "../config";
 
 class InspectionDetailsPage extends Component {
-  constructor(props){
-      super(props);
-      this.state = {
-          name: "John Smith",
-          homePhone: "(0x) xxx xxxx",
-          mobilePhone: "(0xx) xxx xxxx",
-          inspectorEmailAddress: "jsmith@gmail.com",
-          inspectorAddress: "71 High Street, Auckland",
-          inspectionDate: "xx/xx/xxxx"
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: "John Smith",
+      homePhone: "(0x) xxx xxxx",
+      mobilePhone: "(0xx) xxx xxxx",
+      inspectorEmailAddress: "jsmith@gmail.com",
+      inspectorAddress: "71 High Street, Auckland",
+      inspectionDate: "xx/xx/xxxx"
+    };
   }
-  componentDidMount(){  
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -42,10 +41,7 @@ class InspectionDetailsPage extends Component {
                     />
                   </Form.Group>
                   <Form.Group label="Summonsed By">
-                    <Form.Input
-                      name="summonsed-by"
-                      placeholder="Name"
-                    />
+                    <Form.Input name="summonsed-by" placeholder="Name" />
                   </Form.Group>
                 </Card.Body>
               </Card>
@@ -93,18 +89,15 @@ class InspectionDetailsPage extends Component {
             </Grid.Col>
           </Grid.Row>
           <Button.List align="center">
-            <Button
-              onClick={this.handleClick.bind(this)}
-              color="secondary"
-            >
+            <Button onClick={this.handleClick.bind(this)} color="secondary">
               Begin Inspection
             </Button>
           </Button.List>
         </Page.Content>
       </SiteWrapper>
-    );  
+    );
   }
-  
+
   handleClick = () => {
     var json = jsonHouse;
     console.log(json);
@@ -118,7 +111,8 @@ class InspectionDetailsPage extends Component {
     // 		this.props.history.push("/inspect/"+id);
     // 	})
     // 	.catch(error => console.log(error))
-  }
+    // this.props.history.push("/REDIRECT TO NEXT PAGE HERE")
+  };
 }
 
 export default InspectionDetailsPage;
