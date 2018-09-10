@@ -18,7 +18,10 @@ class ProfilePage extends Component {
                     <Form>
                       <Grid.Row>
                         <Grid.Col auto>
-                          <Avatar size="xl" imageURL="demo/faces/female/9.jpg" />
+                          <Avatar
+                            size="xl"
+                            imageURL="demo/faces/female/9.jpg"
+                          />
                         </Grid.Col>
                         <Grid.Col>
                           <Form.Group>
@@ -29,7 +32,10 @@ class ProfilePage extends Component {
                       </Grid.Row>
                       <Form.Group>
                         <Form.Label>Bio</Form.Label>
-                        <Form.Textarea rows={5} defaultValue="Big belly rude boy, million dollar hustler. Unemployed." />
+                        <Form.Textarea
+                          rows={5}
+                          defaultValue="Big belly rude boy, million dollar hustler. Unemployed."
+                        />
                       </Form.Group>
                       <Form.Group>
                         <Form.Label>Email-Address</Form.Label>
@@ -140,8 +146,7 @@ class ProfilePage extends Component {
                             rows={5}
                             placeholder="Here can be your description"
                             defaultValue={`Oh so, your weak rhyme You doubt I'll bother, reading into it I'll probably won't, left to my own devices But that's the difference in our opinions.`}
-                          >
-                          </Form.Textarea>
+                          />
                         </Form.Group>
                       </Grid.Col>
                     </Grid.Row>
@@ -157,7 +162,7 @@ class ProfilePage extends Component {
           </Container>
         </div>
       </SiteWrapper>
-    );  
+    );
   }
 }
 
