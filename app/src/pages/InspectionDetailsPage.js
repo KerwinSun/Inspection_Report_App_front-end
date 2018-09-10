@@ -7,18 +7,17 @@ import { jsonHouse } from '../config';
 
 class InspectionDetailsPage extends Component {
   constructor(props){
-    super(props)
-    this.state = {
-      name: "John Smith",
-      homePhone: "(0x) xxx xxxx",
-      mobilePhone: "(0xx) xxx xxxx",
-      inspectorEmailAddress: "jsmith@gmail.com",
-      inspectorAddress: "71 High Street, Auckland",
-      inspectionDate: "xx/xx/xxxx"
-    }
+      super(props);
+      this.state = {
+          name: "John Smith",
+          homePhone: "(0x) xxx xxxx",
+          mobilePhone: "(0xx) xxx xxxx",
+          inspectorEmailAddress: "jsmith@gmail.com",
+          inspectorAddress: "71 High Street, Auckland",
+          inspectionDate: "xx/xx/xxxx"
+      }
   }
-  componentDidMount(){
-      
+  componentDidMount(){  
   }
 
   render() {
