@@ -8,38 +8,43 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      wipHouses: [{
-        "id": 1,
-        "completed": false,
-        "address": "21 Symonds Street",
-        "date": "2018-08-28T00:00:00",
-        "constructionType": "old",
-        "categories": null
-      },
-      {
-        "id": 2,
-        "completed": false,
-        "address": "23 Symonds Street",
-        "date": "2018-08-28T00:00:00",
-        "constructionType": "new ",
-        "categories": null
-      }],
-      completedHouses: [{
-        "id": 1,
-        "completed": true,
-        "address": "21 Symonds Street",
-        "date": "2018-08-28T00:00:00",
-        "constructionType": "old",
-        "categories": null
-      }, {
-        "id": 2,
-        "completed": true,
-        "address": "23 Symonds Street",
-        "date": "2018-08-28T00:00:00",
-        "constructionType": "new ",
-        "categories": null
-      }]
-    }
+      wipHouses: [
+        {
+          id: 1,
+          completed: false,
+          address: "21 Symonds Street",
+          date: "2018-08-28T00:00:00",
+          constructionType: "old",
+          categories: null
+        },
+        {
+          id: 2,
+          completed: false,
+          address: "23 Symonds Street",
+          date: "2018-08-28T00:00:00",
+          constructionType: "new ",
+          categories: null
+        }
+      ],
+      completedHouses: [
+        {
+          id: 1,
+          completed: true,
+          address: "21 Symonds Street",
+          date: "2018-08-28T00:00:00",
+          constructionType: "old",
+          categories: null
+        },
+        {
+          id: 2,
+          completed: true,
+          address: "23 Symonds Street",
+          date: "2018-08-28T00:00:00",
+          constructionType: "new ",
+          categories: null
+        }
+      ]
+    };
   }
 
   componentDidMount() {
@@ -82,9 +87,9 @@ class Home extends Component {
                     {this.state.wipHouses.map(house => (
                       <Table.Row key={house.id}>
                         <Table.Col>
-                          <a href={"/inspect/"+ house.id}>{house.address}</a>
+                          <a href={"/inspect/" + house.id}>{house.address}</a>
                         </Table.Col>
-                      </Table.Row>                    
+                      </Table.Row>
                     ))}
                   </Table.Body>
                 </Table>
@@ -107,9 +112,9 @@ class Home extends Component {
                     {this.state.completedHouses.map(house => (
                       <Table.Row key={house.id}>
                         <Table.Col>
-                          <a href={"/inspect/"+ house.id}>{house.address}</a>
+                          <a href={"/inspect/" + house.id}>{house.address}</a>
                         </Table.Col>
-                      </Table.Row>                    
+                      </Table.Row>
                     ))}
                   </Table.Body>
                 </Table>
@@ -119,7 +124,7 @@ class Home extends Component {
           <Button.List align="center">
             <Button
               RootComponent="a"
-              href="/new-inspection"
+              onClick={() => this.props.history.push("/new-inspection")}
               color="secondary"
             >
               Begin New Inspection
