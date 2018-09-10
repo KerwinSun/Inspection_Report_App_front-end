@@ -89,6 +89,12 @@ class InspectionDetailsPage extends Component {
             </Grid.Col>
           </Grid.Row>
           <Button.List align="center">
+            <Button
+              onClick={() => this.props.history.push("/home")}
+              color="secondary"
+            >
+              Back
+            </Button>
             <Button onClick={this.handleClick.bind(this)} color="secondary">
               Begin Inspection
             </Button>
