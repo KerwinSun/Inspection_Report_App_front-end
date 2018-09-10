@@ -5,29 +5,18 @@ import FeatureItem from "./FeatureItem";
 class CategoryList extends Component {
   state = {
     categories: {},
-    title: ""
   };
   componentWillMount() {
-    this.setState(
-      {
-        categories: this.props.categories.categories
-      },
-      () => {
-        console.log(this.state.categories);
-      }
-    );
+    this.setState({ categories: this.props.categories });
   }
 
   render() {
     return this.state.categories.map((dynamicData, i) => (
-      <div key={dynamicData.id.toString()}>
-        <Card title={dynamicData.name} isCollapsible isCollapsed={true}>
-          <Card.Body>
-            {console.log(dynamicData.features)}
+        <Card key={dynamicData.name} title={dynamicData.name} isCollapsible isCollapsed={true}>
+          <div>
             <FeatureItem features={dynamicData.features} />
-          </Card.Body>
+          </div>
         </Card>
-      </div>
     ));
   }
 }

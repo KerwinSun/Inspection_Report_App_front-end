@@ -40,6 +40,7 @@ class App extends Component {
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/empty" component={EmptyPage} />
           <Route exact path="/camera" component={CameraPage} />
+          <Route component={HomePage} />
         </Switch>
       </Router>
     );

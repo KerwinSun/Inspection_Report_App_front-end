@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
+// import axios from 'axios';
+// import { server, jsonHouse } from '../config';
+import { jsonHouse } from "../config";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -15,6 +18,7 @@ class InspectionDetailsPage extends Component {
     };
   }
   componentDidMount() {}
+
   render() {
     return (
       <SiteWrapper>
@@ -85,13 +89,7 @@ class InspectionDetailsPage extends Component {
             </Grid.Col>
           </Grid.Row>
           <Button.List align="center">
-            <Button
-              RootComponent="a"
-              onClick={() =>
-                this.props.history.push("/inspect/1")
-              } /* TODO: change 1 to id from backend */
-              color="secondary"
-            >
+            <Button onClick={this.handleClick.bind(this)} color="secondary">
               Begin Inspection
             </Button>
           </Button.List>
@@ -99,6 +97,22 @@ class InspectionDetailsPage extends Component {
       </SiteWrapper>
     );
   }
+
+  handleClick = () => {
+    var json = jsonHouse;
+    console.log(json);
+    // json.inspectedBy = "" /* TODO: User id */
+    // json.address = this.state.inspectorAddress;
+    // json.date = this.state.inspectionDate;
+
+    // axios.post(server + '/House/', json)
+    // 	.then(response =>	{
+    // 		const id = response.data;
+    // 		this.props.history.push("/inspect/"+id);
+    // 	})
+    // 	.catch(error => console.log(error))
+    // this.props.history.push("/REDIRECT TO NEXT PAGE HERE")
+  };
 }
 
 export default InspectionDetailsPage;
