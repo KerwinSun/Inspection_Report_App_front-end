@@ -95,7 +95,7 @@ class InspectionDetailsPage extends Component {
             >
               Back
             </Button>
-            <Button onClick={this.handleClick.bind(this)} color="secondary">
+            <Button onClick={() => this.props.history.push("/inspect/1")} color="secondary">
               Begin Inspection
             </Button>
           </Button.List>

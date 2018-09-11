@@ -12,7 +12,7 @@ class Home extends Component {
         {
           id: 1,
           completed: false,
-          address: "21 Symonds Street",
+          address: "94  Hocking Street, Titirangi",
           date: "2018-08-28T00:00:00",
           constructionType: "old",
           categories: null
@@ -20,7 +20,7 @@ class Home extends Component {
         {
           id: 2,
           completed: false,
-          address: "23 Symonds Street",
+          address: "253  Jasmine Grove, Remuera",
           date: "2018-08-28T00:00:00",
           constructionType: "new ",
           categories: null
@@ -30,7 +30,7 @@ class Home extends Component {
         {
           id: 1,
           completed: true,
-          address: "21 Symonds Street",
+          address: "177  Rigg Street, Stonefeilds",
           date: "2018-08-28T00:00:00",
           constructionType: "old",
           categories: null
@@ -38,7 +38,7 @@ class Home extends Component {
         {
           id: 2,
           completed: true,
-          address: "23 Symonds Street",
+          address: "143 Iris Grove, Avondale",
           date: "2018-08-28T00:00:00",
           constructionType: "new ",
           categories: null
