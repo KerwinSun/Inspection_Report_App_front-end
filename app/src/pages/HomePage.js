@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-// import axios from 'axios';
 import { Page, Grid, Card, Table, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
-// import { server } from '../config';
+import API from "../api";
 
 class Home extends Component {
   constructor(props) {
@@ -48,23 +47,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    /*
-    var id = 0; //set user id
-    axios
-      .get(server + "/user/" + id, { withCredentials: true })
+    var id = 1; //Hard coded value for now.
+    API.getPerson(id)
       .then(res => {
-        //handle response
         var houses = res.inspected;
         var wipHouses = [];
         var completedHouses = [];
-        houses.map(value => { value.completed ? completedHouses.push(value) : wipHouses.push(value) });
+        houses.map(value => { value.house.completed ? completedHouses.push(value.house) : wipHouses.push(value.house) });
         this.setState({ wipHouses: wipHouses, completedHouses: completedHouses });
       })
-      .catch(res => {
-        //handle response error
-        console.log(res);
-      })
-      */
   }
 
   render() {

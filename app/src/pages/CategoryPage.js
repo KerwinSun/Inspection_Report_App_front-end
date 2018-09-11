@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { Page, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
-// import axios from 'axios';
-// import { server } from '../config';
 import { jsonCatAndFeats } from '../config';
+import API from '../api.js';
 
 class CategoryPage extends Component {
   state = {
@@ -13,13 +12,10 @@ class CategoryPage extends Component {
   };
 
   componentWillMount() {
-    // axios.get(server + "/house/" + this.props.match.params.id)
-    //   .then(res => {
-    //     this.setState({ house: res })
-    //   })
-    //   .catch(res => {
-    //     console.log(res);
-    //   })   
+    API.getHouse(this.props.match.params.id)
+      .then(res => {
+        this.setState({ house: res })
+      });
 
     this.setState({ house: {
       id: 1,
@@ -59,6 +55,14 @@ class CategoryPage extends Component {
   }
 
   postHouse = () => {
+    console.log(this.state.house);
+    API.postHouse(this.state.house)
+      .then(response => {
+        this.props.history.push("/");
+      })
+      .catch (error => {
+        console.log(error);
+      })
     //   axios.post(server + "/House/", this.state.house)
     //     .then(response => {
     //       const id = response.data;

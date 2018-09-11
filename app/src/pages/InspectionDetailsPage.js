@@ -4,6 +4,7 @@ import SiteWrapper from "../SiteWrapper";
 // import axios from 'axios';
 // import { server, jsonHouse } from '../config';
 import { jsonHouse } from "../config";
+import API from "../api";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -17,7 +18,7 @@ class InspectionDetailsPage extends Component {
       inspectionDate: "xx/xx/xxxx"
     };
   }
-  componentDidMount() {}
+  componentDidMount() { }
 
   render() {
     return (
@@ -95,7 +96,7 @@ class InspectionDetailsPage extends Component {
             >
               Back
             </Button>
-            <Button onClick={() => this.props.history.push("/inspect/1")} color="secondary">
+            <Button onClick={() => this.handleClick()} color="secondary">
               Begin Inspection
             </Button>
           </Button.List>
@@ -107,17 +108,18 @@ class InspectionDetailsPage extends Component {
   handleClick = () => {
     var json = jsonHouse;
     console.log(json);
-    // json.inspectedBy = "" /* TODO: User id */
-    // json.address = this.state.inspectorAddress;
-    // json.date = this.state.inspectionDate;
 
-    // axios.post(server + '/House/', json)
-    // 	.then(response =>	{
-    // 		const id = response.data;
-    // 		this.props.history.push("/inspect/"+id);
-    // 	})
-    // 	.catch(error => console.log(error))
-    // this.props.history.push("/REDIRECT TO NEXT PAGE HERE")
+    json.inspectedBy = [];
+    json.address = this.state.inspectorAddress;
+    json.date = "2018-08-28T00:00:00";
+    API.postHouse(json)
+      .then(id => {
+        this.props.history.push("/inspect/" + id);
+      })
+      .catch (error => {
+        console.log(error);
+        this.props.history.push("/REDIRECT TO NEXT PAGE HERE");
+      })
   };
 }
 
