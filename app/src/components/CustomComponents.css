@@ -29,3 +29,9 @@
 .open {
   display: block;
 }
+
+.clear-button {
+  border: "none";
+  box-shadow: "none";
+  background: "none";
+}

@@ -1,18 +1,22 @@
 import React, { Component } from "react";
-import { Icon, Form, Grid } from "tabler-react";
+import { Icon, Grid } from "tabler-react";
 import FeatureItem from "./FeatureItem";
-import update from "immutability-helper";
+import { CategoryCounter } from "./CategoryCounter";
 
 class CategoryItem extends Component {
   state = {
     category: {},
     count: 0,
+    index: -1,
     isCollapsed: true,
   };
 
   componentWillMount() {
-    const { category } = this.props;
-    this.setState({ category: category });
+    this.setState({ 
+      category: this.props.category, 
+      count: this.props.category.count,
+      index: this.props.index
+    });
   }
 
   render() {
@@ -21,27 +25,22 @@ class CategoryItem extends Component {
       <div className="card">
         <div className="card-header">
           <Grid.Row>
-            <Grid.Col width={6}>
+            <Grid.Col width={7}>
               <h3 className="card-title float-left">{category.name}</h3>
             </Grid.Col>
-            <Grid.Col width={6}>
-              <Form.Group>
-                <Form.Input
-                  placeholder="0"
-                  onChange={this.countChangeHandler}
-                />
-              </Form.Group>
+            <Grid.Col width={5}>
+              <CategoryCounter 
+                increment={() => { this.setState({ count: this.state.count + 1 }, () => this.props.updateCategoryState(this.state))}} 
+                decrement={() => { this.state.count === 0 ? this.setState({ count: 0 }, () => this.props.updateCategoryState(this.state)) : this.setState({ count: this.state.count - 1 }, () => this.props.updateCategoryState(this.state))}} 
+                count={this.state.count}
+                onChange={() => this.countChangeHandler.bind(this)}
+              />
             </Grid.Col>
           </Grid.Row>
           <button
             className="card-options"
             type="button"
-            onClick={() => {
-              this.setState(
-                { isCollapsed: !isCollapsed },
-                this.updateAllFeatureStates.bind(this)
-              );
-            }}
+            onClick={() => this.setState({ isCollapsed: !isCollapsed })}
           >
             {isCollapsed ? (
               <Icon prefix="fe" name="chevron-down" />
@@ -53,10 +52,8 @@ class CategoryItem extends Component {
         <div className={isCollapsed ? "hidden" : "open"}>
           {category.features.map((feature, i) => (
             <FeatureItem
-              label={feature.name}
               key={feature.name}
               feature={feature}
-              isParentCollapsed={isCollapsed}
               updateFeatureState={this.updateFeatureState}
               index={i}
             />
@@ -65,6 +62,7 @@ class CategoryItem extends Component {
       </div>
     );
   }
+
   countChangeHandler(event){
     var num = event.target.value.match(/^\+?(0|[1-9]\d*)$/);//(/^\d+$/);
     if (num === null) {
@@ -75,20 +73,13 @@ class CategoryItem extends Component {
     });
   }
 
-  updateAllFeatureStates = () => {
-    //for each feature of the category, call updateFeatureState
-    this.props.updateCategoryState(this.state);
-  };
-
   updateFeatureState = updatedState => {
     const index = updatedState.index;
     const updatedFeature = updatedState.feature;
-
-    this.setState({
-      category: update(this.state.category, {
-        [index]: { $set: updatedFeature }
-      })
-    });
+    let features = this.state.category.features;
+    features[index] = updatedFeature;
+    const category = Object.assign({}, this.state.category, { features: features });
+    this.setState({ category });  
   };
 }
 
