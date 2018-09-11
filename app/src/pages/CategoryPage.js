@@ -61,14 +61,7 @@ class CategoryPage extends Component {
         this.props.history.push("/");
       })
       .catch (error => {
-        console.log(error);
       })
-    //   axios.post(server + "/House/", this.state.house)
-    //     .then(response => {
-    //       const id = response.data;
-    //       this.props.history.push("/");
-    //     })
-    //     .catch(error => console.log(error))
   }
 }
 
