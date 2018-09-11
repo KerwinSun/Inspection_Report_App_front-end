@@ -53,7 +53,7 @@ class Home extends Component {
         var houses = res.inspected;
         var wipHouses = [];
         var completedHouses = [];
-        houses.map(value => { value.house.completed ? completedHouses.push(value.house) : wipHouses.push(value.house) });
+        houses.forEach(value => { value.house.completed ? completedHouses.push(value.house) : wipHouses.push(value.house) });
         this.setState({ wipHouses: wipHouses, completedHouses: completedHouses });
       })
   }

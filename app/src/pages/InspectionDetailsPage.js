@@ -123,7 +123,6 @@ class InspectionDetailsPage extends Component {
 
   handleClick = () => {
     var json = jsonHouse;
-    console.log(json);
 
     json.inspectedBy = [];
     json.address = this.state.inspectorAddress;
@@ -133,8 +132,7 @@ class InspectionDetailsPage extends Component {
         this.props.history.push("/inspect/" + id);
       })
       .catch (error => {
-        console.log(error);
-        this.props.history.push("/REDIRECT TO NEXT PAGE HERE");
+        // this.props.history.push("/REDIRECT TO NEXT PAGE HERE");
       })
   };
 }
