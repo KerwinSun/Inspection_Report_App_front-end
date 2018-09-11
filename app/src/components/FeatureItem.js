@@ -29,8 +29,8 @@ class FeatureItem extends Component {
           {feature.name}
           <button
             type="button"
-            class="btn btn-secondary"
-            style={{ border: "none", "box-shadow": "none", background: "none" }}
+            className="btn btn-secondary"
+            style={{ border: "none", "boxShadow": "none", background: "none" }}
             onClick={() => {
               this.setState({ isCollapsed: !isCollapsed }, () =>
                 this.props.updateFeatureState(this.state)
@@ -56,32 +56,34 @@ class FeatureItem extends Component {
   renderFeature() {
     return (
       <div>
-        <Form.Group label="Rating">
-          <Form.Radio
+      <Form.Group label="Rating">
+        <Form.SelectGroup>
+          <Form.SelectGroupItem
             onChange={this.radioOnChange.bind(this)}
-            name={"rating" + this.state.feature.name}
-            label="Good"
+            name={"rating"+this.state.feature.name}
+            icon="thumbs-up"
             value="1"
           />
-          <Form.Radio
+          <Form.SelectGroupItem
             onChange={this.radioOnChange.bind(this)}
-            name={"rating" + this.state.feature.name}
-            label="Will need attention"
+            name={"rating"+this.state.feature.name}
+            icon="thumbs-down"
             value="2"
           />
-          <Form.Radio
+          <Form.SelectGroupItem
             onChange={this.radioOnChange.bind(this)}
-            name={"rating" + this.state.feature.name}
-            label="Need immediate attention"
+            name={"rating"+this.state.feature.name}
+            icon="alert-triangle"
             value="3"
           />
-          <Form.Radio
+          <Form.SelectGroupItem
             onChange={this.radioOnChange.bind(this)}
-            name={"rating" + this.state.feature.name}
-            label="N/A"
+            name={"rating"+this.state.feature.name}
+            icon="slash"
             value="4"
           />
-        </Form.Group>
+        </Form.SelectGroup>
+      </Form.Group>
         <Form.Group label={<Form.Label>Comments</Form.Label>}>
           <Form.Textarea
             onChange={this.commentOnChange.bind(this)}
