@@ -68,7 +68,6 @@ class CategoryItem extends Component {
     if (num === null) {
       event.target.value="";
     }
-    this.
     this.setState({
       count: num
     });
