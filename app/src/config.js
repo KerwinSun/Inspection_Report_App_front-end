@@ -219,3 +219,13 @@ export const jsonHouse = {
   "categories": generateJson(CategoriesAndFeatures)
 };
 
+export const realEstateOptions = [
+  "Iron Bridge",
+  "Barfoot and Thompson",
+  "Mike Pero",
+  "Ray White",
+  "Harcourts",
+  "Bayleys",
+  "Prestige Realty",
+  "L J Hooker"
+];
