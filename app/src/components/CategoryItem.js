@@ -16,7 +16,7 @@ class CategoryItem extends Component {
       category: this.props.category, 
       count: this.props.category.count,
       index: this.props.index
-    }, () => console.log(this.state));
+    });
   }
 
   render() {

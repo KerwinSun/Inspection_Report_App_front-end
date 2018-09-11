@@ -14,7 +14,6 @@ class CategoryPage extends Component {
   componentWillMount() {
     API.getHouse(this.props.match.params.id)
       .then(res => {
-        console.log(res);
         this.setState({ house: res, isLoaded: true })
       });
   }
