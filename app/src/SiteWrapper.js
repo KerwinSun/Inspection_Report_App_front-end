@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import { Site } from "tabler-react";
 import header from "./resources/logo_with_text.png";
-import profileImage from "./resources/logo.png";
+import profileImage from "./resources/stock_headshot.png";
 
 const navBarItems = [
   { value: "Home", to: "/home", icon: "home", LinkComponent: NavLink },
@@ -16,7 +16,7 @@ const navBarItems = [
 
 const accountDropdownProps = {
   avatarURL: profileImage,
-  name: "Inspector_1",
+  name: "Jake Miller",
   description: "Administrator",
   options: [
     { icon: "user", value: "Profile", to: "/profile" },
