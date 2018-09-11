@@ -1,4 +1,5 @@
 export const server = "https://inspection-report-app-server.azurewebsites.net/api";
+// export const server = "http://localhost:62163/api";
 
 const CategoriesAndFeatures = [
   {
