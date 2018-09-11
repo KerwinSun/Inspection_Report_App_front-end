@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
-// import axios from 'axios';
-// import { server, jsonHouse } from '../config';
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
 
@@ -22,7 +20,7 @@ class InspectionDetailsPage extends Component {
   }
   componentDidMount() { }
 
-  setRealEstate = e =>{
+  setRealEstate = e => {
     this.setState({
       realEstate: e.target.value
     });
@@ -124,15 +122,15 @@ class InspectionDetailsPage extends Component {
   handleClick = () => {
     var json = jsonHouse;
 
-    json.inspectedBy = [];
+    json.inspectedBy = "";
     json.address = this.state.inspectorAddress;
-    json.date = "2018-08-28T00:00:00";
+    json.inspectionDate = "2018-08-28T00:00:00";
+    json.lastModified = "2018-08-28T00:00:00";
     API.postHouse(json)
       .then(id => {
         this.props.history.push("/inspect/" + id);
       })
       .catch (error => {
-        // this.props.history.push("/REDIRECT TO NEXT PAGE HERE");
       })
   };
 }

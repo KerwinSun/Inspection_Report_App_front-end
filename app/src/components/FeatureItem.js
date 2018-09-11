@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Icon } from "tabler-react";
 import "./CustomComponents.css";
+// import { jsonHouse } from '../config';
 
 class FeatureItem extends Component {
   constructor(props) {
@@ -53,34 +54,34 @@ class FeatureItem extends Component {
   renderFeature() {
     return (
       <div>
-      <Form.Group label="Rating">
-        <Form.SelectGroup>
-          <Form.SelectGroupItem
-            onChange={this.radioOnChange.bind(this)}
-            name={"rating"+this.state.feature.name}
-            icon="thumbs-up"
-            value="1"
-          />
-          <Form.SelectGroupItem
-            onChange={this.radioOnChange.bind(this)}
-            name={"rating"+this.state.feature.name}
-            icon="thumbs-down"
-            value="2"
-          />
-          <Form.SelectGroupItem
-            onChange={this.radioOnChange.bind(this)}
-            name={"rating"+this.state.feature.name}
-            icon="alert-triangle"
-            value="3"
-          />
-          <Form.SelectGroupItem
-            onChange={this.radioOnChange.bind(this)}
-            name={"rating"+this.state.feature.name}
-            icon="slash"
-            value="4"
-          />
-        </Form.SelectGroup>
-      </Form.Group>
+        <Form.Group label="Rating">
+          <Form.SelectGroup>
+            <Form.SelectGroupItem
+              onChange={this.radioOnChange.bind(this)}
+              name={"rating"+this.state.feature.name}
+              icon="thumbs-up"
+              value="1"
+            />
+            <Form.SelectGroupItem
+              onChange={this.radioOnChange.bind(this)}
+              name={"rating"+this.state.feature.name}
+              icon="thumbs-down"
+              value="2"
+            />
+            <Form.SelectGroupItem
+              onChange={this.radioOnChange.bind(this)}
+              name={"rating"+this.state.feature.name}
+              icon="alert-triangle"
+              value="3"
+            />
+            <Form.SelectGroupItem
+              onChange={this.radioOnChange.bind(this)}
+              name={"rating"+this.state.feature.name}
+              icon="slash"
+              value="4"
+            />
+          </Form.SelectGroup>
+        </Form.Group>
         <Form.Group label={<Form.Label>Comments</Form.Label>}>
           <Form.Textarea
             onChange={this.commentOnChange.bind(this)}
