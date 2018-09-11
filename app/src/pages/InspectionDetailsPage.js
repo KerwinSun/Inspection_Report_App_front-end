@@ -3,21 +3,28 @@ import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 // import axios from 'axios';
 // import { server, jsonHouse } from '../config';
-import { jsonHouse } from "../config";
+import { jsonHouse, realEstateOptions } from "../config";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "John Smith",
+      name: "Jason",
       homePhone: "(0x) xxx xxxx",
       mobilePhone: "(0xx) xxx xxxx",
       inspectorEmailAddress: "jsmith@gmail.com",
       inspectorAddress: "71 High Street, Auckland",
-      inspectionDate: "xx/xx/xxxx"
+      inspectionDate: "xx/xx/xxxx",
+      realEstate: realEstateOptions[0]
     };
   }
   componentDidMount() {}
+
+  setRealEstate = e =>{
+    this.setState({
+      realEstate: e.target.value
+    });
+  }
 
   render() {
     return (
@@ -39,6 +46,14 @@ class InspectionDetailsPage extends Component {
                       name="address-inspecting"
                       placeholder="Address"
                     />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Real Estate</Form.Label>
+                    <Form.Select onChange={this.setRealEstate}>
+                    {realEstateOptions.map((dynamicData, i) => (
+                      <option key={dynamicData}>{dynamicData}</option>
+                    ))}
+                    </Form.Select>
                   </Form.Group>
                   <Form.Group label="Summonsed By">
                     <Form.Input name="summonsed-by" placeholder="Name" />
