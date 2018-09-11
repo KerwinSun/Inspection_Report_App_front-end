@@ -7,11 +7,16 @@ class CategoryItem extends Component {
   state = {
     category: {},
     count: 0,
+    index: -1,
     isCollapsed: true,
   };
 
   componentWillMount() {
-    this.setState({ category: this.props.category });
+    this.setState({ 
+      category: this.props.category, 
+      count: this.props.category.count,
+      index: this.props.index
+    }, () => console.log(this.state));
   }
 
   render() {
@@ -25,8 +30,8 @@ class CategoryItem extends Component {
             </Grid.Col>
             <Grid.Col width={5}>
               <CategoryCounter 
-                increment={() => this.setState({ count: this.state.count + 1 })} 
-                decrement={() => { this.state.count === 0 ? this.setState({ count: 0 }) : this.setState({ count: this.state.count - 1 })}} 
+                increment={() => { this.setState({ count: this.state.count + 1 }, () => this.props.updateCategoryState(this.state))}} 
+                decrement={() => { this.state.count === 0 ? this.setState({ count: 0 }, () => this.props.updateCategoryState(this.state)) : this.setState({ count: this.state.count - 1 }, () => this.props.updateCategoryState(this.state))}} 
                 count={this.state.count}
                 onChange={() => this.countChangeHandler.bind(this)}
               />
@@ -63,6 +68,7 @@ class CategoryItem extends Component {
     if (num === null) {
       event.target.value="";
     }
+    this.
     this.setState({
       count: num
     });
@@ -74,8 +80,7 @@ class CategoryItem extends Component {
     let features = this.state.category.features;
     features[index] = updatedFeature;
     const category = Object.assign({}, this.state.category, { features: features });
-    
-    this.setState({ category }, () => this.state.category);  
+    this.setState({ category });  
   };
 }
 

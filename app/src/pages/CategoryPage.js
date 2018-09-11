@@ -14,6 +14,7 @@ class CategoryPage extends Component {
   componentWillMount() {
     API.getHouse(this.props.match.params.id)
       .then(res => {
+        console.log(res);
         this.setState({ house: res, isLoaded: true })
       });
   }
@@ -26,8 +27,9 @@ class CategoryPage extends Component {
             {this.state.house.categories.map((dynamicData, i) => (
               <CategoryItem 
                 key={dynamicData.name} 
-                category={dynamicData} 
+                category={dynamicData}
                 updateCategoryState={this.updateCategoryState}
+                index={i}
               />
             ))}
             <div className="d-flex">
@@ -43,6 +45,17 @@ class CategoryPage extends Component {
       return null;      
     }
   }
+
+  updateCategoryState = updatedState => {
+    const index = updatedState.index;
+    const updatedCount = updatedState.count;    
+    let updatedCategory = updatedState.category;
+    const category = Object.assign({}, updatedCategory, { count: updatedCount });
+    let categories = this.state.house.categories;
+    categories[index] = category;
+    const house = Object.assign({}, this.state.house, { categories: categories });
+    this.setState({ house });
+  };
 
   postHouse = () => {
     API.postHouse(this.state.house)

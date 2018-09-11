@@ -22,7 +22,7 @@ class FeatureItem extends Component {
   render() {
     const { isCollapsed, feature } = this.state;
     return (
-      <div label={this.props.label}>
+      <div>
         <div className="small-card-header">
           {feature.name}
           <button
