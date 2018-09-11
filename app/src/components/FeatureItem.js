@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Icon } from "tabler-react";
-import "./Card.css";
+import "./CustomComponents.css";
 
 class FeatureItem extends Component {
   constructor(props) {
@@ -9,7 +9,6 @@ class FeatureItem extends Component {
       feature: {},
       index: -1,
       isCollapsed: true,
-      isParentCollapsed: false
     };
   }
 
@@ -17,7 +16,6 @@ class FeatureItem extends Component {
     this.setState({
       feature: this.props.feature,
       index: this.props.index,
-      isParentCollapsed: this.props.isParentCollapsed
     });
   }
 
@@ -29,8 +27,7 @@ class FeatureItem extends Component {
           {feature.name}
           <button
             type="button"
-            className="btn btn-secondary"
-            style={{ border: "none", "boxShadow": "none", background: "none" }}
+            className="clear-button"
             onClick={() => {
               this.setState({ isCollapsed: !isCollapsed }, () =>
                 this.props.updateFeatureState(this.state)
