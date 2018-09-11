@@ -9,7 +9,7 @@ class CameraPage extends Component {
       selectedImage: []
     }
   }
-   7
+  
   selectPhoto = event => {
     this.setState({
       selectedImage: [...this.state.selectedImage, event.target.files[0]]

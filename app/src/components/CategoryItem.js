@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Icon } from "tabler-react";
+import { Icon, Form, Grid } from "tabler-react";
 import FeatureItem from "./FeatureItem";
 import update from "immutability-helper";
 
 class CategoryItem extends Component {
   state = {
     category: {},
-    isCollapsed: true
+    count: 0,
+    isCollapsed: true,
   };
 
   componentWillMount() {
@@ -19,7 +20,19 @@ class CategoryItem extends Component {
     return (
       <div className="card">
         <div className="card-header">
-          <h3 className="card-title float-left">{category.name}</h3>
+          <Grid.Row>
+            <Grid.Col width={6}>
+              <h3 className="card-title float-left">{category.name}</h3>
+            </Grid.Col>
+            <Grid.Col width={6}>
+              <Form.Group>
+                <Form.Input
+                  placeholder="0"
+                  onChange={this.countChangeHandler}
+                />
+              </Form.Group>
+            </Grid.Col>
+          </Grid.Row>
           <button
             className="card-options"
             type="button"
@@ -51,6 +64,15 @@ class CategoryItem extends Component {
         </div>
       </div>
     );
+  }
+  countChangeHandler(event){
+    var num = event.target.value.match(/^\+?(0|[1-9]\d*)$/);//(/^\d+$/);
+    if (num === null) {
+      event.target.value="";
+    }
+    this.setState({
+      count: num
+    });
   }
 
   updateAllFeatureStates = () => {
