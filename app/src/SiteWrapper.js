@@ -11,8 +11,7 @@ const navBarItems = [
     to: "/new-inspection",
     icon: "check-square",
     LinkComponent: NavLink
-  },
-  { value: "Inspections", to: "/empty", icon: "image", LinkComponent: NavLink }
+  }
 ];
 
 const accountDropdownProps = {
