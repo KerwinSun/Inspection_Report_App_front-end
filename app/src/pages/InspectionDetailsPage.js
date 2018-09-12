@@ -9,12 +9,12 @@ class InspectionDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "Jason",
-      homePhone: "(0x) xxx xxxx",
-      mobilePhone: "(0xx) xxx xxxx",
-      inspectorEmailAddress: "jsmith@gmail.com",
+      name: "Jason React",
+      homePhone: "09 143 1235",
+      mobilePhone: "021 485 9876",
+      inspectorEmailAddress: "jreact@gmail.com",
       inspectorAddress: "71 High Street, Auckland",
-      inspectionDate: "xx/xx/xxxx",
+      inspectionDate: "12/09/2018 ",
       realEstate: realEstateOptions[0]
     };
   }
