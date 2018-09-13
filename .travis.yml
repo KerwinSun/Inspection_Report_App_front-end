@@ -8,10 +8,13 @@ install:
 script:
   - npm run test
   - npm run build
+git:
+  depth: false
 before_deploy:
   - cd build
 deploy:
   provider: azure_web_apps
+  on: master
   site: inspection-report-app
   skip_cleanup: true
   verbose: true
