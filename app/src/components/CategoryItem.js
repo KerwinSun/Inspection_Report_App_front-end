@@ -1,86 +1,99 @@
 import React, { Component } from "react";
-import { Icon, Grid } from "tabler-react";
 import FeatureItem from "./FeatureItem";
-import { CategoryCounter } from "./CategoryCounter";
+import update from "immutability-helper";
+import "./Custom.css";
 
 class CategoryItem extends Component {
   state = {
+    house: {},
+    categoryIndex: {},
     category: {},
-    count: 0,
-    index: -1,
     isCollapsed: true,
+    isLoaded: false,
+    count: 0,
   };
 
   componentWillMount() {
-    this.setState({ 
-      category: this.props.category, 
-      count: this.props.category.count,
-      index: this.props.index
+    const { house, categoryIndex, category } = this.props;
+    this.setState({
+      house: house,
+      categoryIndex: categoryIndex,
+      category: category,
+      count: category.count,
+      isLoaded: true,
     });
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.house !== prevProps.house) {
+      this.setState({ house: this.props.house });
+    }
+  }
+
   render() {
-    const { isCollapsed, category } = this.state;
-    return (
-      <div className="card">
-        <div className="card-header">
-          <Grid.Row>
-            <Grid.Col width={7}>
-              <h3 className="card-title float-left">{category.name}</h3>
-            </Grid.Col>
-            <Grid.Col width={5}>
-              <CategoryCounter 
-                increment={() => { this.setState({ count: this.state.count + 1 }, () => this.props.updateCategoryState(this.state))}} 
-                decrement={() => { this.state.count === 0 ? this.setState({ count: 0 }, () => this.props.updateCategoryState(this.state)) : this.setState({ count: this.state.count - 1 }, () => this.props.updateCategoryState(this.state))}} 
-                count={this.state.count}
-                onChange={() => this.countChangeHandler.bind(this)}
+    const { isLoaded, isCollapsed, category } = this.state;
+    if (isLoaded) {
+      return (
+        <div className="card">
+          <div className={isCollapsed ? "large-card-header" : "large-card-header-open"}>
+            <h3 className="card-title">{category.name}</h3>
+            <div className="card-header-options">
+              <input 
+                className="card-header-options text-input"
+                defaultValue={this.props.category.count} 
+                onChange={this.countChangeHandler.bind(this)}
+                onBlur={this.countOnBlur.bind(this)}
               />
-            </Grid.Col>
-          </Grid.Row>
-          <button
-            className="card-options"
-            type="button"
-            onClick={() => this.setState({ isCollapsed: !isCollapsed })}
-          >
-            {isCollapsed ? (
-              <Icon prefix="fe" name="chevron-down" />
-            ) : (
-              <Icon prefix="fe" name="chevron-up" />
-            )}
-          </button>
+              <a 
+                className="card-header-options"
+                onClick={() => this.setState({ isCollapsed: !isCollapsed })}
+              >
+                {isCollapsed ? (
+                  <i className="fe fe-chevron-down" />
+                ) : (
+                  <i className="fe fe-chevron-up" />
+                )}
+              </a>
+            </div>
+          </div>
+          <div className={isCollapsed ? "hidden" : "show"}>
+            {category.features.map((feature, i) => (
+              <FeatureItem
+                key={feature.name}
+                house={this.state.house}
+                categoryIndex={this.state.categoryIndex}
+                featureIndex={i}
+                updateHouseState={this.props.updateHouseState}
+              />
+            ))}
+          </div>
         </div>
-        <div className={isCollapsed ? "hidden" : "open"}>
-          {category.features.map((feature, i) => (
-            <FeatureItem
-              key={feature.name}
-              feature={feature}
-              updateFeatureState={this.updateFeatureState}
-              index={i}
-            />
-          ))}
-        </div>
-      </div>
-    );
+      );  
+    } else {
+      return null;
+    }
   }
 
   countChangeHandler(event){
     var num = event.target.value.match(/^\+?(0|[1-9]\d*)$/);//(/^\d+$/);
-    if (num === null) {
-      event.target.value="";
-    }
-    this.setState({
-      count: num
-    });
+    var input = num === null ? 0 : num.input;
+    this.setState({ count: input });
   }
 
-  updateFeatureState = updatedState => {
-    const index = updatedState.index;
-    const updatedFeature = updatedState.feature;
-    let features = this.state.category.features;
-    features[index] = updatedFeature;
-    const category = Object.assign({}, this.state.category, { features: features });
-    this.setState({ category });  
-  };
+  countOnBlur = e => {
+    //change house's state rather than category's state
+    const { house, categoryIndex, count } = this.state;
+    const newHouse = update(house, { 
+      categories: { 
+        [categoryIndex]: { 
+          count: { $set: count }
+        }
+      }
+    });
+    this.setState({ house: newHouse }, 
+      () => this.props.updateHouseState(this.state.house)
+    );
+  }
 }
 
 export default CategoryItem;
