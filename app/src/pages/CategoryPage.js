@@ -26,9 +26,10 @@ class CategoryPage extends Component {
             {this.state.house.categories.map((dynamicData, i) => (
               <CategoryItem 
                 key={dynamicData.name} 
+                house={this.state.house}
+                categoryIndex={i}
                 category={dynamicData}
-                updateCategoryState={this.updateCategoryState}
-                index={i}
+                updateHouseState={this.updateHouseState}
               />
             ))}
             <div className="d-flex">
@@ -45,16 +46,9 @@ class CategoryPage extends Component {
     }
   }
 
-  updateCategoryState = updatedState => {
-    const index = updatedState.index;
-    const updatedCount = updatedState.count;    
-    let updatedCategory = updatedState.category;
-    const category = Object.assign({}, updatedCategory, { count: updatedCount });
-    let categories = this.state.house.categories;
-    categories[index] = category;
-    const house = Object.assign({}, this.state.house, { categories: categories });
+  updateHouseState = house => {
     this.setState({ house });
-  };
+  }
 
   postHouse = () => {
     API.postHouse(this.state.house)
@@ -62,6 +56,7 @@ class CategoryPage extends Component {
         this.props.history.push("/");
       })
       .catch (error => {
+        console.log(error);
       })
   }
 }
