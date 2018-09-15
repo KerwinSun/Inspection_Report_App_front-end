@@ -114,6 +114,14 @@ class FeatureItem extends Component {
           </Form.SelectGroup>
         </Form.Group>
         <Form.Group label={<Form.Label>Comments</Form.Label>}>
+          {/* <Form.SelectGroup>
+            {comments.map((comment, i) => (
+              <Form.SelectGroupItem
+                key={i}
+                name={comment}
+              />
+            ))}
+          </Form.SelectGroup> */}
           <Form.Textarea
             onBlur={this.commentOnBlur.bind(this)}
             name="comments"

@@ -3,12 +3,14 @@ import { Page, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
 import API from '../api.js';
+import { commentOptions } from "../config";
 
 class CategoryPage extends Component {
   state = {
     house: {},
     isCollapsed: true,
     isLoaded: false,
+    options: null,
   };
 
   componentWillMount() {
@@ -19,6 +21,8 @@ class CategoryPage extends Component {
   }
 
   render() {
+    console.log(commentOptions);
+    console.log(this.state.house);
     if (this.state.isLoaded) {
       return (
         <SiteWrapper>

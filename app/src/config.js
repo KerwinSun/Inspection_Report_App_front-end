@@ -858,6 +858,25 @@ export const jsonHouse = {
   "categories": generateJson(house)
 };
 
+function generateJsonOptions(house) {
+  return house.map(category => {
+    var categoryToReturn = {};
+    categoryToReturn.name = category.name;
+    categoryToReturn.features = 
+    category.features.map(feature => {
+      var json = {};
+      json.name = feature.name;
+      json.commentOptions = feature.comments;
+      return json;
+    })
+    return categoryToReturn;
+  })
+}
+
+export const commentOptions = {
+  house: generateJsonOptions(house)
+}
+
 export const realEstateOptions = [
   "Iron Bridge",
   "Barfoot and Thompson",

@@ -126,12 +126,13 @@ class InspectionDetailsPage extends Component {
     json.address = this.state.inspectorAddress;
     json.inspectionDate = "2018-08-28T00:00:00";
     json.lastModified = "2018-08-28T00:00:00";
-    API.postHouse(json)
-      .then(id => {
-        this.props.history.push("/inspect/" + id);
-      })
-      .catch (error => {
-      })
+    console.log(json);
+    // API.postHouse(json)
+    //   .then(id => {
+    //     this.props.history.push("/inspect/" + id);
+    //   })
+    //   .catch (error => {
+    //   })
   };
 }
 
