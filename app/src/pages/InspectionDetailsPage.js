@@ -121,7 +121,6 @@ class InspectionDetailsPage extends Component {
 
   handleClick = () => {
     var json = jsonHouse;
-
     json.inspectedBy = "";
     json.address = this.state.inspectorAddress;
     json.inspectionDate = "2018-08-28T00:00:00";

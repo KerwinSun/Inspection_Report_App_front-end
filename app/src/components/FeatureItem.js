@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Form, Button, Icon } from "tabler-react";
 import update from "immutability-helper";
 import "./Custom.css";
-// import { jsonHouse } from '../config';
 
 class FeatureItem extends Component {
   constructor(props) {
@@ -14,7 +13,10 @@ class FeatureItem extends Component {
       feature: {},
       isCollapsed: true,
       grade: "",
-      comments: "",
+      optionSelected: "",
+      commentFromOption: "",
+      commentAddedByUser: "",
+      options: [],
       isLoaded: false,
     };
   }
@@ -27,9 +29,9 @@ class FeatureItem extends Component {
       categoryIndex: categoryIndex,
       featureIndex: featureIndex,
       grade: house.categories[categoryIndex].features[featureIndex].grade+"",
-      comments: house.categories[categoryIndex].features[featureIndex].comments,
+      options: house.categories[categoryIndex].features[featureIndex].options,
       isLoaded: true,
-    });
+    }, this.setComment);
   }
 
   componentDidUpdate(prevProps) {
@@ -39,10 +41,32 @@ class FeatureItem extends Component {
         house: this.props.house,
         feature: this.props.house.categories[categoryIndex].features[featureIndex],
         grade: this.props.house.categories[categoryIndex].features[featureIndex].grade+"",
-        comments: this.props.house.categories[categoryIndex].features[featureIndex].comments,
-      });      
+      }, this.setComment);      
     }
   }
+
+  setComment = () => {
+    const { feature, optionSelected } = this.state;
+    if (optionSelected === "other") {
+      this.setState({ commentFromOption: ""});
+    } else if (feature.comments === "") {
+      this.setState({ commentFromOption: "", optionSelected: "none" });
+    } else { //comment has been pre set
+      var isCommentFromOption = false;
+      for (var i = 0; i < this.state.options.length; i++) {
+        var thisOption = this.state.options[i];
+        if (feature.comments === thisOption) {
+          isCommentFromOption = true;
+          this.setState({ commentFromOption: thisOption, optionSelected: thisOption });
+          break;
+        }
+      }
+      if (!isCommentFromOption) {
+        this.setState({ commentAddedByUser: feature.comments, optionSelected: "other" });
+      }  
+    }
+  }
+
   render() {
     const { isLoaded, isCollapsed, feature } = this.state;
     if (isLoaded) {
@@ -76,7 +100,7 @@ class FeatureItem extends Component {
   }
 
   renderFeature() {
-    const { categoryIndex, featureIndex, grade, comments } = this.state;
+    const { categoryIndex, featureIndex, grade, commentAddedByUser, optionSelected, options } = this.state;
     return (
       <div>
         <Form.Group label="Rating">
@@ -114,13 +138,26 @@ class FeatureItem extends Component {
           </Form.SelectGroup>
         </Form.Group>
         <Form.Group label={<Form.Label>Comments</Form.Label>}>
-          <Form.Textarea
-            onBlur={this.commentOnBlur.bind(this)}
-            name="comments"
-            placeholder="Add comment"
-            defaultValue={comments}
-            rows={4}
-          />
+          <Form.Select 
+            onBlur={this.optionOnBlur}
+            onChange={this.optionOnChange}
+            value={optionSelected}
+          >
+            <option value="none"></option>
+            {options.map((option, i) => (
+              <option key={i} value={option}>{option}</option> 
+            ))}
+            <option value="other">Other</option>
+          </Form.Select>
+          { optionSelected === "other" ? (
+            <Form.Textarea
+              onBlur={this.commentOnBlur.bind(this)}
+              name="comments"
+              placeholder="Add comment"
+              defaultValue={commentAddedByUser}
+              rows={4}
+            />
+            ) : null }
         </Form.Group>
         <Button.List align="center">
           <Button RootComponent="a" href="/camera" color="secondary">
@@ -132,13 +169,43 @@ class FeatureItem extends Component {
   }
 
   ratingOnBlur = e => {
-    const { house, categoryIndex, featureIndex, grade } = this.state;
+    this.updateHouse("grade", this.state.grade);
+  }
+
+  ratingOnChange = e => {
+    this.setState( { grade: e.target.value });
+  };
+
+  optionOnChange = e => {
+    if (e.target.value === "other") {
+      this.setState({ optionSelected: e.target.value, commentFromOption: "" });
+    } else if (e.target.value === "none") {
+      this.setState({ optionSelected: e.target.value, commentFromOption: "" });
+    } else {
+      this.setState({ optionSelected: e.target.value, commentFromOption: e.target.value, commentAddedByUser: "" });
+    }
+  }
+
+  optionOnBlur = e => {
+    if (this.state.optionSelected !== "other") {
+      this.updateHouse("comments", this.state.commentFromOption);
+    } else {
+      this.updateHouse("comments", "");
+    }
+  }
+
+  commentOnBlur = e => {
+    this.updateHouse("comments", e.target.value);
+  };
+
+  updateHouse(fieldName, fieldValue) {
+    const { house, categoryIndex, featureIndex } = this.state;
     const newHouse = update(house, {
       categories: {
         [categoryIndex]: {
           features: {
             [featureIndex]: {
-              grade: { $set: grade }
+              [fieldName]: { $set: fieldValue }
             }
           }
         }
@@ -146,33 +213,8 @@ class FeatureItem extends Component {
     });
     this.setState({ house: newHouse }, 
       () => this.props.updateHouseState(this.state.house)
-    );
-
+    );    
   }
-
-  ratingOnChange = e => {
-    this.setState( { grade: e.target.value });
-  };
-
-  commentOnBlur = e => {
-    //change house's state rather than feature's state
-    const value = e.target.value;
-    const { house, categoryIndex, featureIndex } = this.state;
-    const newHouse = update(house, {
-      categories: {
-        [categoryIndex]: {
-          features: {
-            [featureIndex]: {
-              comments: { $set: value },
-            }
-          }
-        }
-      }
-    });
-    this.setState({ house: newHouse, comments: value }, 
-      () => this.props.updateHouseState(this.state.house)
-    );
-  };
 }
 
 export default FeatureItem;

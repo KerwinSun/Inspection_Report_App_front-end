@@ -10,6 +10,7 @@ class CategoryItem extends Component {
     category: {},
     isCollapsed: true,
     isLoaded: false,
+    count: 0,
   };
 
   componentWillMount() {
@@ -39,9 +40,9 @@ class CategoryItem extends Component {
             <div className="card-header-options">
               <input 
                 className="card-header-options text-input"
-                type="numeric"
                 defaultValue={this.props.category.count} 
                 onChange={this.countChangeHandler.bind(this)}
+                onBlur={this.countOnBlur.bind(this)}
               />
               <a 
                 className="card-header-options"
@@ -75,16 +76,17 @@ class CategoryItem extends Component {
 
   countChangeHandler(event){
     var num = event.target.value.match(/^\+?(0|[1-9]\d*)$/);//(/^\d+$/);
-    if (num === null) {
-      event.target.value="";
-    }
+    var input = num === null ? 0 : num.input;
+    this.setState({ count: input });
+  }
 
+  countOnBlur = e => {
     //change house's state rather than category's state
-    const { house, categoryIndex } = this.state;
+    const { house, categoryIndex, count } = this.state;
     const newHouse = update(house, { 
       categories: { 
         [categoryIndex]: { 
-          count: { $set: num.input }
+          count: { $set: count }
         }
       }
     });
