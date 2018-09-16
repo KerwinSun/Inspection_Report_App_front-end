@@ -10,19 +10,15 @@ class CategoryPage extends Component {
     house: {},
     isCollapsed: true,
     isLoaded: false,
-    options: null,
   };
 
   componentWillMount() {
     API.getHouse(this.props.match.params.id)
-      .then(res => {
-        this.setState({ house: res, isLoaded: true })
-      });
+      .then(res => this.addOptionsToHouse(res))     
+      .then(res => this.setState({ house: res, isLoaded: true }))
   }
 
   render() {
-    console.log(commentOptions);
-    console.log(this.state.house);
     if (this.state.isLoaded) {
       return (
         <SiteWrapper>
@@ -50,8 +46,31 @@ class CategoryPage extends Component {
     }
   }
 
+  addOptionsToHouse = res => {
+    for (var i = 0; i < res.categories.length; i++) {
+      var category1 = res.categories[i];
+      for (var j = 0; j < commentOptions.categories.length; j++) {
+        var category2 = commentOptions.categories[j];
+        if (category1.name === category2.name) {
+          for (var k = 0; k < category1.features.length; k++) {
+            var feature1 = category1.features[k];
+            for (var l = 0; l <category2.features.length; l++) {
+              var feature2 = category2.features[l];
+              if (feature1.name === feature2.name) {
+                feature1.options = feature2.options;
+                break;
+              }
+            }
+          }              
+          break;
+        }
+      }
+    }
+    return res;
+  }
+
   updateHouseState = house => {
-    this.setState({ house });
+    this.setState({ house }, console.log(house));
   }
 
   postHouse = () => {

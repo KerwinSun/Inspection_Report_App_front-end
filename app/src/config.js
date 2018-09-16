@@ -866,7 +866,7 @@ function generateJsonOptions(house) {
     category.features.map(feature => {
       var json = {};
       json.name = feature.name;
-      json.commentOptions = feature.comments;
+      json.options = feature.comments;
       return json;
     })
     return categoryToReturn;
@@ -874,7 +874,7 @@ function generateJsonOptions(house) {
 }
 
 export const commentOptions = {
-  house: generateJsonOptions(house)
+  categories: generateJsonOptions(house)
 }
 
 export const realEstateOptions = [
