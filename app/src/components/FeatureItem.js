@@ -169,21 +169,7 @@ class FeatureItem extends Component {
   }
 
   ratingOnBlur = e => {
-    const { house, categoryIndex, featureIndex, grade } = this.state;
-    const newHouse = update(house, {
-      categories: {
-        [categoryIndex]: {
-          features: {
-            [featureIndex]: {
-              grade: { $set: grade }
-            }
-          }
-        }
-      }
-    });
-    this.setState({ house: newHouse }, 
-      () => this.props.updateHouseState(this.state.house)
-    );
+    this.updateHouse("grade", this.state.grade);
   }
 
   ratingOnChange = e => {
@@ -201,50 +187,25 @@ class FeatureItem extends Component {
   }
 
   optionOnBlur = e => {
-    const { house, categoryIndex, featureIndex, commentFromOption } = this.state;
-    let newHouse = null;
     if (this.state.optionSelected !== "other") {
-      newHouse = update(house, {
-        categories: {
-          [categoryIndex]: {
-            features: {
-              [featureIndex]: {
-                comments: { $set: commentFromOption }
-              }
-            }
-          }
-        }
-      });
-      this.setState({ house: newHouse }, 
-        () => this.props.updateHouseState(this.state.house)
-      );    
+      this.updateHouse("comments", this.state.commentFromOption);
     } else {
-      newHouse = update(house, {
-        categories: {
-          [categoryIndex]: {
-            features: {
-              [featureIndex]: {
-                comments: { $set: "" }
-              }
-            }
-          }
-        }
-      });
-      this.setState({ house: newHouse }, 
-        () => this.props.updateHouseState(this.state.house)
-      );    
+      this.updateHouse("comments", "");
     }
   }
 
   commentOnBlur = e => {
-    const value = e.target.value;
+    this.updateHouse("comments", e.target.value);
+  };
+
+  updateHouse(fieldName, fieldValue) {
     const { house, categoryIndex, featureIndex } = this.state;
     const newHouse = update(house, {
       categories: {
         [categoryIndex]: {
           features: {
             [featureIndex]: {
-              comments: { $set: value },
+              [fieldName]: { $set: fieldValue }
             }
           }
         }
@@ -252,8 +213,8 @@ class FeatureItem extends Component {
     });
     this.setState({ house: newHouse }, 
       () => this.props.updateHouseState(this.state.house)
-    );
-  };
+    );    
+  }
 }
 
 export default FeatureItem;

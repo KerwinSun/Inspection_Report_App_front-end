@@ -70,7 +70,7 @@ class CategoryPage extends Component {
   }
 
   updateHouseState = house => {
-    this.setState({ house }, console.log(house));
+    this.setState({ house });
   }
 
   postHouse = () => {
