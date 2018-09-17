@@ -1,9 +1,9 @@
 import React, { Component } from 'react'; 
-import {Button} from "tabler-react";
-//import axios from "axios";
- 
+import { Page, Icon, Grid, GalleryCard, Button } from "tabler-react";
+import update from "immutability-helper";
+
 class CameraPage extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       selectedImage: []
@@ -11,50 +11,75 @@ class CameraPage extends Component {
   }
   
   selectPhoto = event => {
-    this.setState({
-      selectedImage: [...this.state.selectedImage, event.target.files[0]]
+    let img = [];
+    Array.from(event.target.files).forEach(file => {
+      if (file.type.match('image.*')) {
+        img = [...img, {
+          imgObject: file,
+          src: URL.createObjectURL(file)
+        }]
+      }
     });
-    //console.log(event.target.files[0]);
-    console.log(event.target.files[0]);
-  }   
+    this.setState({
+      selectedImage: this.state.selectedImage.concat(img)
+    });
+  }
+
+  removePhoto = item => {
+    const { selectedImage } = this.state;
+    let index = selectedImage.indexOf(item);
+    if (index > -1) { 
+      const newArray = update(selectedImage, {
+        $splice: [[index, 1]]
+      });
+      this.setState({ selectedImage: newArray })
+    }
+  }
 
   uploadPhotos = () => {
     const fd = new FormData();
     fd.append('image', this.state.selectedImage, this.state.selectedImage.name);
-    console.log(this.state.selectedImage);  
-    //https://www.youtube.com/watch?v=XeiOnkEI7XI
-    //axios.post()
   }
 
-  displaySelectedPhotos(){
-    var photos="";
-    for (let i = 0; i < this.state.selectedImage.length; i++) {
-      photos=photos+this.state.selectedImage[i].name+"\n";
-    }
-    return photos;
-  }
-
-  render () {
+  render() {
     return (
-      <div className="App">
-        <input 
-          style={{display: 'none'}}
+      <Page.Content>
+        <input
+          className="hidden"
           type="file" 
           accept="image/*"
-          capture="camera"
+          multiple
           onChange={this.selectPhoto}  
           ref={fileInput => this.fileInput = fileInput}
         />
-        <Button onClick={() => this.fileInput.click()}>Add Photo</Button>
-        <Button onClick={this.uploadPhotos}>Confirm</Button>
-        <div>
-          {typeof this.state.selectedImage !== 'undefined' && this.state.selectedImage.length === 0 ? null :
-          <div>
-            <p>{this.displaySelectedPhotos()}</p>
-          </div>}
+        <div className="d-flex">
+          <Button color="secondary" onClick={() => this.fileInput.click()}>Add Photo</Button>
+          <Button color="primary" className="ml-auto" onClick={this.uploadPhotos}>Confirm</Button>
         </div>
-      </div>
+        <Button.List className="mt-4" align="left">
+         
+        </Button.List>
+        <Button.List className="mt-4" align="right">
+         
+        </Button.List>
+        <Grid.Row className="row-cards"> 
+          { this.state.selectedImage.map((item, key) => (
+            <Grid.Col width={12} lg={4} key={key}>
+              <GalleryCard>
+                <a onClick={()=>this.removePhoto(item)}>
+                  <Icon name="x"/>
+                </a>
+                <GalleryCard.Image
+                  src={item.src}
+                  alt={`Pic`}
+                />
+              </GalleryCard>
+            </Grid.Col> 
+          ))}
+        </Grid.Row>
+      </Page.Content>
     );
   }
 }
+
 export default CameraPage;
