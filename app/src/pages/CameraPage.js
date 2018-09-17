@@ -1,6 +1,7 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import { Page, Icon, Grid, GalleryCard, Button } from "tabler-react";
 import update from "immutability-helper";
+import API from '../api.js';
 
 class CameraPage extends Component {
   constructor(props) {
@@ -9,7 +10,7 @@ class CameraPage extends Component {
       selectedImage: []
     }
   }
-  
+
   selectPhoto = event => {
     let img = [];
     Array.from(event.target.files).forEach(file => {
@@ -28,7 +29,7 @@ class CameraPage extends Component {
   removePhoto = item => {
     const { selectedImage } = this.state;
     let index = selectedImage.indexOf(item);
-    if (index > -1) { 
+    if (index > -1) {
       const newArray = update(selectedImage, {
         $splice: [[index, 1]]
       });
@@ -38,7 +39,10 @@ class CameraPage extends Component {
 
   uploadPhotos = () => {
     const fd = new FormData();
-    fd.append('image', this.state.selectedImage, this.state.selectedImage.name);
+    this.state.selectedImage.map((image, key) => {
+          fd.append('image', image.imgObject, image.imgObject.name);
+    })
+    API.postImage(fd);
   }
 
   render() {
@@ -46,23 +50,24 @@ class CameraPage extends Component {
       <Page.Content>
         <input
           className="hidden"
-          type="file" 
+          type="file"
           accept="image/*"
           multiple
-          onChange={this.selectPhoto}  
+          onChange={this.selectPhoto}
           ref={fileInput => this.fileInput = fileInput}
         />
         <div className="d-flex">
+
           <Button color="secondary" onClick={() => this.fileInput.click()}>Add Photo</Button>
           <Button color="primary" className="ml-auto" onClick={this.uploadPhotos}>Confirm</Button>
         </div>
         <Button.List className="mt-4" align="left">
-         
+
         </Button.List>
         <Button.List className="mt-4" align="right">
-         
+
         </Button.List>
-        <Grid.Row className="row-cards"> 
+        <Grid.Row className="row-cards">
           { this.state.selectedImage.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
               <GalleryCard>
@@ -74,7 +79,7 @@ class CameraPage extends Component {
                   alt={`Pic`}
                 />
               </GalleryCard>
-            </Grid.Col> 
+            </Grid.Col>
           ))}
         </Grid.Row>
       </Page.Content>
