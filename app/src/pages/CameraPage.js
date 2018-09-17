@@ -39,7 +39,7 @@ class CameraPage extends Component {
 
   uploadPhotos = () => {
     const fd = new FormData();
-    this.state.selectedImage.map((image, key) => {
+    this.state.selectedImage.forEach((image, key) => {
           fd.append('image', image.imgObject, image.imgObject.name);
     })
     API.postImage(fd);
@@ -57,7 +57,6 @@ class CameraPage extends Component {
           ref={fileInput => this.fileInput = fileInput}
         />
         <div className="d-flex">
-
           <Button color="secondary" onClick={() => this.fileInput.click()}>Add Photo</Button>
           <Button color="primary" className="ml-auto" onClick={this.uploadPhotos}>Confirm</Button>
         </div>
