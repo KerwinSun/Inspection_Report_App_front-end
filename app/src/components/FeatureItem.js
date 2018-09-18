@@ -42,18 +42,11 @@ class FeatureItem extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.house !== prevProps.house) {
       const { categoryIndex, featureIndex } = this.state;
-      this.setState(
-        {
-          house: this.props.house,
-          feature: this.props.house.categories[categoryIndex].features[
-            featureIndex
-          ],
-          grade:
-            this.props.house.categories[categoryIndex].features[featureIndex]
-              .grade + ""
-        },
-        this.setComment
-      );
+      this.setState({
+        house: this.props.house,
+        feature: this.props.house.categories[categoryIndex].features[featureIndex],
+        grade: this.props.house.categories[categoryIndex].features[featureIndex].grade+"",
+      }, this.setComment);
     }
   }
 
@@ -212,8 +205,8 @@ class FeatureItem extends Component {
     );
   };
   getFeatureID = () => {
-    return this.state.house.categories[this.state.categoryIndex].id;
-  };
+    return this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex].id;
+  }
 
   ratingOnBlur = e => {
     this.updateHouse("grade", this.state.grade);
