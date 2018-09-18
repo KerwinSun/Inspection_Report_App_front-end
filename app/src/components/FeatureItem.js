@@ -162,17 +162,17 @@ class FeatureItem extends Component {
         <Button.List align="center">
           <Button
             RootComponent="a"
-            href={
-            "/inspect/"+this.state.house.id+"/images/"+this.getFeatureID()
-            }
-            color="secondary">
+            color="secondary"
+            onClick={this.cameraClick}>
             <Icon prefix="fe" name="camera" />
           </Button>
         </Button.List>
       </div>
     );
   }
-
+  cameraClick = () => {
+    this.props.history.push("/inspect/"+this.state.house.id+"/images/"+this.getFeatureID());
+  }
   getFeatureID = () => {
     console.log(this.state.house);
     return this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex].id;

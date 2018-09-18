@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Table, Button } from "tabler-react";
+import { Page, Grid, Card, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
+import HouseTable from "../components/HouseTable";
 
 class Home extends Component {
   constructor(props) {
@@ -36,22 +37,7 @@ class Home extends Component {
                   <Card.Header>
                     <Card.Title>Inspections in Process</Card.Title>
                   </Card.Header>
-                  <Table cards={true} responsive={true} className="table-vcenter">
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.ColHeader>Address</Table.ColHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {this.state.wipHouses.map(house => (
-                        <Table.Row key={house.id}>
-                          <Table.Col>
-                            <a href={"/inspect/" + house.id}>{house.address}</a>
-                          </Table.Col>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
+                  <HouseTable houses={this.state.wipHouses}/>
                 </Card>
               </Grid.Col>
             </Grid.Row>
@@ -61,22 +47,7 @@ class Home extends Component {
                   <Card.Header>
                     <Card.Title>Completed Inspections</Card.Title>
                   </Card.Header>
-                  <Table cards={true} responsive={true} className="table-vcenter">
-                    <Table.Header>
-                      <Table.Row>
-                        <Table.ColHeader>Address</Table.ColHeader>
-                      </Table.Row>
-                    </Table.Header>
-                    <Table.Body>
-                      {this.state.completedHouses.map(house => (
-                        <Table.Row key={house.id}>
-                          <Table.Col>
-                            <a href={"/inspect/" + house.id}>{house.address}</a>
-                          </Table.Col>
-                        </Table.Row>
-                      ))}
-                    </Table.Body>
-                  </Table>
+                  <HouseTable houses={this.state.completedHouses}/>
                 </Card>
               </Grid.Col>
             </Grid.Row>

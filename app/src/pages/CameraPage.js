@@ -8,22 +8,25 @@ class CameraPage extends Component {
     super(props);
     this.state = {
       selectedImage: [],
-      persistedImages: [""],
-      featureID: -1
+      persistedImages: [],
+      featureID: -1,
+      houseID: -1
     };
   }
+
   componentDidMount() {
     let url = window.location.href;
     let index = url.search("images/(\\d+)");
-    url = url.substring(index);
-    this.setState(
-      {
-        featureID: url.match(/\d+/g)[0]
-      },
-      () => {
-        this.getSavedPhotos();
-      }
-    );
+    let feature = url.substring(index);
+    index = url.search("inspect/(\\d+)");
+    let house = url.substring(index);
+    console.log(feature.match(/\d+/g)[0]);
+    console.log(house.match(/\d+/g)[0]);
+    this.setState({
+      featureID: feature.match(/\d+/g)[0],
+      houseID: house.match(/\d+/g)[0]
+    });
+    this.getSavedPhotos();
   }
 
   selectPhoto = event => {
@@ -61,13 +64,13 @@ class CameraPage extends Component {
       fd.append("image", image.imgObject, image.imgObject.name);
     });
     API.postImage(fd, this.state.featureID);
+    this.props.history.push("/inspect/" + this.state.houseID);
   };
 
   getSavedPhotos = () => {
     API.getImages(this.state.featureID).then(response => {
       console.log(response);
-      if (response === "") {
-        console.log('NULLLLLL');
+      if (response === "" || response === undefined || response === null) {
         this.setState(
           {
             persistedImages: []
@@ -77,7 +80,6 @@ class CameraPage extends Component {
           }
         );
       } else {
-                console.log('NOt     NULLLLLL');
         this.setState({
           persistedImages: response
         });
@@ -108,9 +110,7 @@ class CameraPage extends Component {
             Confirm
           </Button>
         </div>
-        <div>
-          <br />
-        </div>
+        <Button.List className="mt-4" />
         <Grid.Row className="row-cards">
           {this.state.selectedImage.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
