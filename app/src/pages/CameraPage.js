@@ -6,7 +6,8 @@ class CameraPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedImage: []
+      selectedImage: [],
+      featureID: -1
     }
   }
   
