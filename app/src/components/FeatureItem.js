@@ -37,11 +37,11 @@ class FeatureItem extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.house !== prevProps.house) {
       const { categoryIndex, featureIndex } = this.state;
-      this.setState({ 
+      this.setState({
         house: this.props.house,
         feature: this.props.house.categories[categoryIndex].features[featureIndex],
         grade: this.props.house.categories[categoryIndex].features[featureIndex].grade+"",
-      }, this.setComment);      
+      }, this.setComment);
     }
   }
 
@@ -63,7 +63,7 @@ class FeatureItem extends Component {
       }
       if (!isCommentFromOption) {
         this.setState({ commentAddedByUser: feature.comments, optionSelected: "other" });
-      }  
+      }
     }
   }
 
@@ -75,7 +75,7 @@ class FeatureItem extends Component {
           <div className={isCollapsed ? "small-card-header" : "small-card-header-open"}>
             <h6 className="small-card-title">{feature.name}</h6>
             <div className="card-header-options">
-              <a 
+              <a
                 className="card-header-options"
                 onClick={() => this.setState({ isCollapsed: !isCollapsed })}
               >
@@ -93,7 +93,7 @@ class FeatureItem extends Component {
             {this.renderFeature()}
           </div>
         </div>
-      );      
+      );
     } else {
       return null;
     }
@@ -138,14 +138,14 @@ class FeatureItem extends Component {
           </Form.SelectGroup>
         </Form.Group>
         <Form.Group label={<Form.Label>Comments</Form.Label>}>
-          <Form.Select 
+          <Form.Select
             onBlur={this.optionOnBlur}
             onChange={this.optionOnChange}
             value={optionSelected}
           >
             <option value="none"></option>
             {options.map((option, i) => (
-              <option key={i} value={option}>{option}</option> 
+              <option key={i} value={option}>{option}</option>
             ))}
             <option value="other">Other</option>
           </Form.Select>
@@ -160,7 +160,7 @@ class FeatureItem extends Component {
             ) : null }
         </Form.Group>
         <Button.List align="center">
-          <Button 
+          <Button
             RootComponent="a"
             color="secondary"
             onClick={this.cameraClick}>
@@ -174,7 +174,8 @@ class FeatureItem extends Component {
     this.props.history.push("/inspect/"+this.state.house.id+"/images/"+this.getFeatureID());
   }
   getFeatureID = () => {
-    return this.state.house.categories[this.state.categoryIndex].id;
+    console.log(this.state.house);
+    return this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex].id;
   }
 
   ratingOnBlur = e => {
@@ -220,9 +221,9 @@ class FeatureItem extends Component {
         }
       }
     });
-    this.setState({ house: newHouse }, 
+    this.setState({ house: newHouse },
       () => this.props.updateHouseState(this.state.house)
-    );    
+    );
   }
 }
 
