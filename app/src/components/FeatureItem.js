@@ -14,21 +14,16 @@ class FeatureItem extends Component {
       feature: {},
       isCollapsed: true,
       grade: "",
-<<<<<<< HEAD
       optionSelected: "",
       commentFromOption: "",
       commentAddedByUser: "",
       options: [],
-=======
-      comments: "",
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
       isLoaded: false
     };
   }
 
   componentDidMount() {
     const { house, categoryIndex, featureIndex } = this.props;
-<<<<<<< HEAD
     this.setState(
       {
         house: house,
@@ -42,23 +37,11 @@ class FeatureItem extends Component {
       },
       this.setComment
     );
-=======
-    this.setState({
-      house: house,
-      feature: house.categories[categoryIndex].features[featureIndex],
-      categoryIndex: categoryIndex,
-      featureIndex: featureIndex,
-      grade: house.categories[categoryIndex].features[featureIndex].grade + "",
-      comments: house.categories[categoryIndex].features[featureIndex].comments,
-      isLoaded: true
-    });
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.house !== prevProps.house) {
       const { categoryIndex, featureIndex } = this.state;
-<<<<<<< HEAD
       this.setState(
         {
           house: this.props.house,
@@ -71,20 +54,6 @@ class FeatureItem extends Component {
         },
         this.setComment
       );
-=======
-      this.setState({
-        house: this.props.house,
-        feature: this.props.house.categories[categoryIndex].features[
-          featureIndex
-        ],
-        grade:
-          this.props.house.categories[categoryIndex].features[featureIndex]
-            .grade + "",
-        comments: this.props.house.categories[categoryIndex].features[
-          featureIndex
-        ].comments
-      });
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
     }
   }
 
@@ -237,7 +206,6 @@ class FeatureItem extends Component {
       </div>
     );
   }
-<<<<<<< HEAD
   cameraClick = () => {
     this.props.history.push(
       "/inspect/" + this.state.house.id + "/images/" + this.getFeatureID()
@@ -275,29 +243,6 @@ class FeatureItem extends Component {
     } else {
       this.updateHouse("comments", "");
     }
-=======
-
-  ratingOnBlur = e => {
-    const { house, categoryIndex, featureIndex, grade } = this.state;
-    const newHouse = update(house, {
-      categories: {
-        [categoryIndex]: {
-          features: {
-            [featureIndex]: {
-              grade: { $set: grade }
-            }
-          }
-        }
-      }
-    });
-    this.setState({ house: newHouse }, () =>
-      this.props.updateHouseState(this.state.house)
-    );
-  };
-
-  ratingOnChange = e => {
-    this.setState({ grade: e.target.value });
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
   };
 
   commentOnBlur = e => {
@@ -311,21 +256,13 @@ class FeatureItem extends Component {
         [categoryIndex]: {
           features: {
             [featureIndex]: {
-<<<<<<< HEAD
               [fieldName]: { $set: fieldValue }
-=======
-              comments: { $set: value }
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
             }
           }
         }
       }
     });
-<<<<<<< HEAD
     this.setState({ house: newHouse }, () =>
-=======
-    this.setState({ house: newHouse, comments: value }, () =>
->>>>>>> 992b4e2ae9ca97024e40c127f63405f033a1a369
       this.props.updateHouseState(this.state.house)
     );
   }
