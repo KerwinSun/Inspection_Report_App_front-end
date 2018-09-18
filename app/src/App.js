@@ -9,6 +9,7 @@ import CameraPage from "./pages/CameraPage";
 import GalleryPage from "./pages/GalleryPage";
 
 import "tabler-react/dist/Tabler.css";
+import "./App.css";
 
 const hist = createBrowserHistory();
 
@@ -39,7 +40,7 @@ class App extends Component {
           <Route exact path="/register" component={EmptyPage} />
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/empty" component={EmptyPage} />
-          <Route exact path="/camera" component={CameraPage} />
+          <Route exact path={'/inspect/:id(\\d+)/images/:featureId(\\d+)'} component={CameraPage} />
           <Route component={HomePage} />
         </Switch>
       </Router>

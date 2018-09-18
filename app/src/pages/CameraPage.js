@@ -7,9 +7,25 @@ class CameraPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedImage: []
+      selectedImage: [],
+      featureID: -1,
+      houseID: -1
     }
   }
+  componentDidMount(){
+    let url = window.location.href;
+    let index = url.search("images/(\\d+)");
+    let feature = url.substring(index);
+    index = url.search("inspect/(\\d+)");
+    let house =  url.substring(index);
+    console.log(feature.match(/\d+/g)[0]);
+    console.log(house.match(/\d+/g)[0]);
+    this.setState({
+      featureID: feature.match(/\d+/g)[0],
+      houseID: house.match(/\d+/g)[0]
+    })
+  }
+
 
   selectPhoto = event => {
     let img = [];
@@ -43,6 +59,7 @@ class CameraPage extends Component {
           fd.append('image', image.imgObject, image.imgObject.name);
     })
     API.postImage(fd);
+    this.props.history.push("/inspect/"+this.state.houseID);
   }
 
   render() {
@@ -60,13 +77,8 @@ class CameraPage extends Component {
           <Button color="secondary" onClick={() => this.fileInput.click()}>Add Photo</Button>
           <Button color="primary" className="ml-auto" onClick={this.uploadPhotos}>Confirm</Button>
         </div>
-        <Button.List className="mt-4" align="left">
-
-        </Button.List>
-        <Button.List className="mt-4" align="right">
-
-        </Button.List>
-        <Grid.Row className="row-cards">
+        <Button.List className="mt-4"></Button.List>
+        <Grid.Row className="row-cards"> 
           { this.state.selectedImage.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
               <GalleryCard>

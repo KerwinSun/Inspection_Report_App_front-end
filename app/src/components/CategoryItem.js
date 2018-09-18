@@ -64,6 +64,7 @@ class CategoryItem extends Component {
                 categoryIndex={this.state.categoryIndex}
                 featureIndex={i}
                 updateHouseState={this.props.updateHouseState}
+                history={this.props.history}
               />
             ))}
           </div>

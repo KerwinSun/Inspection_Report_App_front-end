@@ -9,6 +9,7 @@ class InspectionDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 1, //Hard coded user id for now. 
       name: "Jason React",
       homePhone: "09 143 1235",
       mobilePhone: "021 485 9876",
@@ -121,7 +122,10 @@ class InspectionDetailsPage extends Component {
 
   handleClick = () => {
     var json = jsonHouse;
-    json.inspectedBy = "";
+    var userObject = {
+      "UserId": this.state.userId, 
+    };
+    json.inspectedBy = [userObject];
     json.address = this.state.inspectorAddress;
     json.inspectionDate = "2018-08-28T00:00:00";
     json.lastModified = "2018-08-28T00:00:00";

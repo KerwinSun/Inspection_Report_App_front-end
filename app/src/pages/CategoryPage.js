@@ -30,6 +30,7 @@ class CategoryPage extends Component {
                 categoryIndex={i}
                 category={dynamicData}
                 updateHouseState={this.updateHouseState}
+                history={this.props.history}
               />
             ))}
             <div className="d-flex">
@@ -74,6 +75,7 @@ class CategoryPage extends Component {
   }
 
   postHouse = () => {
+    console.log(this.state.house);
     API.postHouse(this.state.house)
       .then(response => {
         this.props.history.push("/");
