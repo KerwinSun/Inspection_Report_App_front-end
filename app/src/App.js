@@ -39,7 +39,7 @@ class App extends Component {
           <Route exact path="/register" component={EmptyPage} />
           <Route exact path="/gallery" component={GalleryPage} />
           <Route exact path="/empty" component={EmptyPage} />
-          <Route exact path="/camera" component={CameraPage} />
+          <Route exact path={'/inspect/:id(\\d+)/images/:featureId(\\d+)'} component={CameraPage} />
           <Route component={HomePage} />
         </Switch>
       </Router>
