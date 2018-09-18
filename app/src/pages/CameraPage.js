@@ -12,6 +12,12 @@ class CameraPage extends Component {
   }
 
   componentDidMount(){
+    let url = window.location.href;
+    let index = url.search("images/(\\d+)");
+    url = url.substring(index);
+    this.setState({
+      featureID: url.match(/\d+/g)[0]
+    })
   }
 
   selectPhoto = event => {
