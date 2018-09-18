@@ -74,6 +74,7 @@ class CategoryPage extends Component {
   }
 
   postHouse = () => {
+    console.log(this.state.house);
     API.postHouse(this.state.house)
       .then(response => {
         this.props.history.push("/");

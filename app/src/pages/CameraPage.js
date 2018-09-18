@@ -10,7 +10,10 @@ class CameraPage extends Component {
       featureID: -1
     }
   }
-  
+
+  componentDidMount(){
+  }
+
   selectPhoto = event => {
     let img = [];
     Array.from(event.target.files).forEach(file => {

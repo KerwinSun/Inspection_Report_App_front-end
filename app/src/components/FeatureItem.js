@@ -160,12 +160,21 @@ class FeatureItem extends Component {
             ) : null }
         </Form.Group>
         <Button.List align="center">
-          <Button RootComponent="a" href="/camera" color="secondary">
+          <Button 
+            RootComponent="a"
+            href={
+            "/inspect/"+this.state.house.id+"/images/"+this.getFeatureID()
+            } 
+            color="secondary">
             <Icon prefix="fe" name="camera" />
           </Button>
         </Button.List>
       </div>
     );
+  }
+
+  getFeatureID = () => {
+    return this.state.house.categories[this.state.categoryIndex].id;
   }
 
   ratingOnBlur = e => {
