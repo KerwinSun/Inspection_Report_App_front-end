@@ -26,12 +26,25 @@ export default {
       return response.data.id;
     });
   },
-  postImage(formData) {
-    return axios.post(server + "/Image/", formData).then(response => {
+  postImage(formData, featureId) {
+    return axios.post(server + "/Image/", formData, {
+      headers: {
+        'feature-id': featureId
+      }
+    }).then(response => {
       console.log(response);
     })
     .catch(response => {
       console.log('Error sending images');
     });
-  }
+  },
+  getImages(featureId) {
+  return axios.get(server + "/Image/" + featureId)
+  .then(response => {
+    return response.data;
+  })
+  .catch(response => {
+    console.log(response);
+  })
+}
 };
