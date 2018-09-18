@@ -8,7 +8,7 @@ class CameraPage extends Component {
     super(props);
     this.state = {
       selectedImage: [],
-      persistedImages: [],
+      persistedImages: [""],
       featureID: -1
     };
   }
@@ -66,9 +66,22 @@ class CameraPage extends Component {
   getSavedPhotos = () => {
     API.getImages(this.state.featureID).then(response => {
       console.log(response);
-      this.setState({
-        persistedImages: response
-      });
+      if (response === "") {
+        console.log('NULLLLLL');
+        this.setState(
+          {
+            persistedImages: []
+          },
+          () => {
+            console.log(this.state.persistedImages);
+          }
+        );
+      } else {
+                console.log('NOt     NULLLLLL');
+        this.setState({
+          persistedImages: response
+        });
+      }
     });
   };
 
@@ -96,7 +109,7 @@ class CameraPage extends Component {
           </Button>
         </div>
         <div>
-          <br/>
+          <br />
         </div>
         <Grid.Row className="row-cards">
           {this.state.selectedImage.map((item, key) => (
