@@ -30,6 +30,7 @@ class CategoryPage extends Component {
                 categoryIndex={i}
                 category={dynamicData}
                 updateHouseState={this.updateHouseState}
+                history={this.props.history}
               />
             ))}
             <div className="d-flex">
