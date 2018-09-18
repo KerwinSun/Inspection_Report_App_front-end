@@ -1,6 +1,7 @@
-import React, { Component } from 'react'; 
+import React, { Component } from 'react';
 import { Page, Icon, Grid, GalleryCard, Button } from "tabler-react";
 import update from "immutability-helper";
+import API from '../api.js';
 
 class CameraPage extends Component {
   constructor(props) {
@@ -10,7 +11,6 @@ class CameraPage extends Component {
       featureID: -1
     }
   }
-
   componentDidMount(){
     let url = window.location.href;
     let index = url.search("images/(\\d+)");
@@ -19,6 +19,7 @@ class CameraPage extends Component {
       featureID: url.match(/\d+/g)[0]
     })
   }
+
 
   selectPhoto = event => {
     let img = [];
@@ -38,7 +39,7 @@ class CameraPage extends Component {
   removePhoto = item => {
     const { selectedImage } = this.state;
     let index = selectedImage.indexOf(item);
-    if (index > -1) { 
+    if (index > -1) {
       const newArray = update(selectedImage, {
         $splice: [[index, 1]]
       });
@@ -48,7 +49,10 @@ class CameraPage extends Component {
 
   uploadPhotos = () => {
     const fd = new FormData();
-    fd.append('image', this.state.selectedImage, this.state.selectedImage.name);
+    this.state.selectedImage.forEach((image, key) => {
+          fd.append('image', image.imgObject, image.imgObject.name);
+    })
+    API.postImage(fd);
   }
 
   render() {
@@ -56,10 +60,10 @@ class CameraPage extends Component {
       <Page.Content>
         <input
           className="hidden"
-          type="file" 
+          type="file"
           accept="image/*"
           multiple
-          onChange={this.selectPhoto}  
+          onChange={this.selectPhoto}
           ref={fileInput => this.fileInput = fileInput}
         />
         <div className="d-flex">
@@ -78,7 +82,7 @@ class CameraPage extends Component {
                   alt={`Pic`}
                 />
               </GalleryCard>
-            </Grid.Col> 
+            </Grid.Col>
           ))}
         </Grid.Row>
       </Page.Content>
