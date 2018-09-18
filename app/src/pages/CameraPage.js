@@ -70,6 +70,7 @@ class CameraPage extends Component {
           <Button color="secondary" onClick={() => this.fileInput.click()}>Add Photo</Button>
           <Button color="primary" className="ml-auto" onClick={this.uploadPhotos}>Confirm</Button>
         </div>
+        <Button.List className="mt-4"></Button.List>
         <Grid.Row className="row-cards"> 
           { this.state.selectedImage.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
