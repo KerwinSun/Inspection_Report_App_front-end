@@ -8,15 +8,21 @@ class CameraPage extends Component {
     super(props);
     this.state = {
       selectedImage: [],
-      featureID: -1
+      featureID: -1,
+      houseID: -1
     }
   }
   componentDidMount(){
     let url = window.location.href;
     let index = url.search("images/(\\d+)");
-    url = url.substring(index);
+    let feature = url.substring(index);
+    index = url.search("inspect/(\\d+)");
+    let house =  url.substring(index);
+    console.log(feature.match(/\d+/g)[0]);
+    console.log(house.match(/\d+/g)[0]);
     this.setState({
-      featureID: url.match(/\d+/g)[0]
+      featureID: feature.match(/\d+/g)[0],
+      houseID: house.match(/\d+/g)[0]
     })
   }
 
@@ -53,6 +59,7 @@ class CameraPage extends Component {
           fd.append('image', image.imgObject, image.imgObject.name);
     })
     API.postImage(fd);
+    this.props.history.push("/inspect/"+this.state.houseID);
   }
 
   render() {

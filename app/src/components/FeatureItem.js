@@ -162,9 +162,6 @@ class FeatureItem extends Component {
         <Button.List align="center">
           <Button 
             RootComponent="a"
-            href={
-            "/inspect/"+this.state.house.id+"/images/"+this.getFeatureID()
-            } 
             color="secondary"
             onClick={this.cameraClick}>
             <Icon prefix="fe" name="camera" />
