@@ -22,11 +22,15 @@ class CameraPage extends Component {
     let house = url.substring(index);
     console.log(feature.match(/\d+/g)[0]);
     console.log(house.match(/\d+/g)[0]);
-    this.setState({
-      featureID: feature.match(/\d+/g)[0],
-      houseID: house.match(/\d+/g)[0]
-    });
-    this.getSavedPhotos();
+    this.setState(
+      {
+        featureID: feature.match(/\d+/g)[0],
+        houseID: house.match(/\d+/g)[0]
+      },
+      () => {
+        this.getSavedPhotos();
+      }
+    );
   }
 
   selectPhoto = event => {
