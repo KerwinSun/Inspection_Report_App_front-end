@@ -9,6 +9,7 @@ import CameraPage from "./pages/CameraPage";
 import GalleryPage from "./pages/GalleryPage";
 
 import "tabler-react/dist/Tabler.css";
+import "./App.css";
 
 const hist = createBrowserHistory();
 

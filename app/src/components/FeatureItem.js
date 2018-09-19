@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Icon } from "tabler-react";
+import ColouredRatingBarItem from "./ColouredRatingBarItem";
 import update from "immutability-helper";
 import "./Custom.css";
 
@@ -17,21 +18,25 @@ class FeatureItem extends Component {
       commentFromOption: "",
       commentAddedByUser: "",
       options: [],
-      isLoaded: false,
+      isLoaded: false
     };
   }
 
   componentDidMount() {
     const { house, categoryIndex, featureIndex } = this.props;
-    this.setState({
-      house: house,
-      feature: house.categories[categoryIndex].features[featureIndex],
-      categoryIndex: categoryIndex,
-      featureIndex: featureIndex,
-      grade: house.categories[categoryIndex].features[featureIndex].grade+"",
-      options: house.categories[categoryIndex].features[featureIndex].options,
-      isLoaded: true,
-    }, this.setComment);
+    this.setState(
+      {
+        house: house,
+        feature: house.categories[categoryIndex].features[featureIndex],
+        categoryIndex: categoryIndex,
+        featureIndex: featureIndex,
+        grade:
+          house.categories[categoryIndex].features[featureIndex].grade + "",
+        options: house.categories[categoryIndex].features[featureIndex].options,
+        isLoaded: true
+      },
+      this.setComment
+    );
   }
 
   componentDidUpdate(prevProps) {
@@ -48,31 +53,42 @@ class FeatureItem extends Component {
   setComment = () => {
     const { feature, optionSelected } = this.state;
     if (optionSelected === "other") {
-      this.setState({ commentFromOption: ""});
+      this.setState({ commentFromOption: "" });
     } else if (feature.comments === "") {
       this.setState({ commentFromOption: "", optionSelected: "none" });
-    } else { //comment has been pre set
+    } else {
+      //comment has been pre set
       var isCommentFromOption = false;
       for (var i = 0; i < this.state.options.length; i++) {
         var thisOption = this.state.options[i];
         if (feature.comments === thisOption) {
           isCommentFromOption = true;
-          this.setState({ commentFromOption: thisOption, optionSelected: thisOption });
+          this.setState({
+            commentFromOption: thisOption,
+            optionSelected: thisOption
+          });
           break;
         }
       }
       if (!isCommentFromOption) {
-        this.setState({ commentAddedByUser: feature.comments, optionSelected: "other" });
+        this.setState({
+          commentAddedByUser: feature.comments,
+          optionSelected: "other"
+        });
       }
     }
-  }
+  };
 
   render() {
     const { isLoaded, isCollapsed, feature } = this.state;
     if (isLoaded) {
       return (
         <div>
-          <div className={isCollapsed ? "small-card-header" : "small-card-header-open"}>
+          <div
+            className={
+              isCollapsed ? "small-card-header" : "small-card-header-open"
+            }
+          >
             <h6 className="small-card-title">{feature.name}</h6>
             <div className="card-header-options">
               <a
@@ -88,7 +104,9 @@ class FeatureItem extends Component {
             </div>
           </div>
           <div
-            className={isCollapsed ? "card-content hidden" : "card-content show"}
+            className={
+              isCollapsed ? "card-content hidden" : "card-content show"
+            }
           >
             {this.renderFeature()}
           </div>
@@ -100,35 +118,43 @@ class FeatureItem extends Component {
   }
 
   renderFeature() {
-    const { categoryIndex, featureIndex, grade, commentAddedByUser, optionSelected, options } = this.state;
+    const {
+      categoryIndex,
+      featureIndex,
+      grade,
+      commentAddedByUser,
+      optionSelected,
+      options
+    } = this.state;
     return (
       <div>
         <Form.Group label="Rating">
-          <Form.SelectGroup
-            onBlur={this.ratingOnBlur.bind(this)}
-          >
-            <Form.SelectGroupItem
+          <Form.SelectGroup onBlur={this.ratingOnBlur.bind(this)}>
+            <ColouredRatingBarItem
               onChange={this.ratingOnChange.bind(this)}
               name={categoryIndex + "," + featureIndex}
               icon="thumbs-up"
               value="1"
               checked={grade === "1"}
             />
-            <Form.SelectGroupItem
+            <ColouredRatingBarItem
               onChange={this.ratingOnChange.bind(this)}
               name={categoryIndex + "," + featureIndex}
               icon="thumbs-down"
               value="2"
               checked={grade === "2"}
             />
-            <Form.SelectGroupItem
+            <ColouredRatingBarItem
+              styleClass="alertRatingItem"
               onChange={this.ratingOnChange.bind(this)}
               name={categoryIndex + "," + featureIndex}
               icon="alert-triangle"
               value="3"
               checked={grade === "3"}
+              className="test"
             />
-            <Form.SelectGroupItem
+            <ColouredRatingBarItem
+              styleClass="cancelRatingItem"
               onChange={this.ratingOnChange.bind(this)}
               name={categoryIndex + "," + featureIndex}
               icon="slash"
@@ -143,13 +169,15 @@ class FeatureItem extends Component {
             onChange={this.optionOnChange}
             value={optionSelected}
           >
-            <option value="none"></option>
+            <option value="none" />
             {options.map((option, i) => (
-              <option key={i} value={option}>{option}</option>
+              <option key={i} value={option}>
+                {option}
+              </option>
             ))}
             <option value="other">Other</option>
           </Form.Select>
-          { optionSelected === "other" ? (
+          {optionSelected === "other" ? (
             <Form.Textarea
               onBlur={this.commentOnBlur.bind(this)}
               name="comments"
@@ -157,13 +185,14 @@ class FeatureItem extends Component {
               defaultValue={commentAddedByUser}
               rows={4}
             />
-            ) : null }
+          ) : null}
         </Form.Group>
         <Button.List align="center">
           <Button
             RootComponent="a"
             color="secondary"
-            onClick={this.cameraClick}>
+            onClick={this.cameraClick}
+          >
             <Icon prefix="fe" name="camera" />
           </Button>
         </Button.List>
@@ -171,19 +200,20 @@ class FeatureItem extends Component {
     );
   }
   cameraClick = () => {
-    this.props.history.push("/inspect/"+this.state.house.id+"/images/"+this.getFeatureID());
-  }
+    this.props.history.push(
+      "/inspect/" + this.state.house.id + "/images/" + this.getFeatureID()
+    );
+  };
   getFeatureID = () => {
-    console.log(this.state.house);
     return this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex].id;
   }
 
   ratingOnBlur = e => {
     this.updateHouse("grade", this.state.grade);
-  }
+  };
 
   ratingOnChange = e => {
-    this.setState( { grade: e.target.value });
+    this.setState({ grade: e.target.value });
   };
 
   optionOnChange = e => {
@@ -192,9 +222,13 @@ class FeatureItem extends Component {
     } else if (e.target.value === "none") {
       this.setState({ optionSelected: e.target.value, commentFromOption: "" });
     } else {
-      this.setState({ optionSelected: e.target.value, commentFromOption: e.target.value, commentAddedByUser: "" });
+      this.setState({
+        optionSelected: e.target.value,
+        commentFromOption: e.target.value,
+        commentAddedByUser: ""
+      });
     }
-  }
+  };
 
   optionOnBlur = e => {
     if (this.state.optionSelected !== "other") {
@@ -202,7 +236,7 @@ class FeatureItem extends Component {
     } else {
       this.updateHouse("comments", "");
     }
-  }
+  };
 
   commentOnBlur = e => {
     this.updateHouse("comments", e.target.value);
@@ -221,8 +255,8 @@ class FeatureItem extends Component {
         }
       }
     });
-    this.setState({ house: newHouse },
-      () => this.props.updateHouseState(this.state.house)
+    this.setState({ house: newHouse }, () =>
+      this.props.updateHouseState(this.state.house)
     );
   }
 }
