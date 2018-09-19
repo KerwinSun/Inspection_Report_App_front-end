@@ -43,6 +43,7 @@ class CategoryItem extends Component {
                 defaultValue={this.props.category.count} 
                 onChange={this.countChangeHandler.bind(this)}
                 onBlur={this.countOnBlur.bind(this)}
+                type="number"
               />
               <a 
                 className="card-header-options"
@@ -76,7 +77,7 @@ class CategoryItem extends Component {
   }
 
   countChangeHandler(event){
-    var num = event.target.value.match(/^\+?(0|[1-9]\d*)$/);//(/^\d+$/);
+    var num = event.target.value;
     var input = num === null ? 0 : num.input;
     this.setState({ count: input });
   }

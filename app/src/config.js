@@ -809,7 +809,7 @@ const house = [
       {
         name: "General",
         comments: [
-          "Closed to Westcity, schools and train station"
+          "None"
         ]
       },{
         name: "Privacy and noise levels",

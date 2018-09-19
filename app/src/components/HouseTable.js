@@ -15,7 +15,7 @@ const HouseTable = ({ houses }) => {
                 {houses.map(house => (
                     <Table.Row key={house.id}>
                         <Table.Col>
-                            <p>{house.id}</p>
+                            {house.id}
                         </Table.Col>
                         <Table.Col>
                             <a href={"/inspect/" + house.id}>{house.address}</a>
