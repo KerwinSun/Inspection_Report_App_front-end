@@ -73,7 +73,6 @@ class CameraPage extends Component {
         item.lastIndexOf("/") + 1,
         item.lastIndexOf("?")
       )
-      console.log(imageName);
       API.deleteImage(this.state.featureID, imageName)
       this.setState({ persistedImages: newArray });
     }
