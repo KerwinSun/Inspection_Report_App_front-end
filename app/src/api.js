@@ -27,24 +27,41 @@ export default {
     });
   },
   postImage(formData, featureId) {
-    return axios.post(server + "/Image/", formData, {
-      headers: {
-        'feature-id': featureId
-      }
-    }).then(response => {
-      console.log(response);
-    })
-    .catch(response => {
-      console.log('Error sending images');
-    });
+    return axios
+      .post(server + "/Image/", formData, {
+        headers: {
+          "feature-id": featureId
+        }
+      })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(response => {
+        console.log("Error sending images");
+      });
   },
   getImages(featureId) {
-  return axios.get(server + "/Image/" + featureId)
-  .then(response => {
-    return response.data;
-  })
-  .catch(response => {
-    console.log(response);
-  })
-}
+    return axios
+      .get(server + "/Image/" + featureId)
+      .then(response => {
+        return response.data;
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  },
+  deleteImage(featureId, imageName) {
+    return axios
+    .delete(server + "/Image/" + featureId, {
+      headers: {
+        "image-name" : imageName
+      }
+    })
+    .then(response => {
+      return response.data;
+    })
+    .catch(response => {
+      console.log(response);
+    })
+  }
 };
