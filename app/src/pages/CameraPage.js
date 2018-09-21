@@ -62,6 +62,23 @@ class CameraPage extends Component {
     }
   };
 
+  removeSavedPhoto = item => {
+    const { persistedImages } = this.state;
+    let index = persistedImages.indexOf(item);
+    if (index > -1) {
+      const newArray = update(persistedImages, {
+        $splice: [[index, 1]]
+      });
+      let imageName = item.substring(
+        item.lastIndexOf("/") + 1,
+        item.lastIndexOf("?")
+      )
+      console.log(imageName);
+      API.deleteImage(this.state.featureID, imageName)
+      this.setState({ persistedImages: newArray });
+    }
+  };
+
   uploadPhotos = () => {
     const fd = new FormData();
     this.state.selectedImage.forEach((image, key) => {
@@ -131,6 +148,9 @@ class CameraPage extends Component {
           {this.state.persistedImages.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
               <GalleryCard>
+                <a onClick={() => this.removeSavedPhoto(item)}>
+                  <Icon name="x" />
+                </a>
                 <GalleryCard.Image src={item} alt={`Pic`} />
               </GalleryCard>
             </Grid.Col>
