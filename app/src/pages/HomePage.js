@@ -10,20 +10,27 @@ class Home extends Component {
     this.state = {
       wipHouses: [],
       completedHouses: [],
-      isLoaded: false,
+      isLoaded: false
     };
   }
 
   componentDidMount() {
     var id = 1; //Hard coded value for now.
-    API.getPerson(id)
-      .then(res => {
-        var houses = res.inspected;
-        var wipHouses = [];
-        var completedHouses = [];
-        houses.forEach(value => { value.house.completed ? completedHouses.push(value.house) : wipHouses.push(value.house) });
-        this.setState({ wipHouses: wipHouses, completedHouses: completedHouses, isLoaded: true });
-      })
+    API.getPerson(id).then(res => {
+      var houses = res.inspected;
+      var wipHouses = [];
+      var completedHouses = [];
+      houses.forEach(value => {
+        value.house.completed
+          ? completedHouses.push(value.house)
+          : wipHouses.push(value.house);
+      });
+      this.setState({
+        wipHouses: wipHouses,
+        completedHouses: completedHouses,
+        isLoaded: true
+      });
+    });
   }
 
   render() {
@@ -37,7 +44,7 @@ class Home extends Component {
                   <Card.Header>
                     <Card.Title>Inspections in Process</Card.Title>
                   </Card.Header>
-                  <HouseTable houses={this.state.wipHouses}/>
+                  <HouseTable houses={this.state.wipHouses} />
                 </Card>
               </Grid.Col>
             </Grid.Row>
@@ -47,7 +54,7 @@ class Home extends Component {
                   <Card.Header>
                     <Card.Title>Completed Inspections</Card.Title>
                   </Card.Header>
-                  <HouseTable houses={this.state.completedHouses}/>
+                  <HouseTable houses={this.state.completedHouses} />
                 </Card>
               </Grid.Col>
             </Grid.Row>
@@ -62,7 +69,7 @@ class Home extends Component {
             </Button.List>
           </Page.Content>
         </SiteWrapper>
-      );  
+      );
     } else {
       return null;
     }
