@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Page, Icon, Grid, GalleryCard, Button } from "tabler-react";
 import update from "immutability-helper";
 import API from "../api.js";
+import Loader from "react-loader-spinner";
 
 class CameraPage extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class CameraPage extends Component {
       selectedImage: [],
       persistedImages: [],
       featureID: -1,
-      houseID: -1
+      houseID: -1,
+      isLoaded:false
     };
   }
 
@@ -101,7 +103,8 @@ class CameraPage extends Component {
         );
       } else {
         this.setState({
-          persistedImages: response
+          persistedImages: response,
+          isLoaded:true
         });
       }
     });
@@ -143,6 +146,7 @@ class CameraPage extends Component {
             </Grid.Col>
           ))}
         </Grid.Row>
+        {this.state.isLoaded?
         <Grid.Row className="row-cards">
           {this.state.persistedImages.map((item, key) => (
             <Grid.Col width={12} lg={4} key={key}>
@@ -154,7 +158,16 @@ class CameraPage extends Component {
               </GalleryCard>
             </Grid.Col>
           ))}
-        </Grid.Row>
+        </Grid.Row>:
+         <div className="btn-list text-center">
+         <Loader
+           type="ThreeDots"
+           color="#316CBE"
+           height={30}
+           width={30}
+         />
+       </div>
+        }
       </Page.Content>
     );
   }

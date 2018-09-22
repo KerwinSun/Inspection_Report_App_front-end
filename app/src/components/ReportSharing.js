@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Icon } from "tabler-react";
-import Loader from "react-loader";
+import Loader from "react-loader-spinner";
 import { EmailShareButton } from "react-share";
 import { isMobile } from "react-device-detect";
 //import API from "../api.js"
@@ -11,9 +11,10 @@ class ReportSharing extends Component {
     this.state = {
       reportURL: "",
       house: undefined,
-      loaded: true,
+      isLoaded: true,
       address: "",
-      date: ""
+      date: "",
+      client: ""
     };
   }
 
@@ -21,16 +22,16 @@ class ReportSharing extends Component {
     this.setState({
       house: this.props.house,
       address: this.props.house.address,
-      date: this.props.house.inspectionDate
+      date: this.props.house.inspectionDate,
+     // client: this.props.house.summonsedBy.name
     });
   }
   simulateLoad = () => {
-    this.setState({ loaded: false });
-    // Simulated a response callback/promise/etc.
+    this.setState({ isLoaded: false });
     setTimeout(
       function() {
         this.setState({
-          loaded: true
+          isLoaded: true
         });
         this.getReport();
       }.bind(this),
@@ -48,25 +49,29 @@ class ReportSharing extends Component {
   };
   emailBody = () => {
     return (
-      "Dear,\nThe following is a link to an inspection conducted on " +
+      "Dear "+this.state.client+",\n\n"+
+      "The link is an inspection report that details an inspection conducted on:\n " +
       this.state.date +
-      " at " +
-      this.state.address
+      "\nat\n" +
+      this.state.address+
+      "\n\nRegards"
     );
   };
   render() {
     return (
       <div>
         {this.state.reportURL === "" ? (
-          <Button
-            color="secondary"
-            onClick={this.simulateLoad}
-            disabled={!this.state.loaded}
-          >
-            <Loader loaded={this.state.loaded} length={10} width={2}>
+          this.state.isLoaded ? (
+            <Button
+              color="secondary"
+              onClick={this.simulateLoad}
+              disabled={!this.state.isLoaded}
+            >
               <Icon prefix="fe" name="file-plus" />
-            </Loader>
-          </Button>
+            </Button>
+          ) : (
+            <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
+          )
         ) : (
           <div>
             <Button color="primary">

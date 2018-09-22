@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { Page, Button } from "tabler-react";
+import { Page, Button, Card } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
 import API from "../api.js";
 import { commentOptions } from "../config";
+import Loader from "react-loader-spinner";
 
 class CategoryPage extends Component {
   state = {
@@ -19,11 +20,11 @@ class CategoryPage extends Component {
   }
 
   render() {
-    if (this.state.isLoaded) {
-      return (
-        <SiteWrapper>
-          <Page.Content title="Category Page">
-            {this.state.house.categories.map((dynamicData, i) => (
+    return (
+      <SiteWrapper>
+        <Page.Content title="Category Page">
+          {this.state.isLoaded ? (
+            this.state.house.categories.map((dynamicData, i) => (
               <CategoryItem
                 key={dynamicData.name}
                 house={this.state.house}
@@ -32,24 +33,34 @@ class CategoryPage extends Component {
                 updateHouseState={this.updateHouseState}
                 history={this.props.history}
               />
-            ))}
-            <div className="d-flex">
-              <Button link>Cancel</Button>
-              <Button
-                type="submit"
-                color="primary"
-                className="ml-auto"
-                onClick={this.postHouse.bind(this)}
-              >
-                Send data
-              </Button>
-            </div>
-          </Page.Content>
-        </SiteWrapper>
-      );
-    } else {
-      return null;
-    }
+            ))
+          ) : (
+            <Card.Body>
+              <div className="btn-list text-center">
+                <Loader
+                  type="ThreeDots"
+                  color="#316CBE"
+                  height={30}
+                  width={30}
+                />
+              </div>
+            </Card.Body>
+          )}
+
+          <div className="d-flex">
+            <Button link>Cancel</Button>
+            <Button
+              type="submit"
+              color="primary"
+              className="ml-auto"
+              onClick={this.postHouse.bind(this)}
+            >
+              Send data
+            </Button>
+          </div>
+        </Page.Content>
+      </SiteWrapper>
+    );
   }
 
   addOptionsToHouse = res => {

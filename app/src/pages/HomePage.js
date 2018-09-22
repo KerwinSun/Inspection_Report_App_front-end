@@ -3,6 +3,7 @@ import { Page, Grid, Card, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import HouseTable from "../components/HouseTable";
+import Loader from "react-loader-spinner";
 
 class Home extends Component {
   constructor(props) {
@@ -34,45 +35,67 @@ class Home extends Component {
   }
 
   render() {
-    if (this.state.isLoaded) {
-      return (
-        <SiteWrapper>
-          <Page.Content title="Dashboard">
-            <Grid.Row cards={true}>
-              <Grid.Col>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Inspections in Process</Card.Title>
-                  </Card.Header>
+    return (
+      <SiteWrapper>
+        <Page.Content title="Dashboard">
+          <Grid.Row cards={true}>
+            <Grid.Col>
+              <Card>
+                <Card.Header>
+                  <Card.Title>Inspections in Process</Card.Title>
+                </Card.Header>
+                {this.state.isLoaded ? (
                   <HouseTable houses={this.state.wipHouses} />
-                </Card>
-              </Grid.Col>
-            </Grid.Row>
-            <Grid.Row cards={true}>
-              <Grid.Col>
-                <Card>
-                  <Card.Header>
-                    <Card.Title>Completed Inspections</Card.Title>
-                  </Card.Header>
+                ) : (
+                  <Card.Body>
+                    <div className="btn-list text-center">
+                      <Loader
+                        type="ThreeDots"
+                        color="#316CBE"
+                        height={30}
+                        width={30}
+                      />
+                    </div>
+                  </Card.Body>
+                )}
+              </Card>
+            </Grid.Col>
+          </Grid.Row>
+          <Grid.Row cards={true}>
+            <Grid.Col>
+              <Card>
+                <Card.Header>
+                  <Card.Title>Completed Inspections</Card.Title>
+                </Card.Header>
+                {this.state.isLoaded ? (
                   <HouseTable houses={this.state.completedHouses} />
-                </Card>
-              </Grid.Col>
-            </Grid.Row>
-            <Button.List align="center">
-              <Button
-                RootComponent="a"
-                onClick={() => this.props.history.push("/new-inspection")}
-                color="secondary"
-              >
-                Begin New Inspection
-              </Button>
-            </Button.List>
-          </Page.Content>
-        </SiteWrapper>
-      );
-    } else {
-      return null;
-    }
+                ) : (
+                  <Card.Body>
+                    <div className="btn-list text-center">
+                      <Loader
+                        type="ThreeDots"
+                        color="#316CBE"
+                        height={30}
+                        width={30}
+                      />
+                    </div>
+                  </Card.Body>
+                )}
+              </Card>
+            </Grid.Col>
+          </Grid.Row>
+          <Button.List align="center">
+            <Button
+              RootComponent="a"
+              onClick={() => this.props.history.push("/new-inspection")}
+              color="secondary"
+            >
+              Begin New Inspection
+            </Button>
+          </Button.List>
+        </Page.Content>
+      </SiteWrapper>
+    );
   }
 }
 
