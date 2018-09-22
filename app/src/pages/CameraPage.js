@@ -95,7 +95,8 @@ class CameraPage extends Component {
       if (response === "" || response === undefined || response === null) {
         this.setState(
           {
-            persistedImages: []
+            persistedImages: [],
+            isLoaded:true
           },
           () => {
             console.log(this.state.persistedImages);
