@@ -6,17 +6,11 @@ import ReportSharing from "./ReportSharing"
 const HouseTable = ({ houses }) => {
     return (
         <Table cards={true} responsive={true} className="table-vcenter">
-            <Table.Header>
-                <Table.Row>
-                    <Table.ColHeader alignContent={"center"}>id</Table.ColHeader>
-                    <Table.ColHeader alignContent={"center"}>Address</Table.ColHeader>
-                </Table.Row>
-            </Table.Header>
             <Table.Body>
                 {houses.map(house => (
                     <Table.Row key={house.id}>
                         <Table.Col alignContent={"center"}>
-                            {house.id}
+                            {house.inspectionDate}
                         </Table.Col>
                         <Table.Col alignContent={"center"}>
                             <a href={"/inspect/" + house.id}>{house.address}</a>

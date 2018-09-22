@@ -42,7 +42,7 @@ class Home extends Component {
             <Grid.Col>
               <Card>
                 <Card.Header>
-                  <Card.Title>Inspections in Process</Card.Title>
+                  <Card.Title>Inspections in Progress</Card.Title>
                 </Card.Header>
                 {this.state.isLoaded ? (
                   <HouseTable houses={this.state.wipHouses} />
