@@ -61,6 +61,15 @@ export default {
       return response.data;
     })
     .catch(response => {
+      console.log('Error sending images');
+    });
+  },
+  getReport(houseID) {
+    return axios.get(server + "/export/" + houseID)
+    .then(response => {
+      return response.data;
+    })
+    .catch(response => {
       console.log(response);
     })
   }

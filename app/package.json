@@ -12,10 +12,13 @@
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-c3js": "^0.1.20",
+    "react-device-detect": "^1.6.1",
     "react-dom": "^16.4.2",
     "react-html5-camera-photo": "^1.2.8-beta.0",
+    "react-loader": "^2.4.5",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "react-share": "^2.3.1",
     "react-syntax-highlighter": "^8.0.1",
     "tabler-react": "^1.19.1"
   },
