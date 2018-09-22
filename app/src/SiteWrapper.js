@@ -20,7 +20,7 @@ const accountDropdownProps = {
   description: "Administrator",
   options: [
     { icon: "user", value: "Profile", to: "/profile" },
-    { icon: "log-out", value: "Sign out" }
+    { icon: "log-out", value: "Sign out", to: "/logout" }
   ]
 };
 

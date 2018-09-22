@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { Page, Button } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
-import API from '../api.js';
+import API from "../api.js";
 import { commentOptions } from "../config";
 
 class CategoryPage extends Component {
   state = {
     house: {},
     isCollapsed: true,
-    isLoaded: false,
+    isLoaded: false
   };
 
   componentWillMount() {
     API.getHouse(this.props.match.params.id)
-      .then(res => this.addOptionsToHouse(res))     
-      .then(res => this.setState({ house: res, isLoaded: true }))
+      .then(res => this.addOptionsToHouse(res))
+      .then(res => this.setState({ house: res, isLoaded: true }));
   }
 
   render() {
@@ -24,8 +24,8 @@ class CategoryPage extends Component {
         <SiteWrapper>
           <Page.Content title="Category Page">
             {this.state.house.categories.map((dynamicData, i) => (
-              <CategoryItem 
-                key={dynamicData.name} 
+              <CategoryItem
+                key={dynamicData.name}
                 house={this.state.house}
                 categoryIndex={i}
                 category={dynamicData}
@@ -35,15 +35,20 @@ class CategoryPage extends Component {
             ))}
             <div className="d-flex">
               <Button link>Cancel</Button>
-              <Button type="submit" color="primary" className="ml-auto" onClick={this.postHouse.bind(this)}>
+              <Button
+                type="submit"
+                color="primary"
+                className="ml-auto"
+                onClick={this.postHouse.bind(this)}
+              >
                 Send data
               </Button>
             </div>
-        </Page.Content>
-      </SiteWrapper>
+          </Page.Content>
+        </SiteWrapper>
       );
     } else {
-      return null;      
+      return null;
     }
   }
 
@@ -55,24 +60,24 @@ class CategoryPage extends Component {
         if (category1.name === category2.name) {
           for (var k = 0; k < category1.features.length; k++) {
             var feature1 = category1.features[k];
-            for (var l = 0; l <category2.features.length; l++) {
+            for (var l = 0; l < category2.features.length; l++) {
               var feature2 = category2.features[l];
               if (feature1.name === feature2.name) {
                 feature1.options = feature2.options;
                 break;
               }
             }
-          }              
+          }
           break;
         }
       }
     }
     return res;
-  }
+  };
 
   updateHouseState = house => {
     this.setState({ house });
-  }
+  };
 
   postHouse = () => {
     console.log(this.state.house);
@@ -80,10 +85,10 @@ class CategoryPage extends Component {
       .then(response => {
         this.props.history.push("/");
       })
-      .catch (error => {
+      .catch(error => {
         console.log(error);
-      })
-  }
+      });
+  };
 }
 
 export default CategoryPage;

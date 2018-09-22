@@ -1,5 +1,6 @@
 import axios from "axios";
 import { server } from "./config";
+import store from "store";
 
 export default {
   getHouse(houseId) {
@@ -72,5 +73,31 @@ export default {
     .catch(response => {
       console.log(response);
     })
+  },
+  login(email, password) {
+    store.set("loggedIn", true);
+    /*
+    return axios
+      .post(server + "/auth/", email)
+      .then(response => {
+        store.set("loggedIn", true);
+        return response;
+      })
+      .catch(error => {
+        return error;
+      });
+      */
+  },
+  isUserAuthenticated() {
+    if (store.get("loggedIn") === undefined) {
+      return false;
+    }
+    if (localStorage.getItem("loggedIn") === false) {
+      return false;
+    }
+    return true;
+  },
+  logout() {
+    store.remove("loggedIn");
   }
 };
