@@ -51,6 +51,20 @@ export default {
         console.log(response);
       });
   },
+  deleteImage(featureId, imageName) {
+    return axios
+    .delete(server + "/Image/" + featureId, {
+      headers: {
+        "image-name" : imageName
+      }
+    })
+    .then(response => {
+      return response.data;
+    })
+    .catch(response => {
+      console.log(response);
+    })
+  },
   login(email, password) {
     store.set("loggedIn", true);
     /*
