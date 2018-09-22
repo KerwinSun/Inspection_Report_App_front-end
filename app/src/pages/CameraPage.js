@@ -12,7 +12,7 @@ class CameraPage extends Component {
       persistedImages: [],
       featureID: -1,
       houseID: -1,
-      isLoaded:false
+      isLoaded: false
     };
   }
 
@@ -74,8 +74,8 @@ class CameraPage extends Component {
       let imageName = item.substring(
         item.lastIndexOf("/") + 1,
         item.lastIndexOf("?")
-      )
-      API.deleteImage(this.state.featureID, imageName)
+      );
+      API.deleteImage(this.state.featureID, imageName);
       this.setState({ persistedImages: newArray });
     }
   };
@@ -96,7 +96,7 @@ class CameraPage extends Component {
         this.setState(
           {
             persistedImages: [],
-            isLoaded:true
+            isLoaded: true
           },
           () => {
             console.log(this.state.persistedImages);
@@ -105,7 +105,7 @@ class CameraPage extends Component {
       } else {
         this.setState({
           persistedImages: response,
-          isLoaded:true
+          isLoaded: true
         });
       }
     });
@@ -147,28 +147,24 @@ class CameraPage extends Component {
             </Grid.Col>
           ))}
         </Grid.Row>
-        {this.state.isLoaded?
-        <Grid.Row className="row-cards">
-          {this.state.persistedImages.map((item, key) => (
-            <Grid.Col width={12} lg={4} key={key}>
-              <GalleryCard>
-                <a onClick={() => this.removeSavedPhoto(item)}>
-                  <Icon name="x" />
-                </a>
-                <GalleryCard.Image src={item} alt={`Pic`} />
-              </GalleryCard>
-            </Grid.Col>
-          ))}
-        </Grid.Row>:
-         <div className="btn-list text-center">
-         <Loader
-           type="ThreeDots"
-           color="#316CBE"
-           height={30}
-           width={30}
-         />
-       </div>
-        }
+        {this.state.isLoaded ? (
+          <Grid.Row className="row-cards">
+            {this.state.persistedImages.map((item, key) => (
+              <Grid.Col width={12} lg={4} key={key}>
+                <GalleryCard>
+                  <a onClick={() => this.removeSavedPhoto(item)}>
+                    <Icon name="x" />
+                  </a>
+                  <GalleryCard.Image src={item} alt={`Pic`} />
+                </GalleryCard>
+              </Grid.Col>
+            ))}
+          </Grid.Row>
+        ) : (
+          <div className="btn-list text-center">
+            <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
+          </div>
+        )}
       </Page.Content>
     );
   }
