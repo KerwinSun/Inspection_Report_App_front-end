@@ -23,8 +23,10 @@ export default {
       });
   },
   postHouse(json) {
-    return axios.post(server + "/House/", json).then(response => {
-      return response.data.id;
+    return axios
+      .post(server + "/House/", json)
+      .then(response => {
+        return response.data.id;
     });
   },
   postImage(formData, featureId) {

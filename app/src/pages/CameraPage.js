@@ -22,8 +22,6 @@ class CameraPage extends Component {
     let feature = url.substring(index);
     index = url.search("inspect/(\\d+)");
     let house = url.substring(index);
-    console.log(feature.match(/\d+/g)[0]);
-    console.log(house.match(/\d+/g)[0]);
     this.setState(
       {
         featureID: feature.match(/\d+/g)[0],
@@ -86,12 +84,14 @@ class CameraPage extends Component {
       fd.append("image", image.imgObject, image.imgObject.name);
     });
     API.postImage(fd, this.state.featureID);
-    this.props.history.push("/inspect/" + this.state.houseID);
+    this.props.history.push({
+      pathname: "/inspect/" + this.state.houseID, 
+      state: { house: this.props.location.state.house }
+    });
   };
 
   getSavedPhotos = () => {
     API.getImages(this.state.featureID).then(response => {
-      console.log(response);
       if (response === "" || response === undefined || response === null) {
         this.setState(
           {

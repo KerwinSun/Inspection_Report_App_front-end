@@ -3,7 +3,14 @@ export const server = "https://inspection-report-app-server.azurewebsites.net/ap
 
 const house = [
   {
-    name: "Kitchen",
+    name: "Overview",
+    features: [
+      {
+        name: "General",
+        comments: [],
+      }
+    ]
+  },{    name: "Kitchen",
     features: [
       { 
         name: "General", 
@@ -96,8 +103,7 @@ const house = [
       },{
         name: "Moisture readings",
         comments: [
-          "Moisture readings were between 0 and 40",
-          "On the external walls at time of inspection"
+          "Moisture readings were between 0 and 40 on the external walls at time of inspection"
         ]        
       }
     ],
@@ -169,8 +175,7 @@ const house = [
       },{
         name: "Moisture readings",
         comments: [
-          "Moisture readings were between 0 and 40",
-          "On the external walls at time of inspection"
+          "Moisture readings were between 0 and 40 on the external walls at time of inspection"
         ]        
       }
     ]
@@ -851,10 +856,22 @@ function generateJson(house) {
 export const jsonHouse = {
   "completed": false,
 	"inspectedBy": "",
-	"address": "",
   "inspectionDate": "",
-  "lastModified": "",
+  "address": "",
+  "summonsedBy": "",
+  "estimateSummary": "",
+  "roomsSummary": "",
   "constructionType": "",
+  "comments": "",
+  "areasInspected": { 
+    "site": false,
+    "subfloor": false,
+    "exterior": false,
+    "roofExterior": false,
+    "roofSpace": false,
+    "services": false,
+    "other": false
+  },
   "categories": generateJson(house)
 };
 

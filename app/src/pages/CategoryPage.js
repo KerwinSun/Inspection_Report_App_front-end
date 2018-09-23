@@ -2,51 +2,87 @@ import React, { Component } from "react";
 import { Page, Button, Card } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
+import OverviewItem from "../components/OverviewItem";
 import API from "../api.js";
 import { commentOptions } from "../config";
 import Loader from "react-loader-spinner";
 
 class CategoryPage extends Component {
-  state = {
-    house: {},
-    isCollapsed: true,
-    isLoaded: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      house: {},
+      isLoaded: false,
+    };
+  }
 
-  componentWillMount() {
-    API.getHouse(this.props.match.params.id)
-      .then(res => this.addOptionsToHouse(res))
-      .then(res => this.setState({ house: res, isLoaded: true }));
+  componentDidMount() {
+    if (this.props.location.state === undefined) {
+      API.getHouse(this.props.match.params.id)
+        .then(res => this.addOptionsToHouse(res))
+        .then(res =>
+          this.setState({
+            house: res,
+            isLoaded: true
+          })
+        );
+    } else {
+      const { house } = this.props.location.state;
+      this.setState(
+        {
+          house: house,
+          isLoaded: true
+        },
+        () => {
+          this.props.history.replace({
+            pathname: this.props.location.pathname,
+            state: undefined
+          });
+        }
+      );
+    }
   }
 
   render() {
-    return (
+    return(
       <SiteWrapper>
         <Page.Content title="Category Page">
-          {this.state.isLoaded ? (
-            this.state.house.categories.map((dynamicData, i) => (
-              <CategoryItem
-                key={dynamicData.name}
-                house={this.state.house}
-                categoryIndex={i}
-                category={dynamicData}
-                updateHouseState={this.updateHouseState}
-                history={this.props.history}
-              />
-            ))
-          ) : (
-            <Card.Body>
-              <div className="btn-list text-center">
-                <Loader
-                  type="ThreeDots"
-                  color="#316CBE"
-                  height={30}
-                  width={30}
-                />
-              </div>
-            </Card.Body>
-          )}
-
+          {this.state.isLoaded & this.state.house !== undefined
+            ? this.state.house.categories.map((dynamicData, i) => {
+              if (dynamicData.name === "Overview") {
+                return (
+                  <OverviewItem
+                    key={i}
+                    house={this.state.house}
+                    categoryIndex={i}
+                    category={dynamicData}
+                    updateHouseState={this.updateHouseState}
+                    history={this.props.history}
+                  />
+                );
+              } else {
+                return (
+                  <CategoryItem
+                    key={dynamicData.name}
+                    house={this.state.house}
+                    categoryIndex={i}
+                    category={dynamicData}
+                    updateHouseState={this.updateHouseState}
+                    history={this.props.history}
+                  />
+                );
+              }})
+            : <Card.Body>
+                <div className="btn-list text-center">
+                  <Loader
+                    type="ThreeDots"
+                    color="#316CBE"
+                    height={30}
+                    width={30}
+                  />
+                </div>
+              </Card.Body>
+          }
           <div className="d-flex">
             <Button link>Cancel</Button>
             <Button
@@ -83,6 +119,15 @@ class CategoryPage extends Component {
         }
       }
     }
+    res.areasInspected = {
+      "site": false,
+      "subfloor": false,
+      "exterior": false,
+      "roofExterior": false,
+      "roofSpace": false,
+      "services": false,
+      "other": false,
+    }
     return res;
   };
 
@@ -91,7 +136,6 @@ class CategoryPage extends Component {
   };
 
   postHouse = () => {
-    console.log(this.state.house);
     API.postHouse(this.state.house)
       .then(response => {
         this.props.history.push("/");

@@ -25,4 +25,4 @@ const HouseTable = ({ houses }) => {
     );
 }
 
-export default HouseTable;  
+export default HouseTable;

@@ -8,27 +8,27 @@ class InspectionDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 1, //Hard coded user id for now.
-      name: "Jason React",
-      homePhone: "09 143 1235",
-      mobilePhone: "021 485 9876",
-      inspectorEmailAddress: "jreact@gmail.com",
-      inspectorAddress: "71 High Street, Auckland",
-      inspectionDate: "12/09/2018 ",
-      realEstate: realEstateOptions[0]
+      userId: -1,
+      inspectionDate: "",
+      address: "",
+      iName: "",
+      cName: "",
+      cHomePhone: "",
+      cMobilePhone: "",
+      cEmailAddress: "",
+      cAddress: "",
+      cRealEstate: "",
     };
   }
-  componentDidMount() {
-    this.setState({
-      inspectionDate: this.getDate()
-    });
-  }
 
-  setRealEstate = e => {
-    this.setState({
-      realEstate: e.target.value
-    });
-  };
+  componentDidMount() { 
+    this.setState({ 
+      userId: 1, //Hard coded user id for now.
+      iName: 'Sam Hill', //hard coded inspector for now
+      inspectionDate: new Date().toJSON(),
+      cRealEstate: realEstateOptions[0] 
+    })
+  }
 
   render() {
     return (
@@ -38,70 +38,67 @@ class InspectionDetailsPage extends Component {
             <Grid.Col width={12} lg={6}>
               <Card title="Inspection Information">
                 <Card.Body>
+                  <Form.Group label="Inspector">
+                    <Form.Input
+                      readOnly
+                      value={this.state.iName}
+                    />
+                  </Form.Group>
                   <Form.Group label="Date">
                     <Form.Input
-                      name="inspection-date"
                       readOnly
-                      value={this.state.inspectionDate}
+                      value={this.state.inspectionDate.substring(0,10)}
                     />
                   </Form.Group>
                   <Form.Group label="Address">
                     <Form.Input
-                      name="address-inspecting"
                       placeholder="Address"
+                      onChange={ e => this.setState({ address: e.target.value })}
                     />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Real Estate</Form.Label>
-                    <Form.Select onChange={this.setRealEstate}>
-                      {realEstateOptions.map((dynamicData, i) => (
-                        <option key={dynamicData}>{dynamicData}</option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                  <Form.Group label="Summonsed By">
-                    <Form.Input name="summonsed-by" placeholder="Name" />
                   </Form.Group>
                 </Card.Body>
               </Card>
             </Grid.Col>
             <Grid.Col width={12} lg={6}>
-              <Card title="Inspector Details">
+              <Card title="Client Details">
                 <Card.Body>
-                  <Form.Group label="Inspector">
-                    <Form.Input
-                      name="inspector"
-                      readOnly
-                      value={this.state.name}
+                  <Form.Group label="Summonsed By">
+                    <Form.Input 
+                      placeholder="Name"
+                      onChange={ e => this.setState({ cName: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group label="Home Phone">
                     <Form.Input
-                      name="home-phone"
-                      readOnly
-                      value={this.state.homePhone}
+                      placeholder="Phone Number"
+                      onChange={ e => this.setState({ cHomePhone: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group label="Mobile Phone">
                     <Form.Input
-                      name="mobile-phone"
-                      readOnly
-                      value={this.state.mobilePhone}
-                    />
-                  </Form.Group>
-                  <Form.Group label="Email Address">
-                    <Form.Input
-                      name="inspector-email"
-                      readOnly
-                      value={this.state.inspectorEmailAddress}
+                      placeholder="Mobile Number"
+                      onChange={ e => this.setState({ cMobilePhone: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group label="Address">
                     <Form.Input
-                      name="inspector-address"
-                      readOnly
-                      value={this.state.inspectorAddress}
+                      placeholder="Address"
+                      onChange={ e => this.setState({ cAddress: e.target.value })}
                     />
+                  </Form.Group>
+                  <Form.Group label="Email Address">
+                    <Form.Input
+                      placeholder="Email Address"
+                      onChange={ e => this.setState({ cEmailAddress: e.target.value })}
+                    />
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Real Estate</Form.Label>
+                    <Form.Select onChange={ e => this.setState({ cRealEstate: e.target.value })}>
+                    {realEstateOptions.map((dynamicData, i) => (
+                      <option key={dynamicData}>{dynamicData}</option>
+                    ))}
+                    </Form.Select>
                   </Form.Group>
                 </Card.Body>
               </Card>
@@ -137,19 +134,40 @@ class InspectionDetailsPage extends Component {
     return dd + "/" + mm + "/" + yyyy;
   };
   handleClick = () => {
+    const { 
+      userId, 
+      inspectionDate, 
+      address, 
+      cName, 
+      cHomePhone, 
+      cMobilePhone, 
+      cEmailAddress, 
+      cAddress, 
+      cRealEstate 
+    } = this.state;
+
+    var client = {};
+    client.name = cName;
+    client.homePhone = cHomePhone;
+    client.mobilePhone = cMobilePhone;
+    client.emailAddress = cEmailAddress;
+    client.address = cAddress;
+    client.realEstate = cRealEstate;
+
     var json = jsonHouse;
     var userObject = {
-      UserId: this.state.userId
+      "UserId": userId, 
     };
     json.inspectedBy = [userObject];
-    json.address = this.state.inspectorAddress;
-    json.inspectionDate = this.getDate();
-    json.lastModified = "2018-08-28T00:00:00";
-    API.postHouse(json)
-      .then(id => {
-        this.props.history.push("/inspect/" + id);
-      })
-      .catch(error => {});
+    json.inspectionDate = inspectionDate;
+    json.address = address;
+//    json.summonsedBy = client;
+
+  API.postHouse(json)
+    .then(id => {
+      this.props.history.push("/inspect/" + id);
+    })
+    .catch(error => {})
   };
 }
 
