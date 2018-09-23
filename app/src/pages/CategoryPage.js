@@ -44,6 +44,7 @@ class CategoryPage extends Component {
   }
 
   render() {
+    console.log(this.state.house);
     return(
       <SiteWrapper>
         <Page.Content title="Category Page">
@@ -119,6 +120,8 @@ class CategoryPage extends Component {
         }
       }
     }
+    /* hard coded areasInspected 
+    - to be removed when API definition is updated for house */
     res.areasInspected = {
       "site": false,
       "subfloor": false,
