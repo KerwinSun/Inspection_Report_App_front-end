@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Page, Button, Card } from "tabler-react";
+import { Page, Button, Card, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
 import OverviewItem from "../components/OverviewItem";
 import API from "../api.js";
 import { commentOptions } from "../config";
 import Loader from "react-loader-spinner";
+import update from "immutability-helper";
 
 class CategoryPage extends Component {
   constructor(props) {
@@ -44,7 +45,6 @@ class CategoryPage extends Component {
   }
 
   render() {
-    console.log(this.state.house);
     return(
       <SiteWrapper>
         <Page.Content title="Category Page">
@@ -84,6 +84,15 @@ class CategoryPage extends Component {
                 </div>
               </Card.Body>
           }
+          <div className="form-group text-right">
+            <Form.Switch 
+              name="complete"
+              value="completed"
+              label="Inspection is completed"
+              onChange={this.switchOnChange}
+              checked={this.state.isLoaded ? this.state.house.completed : false}
+            />
+          </div>
           <div className="d-flex">
             <Button link>Cancel</Button>
             <Button
@@ -98,6 +107,14 @@ class CategoryPage extends Component {
         </Page.Content>
       </SiteWrapper>
     );
+  }
+
+  switchOnChange = e => {
+    this.setState({
+      house: update(this.state.house, {
+        completed: { $set: !this.state.house.completed }
+      })
+    })
   }
 
   addOptionsToHouse = res => {
@@ -139,6 +156,7 @@ class CategoryPage extends Component {
   };
 
   postHouse = () => {
+    // console.log(this.state.house);
     API.postHouse(this.state.house)
       .then(response => {
         this.props.history.push("/");
