@@ -4,12 +4,11 @@ import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
 
-
 class InspectionDetailsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userId: 1, //Hard coded user id for now. 
+      userId: 1, //Hard coded user id for now.
       name: "Jason React",
       homePhone: "09 143 1235",
       mobilePhone: "021 485 9876",
@@ -19,13 +18,17 @@ class InspectionDetailsPage extends Component {
       realEstate: realEstateOptions[0]
     };
   }
-  componentDidMount() { }
+  componentDidMount() {
+    this.setState({
+      inspectionDate: this.getDate()
+    });
+  }
 
   setRealEstate = e => {
     this.setState({
       realEstate: e.target.value
     });
-  }
+  };
 
   render() {
     return (
@@ -51,9 +54,9 @@ class InspectionDetailsPage extends Component {
                   <Form.Group>
                     <Form.Label>Real Estate</Form.Label>
                     <Form.Select onChange={this.setRealEstate}>
-                    {realEstateOptions.map((dynamicData, i) => (
-                      <option key={dynamicData}>{dynamicData}</option>
-                    ))}
+                      {realEstateOptions.map((dynamicData, i) => (
+                        <option key={dynamicData}>{dynamicData}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                   <Form.Group label="Summonsed By">
@@ -120,21 +123,33 @@ class InspectionDetailsPage extends Component {
     );
   }
 
+  getDate = () => {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+      dd = "0" + dd;
+    }
+    if (mm < 10) {
+      mm = "0" + mm;
+    }
+    return dd + "/" + mm + "/" + yyyy;
+  };
   handleClick = () => {
     var json = jsonHouse;
     var userObject = {
-      "UserId": this.state.userId, 
+      UserId: this.state.userId
     };
     json.inspectedBy = [userObject];
     json.address = this.state.inspectorAddress;
-    json.inspectionDate = "2018-08-28T00:00:00";
+    json.inspectionDate = this.getDate();
     json.lastModified = "2018-08-28T00:00:00";
     API.postHouse(json)
       .then(id => {
         this.props.history.push("/inspect/" + id);
       })
-      .catch (error => {
-      })
+      .catch(error => {});
   };
 }
 
