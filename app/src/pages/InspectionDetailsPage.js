@@ -47,7 +47,7 @@ class InspectionDetailsPage extends Component {
                   <Form.Group label="Date">
                     <Form.Input
                       readOnly
-                      value={this.state.inspectionDate.substring(0,10)}
+                      value={this.state.inspectionDate.substring(0,10).split("-").reverse().join("/")}
                     />
                   </Form.Group>
                   <Form.Group label="Address">
@@ -120,19 +120,6 @@ class InspectionDetailsPage extends Component {
     );
   }
 
-  getDate = () => {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-      dd = "0" + dd;
-    }
-    if (mm < 10) {
-      mm = "0" + mm;
-    }
-    return dd + "/" + mm + "/" + yyyy;
-  };
   handleClick = () => {
     const { 
       userId, 
