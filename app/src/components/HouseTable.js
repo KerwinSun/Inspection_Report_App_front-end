@@ -10,7 +10,7 @@ const HouseTable = ({ houses }) => {
                 {houses.map(house => (
                     <Table.Row key={house.id}>
                         <Table.Col alignContent={"center"}>
-                            {house.inspectionDate}
+                            {house.inspectionDate.substring(0,10).split("-").reverse().join("/")}
                         </Table.Col>
                         <Table.Col alignContent={"center"}>
                             <a href={"/inspect/" + house.id}>{house.address}</a>

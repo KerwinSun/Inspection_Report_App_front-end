@@ -32,8 +32,10 @@ class CategoryItem extends Component {
       return (
         <CategoryCard 
           title={category.name}
+          house={house}
           categoryIndex={categoryIndex}
           category={category}
+          updateHouseState={this.props.updateHouseState}
         >
           {category.features.map((feature, i) => (
             <FeatureItem
