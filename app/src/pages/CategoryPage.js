@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Page, Button, Card, Form } from "tabler-react";
+import { Page, Button, Card } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import CategoryItem from "../components/CategoryItem";
 import OverviewItem from "../components/OverviewItem";
@@ -84,37 +84,25 @@ class CategoryPage extends Component {
                 </div>
               </Card.Body>
           }
-          <div className="form-group text-right">
-            <Form.Switch 
-              name="complete"
-              value="completed"
-              label="Inspection is completed"
-              onChange={this.switchOnChange}
-              checked={this.state.isLoaded ? this.state.house.completed : false}
-            />
-          </div>
           <div className="d-flex">
-            <Button link>Cancel</Button>
+            <Button
+              link
+              onClick={this.saveHouse.bind(this, false)}
+            >
+              Exit and Save
+            </Button>
             <Button
               type="submit"
               color="primary"
               className="ml-auto"
-              onClick={this.postHouse.bind(this)}
+              onClick={this.saveHouse.bind(this, true)}
             >
-              Send data
+              Finish Inspection
             </Button>
           </div>
         </Page.Content>
       </SiteWrapper>
     );
-  }
-
-  switchOnChange = e => {
-    this.setState({
-      house: update(this.state.house, {
-        completed: { $set: !this.state.house.completed }
-      })
-    })
   }
 
   addOptionsToHouse = res => {
@@ -155,16 +143,27 @@ class CategoryPage extends Component {
     this.setState({ house });
   };
 
-  postHouse = () => {
-    // console.log(this.state.house);
+  saveHouse = (isComplete) => {
+    if (!this.state.house.completed && isComplete) {
+      this.setState({
+        house: update(this.state.house, {
+          completed: { $set: isComplete }
+        })
+      }, this.postHouse());
+    } else {
+      this.postHouse();
+    }
+  };
+
+  postHouse() {
     API.postHouse(this.state.house)
       .then(response => {
         this.props.history.push("/");
       })
       .catch(error => {
         console.log(error);
-      });
-  };
+    });
+  }
 }
 
 export default CategoryPage;
