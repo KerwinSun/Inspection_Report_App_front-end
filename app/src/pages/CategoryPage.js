@@ -13,7 +13,7 @@ class CategoryPage extends Component {
     super(props);
     this.state = {
       house: {},
-      isLoaded: false,
+      isLoaded: false
     };
   }
 
@@ -45,11 +45,11 @@ class CategoryPage extends Component {
   }
 
   render() {
-    return(
+    return (
       <SiteWrapper>
         <Page.Content title="Category Page">
-          {this.state.isLoaded & this.state.house !== undefined
-            ? this.state.house.categories.map((dynamicData, i) => {
+          {this.state.isLoaded & (this.state.house !== undefined) ? (
+            this.state.house.categories.map((dynamicData, i) => {
               if (dynamicData.name === "Overview") {
                 return (
                   <OverviewItem
@@ -72,23 +72,22 @@ class CategoryPage extends Component {
                     history={this.props.history}
                   />
                 );
-              }})
-            : <Card.Body>
-                <div className="btn-list text-center">
-                  <Loader
-                    type="ThreeDots"
-                    color="#316CBE"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-              </Card.Body>
-          }
+              }
+            })
+          ) : (
+            <Card.Body>
+              <div className="btn-list text-center">
+                <Loader
+                  type="ThreeDots"
+                  color="#316CBE"
+                  height={30}
+                  width={30}
+                />
+              </div>
+            </Card.Body>
+          )}
           <div className="d-flex">
-            <Button
-              link
-              onClick={this.saveHouse.bind(this, false)}
-            >
+            <Button link onClick={this.saveHouse.bind(this, false)}>
               Exit and Save
             </Button>
             <Button
@@ -128,14 +127,14 @@ class CategoryPage extends Component {
     /* hard coded areasInspected 
     - to be removed when API definition is updated for house */
     res.areasInspected = {
-      "site": false,
-      "subfloor": false,
-      "exterior": false,
-      "roofExterior": false,
-      "roofSpace": false,
-      "services": false,
-      "other": false,
-    }
+      site: false,
+      subfloor: false,
+      exterior: false,
+      roofExterior: false,
+      roofSpace: false,
+      services: false,
+      other: false
+    };
     return res;
   };
 
@@ -143,13 +142,16 @@ class CategoryPage extends Component {
     this.setState({ house });
   };
 
-  saveHouse = (isComplete) => {
+  saveHouse = isComplete => {
     if (!this.state.house.completed && isComplete) {
-      this.setState({
-        house: update(this.state.house, {
-          completed: { $set: isComplete }
-        })
-      }, this.postHouse());
+      this.setState(
+        {
+          house: update(this.state.house, {
+            completed: { $set: isComplete }
+          })
+        },
+        () => this.postHouse()
+      );
     } else {
       this.postHouse();
     }
@@ -162,7 +164,7 @@ class CategoryPage extends Component {
       })
       .catch(error => {
         console.log(error);
-    });
+      });
   }
 }
 
