@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Custom.css";
 import update from "immutability-helper";
+import NumberFormat from "react-number-format";
 
 class CategoryCard extends Component {
   state = {
@@ -8,7 +9,7 @@ class CategoryCard extends Component {
     categoryIndex: {},
     category: {},
     isCollapsed: true,
-    count: -1,
+    count: -1
   };
 
   componentDidMount() {
@@ -17,29 +18,32 @@ class CategoryCard extends Component {
       house: house,
       categoryIndex: categoryIndex,
       category: category,
-      count: category.count,
-    })
+      count: category.count
+    });
   }
   render() {
     const { isCollapsed } = this.state;
     return (
       <div className="card">
-        <div className={isCollapsed ? "large-card-header" : "large-card-header-open"}>
-          <a 
+        <div
+          className={
+            isCollapsed ? "large-card-header" : "large-card-header-open"
+          }
+        >
+          <a
             className="card-title"
             onClick={() => this.setState({ isCollapsed: !isCollapsed })}
           >
             {this.props.title}
           </a>
           <div className="card-header-options">
-            <input 
+            <NumberFormat
               className="card-header-options text-input"
-              defaultValue={this.props.category.count} 
-              onChange={this.countChangeHandler.bind(this)}
-              onBlur={this.countOnBlur.bind(this)}
-              type="number"
+              displayType={"input"}
+              value={0}
+              allowNegative={false}
             />
-            <a 
+            <a
               className="card-header-options"
               onClick={() => this.setState({ isCollapsed: !isCollapsed })}
             >
@@ -51,14 +55,14 @@ class CategoryCard extends Component {
             </a>
           </div>
         </div>
-        <div className={ isCollapsed ? "hidden" : "show" }>
+        <div className={isCollapsed ? "hidden" : "show"}>
           {this.props.children}
         </div>
       </div>
-    );  
+    );
   }
 
-  countChangeHandler(event){
+  countChangeHandler(event) {
     var num = event.target.value;
     var input = num === null ? 0 : num;
     this.setState({ count: input });
@@ -67,17 +71,17 @@ class CategoryCard extends Component {
   countOnBlur = e => {
     //change house's state rather than category's state
     const { house, categoryIndex, count } = this.state;
-    const newHouse = update(house, { 
-      categories: { 
-        [categoryIndex]: { 
+    const newHouse = update(house, {
+      categories: {
+        [categoryIndex]: {
           count: { $set: count }
         }
       }
     });
-    this.setState({ house: newHouse }, 
-      () => this.props.updateHouseState(this.state.house)
+    this.setState({ house: newHouse }, () =>
+      this.props.updateHouseState(this.state.house)
     );
-  }
+  };
 }
 
 export default CategoryCard;
