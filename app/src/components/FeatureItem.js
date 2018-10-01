@@ -123,7 +123,7 @@ class FeatureItem extends Component {
                 styleClass="cancelRatingItem"
                 onChange={this.ratingOnChange}
                 name={categoryIndex + "," + featureIndex}
-                icon="slash"
+                label="N/A"
                 value="4"
                 checked={grade === "4"}
               />
@@ -170,7 +170,7 @@ class FeatureItem extends Component {
   }
 
   cameraClick = () => {
-    const { id } = this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex];    
+    const { id } = this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex];
     this.props.history.push({
       pathname: "/inspect/" + this.state.house.id + "/images/" + id,
       state: { house: this.state.house }

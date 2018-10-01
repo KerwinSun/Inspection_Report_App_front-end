@@ -124,7 +124,7 @@ class OverviewItem extends Component {
               rows={8}
             />
           </Form.Group>
-          <Form.Group label="General Comments">
+          <Form.Group label="General Comments (Appear in the Report)">
             <Form.Textarea
               defaultValue={this.state.comments}
               placeholder="General Comments"
@@ -145,7 +145,7 @@ class OverviewItem extends Component {
       );
     } else {
       return null;
-    }   
+    }
   }
 
   cameraClick = () => {
@@ -162,7 +162,7 @@ class OverviewItem extends Component {
         [e.target.value]: { $set: !this.state.areasInspected[e.target.value] }
       }
     });
-    this.setState({ house: newHouse }, () => 
+    this.setState({ house: newHouse }, () =>
       this.props.updateHouseState(this.state.house)
     );
   }
