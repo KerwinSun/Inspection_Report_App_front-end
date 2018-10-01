@@ -8,31 +8,13 @@ import InspectionDetailsPage from "./pages/InspectionDetailsPage";
 import CameraPage from "./pages/CameraPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
+import PrivateRoute from "./components/PrivateRoute";
 import api from "./api";
 
 import "tabler-react/dist/Tabler.css";
 import "./App.css";
 
 const hist = createBrowserHistory();
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      api.isUserAuthenticated() === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
-
 class App extends Component {
   componentDidMount() {
     hist.listen((location, action) => this.onRouteChanged());
@@ -47,7 +29,7 @@ class App extends Component {
 
   toggleAuthenticationStatus = () => {
     // check authenticated status and toggle state based on that
-    this.setState({ loggedIn: api.isUserAuthenticated() });
+    return api.isUserAuthenticated();
   };
 
   render() {
@@ -64,7 +46,12 @@ class App extends Component {
               />
             )}
           />
-          <Route exact path="/logout" component={LogoutPage} />
+          <Route
+            exact
+            path="/logout"
+            component={LogoutPage}
+            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
+          />
           <PrivateRoute
             exact
             path="/"
@@ -81,14 +68,8 @@ class App extends Component {
             exact
             path={`/inspect/:id(\\d+)`}
             component={CategoryPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
-          <PrivateRoute
-            exact
-            path="/profile"
-            component={ProfilePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute
             exact
             path={"/inspect/:id(\\d+)/images/:featureId(\\d+)"}

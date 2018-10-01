@@ -5,17 +5,24 @@ import { LoginPage as TablerLoginPage } from "tabler-react";
 import api from "../api";
 
 class LoginPage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false
+    };
+  }
+
   login(email, password) {
-    console.log("hi");
-    api.login(email, password);
-    this.props.toggleAuthenticationStatus();
+    if (api.login(email, password)) {
+      this.setState({ loggedIn: true });
+    }
   }
 
   render() {
     const { from } = this.props.location.state || {
       from: { pathname: "/home" }
     };
-    if (api.isUserAuthenticated()) {
+    if (this.state.loggedIn) {
       return <Redirect to={from} />;
     }
     return (

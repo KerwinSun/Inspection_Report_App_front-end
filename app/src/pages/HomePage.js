@@ -16,6 +16,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
+    API.logout();
     var id = 1; //Hard coded value for now.
     API.getPerson(id).then(res => {
       var houses = res.inspected;
