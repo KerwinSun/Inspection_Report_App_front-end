@@ -1,5 +1,4 @@
 export const server = "https://inspectionreportservice.azurewebsites.net/api";
-// export const server = "http://localhost:62163/api";
 
 const house = [
   {
@@ -7,10 +6,12 @@ const house = [
     features: [
       {
         name: "General",
-        comments: [],
+        comments: []
       }
     ]
-  },{    name: "Kitchen",
+  },
+  {
+    name: "Kitchen",
     features: [
       {
         name: "General",
@@ -18,60 +19,62 @@ const house = [
           "The kitchen was not clean and tidy",
           "The kitchen was clean and tidy"
         ]
-      },{
+      },
+      {
         name: "Benchtops",
         comments: [
           "Maintained in good condition at the time of inspection",
           "Bench was damaged"
         ]
-      },{
+      },
+      {
         name: "Cabinets and Pantry",
-        comments: [
-          "Doors and sliding drawers are in good working condition"
-        ]
-      },{
+        comments: ["Doors and sliding drawers are in good working condition"]
+      },
+      {
         name: "Taps",
-        comments: [
-          "There is good water pressure"
-        ]
-      }, {
+        comments: ["There is good water pressure"]
+      },
+      {
         name: "Rangehood",
         comments: [
           "None",
           "Good working condition at time of inspection",
           "The light wasn't working at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Cooking Appliances",
         comments: [
           "Electric oven, in good working condition at time of inspection",
           "Gas hob and electric oven, in good working condition at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Wastemaster",
         comments: [
           "None",
           "Good working condition at time of inspection",
           "Not working at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Dishwasher",
         comments: [
           "None",
           "The dishwasher is leaking",
           "Good working condition at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Power points",
-        comments: [
-          "Good working condition at time of inspection"
-        ]
-      },{
+        comments: ["Good working condition at time of inspection"]
+      },
+      {
         name: "Lights",
-        comments: [
-          "Good working condition at time of inspection"
-        ]
-      },{
+        comments: ["Good working condition at time of inspection"]
+      },
+      {
         name: "Windows and doors",
         comments: [
           "The windows are double glazed and made of aluminum",
@@ -80,7 +83,8 @@ const house = [
           "Made of aluminium framing and opened and closed correctly",
           "Framing and opened and closed correctly"
         ]
-      },{
+      },
+      {
         name: "Blinds, curtains or drapes",
         comments: [
           "None",
@@ -92,7 +96,8 @@ const house = [
           "Venetian blinds",
           "Wooden blinds"
         ]
-      },{
+      },
+      {
         name: "Floor covering",
         comments: [
           "Vinyl flooring",
@@ -100,14 +105,16 @@ const house = [
           "Tile flooring",
           "Wooden veneer floor"
         ]
-      },{
+      },
+      {
         name: "Moisture readings",
         comments: [
           "Moisture readings were between 0 and 40 on the external walls at time of inspection"
         ]
       }
-    ],
-  },{
+    ]
+  },
+  {
     name: "Dining room",
     features: [
       {
@@ -119,15 +126,15 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Lounge",
     features: [
       {
         name: "General",
-        comments: [
-          "Good room space"
-        ]
-      },{
+        comments: ["Good room space"]
+      },
+      {
         name: "Blinds, curtains or drapes",
         comments: [
           "None",
@@ -138,7 +145,8 @@ const house = [
           "Venetian blinds",
           "Wooden blinds"
         ]
-      },{
+      },
+      {
         name: "Windows and doors",
         comments: [
           "The windows are double glazed and made of aluminum",
@@ -147,24 +155,21 @@ const house = [
           "Framing and opened and closed correctly",
           "Interior doors are made of timber"
         ]
-      },{
+      },
+      {
         name: "Power points",
-        comments: [
-          "Good working condition at time of inspection"
-        ]
-      },{
+        comments: ["Good working condition at time of inspection"]
+      },
+      {
         name: "Lights",
         comments: [
           "Good working condition at time of inspection"
         ]
       },{
         name: "Fireplace",
-        comments: [
-          "Wood burner",
-          "Operates by gas",
-          "None"
-        ]
-      },{
+        comments: ["Wood burner", "Operates by gas", "None"]
+      },
+      {
         name: "Floor covering",
         comments: [
           "None",
@@ -179,7 +184,8 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Laundry",
     features: [
       {
@@ -191,7 +197,8 @@ const house = [
           "Good room space",
           "Located in the garage"
         ]
-      },{
+      },
+      {
         name: "Ventilation",
         comments: [
           "None",
@@ -200,7 +207,8 @@ const house = [
           "Exterior door and window",
           "Fan extractor and windows"
         ]
-      },{
+      },
+      {
         name: "Windows and doors",
         comments: [
           "The windows are double glazed and made of aluminum",
@@ -224,22 +232,19 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Bathroom and Toilets",
     features: [
       {
         name: "General",
-        comments: [
-          "Good room space clean and tidy",
-
-        ]
-      },{
+        comments: ["Good room space clean and tidy"]
+      },
+      {
         name: "Bath tub",
-        comments: [
-          "None",
-          "Good size bath tub"
-          ]
-      },{
+        comments: ["None", "Good size bath tub"]
+      },
+      {
         name: "Shower",
         comments: [
           "Leaking on the side",
@@ -247,12 +252,12 @@ const house = [
           "Good water pressure",
           "Shower and bath tub combined"
         ]
-      },{
+      },
+      {
         name: "Taps",
-        comments: [
-          "In good working condition at time of inspection"
-        ]
-      },{
+        comments: ["In good working condition at time of inspection"]
+      },
+      {
         name: "Vanity",
         comments: [
           "Clean and in good condition at time of inspection"
@@ -272,11 +277,9 @@ const house = [
         ]
       },{
         name: "Accessories",
-        comments: [
-          "None",
-          "Heated towel rail"
-        ]
-      },{
+        comments: ["None", "Heated towel rail"]
+      },
+      {
         name: "Windows and doors",
         comments: [
           "No windows and interior door is made of timber",
@@ -295,29 +298,27 @@ const house = [
           "Separate toilet downstairs and in the bathroom",
           "Toilets in good condition at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Cisterns",
-        comments: [
-          "Good water flow and flush correctly"
-        ]
-      },{
+        comments: ["Good water flow and flush correctly"]
+      },
+      {
         name: "Moisture readings",
         comments: [
           "Moisture readings were between 0 and 40 at time of inspection"
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Ensuites",
     features: [
       {
         name: "General",
-        comments: [
-          "Good room space",
-          "Clean and tidy",
-          "None"
-        ]
-      },{
+        comments: ["Good room space", "Clean and tidy", "None"]
+      },
+      {
         name: "Bath tub",
         comments: [
           "None"
@@ -330,11 +331,9 @@ const house = [
         ]
       },{
         name: "Vanity",
-        comments: [
-          "Clean and tidy",
-          "None"
-        ]
-      },{
+        comments: ["Clean and tidy", "None"]
+      },
+      {
         name: "Accessories",
         comments: [
           "Heated towel rail",
@@ -348,7 +347,8 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Bedrooms and Office/Studies",
     features: [
       {
@@ -359,7 +359,8 @@ const house = [
           "Four bedrooms and all have good room space",
           "Five bedrooms and all have good room space"
         ]
-      },{
+      },
+      {
         name: "Windows and doors",
         comments: [
           "The bedroom windows are made of timber framing",
@@ -373,10 +374,9 @@ const house = [
         ]
       },{
         name: "Wardrobes",
-        comments: [
-          "Good room space, clean and tidy"
-        ]
-      },{
+        comments: ["Good room space, clean and tidy"]
+      },
+      {
         name: "Office/Studies",
         comments: [
           "Good room space",
@@ -389,15 +389,15 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Hallway",
     features: [
       {
         name: "General",
-        comments: [
-          "Good room space"
-        ]
-      },{
+        comments: ["Good room space"]
+      },
+      {
         name: "Interior Stairwells/handrails",
         comments: [
           "None",
@@ -408,28 +408,24 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Family room/extra rooms",
     features: [
       {
         name: "General",
-        comments: [
-          "Good room space",
-          "None"
-        ]
+        comments: ["Good room space", "None"]
       }
     ]
-  },{
+  },
+  {
     name: "Other Interior Features",
     features: [
       {
         name: "DVS or HRV",
-        comments: [
-          "HRV",
-          "DVS",
-          "None"
-        ]
-      },{
+        comments: ["HRV", "DVS", "None"]
+      },
+      {
         name: "Alarm",
         comments: [
           "None",
@@ -456,7 +452,8 @@ const house = [
           "None",
           "Hot water cylinder located upstairs"
         ]
-      },{
+      },
+      {
         name: "Insulation",
         comments: [
           "None",
@@ -464,7 +461,8 @@ const house = [
           "Insulation in the roof space and nothing under the house",
           "Insulation in the roof space"
         ]
-      },{
+      },
+      {
         name: "Heating inside the house",
         comments: [
           "Hitachi Inverter heat pump",
@@ -507,7 +505,8 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Garage",
     features: [
       {
@@ -518,7 +517,8 @@ const house = [
           "Double garage in good condition at time of inspection",
           "Good room space"
         ]
-      },{
+      },
+      {
         name: "Lights",
         comments: [
           "Good working condition at time of inspection",
@@ -540,22 +540,23 @@ const house = [
           "Exterior steel door",
           "inspection"
         ]
-      },{
+      },
+      {
         name: "Moisture readings",
         comments: [
           "Moisture readings were between 0 and 40 at time of inspection"
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Site conditions",
     features: [
       {
         name: "General",
-        comments: [
-          "Good condition"
-        ]
-      },{
+        comments: ["Good condition"]
+      },
+      {
         name: "Drainage",
         comments: [
         ]
@@ -566,15 +567,13 @@ const house = [
         ]
       },{
         name: "House stormwater",
-        comments: [
-          "Good condition"
-        ]
-      },{
+        comments: ["Good condition"]
+      },
+      {
         name: "Sewer, vents and gullies",
-        comments: [
-          "Gullie trap in good condition"
-        ]
-      },{
+        comments: ["Gullie trap in good condition"]
+      },
+      {
         name: "Water supply",
         comments: [
           "Water tank",
@@ -588,16 +587,15 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Pests, rot, decay, moisture and mould",
     features: [
       {
         name: "Evidence of pests",
-        comments: [
-          "Rat or mice dropping in the roof space",
-          "Nothing evident"
-        ]
-      },{
+        comments: ["Rat or mice dropping in the roof space", "Nothing evident"]
+      },
+      {
         name: "Evidence of rot and decay",
         comments: [
           "Nothing evident"
@@ -609,7 +607,8 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Other Exterior Feature",
     features: [
       {
@@ -620,7 +619,8 @@ const house = [
           "Aerial located in the roof space",
           "Sky dish and aerial"
         ]
-      },{
+      },
+      {
         name: "Clothesline",
         comments: [
           "None",
@@ -640,13 +640,15 @@ const house = [
           "Asphalt shingle roofing",
           "Concrete tile roof"
         ]
-      },{
+      },
+      {
         name: "Spouting",
         comments: [
           "PVC in good condition at time of inspection",
           "Long run steel in good condition at time of inspection"
         ]
-      },{
+      },
+      {
         name: "Downpipes",
         comments: [
           "Made of steel in good condition at time of inspection",
@@ -808,15 +810,15 @@ const house = [
         ]
       }
     ]
-  },{
+  },
+  {
     name: "Qualities of residential area",
     features: [
       {
         name: "General",
-        comments: [
-          "None"
-        ]
-      },{
+        comments: ["None"]
+      },
+      {
         name: "Privacy and noise levels",
         comments: [
           "Good"
@@ -834,7 +836,7 @@ const house = [
       }
     ]
   }
-]
+];
 
 function generateJson(house) {
   return house.map(category => {
@@ -848,9 +850,9 @@ function generateJson(house) {
       json.grade = 0;
       json.comments = "";
       return json;
-    })
+    });
     return categoryToReturn;
-  })
+  });
 }
 
 export const jsonHouse = {
@@ -872,27 +874,26 @@ export const jsonHouse = {
     "services": false,
     "other": false
   },
-  "categories": generateJson(house)
+  categories: generateJson(house)
 };
 
 function generateJsonOptions(house) {
   return house.map(category => {
     var categoryToReturn = {};
     categoryToReturn.name = category.name;
-    categoryToReturn.features =
-    category.features.map(feature => {
+    categoryToReturn.features = category.features.map(feature => {
       var json = {};
       json.name = feature.name;
       json.options = feature.comments;
       return json;
-    })
+    });
     return categoryToReturn;
-  })
+  });
 }
 
 export const commentOptions = {
   categories: generateJsonOptions(house)
-}
+};
 
 export const realEstateOptions = [
   "Iron Bridge",

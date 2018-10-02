@@ -2,104 +2,139 @@ import axios from "axios";
 import { server } from "./config";
 import store from "store";
 
+const axiosInstance = axios.create({
+  baseURL: server,
+  withCredentials: true
+});
+
 export default {
   getHouse(houseId) {
-    return axios
-      .get(server + "/house/" + houseId)
-      .then(response => {
-        return response.data;
-      })
-      .catch(response => {});
+    let payload = {
+      url: "/house/" + houseId,
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    });
   },
   getPerson(personId) {
-    return axios
-      .get(server + "/user/" + personId)
-      .then(res => {
-        //handle response
-        return res.data;
-      })
-      .catch(res => {
-        //handle response error
-      });
+    let payload = {
+      url: "/user/" + personId,
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    });
   },
   postHouse(json) {
-    return axios
-      .post(server + "/House/", json)
-      .then(response => {
-        return response.data.id;
+    let payload = {
+      data: {
+        json
+      },
+      url: "/House",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
     });
   },
   postImage(formData, featureId) {
-    return axios
-      .post(server + "/Image/", formData, {
-        headers: {
-          "feature-id": featureId
-        }
-      })
+    let payload = {
+      data: {
+        formData
+      },
+      url: "/image",
+      method: "POST",
+      headers: {
+        "feature-id": featureId
+      }
+    };
+    return axiosInstance(payload)
       .then(response => {
         console.log(response);
       })
-      .catch(response => {
+      .catch(() => {
         console.log("Error sending images");
       });
   },
   getImages(featureId) {
-    return axios
-      .get(server + "/Image/" + featureId)
+    let payload = {
+      url: "/image/" + featureId,
+      method: "GET"
+    };
+    return axiosInstance(payload)
       .then(response => {
         return response.data;
-      })
-      .catch(response => {
-        console.log(response);
-      });
-  },
-  deleteImage(featureId, imageName) {
-    return axios
-    .delete(server + "/Image/" + featureId, {
-      headers: {
-        "image-name" : imageName
-      }
-    })
-    .then(response => {
-      return response.data;
-    })
-    .catch(response => {
-      console.log('Error sending images');
-    });
-  },
-  getReport(houseID) {
-    return axios.get(server + "/export/" + houseID)
-    .then(response => {
-      return response.data;
-    })
-    .catch(response => {
-      console.log(response);
-    })
-  },
-  login(email, password) {
-    store.set("loggedIn", true);
-    /*
-    return axios
-      .post(server + "/auth/", email)
-      .then(response => {
-        store.set("loggedIn", true);
-        return response;
       })
       .catch(error => {
         return error;
       });
-      */
+  },
+  deleteImage(featureId, imageName) {
+    let payload = {
+      url: "/image/" + featureId,
+      method: "DELETE",
+      headers: {
+        "image-name": imageName
+      }
+    };
+    return axiosInstance(payload)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error;
+      });
+  },
+  getReport(houseId) {
+    let payload = {
+      url: "/export/" + houseId,
+      method: "GET"
+    };
+    return axiosInstance(payload)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => {
+        return error;
+      });
+  },
+  login(email, password) {
+    var payload = {
+      data: {
+        email: email,
+        password: password
+      },
+      url: "auth/login",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(() => {
+      store.set("loggedIn", true);
+    });
   },
   isUserAuthenticated() {
+    console.log("loggedIn = " + store.get("loggedIn"));
     if (store.get("loggedIn") === undefined) {
       return false;
     }
-    if (localStorage.getItem("loggedIn") === false) {
+    if (store.get("loggedIn") === false) {
       return false;
     }
     return true;
   },
   logout() {
-    store.remove("loggedIn");
+    let payload = {
+      url: "/auth/logout",
+      method: "POST"
+    };
+    return axiosInstance(payload)
+      .then(response => {
+        store.clearAll();
+        return response;
+      })
+      .catch(error => {
+        store.clearAll();
+        return error;
+      });
   }
 };

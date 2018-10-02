@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -8,31 +8,13 @@ import InspectionDetailsPage from "./pages/InspectionDetailsPage";
 import CameraPage from "./pages/CameraPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
-import api from "./api";
+import PrivateRoute from "./components/PrivateRoute";
+import API from "./api";
 
 import "tabler-react/dist/Tabler.css";
 import "./App.css";
 
 const hist = createBrowserHistory();
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      api.isUserAuthenticated() === true ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
-
 class App extends Component {
   componentDidMount() {
     hist.listen((location, action) => this.onRouteChanged());
@@ -47,7 +29,7 @@ class App extends Component {
 
   toggleAuthenticationStatus = () => {
     // check authenticated status and toggle state based on that
-    this.setState({ loggedIn: api.isUserAuthenticated() });
+    return API.isUserAuthenticated();
   };
 
   render() {
@@ -57,48 +39,27 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={props => (
-              <LoginPage
-                {...props}
-                toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-              />
-            )}
+            render={props => <LoginPage {...props} />}
           />
           <Route exact path="/logout" component={LogoutPage} />
-          <PrivateRoute
-            exact
-            path="/"
-            component={HomePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <PrivateRoute exact path="/" component={HomePage} />
           <PrivateRoute
             exact
             path="/new-inspection"
             component={InspectionDetailsPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
           <PrivateRoute
             exact
             path={`/inspect/:id(\\d+)`}
             component={CategoryPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
-          <PrivateRoute
-            exact
-            path="/profile"
-            component={ProfilePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <PrivateRoute exact path="/profile" component={ProfilePage} />
           <PrivateRoute
             exact
             path={"/inspect/:id(\\d+)/images/:featureId(\\d+)"}
             component={CameraPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
-          <PrivateRoute
-            component={HomePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <PrivateRoute component={HomePage} />
         </Switch>
       </Router>
     );
