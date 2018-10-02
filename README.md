@@ -23,7 +23,7 @@ Master branch: [![Build Status](https://travis-ci.com/Karim-C/Inspection_Report_
 
 ## Link to Backend
 
-https://github.com/Karim-C/Inspection_Report_App_back-end
+https://inspectionreportservice.azurewebsites.net
 
 ## Link to the App
 

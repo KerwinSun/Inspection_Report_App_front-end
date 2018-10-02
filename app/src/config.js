@@ -162,17 +162,22 @@ const house = [
       },
       {
         name: "Lights",
-        comments: ["Good working condition at time of inspection"]
-      },
-      {
+        comments: [
+          "Good working condition at time of inspection"
+        ]
+      },{
         name: "Fireplace",
         comments: ["Wood burner", "Operates by gas", "None"]
       },
       {
         name: "Floor covering",
-        comments: ["None", "Timber flooring", "Tile flooring", "Carpet floors"]
-      },
-      {
+        comments: [
+          "None",
+          "Timber flooring",
+          "Tile flooring",
+          "Carpet floors"
+        ]
+      },{
         name: "Moisture readings",
         comments: [
           "Moisture readings were between 0 and 40 on the external walls at time of inspection"
@@ -214,15 +219,16 @@ const house = [
           "The windows and door are made of timber framing and opened and closed correctly",
           "Interior door is made of timber"
         ]
-      },
-      {
+      },{
         name: "Tub",
-        comments: ["Good size tub", "Good size super tub"]
-      },
-      {
+        comments: [
+          "Good size tub",
+          "Good size super tub"
+        ]
+      },{
         name: "Moisture readings",
         comments: [
-          "Moisture readings were between 0 and 40 at time of inspection"
+          "Moisture readings were between 0 and 40 at time of inspection",
         ]
       }
     ]
@@ -253,9 +259,10 @@ const house = [
       },
       {
         name: "Vanity",
-        comments: ["Clean and in good condition at time of inspection"]
-      },
-      {
+        comments: [
+          "Clean and in good condition at time of inspection"
+        ]
+      },{
         name: "Ventilation",
         comments: [
           "None",
@@ -263,12 +270,12 @@ const house = [
           "Window and fan extractor",
           "Fan extractor"
         ]
-      },
-      {
+      },{
         name: "Lights",
-        comments: ["Good working condition at time of inspection"]
-      },
-      {
+        comments: [
+          "Good working condition at time of inspection"
+        ]
+      },{
         name: "Accessories",
         comments: ["None", "Heated towel rail"]
       },
@@ -283,8 +290,7 @@ const house = [
           "The windows are made of timber framing and opened and closed correctly",
           "The interior door is made of timber"
         ]
-      },
-      {
+      },{
         name: "Toilets",
         comments: [
           "Toilet in good condition at time of inspection",
@@ -314,21 +320,26 @@ const house = [
       },
       {
         name: "Bath tub",
-        comments: ["None"]
-      },
-      {
+        comments: [
+          "None"
+        ]
+      },{
         name: "Shower",
-        comments: ["Good water pressure", "None"]
-      },
-      {
+        comments: [
+          "Good water pressure",
+          "None"
+        ]
+      },{
         name: "Vanity",
         comments: ["Clean and tidy", "None"]
       },
       {
         name: "Accessories",
-        comments: ["Heated towel rail", "None"]
-      },
-      {
+        comments: [
+          "Heated towel rail",
+          "None"
+        ]
+      },{
         name: "Moisture readings",
         comments: [
           "None",
@@ -356,20 +367,22 @@ const house = [
           "The bedroom windows are made of aluminium framing",
           "The interior doors are made of timber"
         ]
-      },
-      {
+      },{
         name: "Lights",
-        comments: ["Working at the time of inspection"]
-      },
-      {
+        comments: [
+          "Working at the time of inspection"
+        ]
+      },{
         name: "Wardrobes",
         comments: ["Good room space, clean and tidy"]
       },
       {
         name: "Office/Studies",
-        comments: ["Good room space", "None"]
-      },
-      {
+        comments: [
+          "Good room space",
+          "None"
+        ]
+      },{
         name: "Moisture readings",
         comments: [
           "Moisture readings were between 0 and 40 at time of inspection"
@@ -419,8 +432,7 @@ const house = [
           "In good working condition at time of inspection",
           "Was not working at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Smoke alarms",
         comments: [
           "One alarm installed, in good working condition",
@@ -429,8 +441,7 @@ const house = [
           "Two alarms are installed, in good working condition",
           "Three alarms are installed, in good working condition"
         ]
-      },
-      {
+      },{
         name: "Hot water cylinder",
         comments: [
           "Low pressure 180 litre",
@@ -461,32 +472,32 @@ const house = [
           "Mitsubishi Electric Inverter heat pump",
           "None"
         ]
-      },
-      {
+      },{
         name: "Interior decorating/wallpaper",
-        comments: ["Good condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "Good condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Interior and exterior painting",
         comments: [
           "Interior paint will need to be painted",
           "Exterior paint will need to be painted",
           "Interior and exterior paint is in good condition"
         ]
-      },
-      {
+      },{
         name: "Electrical internal distribution board",
         comments: [
           "Good condition at time of inspection",
           "Located near the kitchen",
           "Located the garage"
         ]
-      },
-      {
+      },{
         name: "Wiring",
-        comments: ["Good"]
-      },
-      {
+        comments: [
+          "Good"
+        ]
+      },{
         name: "Plumbing pipes and waste",
         comments: [
           "Pipe is leaking under the laundry tub",
@@ -514,12 +525,13 @@ const house = [
           "None",
           "Good"
         ]
-      },
-      {
+      },{
         name: "Power points",
-        comments: ["None", "In good conditionx"]
-      },
-      {
+        comments: [
+          "None",
+          "In good conditionx"
+        ]
+      },{
         name: "Windows and doors",
         comments: [
           "None",
@@ -546,13 +558,14 @@ const house = [
       },
       {
         name: "Drainage",
-        comments: []
-      },
-      {
+        comments: [
+        ]
+      },{
         name: "Site stormwater",
-        comments: ["Good condition"]
-      },
-      {
+        comments: [
+          "Good condition"
+        ]
+      },{
         name: "House stormwater",
         comments: ["Good condition"]
       },
@@ -562,11 +575,16 @@ const house = [
       },
       {
         name: "Water supply",
-        comments: ["Water tank", "Town water supply"]
-      },
-      {
+        comments: [
+          "Water tank",
+          "Town water supply"
+        ]
+      },{
         name: "Septic supply",
-        comments: ["Septic tank", "City septic supply"]
+        comments: [
+          "Septic tank",
+          "City septic supply"
+        ]
       }
     ]
   },
@@ -579,11 +597,14 @@ const house = [
       },
       {
         name: "Evidence of rot and decay",
-        comments: ["Nothing evident"]
-      },
-      {
+        comments: [
+          "Nothing evident"
+        ]
+      },{
         name: "Evidence of moisture and mould",
-        comments: ["Nothing evident"]
+        comments: [
+          "Nothing evident"
+        ]
       }
     ]
   },
@@ -606,12 +627,12 @@ const house = [
           "Located on the side of the house",
           "Located at the back of the house"
         ]
-      },
-      {
+      },{
         name: "Letterbox",
-        comments: ["In front of the house"]
-      },
-      {
+        comments: [
+          "In front of the house"
+        ]
+      },{
         name: "Exterior Roofing",
         comments: [
           "Colour tile steel roofing",
@@ -633,27 +654,25 @@ const house = [
           "Made of steel in good condition at time of inspection",
           "Made of PVC in good condition at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Flashing above the windows and door",
         comments: [
           "None",
           "Timber flashing in good condition at time of inspection",
           "In good condition at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Soffits boards under the eaves of the house",
         comments: [
           "Soffit boards will need to be painted",
           "The soffits boards were in good condition at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Fascia boards and barges",
-        comments: ["Fascia boards in good condition at time of inspection"]
-      },
-      {
+        comments: [
+          "Fascia boards in good condition at time of inspection"
+        ]
+      },{
         name: "Cladding",
         comments: [
           "Brick Cladding",
@@ -665,8 +684,7 @@ const house = [
           "Timber weather boards cladding",
           "Hardifex plastered and timber cladding"
         ]
-      },
-      {
+      },{
         name: "Base cladding",
         comments: [
           "Concrete blocks",
@@ -674,56 +692,64 @@ const house = [
           "Timber and concrete foundation",
           "Concrete"
         ]
-      },
-      {
+      },{
         name: "Construction",
-        comments: ["Very good standard of workmanship"]
-      },
-      {
+        comments: [
+          "Very good standard of workmanship"
+        ]
+      },{
         name: "Exterior windows and doors",
         comments: [
           "Aluminium and timber framing in good condition at time",
           "Timber doors in good condition at time of inspection",
           "Aluminium doors in good condition at time of inspection of inspection"
         ]
-      },
-      {
+      },{
         name: "Foundations and blockwork",
-        comments: ["Concrete", "Concrete and timber", "Concrete foundation"]
-      },
-      {
+        comments: [
+          "Concrete",
+          "Concrete and timber",
+          "Concrete foundation"
+        ]
+      },{
         name: "Joist and under the house",
         comments: [
           "No Joist on the bottom floor, concrete foundtion",
           "None",
           "In good condition at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Sub floor ventilation",
-        comments: ["Vent holes around the house", "None"]
-      },
-      {
+        comments: [
+          "Vent holes around the house",
+          "None"
+        ]
+      },{
         name: "Decks",
-        comments: ["In good condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "In good condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Exterior handrails",
-        comments: ["Good condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "Good condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Balustrades",
-        comments: ["In good condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "In good condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Pergolas, verandah or conservatory",
         comments: [
           "Veranda in good condition at time of inspection",
           "Conservatory in good condition at time of inspection",
           "None"
         ]
-      },
-      {
+      },{
         name: "Fences, walls",
         comments: [
           "None",
@@ -731,45 +757,57 @@ const house = [
           "Fully fenced",
           "Located at the back of the house"
         ]
-      },
-      {
+      },{
         name: "Garden shed",
-        comments: ["In good condition at time of inspection", ""]
-      },
-      {
+        comments: [
+          "In good condition at time of inspection",
+          ""
+        ]
+      },{
         name: "Sleepouts",
-        comments: ["None"]
-      },
-      {
+        comments: [
+          "None"
+        ]
+      },{
         name: "Carports",
-        comments: ["In good condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "In good condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Granny flats",
-        comments: ["None"]
-      },
-      {
+        comments: [
+          "None"
+        ]
+      },{
         name: "Retaining walls",
-        comments: ["Along the side of the house", "None"]
-      },
-      {
+        comments: [
+          "Along the side of the house",
+          "None"
+        ]
+      },{
         name: "Driveway",
-        comments: ["None", "Good condition at time of inspection"]
-      },
-      {
+        comments: [
+          "None",
+          "Good condition at time of inspection"
+        ]
+      },{
         name: "Pool and spa",
-        comments: ["In good working condition at time of inspection", "None"]
-      },
-      {
+        comments: [
+          "In good working condition at time of inspection",
+          "None"
+        ]
+      },{
         name: "Exterior taps",
         comments: [
           "Along the side of the house",
           "In good working condition at time of inspection"
         ]
-      },
-      {
+      },{
         name: "Miscellaneous alterations to original house",
-        comments: ["None"]
+        comments: [
+          "None"
+        ]
       }
     ]
   },
@@ -782,15 +820,19 @@ const house = [
       },
       {
         name: "Privacy and noise levels",
-        comments: ["Good"]
-      },
-      {
+        comments: [
+          "Good"
+        ]
+      },{
         name: "Workmanship",
-        comments: ["Good standard of workmanship"]
-      },
-      {
+        comments: [
+          "Good standard of workmanship"
+        ]
+      },{
         name: "Future construction development",
-        comments: ["None"]
+        comments: [
+          "None"
+        ]
       }
     ]
   }
@@ -801,7 +843,8 @@ function generateJson(house) {
     var categoryToReturn = {};
     categoryToReturn.name = category.name;
     categoryToReturn.count = 0;
-    categoryToReturn.features = category.features.map(feature => {
+    categoryToReturn.features =
+    category.features.map(feature => {
       var json = {};
       json.name = feature.name;
       json.grade = 0;
@@ -813,23 +856,23 @@ function generateJson(house) {
 }
 
 export const jsonHouse = {
-  completed: false,
-  inspectedBy: "",
-  inspectionDate: "",
-  address: "",
-  summonsedBy: "",
-  estimateSummary: "",
-  roomsSummary: "",
-  constructionType: "",
-  comments: "",
-  areasInspected: {
-    site: false,
-    subfloor: false,
-    exterior: false,
-    roofExterior: false,
-    roofSpace: false,
-    services: false,
-    other: false
+  "completed": false,
+	"inspectedBy": "",
+  "inspectionDate": "",
+  "address": "",
+  "summonsedBy": "",
+  "estimateSummary": "",
+  "roomsSummary": "",
+  "constructionType": "",
+  "comments": "",
+  "areasInspected": {
+    "site": false,
+    "subfloor": false,
+    "exterior": false,
+    "roofExterior": false,
+    "roofSpace": false,
+    "services": false,
+    "other": false
   },
   categories: generateJson(house)
 };
