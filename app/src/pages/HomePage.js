@@ -16,23 +16,26 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    API.logout();
     var id = 1; //Hard coded value for now.
-    API.getPerson(id).then(res => {
-      var houses = res.inspected;
-      var wipHouses = [];
-      var completedHouses = [];
-      houses.forEach(value => {
-        value.house.completed
-          ? completedHouses.push(value.house)
-          : wipHouses.push(value.house);
+    API.getPerson(id)
+      .then(res => {
+        var houses = res.inspected;
+        var wipHouses = [];
+        var completedHouses = [];
+        houses.forEach(value => {
+          value.house.completed
+            ? completedHouses.push(value.house)
+            : wipHouses.push(value.house);
+        });
+        this.setState({
+          wipHouses: wipHouses,
+          completedHouses: completedHouses,
+          isLoaded: true
+        });
+      })
+      .catch(error => {
+        console.log(error);
       });
-      this.setState({
-        wipHouses: wipHouses,
-        completedHouses: completedHouses,
-        isLoaded: true
-      });
-    });
   }
 
   render() {

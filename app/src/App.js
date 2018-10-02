@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
+import { Router, Route, Switch } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
@@ -9,7 +9,7 @@ import CameraPage from "./pages/CameraPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import PrivateRoute from "./components/PrivateRoute";
-import api from "./api";
+import API from "./api";
 
 import "tabler-react/dist/Tabler.css";
 import "./App.css";
@@ -29,7 +29,7 @@ class App extends Component {
 
   toggleAuthenticationStatus = () => {
     // check authenticated status and toggle state based on that
-    return api.isUserAuthenticated();
+    return API.isUserAuthenticated();
   };
 
   render() {
@@ -39,30 +39,14 @@ class App extends Component {
           <Route
             exact
             path="/login"
-            render={props => (
-              <LoginPage
-                {...props}
-                toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-              />
-            )}
+            render={props => <LoginPage {...props} />}
           />
-          <Route
-            exact
-            path="/logout"
-            component={LogoutPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
-          <PrivateRoute
-            exact
-            path="/"
-            component={HomePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <Route exact path="/logout" component={LogoutPage} />
+          <PrivateRoute exact path="/" component={HomePage} />
           <PrivateRoute
             exact
             path="/new-inspection"
             component={InspectionDetailsPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
           <PrivateRoute
             exact
@@ -74,12 +58,8 @@ class App extends Component {
             exact
             path={"/inspect/:id(\\d+)/images/:featureId(\\d+)"}
             component={CameraPage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
           />
-          <PrivateRoute
-            component={HomePage}
-            toggleAuthenticationStatus={this.toggleAuthenticationStatus}
-          />
+          <PrivateRoute component={HomePage} />
         </Switch>
       </Router>
     );

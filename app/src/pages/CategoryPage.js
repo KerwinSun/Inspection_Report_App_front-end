@@ -160,16 +160,12 @@ class CategoryPage extends Component {
 
   postHouse() {
     API.postHouse(this.state.house)
-      .then(response => {
+      .then(() => {
         this.props.history.push("/");
       })
       .catch(error => {
         console.log(error);
       });
-  }
-
-  orderCategoriesAndFeatures() {
-    this.state.house.categories.map((data, i) => {});
   }
 }
 

@@ -4,23 +4,24 @@
 // If they are: they proceed to the page
 // If not: they are redirected to the login page.
 import React from "react";
-import api from "../api";
 import { Redirect, Route } from "react-router-dom";
+import API from "../api";
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        this.props.toggleAuthenticationStatus ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: "/login", state: { from: props.location } }}
-          />
-        )
-      }
-    />
-  );
-};
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      API.isUserAuthenticated() === true ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: { from: props.location }
+          }}
+        />
+      )
+    }
+  />
+);
 export default PrivateRoute;

@@ -1,11 +1,13 @@
 import React from "react";
-import api from "../api";
+import API from "../api";
 class LogoutPage extends React.Component {
   componentDidMount() {
     // deauthenticate user
-    api.logout();
+    API.logout().then(() => {
+      this.props.history.push("/login");
+    });
+
     // change the current URL to / after logout
-    this.props.history.push("/login");
   }
 
   render() {
