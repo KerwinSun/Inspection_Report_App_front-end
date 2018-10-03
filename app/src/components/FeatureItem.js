@@ -93,7 +93,7 @@ class FeatureItem extends Component {
 
     if (isLoaded) {
       return (
-        <FeatureCard title={feature.name}>
+        <FeatureCard title={feature.name} count={feature.numOfImages}>
           <Form.Group label="Rating">
             <Form.SelectGroup>
               <ColouredRatingBarItem

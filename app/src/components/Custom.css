@@ -113,6 +113,18 @@
   align-self: center;
 }
 
+.card-header-image-label {
+  margin-left: auto;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-order: 100;
+  order: 100;
+  color: #9aa0ac;
+  margin-right: 0.5rem;  
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
 .card-header-options a {
   margin-left: 0.5rem;
   color: #9aa0ac;
