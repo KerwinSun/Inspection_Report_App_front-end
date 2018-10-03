@@ -62,34 +62,28 @@ class ReportSharing extends Component {
       <div>
         {this.state.reportURL === "" ? (
           this.state.isLoaded ? (
-            <Button
-              color="secondary"
-              onClick={this.simulateLoad}
-              disabled={!this.state.isLoaded}
-            >
-              <Icon prefix="fe" name="file-plus" />
-            </Button>
+              <div>
+                <Button color="primary"
+                onClick={this.simulateLoad}
+                disabled={!this.state.isLoaded}>
+                  <Icon prefix="fe" name="download" />
+                </Button>
+                {isMobile ? (
+                  <EmailShareButton
+                    url={this.state.reportURL}
+                    subject={this.emailHeader()}
+                    body={this.emailBody()}
+                  >
+                    <Button color="secondary">
+                      <Icon prefix="fe" name="mail" />
+                    </Button>
+                  </EmailShareButton>
+                ) : null}
+              </div>
           ) : (
             <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
           )
-        ) : (
-          <div>
-            <Button color="primary">
-              <Icon prefix="fe" name="download" />
-            </Button>
-            {isMobile ? (
-              <EmailShareButton
-                url={this.state.reportURL}
-                subject={this.emailHeader()}
-                body={this.emailBody()}
-              >
-                <Button color="secondary">
-                  <Icon prefix="fe" name="mail" />
-                </Button>
-              </EmailShareButton>
-            ) : null}
-          </div>
-        )}
+        ) :null}
       </div>
     );
   }
