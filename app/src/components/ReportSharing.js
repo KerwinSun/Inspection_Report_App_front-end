@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Button, Icon } from "tabler-react";
 import Loader from "react-loader-spinner";
-import { EmailShareButton } from "react-share";
-import { isMobile } from "react-device-detect";
-//import API from "../api.js"
+// import { EmailShareButton } from "react-share";
+// import { isMobile } from "react-device-detect";
+// import API from "../api.js";
 
 class ReportSharing extends Component {
   constructor(props) {
@@ -22,8 +22,8 @@ class ReportSharing extends Component {
     this.setState({
       house: this.props.house,
       address: this.props.house.address,
-      date: this.props.house.inspectionDate,
-     // client: this.props.house.summonsedBy.name
+      date: this.props.house.inspectionDate
+      // client: this.props.house.summonsedBy.name
     });
   }
   simulateLoad = () => {
@@ -49,41 +49,43 @@ class ReportSharing extends Component {
   };
   emailBody = () => {
     return (
-      "Dear "+this.state.client+",\n\n"+
+      "Dear " +
+      this.state.client +
+      ",\n\n" +
       "The link is an inspection report that details an inspection conducted on:\n " +
       this.state.date +
       "\nat\n" +
-      this.state.address+
+      this.state.address +
       "\n\nRegards"
     );
   };
   render() {
     return (
       <div>
-        {this.state.reportURL === "" ? (
-          this.state.isLoaded ? (
-              <div>
-                <Button color="primary"
-                onClick={this.simulateLoad}
-                disabled={!this.state.isLoaded}>
-                  <Icon prefix="fe" name="download" />
-                </Button>
-                {isMobile ? (
-                  <EmailShareButton
-                    url={this.state.reportURL}
-                    subject={this.emailHeader()}
-                    body={this.emailBody()}
-                  >
-                    <Button color="secondary">
-                      <Icon prefix="fe" name="mail" />
-                    </Button>
-                  </EmailShareButton>
-                ) : null}
-              </div>
-          ) : (
-            <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
-          )
-        ) :null}
+        {this.state.isLoaded ? (
+          <div>
+            <Button
+              color="primary"
+              onClick={this.getReport}
+              disabled={!this.state.isLoaded}
+            >
+              <Icon prefix="fe" name="download" />
+            </Button>
+            {/* {isMobile ? (
+                <EmailShareButton
+                  url={this.state.reportURL}
+                  subject={this.emailHeader()}
+                  body={this.emailBody()}
+                >
+                  <Button color="secondary">
+                    <Icon prefix="fe" name="mail" />
+                  </Button>
+                </EmailShareButton>
+              ) : null} */}
+          </div>
+        ) : (
+          <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
+        )}
       </div>
     );
   }
@@ -91,15 +93,29 @@ class ReportSharing extends Component {
   getReport = () => {
     //TODO: get pdf link
     let url = "testURL";
-    this.setState({
-      reportURL: url
-    });
-    // API.getReport(this.state.house.id).then(response => {
-    // 	console.log(response);
-    // 	this.setState({
-    // 		reportURL:url
-    // 	});
-    // })
+    this.setState(
+      {
+        isLoaded: false
+      },
+      () => {
+        setTimeout(
+          function() {
+            this.setState({
+              reportURL: url,
+              isLoaded: true
+            });
+          }.bind(this),
+          1500
+        );
+        // API.getReport(this.state.house.id).then(response => {
+        //   console.log(response);
+        //   this.setState({
+        //     reportURL: url,
+        //     isLoaded: true
+        //   });
+        // });
+      }
+    );
   };
 }
 
