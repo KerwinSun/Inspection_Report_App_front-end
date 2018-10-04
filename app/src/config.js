@@ -955,7 +955,7 @@ export const jsonHouse = {
   roomsSummary: "",
   constructionType: "",
   comments: "",
-  areasInspected: {
+  areaInspected: {
     site: false,
     subfloor: false,
     exterior: false,

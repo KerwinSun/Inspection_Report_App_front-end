@@ -82,6 +82,7 @@ class FeatureItem extends Component {
   render() {
     const {
       isLoaded,
+      house,
       feature,
       categoryIndex,
       featureIndex,
@@ -93,7 +94,14 @@ class FeatureItem extends Component {
 
     if (isLoaded) {
       return (
-        <FeatureCard title={feature.name} count={feature.numOfImages}>
+        <FeatureCard
+          house={house}
+          title={feature.name} 
+          count={feature.numOfImages}
+          categoryIndex={categoryIndex}
+          featureIndex={featureIndex}
+          updateHouseState={this.props.updateHouseState}
+        >
           <Form.Group label="Rating">
             <Form.SelectGroup>
               <ColouredRatingBarItem
@@ -170,10 +178,15 @@ class FeatureItem extends Component {
   }
 
   cameraClick = () => {
-    const { id } = this.state.house.categories[this.state.categoryIndex].features[this.state.featureIndex];
+    const { house, featureIndex, categoryIndex } = this.state;
+    const { id } = house.categories[categoryIndex].features[featureIndex];
     this.props.history.push({
-      pathname: "/inspect/" + this.state.house.id + "/images/" + id,
-      state: { house: this.state.house }
+      pathname: "/inspect/" + house.id + "/images/" + id,
+      state: { 
+        house: house,
+        featureIndex: featureIndex,
+        categoryIndex: categoryIndex
+      },
     });
   };
 
@@ -224,8 +237,6 @@ class FeatureItem extends Component {
       this.props.updateHouseState(this.state.house)
     );
   }
-
-
 }
 
 export default FeatureItem;

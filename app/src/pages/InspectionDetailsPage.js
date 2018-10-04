@@ -3,7 +3,7 @@ import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
-import store from "store";
+// import store from "store";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 
@@ -26,10 +26,10 @@ class InspectionDetailsPage extends Component {
   }
 
   componentDidMount() {
-    let user = store.get("user");
+    // let user = store.get("user");
     this.setState({
-      userId: user.id, //Hard coded user id for now.
-      iName: user.name, //hard coded inspector for now\
+      userId: 1, //Hard coded user id for now.
+      iName: 'Jake Miller', //hard coded inspector for now\
       inspectionDate: new Date().toJSON(),
       cRealEstate: realEstateOptions[0]
     });
@@ -278,7 +278,7 @@ class InspectionDetailsPage extends Component {
     json.inspectedBy = [userObject];
     json.inspectionDate = inspectionDate;
     json.address = address;
-    //    json.summonsedBy = client;
+    json.summonsedBy = client;
 
     API.postHouse(json)
       .then(id => {

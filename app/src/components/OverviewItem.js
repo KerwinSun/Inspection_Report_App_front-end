@@ -14,7 +14,7 @@ class OverviewItem extends Component {
       rooms: "",
       constructionType: "",
       comments: "",
-      areasInspected: {},
+      areaInspected: {},
       isLoaded: false
     };
   }
@@ -29,7 +29,7 @@ class OverviewItem extends Component {
         rooms: house.roomsSummary,
         constructionType: house.constructionType,
         comments: house.comments,
-        areasInspected: house.areasInspected,
+        areaInspected: house.areaInspected,
         isLoaded: true
       }
     )
@@ -44,7 +44,7 @@ class OverviewItem extends Component {
         rooms: house.roomsSummary,
         constructionType: house.constructionType,
         comments: house.comments,
-        areasInspected: house.areasInspected,
+        areaInspected: house.areaInspected,
       })
     }
   }
@@ -61,42 +61,42 @@ class OverviewItem extends Component {
                 value="site"
                 label="Site"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.site}
+                checked={this.state.areaInspected.site}
               />
               <Form.Switch
                 name="toggle"
                 value="subfloor"
                 label="Subfloor"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.subfloor}
+                checked={this.state.areaInspected.subfloor}
               />
               <Form.Switch
                 name="toggle"
                 value="exterior"
                 label="Exterior"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.exterior}
+                checked={this.state.areaInspected.exterior}
               />
               <Form.Switch
                 name="toggle"
                 value="roofExterior"
                 label="Roof exterior"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.roofExterior}
+                checked={this.state.areaInspected.roofExterior}
               />
               <Form.Switch
                 name="toggle"
                 value="roofSpace"
                 label="Roof Space"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.roofSpace}
+                checked={this.state.areaInspected.roofSpace}
               />
               <Form.Switch
                 name="toggle"
                 value="services"
                 label="Services"
                 onChange={this.switchOnChange}
-                checked={this.state.areasInspected.services}
+                checked={this.state.areaInspected.services}
               />
             </Form.SwitchStack>
           </Form.Group>
@@ -158,8 +158,8 @@ class OverviewItem extends Component {
 
   switchOnChange = e => {
     const newHouse = update(this.state.house, {
-      "areasInspected": {
-        [e.target.value]: { $set: !this.state.areasInspected[e.target.value] }
+      "areaInspected": {
+        [e.target.value]: { $set: !this.state.areaInspected[e.target.value] }
       }
     });
     this.setState({ house: newHouse }, () =>

@@ -79,16 +79,29 @@ class CameraPage extends Component {
   };
 
   uploadPhotos = () => {
+    const { selectedImage, persistedImages, featureID, houseID } = this.state;
+    const { house, categoryIndex, featureIndex } = this.props.location.state;
     const fd = new FormData();
-    if(this.state.selectedImage.length>0){
-      this.state.selectedImage.forEach((image, key) => {
+    if (selectedImage.length > 0) {
+      selectedImage.forEach((image, key) => {
         fd.append("image", image.imgObject, image.imgObject.name);
       });
-      API.postImage(fd, this.state.featureID);
+      API.postImage(fd, featureID);
     }
+    const newHouse = update(house, {
+      categories: {
+        [categoryIndex]: {
+          features: {
+            [featureIndex]: {
+              numOfImages: { $set: selectedImage.length + persistedImages.length }
+            }
+          }
+        }
+      }
+    });
     this.props.history.push({
-      pathname: "/inspect/" + this.state.houseID, 
-      state: { house: this.props.location.state.house }
+      pathname: "/inspect/" + houseID, 
+      state: { house: newHouse },
     });
   };
 
@@ -99,9 +112,6 @@ class CameraPage extends Component {
           {
             persistedImages: [],
             isLoaded: true
-          },
-          () => {
-            console.log(this.state.persistedImages);
           }
         );
       } else {

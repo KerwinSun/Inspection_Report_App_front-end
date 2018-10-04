@@ -126,7 +126,7 @@ class CategoryPage extends Component {
     }
     /* hard coded areasInspected 
     - to be removed when API definition is updated for house */
-    res.areasInspected = {
+    res.areaInspected = {
       site: false,
       subfloor: false,
       exterior: false,
