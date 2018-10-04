@@ -95,7 +95,7 @@ class InspectionDetailsPage extends Component {
                     />
                   </Form.Group>
                   <Form.Group label="Home Phone">
-                  <NumberFormat
+                    <NumberFormat
                       displayType={"input"}
                       customInput={Form.Input}
                       placeholder="Phone Number"
@@ -117,9 +117,6 @@ class InspectionDetailsPage extends Component {
                   <Form.Group label="Mobile Phone">
                     <NumberFormat
                       placeholder="Mobile Number"
-                      onChange={e =>
-                        this.setState({ cMobilePhone: e.target.value })
-                      }
                       displayType={"input"}
                       customInput={Form.Input}
                       onChange={e =>
