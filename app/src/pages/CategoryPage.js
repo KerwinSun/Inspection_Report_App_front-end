@@ -45,7 +45,6 @@ class CategoryPage extends Component {
   }
 
   render() {
-    console.log(this.state.house.categories);
     return (
       <SiteWrapper>
         <Page.Content title="Category Page">

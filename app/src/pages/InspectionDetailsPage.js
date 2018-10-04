@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Button, Form } from "tabler-react";
+import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
 import store from "store";
+import Loader from "react-loader-spinner";
+import NumberFormat from "react-number-format";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -18,7 +20,8 @@ class InspectionDetailsPage extends Component {
       cMobilePhone: "",
       cEmailAddress: "",
       cAddress: "",
-      cRealEstate: ""
+      cRealEstate: "",
+      isSubmitClicked: false
     };
   }
 
@@ -26,7 +29,7 @@ class InspectionDetailsPage extends Component {
     let user = store.get("user");
     this.setState({
       userId: user.id, //Hard coded user id for now.
-      iName: user.name, //hard coded inspector for now
+      iName: user.name, //hard coded inspector for now\
       inspectionDate: new Date().toJSON(),
       cRealEstate: realEstateOptions[0]
     });
@@ -57,6 +60,16 @@ class InspectionDetailsPage extends Component {
                     <Form.Input
                       placeholder="Address"
                       onChange={e => this.setState({ address: e.target.value })}
+                      feedback={
+                        this.state.address === ""
+                          ? "Please input an address"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.address === ""
+                          : null
+                      }
                     />
                   </Form.Group>
                 </Card.Body>
@@ -69,21 +82,58 @@ class InspectionDetailsPage extends Component {
                     <Form.Input
                       placeholder="Name"
                       onChange={e => this.setState({ cName: e.target.value })}
+                      feedback={
+                        this.state.cName === ""
+                          ? "Please input the client's name"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.cName === ""
+                          : null
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Home Phone">
-                    <Form.Input
+                  <NumberFormat
+                      displayType={"input"}
+                      customInput={Form.Input}
                       placeholder="Phone Number"
                       onChange={e =>
                         this.setState({ cHomePhone: e.target.value })
                       }
+                      feedback={
+                        this.state.cHomePhone === ""
+                          ? "Please input the client's home number"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.cHomePhone === ""
+                          : null
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Mobile Phone">
-                    <Form.Input
+                    <NumberFormat
                       placeholder="Mobile Number"
                       onChange={e =>
                         this.setState({ cMobilePhone: e.target.value })
+                      }
+                      displayType={"input"}
+                      customInput={Form.Input}
+                      onChange={e =>
+                        this.setState({ cMobilePhone: e.target.value })
+                      }
+                      feedback={
+                        this.state.cMobilePhone === ""
+                          ? "Please input the client's mobile number"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.cMobilePhone === ""
+                          : null
                       }
                     />
                   </Form.Group>
@@ -93,14 +143,37 @@ class InspectionDetailsPage extends Component {
                       onChange={e =>
                         this.setState({ cAddress: e.target.value })
                       }
+                      feedback={
+                        this.state.cAddress === ""
+                          ? "Please input the client's address"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.cAddress === ""
+                          : null
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Email Address">
                     <Form.Input
                       placeholder="Email Address"
-                      onChange={e =>
-                        this.setState({ cEmailAddress: e.target.value })
+                      feedback={
+                        this.state.cEmailAddress === ""
+                          ? "Please input a valid email address"
+                          : "Invalid email"
                       }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? !this.isEmail(this.state.cEmailAddress)
+                          : !(
+                              this.isEmail(this.state.cEmailAddress) ||
+                              this.state.cEmailAddress === ""
+                            )
+                      }
+                      onBlur={e => {
+                        this.setState({ cEmailAddress: e.target.value });
+                      }}
                     />
                   </Form.Group>
                   <Form.Group>
@@ -120,13 +193,43 @@ class InspectionDetailsPage extends Component {
             </Grid.Col>
           </Grid.Row>
           <Button.List align="center">
+            {this.state.isSubmitClicked ? (
+              !this.isInputValid() ? (
+                <Alert type="danger" icon="alert-triangle">
+                  Invalid information
+                </Alert>
+              ) : (
+                <div className="btn-list text-center">
+                  <Loader
+                    type="ThreeDots"
+                    color="#316CBE"
+                    height={30}
+                    width={30}
+                  />
+                </div>
+              )
+            ) : null}
             <Button
               onClick={() => this.props.history.push("/home")}
               color="secondary"
             >
               Back
             </Button>
-            <Button onClick={() => this.handleClick()} color="secondary">
+            <Button
+              onClick={() => {
+                this.setState(
+                  {
+                    isSubmitClicked: true
+                  },
+                  () => {
+                    if (this.isInputValid()) {
+                      this.handleClick();
+                    }
+                  }
+                );
+              }}
+              color="secondary"
+            >
               Begin Inspection
             </Button>
           </Button.List>
@@ -134,6 +237,21 @@ class InspectionDetailsPage extends Component {
       </SiteWrapper>
     );
   }
+  isInputValid = () => {
+    return (
+      this.isEmail(this.state.cEmailAddress) &&
+      this.state.cEmailAddress !== "" &&
+      this.state.cAddress !== "" &&
+      this.state.cName !== "" &&
+      this.state.cHomePhone !== "" &&
+      this.state.cMobilePhone !== "" &&
+      this.state.address !== ""
+    );
+  };
+  isEmail = email => {
+    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(email).toLowerCase());
+  };
 
   handleClick = () => {
     const {

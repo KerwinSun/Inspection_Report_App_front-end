@@ -19,6 +19,10 @@ class FeatureCard extends Component {
           </a>
           <div className="card-header-options">
             <a 
+              className="card-header-image-label">
+              images: {this.props.count}
+            </a>
+            <a 
               className="card-header-options"
               onClick={() => this.setState({ isCollapsed: !isCollapsed })}
             >

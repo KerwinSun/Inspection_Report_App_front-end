@@ -28,21 +28,18 @@ export default {
   },
   postHouse(json) {
     let payload = {
-      data: {
-        json
-      },
+      data: json,
       url: "/House",
       method: "POST"
     };
+    console.log(payload);
     return axiosInstance(payload).then(response => {
       return response.data.id;
     });
   },
   postImage(formData, featureId) {
     let payload = {
-      data: {
-        formData
-      },
+      data: formData,
       url: "/image",
       method: "POST",
       headers: {
