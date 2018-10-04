@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Icon } from "tabler-react";
 import "./Custom.css";
 
 class FeatureCard extends Component {
@@ -20,7 +21,7 @@ class FeatureCard extends Component {
           <div className="card-header-options">
             <a 
               className="card-header-image-label">
-              images: {this.props.count}
+              {this.props.count}<Icon prefix="fe" name="image"/>
             </a>
             <a 
               className="card-header-options"
