@@ -3,6 +3,7 @@ import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
+import store from "store";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 
@@ -25,9 +26,10 @@ class InspectionDetailsPage extends Component {
   }
 
   componentDidMount() {
+    let user = store.get("user");
     this.setState({
-      userId: 1, //Hard coded user id for now.
-      iName: "Sam Hill", //hard coded inspector for now
+      userId: user.id, //Hard coded user id for now.
+      iName: user.name, //hard coded inspector for now\
       inspectionDate: new Date().toJSON(),
       cRealEstate: realEstateOptions[0]
     });
@@ -93,7 +95,7 @@ class InspectionDetailsPage extends Component {
                     />
                   </Form.Group>
                   <Form.Group label="Home Phone">
-                  <NumberFormat
+                    <NumberFormat
                       displayType={"input"}
                       customInput={Form.Input}
                       placeholder="Phone Number"

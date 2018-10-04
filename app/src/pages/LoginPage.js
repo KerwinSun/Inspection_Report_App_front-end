@@ -12,7 +12,6 @@ class LoginPage extends Component {
     api
       .login(email, password)
       .then(res => {
-        console.log(res);
         this.setState({ loggedIn: true });
       })
       .catch(error => {
