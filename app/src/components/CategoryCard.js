@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Custom.css";
 import update from "immutability-helper";
 import NumberFormat from "react-number-format";
+import { Form } from "tabler-react";
 
 class CategoryCard extends Component {
   state = {
@@ -42,6 +43,9 @@ class CategoryCard extends Component {
               displayType={"input"}
               value={0}
               allowNegative={false}
+              customInput={Form.Input}
+              onBlur={this.countOnBlur}
+              onChange={this.countChangeHandler}
             />
             <a
               className="card-header-options"
