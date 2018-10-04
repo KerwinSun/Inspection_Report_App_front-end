@@ -3,6 +3,7 @@ import { Page, Grid, Card, Button, Form } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
+import store from "store";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -17,17 +18,18 @@ class InspectionDetailsPage extends Component {
       cMobilePhone: "",
       cEmailAddress: "",
       cAddress: "",
-      cRealEstate: "",
+      cRealEstate: ""
     };
   }
 
-  componentDidMount() { 
-    this.setState({ 
-      userId: 1, //Hard coded user id for now.
-      iName: 'Sam Hill', //hard coded inspector for now
+  componentDidMount() {
+    let user = store.get("user");
+    this.setState({
+      userId: user.id, //Hard coded user id for now.
+      iName: user.name, //hard coded inspector for now
       inspectionDate: new Date().toJSON(),
-      cRealEstate: realEstateOptions[0] 
-    })
+      cRealEstate: realEstateOptions[0]
+    });
   }
 
   render() {
@@ -39,21 +41,22 @@ class InspectionDetailsPage extends Component {
               <Card title="Inspection Information">
                 <Card.Body>
                   <Form.Group label="Inspector">
-                    <Form.Input
-                      readOnly
-                      value={this.state.iName}
-                    />
+                    <Form.Input readOnly value={this.state.iName} />
                   </Form.Group>
                   <Form.Group label="Date">
                     <Form.Input
                       readOnly
-                      value={this.state.inspectionDate.substring(0,10).split("-").reverse().join("/")}
+                      value={this.state.inspectionDate
+                        .substring(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     />
                   </Form.Group>
                   <Form.Group label="Address">
                     <Form.Input
                       placeholder="Address"
-                      onChange={ e => this.setState({ address: e.target.value })}
+                      onChange={e => this.setState({ address: e.target.value })}
                     />
                   </Form.Group>
                 </Card.Body>
@@ -63,41 +66,53 @@ class InspectionDetailsPage extends Component {
               <Card title="Client Details">
                 <Card.Body>
                   <Form.Group label="Summonsed By">
-                    <Form.Input 
+                    <Form.Input
                       placeholder="Name"
-                      onChange={ e => this.setState({ cName: e.target.value })}
+                      onChange={e => this.setState({ cName: e.target.value })}
                     />
                   </Form.Group>
                   <Form.Group label="Home Phone">
                     <Form.Input
                       placeholder="Phone Number"
-                      onChange={ e => this.setState({ cHomePhone: e.target.value })}
+                      onChange={e =>
+                        this.setState({ cHomePhone: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Mobile Phone">
                     <Form.Input
                       placeholder="Mobile Number"
-                      onChange={ e => this.setState({ cMobilePhone: e.target.value })}
+                      onChange={e =>
+                        this.setState({ cMobilePhone: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Address">
                     <Form.Input
                       placeholder="Address"
-                      onChange={ e => this.setState({ cAddress: e.target.value })}
+                      onChange={e =>
+                        this.setState({ cAddress: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <Form.Group label="Email Address">
                     <Form.Input
                       placeholder="Email Address"
-                      onChange={ e => this.setState({ cEmailAddress: e.target.value })}
+                      onChange={e =>
+                        this.setState({ cEmailAddress: e.target.value })
+                      }
                     />
                   </Form.Group>
                   <Form.Group>
                     <Form.Label>Real Estate</Form.Label>
-                    <Form.Select onChange={ e => this.setState({ cRealEstate: e.target.value })}>
-                    {realEstateOptions.map((dynamicData, i) => (
-                      <option key={dynamicData}>{dynamicData}</option>
-                    ))}
+                    <Form.Select
+                      onChange={e =>
+                        this.setState({ cRealEstate: e.target.value })
+                      }
+                    >
+                      {realEstateOptions.map((dynamicData, i) => (
+                        <option key={dynamicData}>{dynamicData}</option>
+                      ))}
                     </Form.Select>
                   </Form.Group>
                 </Card.Body>
@@ -121,16 +136,16 @@ class InspectionDetailsPage extends Component {
   }
 
   handleClick = () => {
-    const { 
-      userId, 
-      inspectionDate, 
-      address, 
-      cName, 
-      cHomePhone, 
-      cMobilePhone, 
-      cEmailAddress, 
-      cAddress, 
-      cRealEstate 
+    const {
+      userId,
+      inspectionDate,
+      address,
+      cName,
+      cHomePhone,
+      cMobilePhone,
+      cEmailAddress,
+      cAddress,
+      cRealEstate
     } = this.state;
 
     var client = {};
@@ -143,18 +158,18 @@ class InspectionDetailsPage extends Component {
 
     var json = jsonHouse;
     var userObject = {
-      "UserId": userId, 
+      UserId: userId
     };
     json.inspectedBy = [userObject];
     json.inspectionDate = inspectionDate;
     json.address = address;
-//    json.summonsedBy = client;
+    //    json.summonsedBy = client;
 
-  API.postHouse(json)
-    .then(id => {
-      this.props.history.push("/inspect/" + id);
-    })
-    .catch(error => {})
+    API.postHouse(json)
+      .then(id => {
+        this.props.history.push("/inspect/" + id);
+      })
+      .catch(error => {});
   };
 }
 
