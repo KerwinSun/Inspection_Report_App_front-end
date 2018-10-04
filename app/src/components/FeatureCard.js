@@ -4,26 +4,32 @@ import "./Custom.css";
 
 class FeatureCard extends Component {
   state = {
-    isCollapsed: true,
+    isCollapsed: true
   };
 
   render() {
     const { isCollapsed } = this.state;
     return (
       <div>
-        <div className={isCollapsed ? "small-card-header" : "small-card-header-open"}>
-          <a 
+        <div
+          className={
+            isCollapsed ? "small-card-header" : "small-card-header-open"
+          }
+        >
+          <a
             className="small-card-title"
             onClick={() => this.setState({ isCollapsed: !isCollapsed })}
           >
             {this.props.title}
           </a>
           <div className="card-header-options">
-            <a 
-              className="card-header-image-label">
-              {this.props.count}<Icon prefix="fe" name="image"/>
-            </a>
-            <a 
+            {this.props.count > 0 ? (
+              <a className="card-header-image-label">
+                {this.props.count}
+                <Icon prefix="fe" name="image" />
+              </a>
+            ) : null}
+            <a
               className="card-header-options"
               onClick={() => this.setState({ isCollapsed: !isCollapsed })}
             >
@@ -35,11 +41,13 @@ class FeatureCard extends Component {
             </a>
           </div>
         </div>
-        <div className={ isCollapsed ? "card-content hidden" : "card-content show" }>
+        <div
+          className={isCollapsed ? "card-content hidden" : "card-content show"}
+        >
           {this.props.children}
         </div>
       </div>
-    );  
+    );
   }
 }
 

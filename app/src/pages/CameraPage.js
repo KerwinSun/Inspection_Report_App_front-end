@@ -80,10 +80,12 @@ class CameraPage extends Component {
 
   uploadPhotos = () => {
     const fd = new FormData();
-    this.state.selectedImage.forEach((image, key) => {
-      fd.append("image", image.imgObject, image.imgObject.name);
-    });
-    API.postImage(fd, this.state.featureID);
+    if(this.state.selectedImage.length>0){
+      this.state.selectedImage.forEach((image, key) => {
+        fd.append("image", image.imgObject, image.imgObject.name);
+      });
+      API.postImage(fd, this.state.featureID);
+    }
     this.props.history.push({
       pathname: "/inspect/" + this.state.houseID, 
       state: { house: this.props.location.state.house }

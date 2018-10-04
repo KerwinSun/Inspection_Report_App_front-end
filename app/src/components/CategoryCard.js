@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./Custom.css";
 import update from "immutability-helper";
 import NumberFormat from "react-number-format";
-import { Form } from "tabler-react";
 
 class CategoryCard extends Component {
   state = {
@@ -10,7 +9,7 @@ class CategoryCard extends Component {
     categoryIndex: {},
     category: {},
     isCollapsed: true,
-    count: -1
+    count: 0
   };
 
   componentDidMount() {
@@ -41,11 +40,10 @@ class CategoryCard extends Component {
             <NumberFormat
               className="card-header-options text-input"
               displayType={"input"}
-              value={0}
+              placeholder="0"
               allowNegative={false}
-              customInput={Form.Input}
-              onBlur={this.countOnBlur}
-              onChange={this.countChangeHandler}
+              onChange={e => this.countChangeHandler(e)}
+              onBlur={e => this.countOnBlur(e)}
             />
             <a
               className="card-header-options"
@@ -66,14 +64,22 @@ class CategoryCard extends Component {
     );
   }
 
-  countChangeHandler(event) {
+  countChangeHandler = event => {
     var num = event.target.value;
-    var input = num === null ? 0 : num;
+    var input = num === "" ? 0 : num;
     this.setState({ count: input });
-  }
+  };
 
   countOnBlur = e => {
     //change house's state rather than category's state
+    if (e.target.value === "") {
+      this.setState({ count: 0 }, () => this.setHouse());
+    } else {
+      this.setHouse();
+    }
+  };
+
+  setHouse = () => {
     const { house, categoryIndex, count } = this.state;
     const newHouse = update(house, {
       categories: {
@@ -82,9 +88,9 @@ class CategoryCard extends Component {
         }
       }
     });
-    this.setState({ house: newHouse }, () =>
-      this.props.updateHouseState(this.state.house)
-    );
+    this.setState({ house: newHouse }, () => {
+      this.props.updateHouseState(this.state.house);
+    });
   };
 }
 
