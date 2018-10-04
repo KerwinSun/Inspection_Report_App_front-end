@@ -81,11 +81,17 @@ export default {
   getReport(houseId) {
     let payload = {
       url: "/export/" + houseId,
-      method: "GET"
+      method: "GET",
+      responseType: 'blob',
     };
     return axiosInstance(payload)
       .then(response => {
-        return response.data;
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'file.pdf');
+        document.body.appendChild(link);
+        link.click();
       })
       .catch(error => {
         return error;

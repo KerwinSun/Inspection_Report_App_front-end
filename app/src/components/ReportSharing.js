@@ -3,7 +3,7 @@ import { Button, Icon } from "tabler-react";
 import Loader from "react-loader-spinner";
 // import { EmailShareButton } from "react-share";
 // import { isMobile } from "react-device-detect";
-// import API from "../api.js";
+import API from "../api.js";
 
 class ReportSharing extends Component {
   constructor(props) {
@@ -71,7 +71,8 @@ class ReportSharing extends Component {
             >
               <Icon prefix="fe" name="download" />
             </Button>
-            {/* {isMobile ? (
+            {/* ADD ONCE REPORTS CAN BE STORED IN BACKEND
+            {isMobile ? (
                 <EmailShareButton
                   url={this.state.reportURL}
                   subject={this.emailHeader()}
@@ -98,22 +99,22 @@ class ReportSharing extends Component {
         isLoaded: false
       },
       () => {
-        setTimeout(
-          function() {
-            this.setState({
-              reportURL: url,
-              isLoaded: true
-            });
-          }.bind(this),
-          1500
-        );
-        // API.getReport(this.state.house.id).then(response => {
-        //   console.log(response);
-        //   this.setState({
-        //     reportURL: url,
-        //     isLoaded: true
-        //   });
-        // });
+        // MOCK DOWNLOAD
+        // setTimeout(
+        //   function() {
+        //     this.setState({
+        //       reportURL: url,
+        //       isLoaded: true
+        //     });
+        //   }.bind(this),
+        //   1500
+        // );
+        API.getReport(this.state.house.id).then(response => {
+          this.setState({
+            reportURL: url,
+            isLoaded: true
+          });
+        });
       }
     );
   };
