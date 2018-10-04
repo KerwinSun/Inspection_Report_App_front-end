@@ -21,7 +21,8 @@ class InspectionDetailsPage extends Component {
       cEmailAddress: "",
       cAddress: "",
       cRealEstate: "",
-      isSubmitClicked: false
+      isSubmitClicked: false,
+      isLoaded: true
     };
   }
 
@@ -29,7 +30,7 @@ class InspectionDetailsPage extends Component {
     // let user = store.get("user");
     this.setState({
       userId: 1, //Hard coded user id for now.
-      iName: 'Jake Miller', //hard coded inspector for now\
+      iName: "Jake Miller", //hard coded inspector for now\
       inspectionDate: new Date().toJSON(),
       cRealEstate: realEstateOptions[0]
     });
@@ -195,7 +196,7 @@ class InspectionDetailsPage extends Component {
                 <Alert type="danger" icon="alert-triangle">
                   Invalid information
                 </Alert>
-              ) : (
+              ) : this.state.isLoaded ? null : (
                 <div className="btn-list text-center">
                   <Loader
                     type="ThreeDots"
@@ -220,7 +221,7 @@ class InspectionDetailsPage extends Component {
                   },
                   () => {
                     if (this.isInputValid()) {
-                      this.handleClick();
+                      this.setState({isLoaded: false},() => this.handleClick());
                     }
                   }
                 );
@@ -282,6 +283,7 @@ class InspectionDetailsPage extends Component {
 
     API.postHouse(json)
       .then(id => {
+        this.setState({ isLoaded: true });
         this.props.history.push("/inspect/" + id);
       })
       .catch(error => {});
