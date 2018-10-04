@@ -32,7 +32,6 @@ export default {
       url: "/House",
       method: "POST"
     };
-    console.log(payload);
     return axiosInstance(payload).then(response => {
       return response.data.id;
     });
@@ -46,13 +45,9 @@ export default {
         "feature-id": featureId
       }
     };
-    return axiosInstance(payload)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(() => {
-        console.log("Error sending images");
-      });
+    return axiosInstance(payload).catch(() => {
+      console.log("Error sending images");
+    });
   },
   getImages(featureId) {
     let payload = {
