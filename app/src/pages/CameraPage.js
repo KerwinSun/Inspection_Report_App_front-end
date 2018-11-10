@@ -84,7 +84,7 @@ class CameraPage extends Component {
     const fd = new FormData();
     if (selectedImage.length > 0) {
       selectedImage.forEach((image, key) => {
-        fd.append("image", image.imgObject, image.imgObject.name);
+        fd.append("image", image.imgObject, Date.now());
       });
       API.postImage(fd, featureID);
     }
