@@ -82,7 +82,6 @@ class FeatureItem extends Component {
   render() {
     const {
       isLoaded,
-      house,
       feature,
       categoryIndex,
       featureIndex,
@@ -94,14 +93,7 @@ class FeatureItem extends Component {
 
     if (isLoaded) {
       return (
-        <FeatureCard
-          house={house}
-          title={feature.name} 
-          count={feature.numOfImages}
-          categoryIndex={categoryIndex}
-          featureIndex={featureIndex}
-          updateHouseState={this.props.updateHouseState}
-        >
+        <FeatureCard title={feature.name} count={feature.numOfImages}>
           <Form.Group label="Rating">
             <Form.SelectGroup>
               <ColouredRatingBarItem

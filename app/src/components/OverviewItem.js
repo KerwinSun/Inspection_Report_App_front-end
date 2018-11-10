@@ -149,10 +149,15 @@ class OverviewItem extends Component {
   }
 
   cameraClick = () => {
-    const { id } = this.state.house.categories[this.state.categoryIndex].features[0];
+    const { house, categoryIndex } = this.state;    
+    const { id } = house.categories[categoryIndex].features[0];
     this.props.history.push({
-      pathname: "/inspect/" + this.state.house.id + "/images/" + id,
-      state: { house: this.state.house }
+      pathname: "/inspect/" + house.id + "/images/" + id,
+      state: { 
+        house: house,
+        featureIndex: 0,
+        categoryIndex: categoryIndex
+      }
     });
   };
 

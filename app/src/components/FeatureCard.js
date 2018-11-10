@@ -6,31 +6,12 @@ class FeatureCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isCollapsed: true,
-      numOfImages: 0,
-    }
-  }
-
-  componentDidMount() {
-    const { categoryIndex, featureIndex } = this.props;
-    this.setState({
-      house: this.props.house,
-      numOfImages: this.props.house.categories[categoryIndex].features[featureIndex].numOfImages,
-    })
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.house !== prevProps.house) {
-      const { categoryIndex, featureIndex } = this.props;
-      this.setState({
-        house: this.props.house,
-        numOfImages: this.props.house.categories[categoryIndex].features[featureIndex].numOfImages,
-      })
+      isCollapsed: true
     }
   }
 
   render() {
-    const { isCollapsed, numOfImages } = this.state;
+    const { isCollapsed } = this.state;
     return (
       <div>
         <div
@@ -45,10 +26,9 @@ class FeatureCard extends Component {
             {this.props.title}
           </a>
           <div className="card-header-options">
-
-            {numOfImages > 0 ? (
+            {this.props.count > 0 ? (
               <a className="card-header-image-label">
-                {numOfImages}
+                {this.props.count}
                 <Icon prefix="fe" name="image" />
               </a>
             ) : null}
