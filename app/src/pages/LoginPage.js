@@ -3,6 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Formik } from "formik";
 import { LoginPage as TablerLoginPage } from "tabler-react";
 import api from "../api";
+import "../components/Custom.css"
 
 class LoginPage extends Component {
   state = {
@@ -57,15 +58,20 @@ class LoginPage extends Component {
           handleSubmit,
           isSubmitting
         }) => (
-          <TablerLoginPage
-            onSubmit={handleSubmit}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            values={values}
-            errors={errors}
-            touched={touched}
-          />
-        )}
+            <div className="login">
+              <TablerLoginPage
+                onSubmit={handleSubmit}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                values={values}
+                errors={errors}
+                touched={touched}
+              />
+              <button className="create" type="submit" disabled={isSubmitting}>
+                Create Account
+              </button>
+            </div>
+          )}
       />
     );
   }
