@@ -9,6 +9,7 @@ import CameraPage from "./pages/CameraPage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import PrivateRoute from "./components/PrivateRoute";
+import CreatePage from "./pages/CreatePage";
 import API from "./api";
 
 import "tabler-react/dist/Tabler.css";
@@ -42,6 +43,7 @@ class App extends Component {
             render={props => <LoginPage {...props} />}
           />
           <Route exact path="/logout" component={LogoutPage} />
+          <Route exact path="/create" component={CreatePage} />
           <PrivateRoute exact path="/" component={HomePage} />
           <PrivateRoute
             exact

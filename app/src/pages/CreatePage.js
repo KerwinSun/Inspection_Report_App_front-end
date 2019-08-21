@@ -3,9 +3,9 @@ import { Redirect } from "react-router-dom";
 import { Formik } from "formik";
 import { LoginPage as TablerLoginPage } from "tabler-react";
 import api from "../api";
-import "../components/Custom.css"
+import "../components/Custom.css";
 
-class LoginPage extends Component {
+class CreatePage extends Component {
   state = {
     loggedIn: false
   };
@@ -21,13 +21,10 @@ class LoginPage extends Component {
   }
 
   createClicked = () => {
-    console.log("can this work?");
-    // this.setState({ loggedIn: true });
-    // const { from } = this.props.location.state || {
-    //   from: { pathname: "/create" }
-    // };
-    // return <Redirect to={"/create"} />;
-    this.props.history.push("/create")
+    const { from } = this.props.location.state || {
+        from: { pathname: "/create" }
+      };
+      return <Redirect to={from} />;
   }
 
   render() {
@@ -77,8 +74,8 @@ class LoginPage extends Component {
                 errors={errors}
                 touched={touched}
               />
-              <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked}>
-                Create Account
+              <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked()}>
+                This is create page
               </button>
             </div>
           )}
@@ -87,4 +84,4 @@ class LoginPage extends Component {
   }
 }
 
-export default LoginPage;
+export default CreatePage;
