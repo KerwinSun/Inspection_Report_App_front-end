@@ -142,6 +142,7 @@ class CreateAccountCard extends Component {
                         }
                         <Form.Group label="Password">
                             <Form.Input
+                                type='password'
                                 placeholder="Password"
                                 onChange={e => this.setState({ cName: e.target.value })}
                                 feedback={
@@ -158,6 +159,7 @@ class CreateAccountCard extends Component {
                         </Form.Group>
                         <Form.Group label="Confirm Password">
                             <Form.Input
+                                type="password"
                                 placeholder="Confirm Password"
                                 onChange={e => this.setState({ cName: e.target.value })}
                                 feedback={
