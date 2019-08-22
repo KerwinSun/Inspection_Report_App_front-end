@@ -10,7 +10,7 @@ import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
 import PrivateRoute from "./components/PrivateRoute";
 import API from "./api";
-
+import UserManagePage from "./pages/UserManagePage";
 import "tabler-react/dist/Tabler.css";
 import "./App.css";
 
@@ -40,6 +40,11 @@ class App extends Component {
             exact
             path="/login"
             render={props => <LoginPage {...props} />}
+          />
+          <Route
+            exact
+            path="/usermanage"
+            render={props => <UserManagePage {...props} />}
           />
           <Route exact path="/logout" component={LogoutPage} />
           <PrivateRoute exact path="/" component={HomePage} />

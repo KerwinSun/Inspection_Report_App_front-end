@@ -70,6 +70,9 @@ class LoginPage extends Component {
               <button className="create" type="submit" disabled={isSubmitting}>
                 Create Account
               </button>
+              <button className="create" type="submit" disabled={isSubmitting} onClick={() => this.props.history.push("/usermanage")}>
+                Create Account
+              </button>
             </div>
           )}
       />
