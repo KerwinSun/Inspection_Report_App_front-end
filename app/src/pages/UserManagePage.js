@@ -7,7 +7,6 @@ class UserManagePage extends React.Component {
     
     constructor(props) {
         super(props);
-
         this.state = {
             users: [
                 {
@@ -23,8 +22,11 @@ class UserManagePage extends React.Component {
                     email:"nikhil@hotmail.com"
                 }
             ]
+    
         };
     }
+    
+    
 
     render() {
         const { users } = this.state;
