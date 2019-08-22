@@ -198,3 +198,12 @@ div.login {
   justify-content: center;
   align-items: center;
 }
+
+div.create_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 70px;
+  width: 40%;
+}

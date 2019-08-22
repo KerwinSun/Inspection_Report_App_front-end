@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import { Formik } from "formik";
-import { LoginPage as TablerLoginPage } from "tabler-react";
 import api from "../api";
 import "../components/Custom.css";
 import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
@@ -10,6 +8,7 @@ import { jsonHouse, realEstateOptions } from "../config";
 // import store from "store";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
+import CreateAccountCard from "../components/CreateAccountCard";
 
 
 class CreatePage extends Component {
@@ -41,123 +40,12 @@ class CreatePage extends Component {
 
   render() {
     return (
-      <SiteWrapper>
-        <Page.Content title="New Client">
-          <Grid.Row cards={true}>
-            <Grid.Col width={12} lg={6}>
-              <Card title="Client Details">
-                <Card.Body>
-                  <Form.Group label="Name">
-                    <Form.Input
-                      placeholder="Name"
-                      onChange={e => this.setState({ cName: e.target.value })}
-                      feedback={
-                        this.state.cName === ""
-                          ? "Please input the client's name"
-                          : null
-                      }
-                      invalid={
-                        this.state.isSubmitClicked
-                          ? this.state.cName === ""
-                          : null
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group label="Home Phone">
-                    <NumberFormat
-                      displayType={"input"}
-                      customInput={Form.Input}
-                      placeholder="Phone Number"
-                      onChange={e =>
-                        this.setState({ cHomePhone: e.target.value })
-                      }
-                      feedback={
-                        this.state.cHomePhone === ""
-                          ? "Please input the client's home number"
-                          : null
-                      }
-                      invalid={
-                        this.state.isSubmitClicked
-                          ? this.state.cHomePhone === ""
-                          : null
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group label="Mobile Phone">
-                    <NumberFormat
-                      placeholder="Mobile Number"
-                      displayType={"input"}
-                      customInput={Form.Input}
-                      onChange={e =>
-                        this.setState({ cMobilePhone: e.target.value })
-                      }
-                      feedback={
-                        this.state.cMobilePhone === ""
-                          ? "Please input the client's mobile number"
-                          : null
-                      }
-                      invalid={
-                        this.state.isSubmitClicked
-                          ? this.state.cMobilePhone === ""
-                          : null
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group label="Address">
-                    <Form.Input
-                      placeholder="Address"
-                      onChange={e =>
-                        this.setState({ cAddress: e.target.value })
-                      }
-                      feedback={
-                        this.state.cAddress === ""
-                          ? "Please input the client's address"
-                          : null
-                      }
-                      invalid={
-                        this.state.isSubmitClicked
-                          ? this.state.cAddress === ""
-                          : null
-                      }
-                    />
-                  </Form.Group>
-                  <Form.Group label="Email Address">
-                    <Form.Input
-                      placeholder="Email Address"
-                      feedback={
-                        this.state.cEmailAddress === ""
-                          ? "Please input a valid email address"
-                          : "Invalid email"
-                      }
-                      invalid={
-                        this.state.isSubmitClicked
-                          ? !this.isEmail(this.state.cEmailAddress)
-                          : !(
-                              this.isEmail(this.state.cEmailAddress) ||
-                              this.state.cEmailAddress === ""
-                            )
-                      }
-                      onBlur={e => {
-                        this.setState({ cEmailAddress: e.target.value });
-                      }}
-                    />
-                  </Form.Group>
-                  <Form.Group>
-                    <Form.Label>Real Estate</Form.Label>
-                    <Form.Select
-                      onChange={e =>
-                        this.setState({ cRealEstate: e.target.value })
-                      }
-                    >
-                      {realEstateOptions.map((dynamicData, i) => (
-                        <option key={dynamicData}>{dynamicData}</option>
-                      ))}
-                    </Form.Select>
-                  </Form.Group>
-                </Card.Body>
-              </Card>
-            </Grid.Col>
-          </Grid.Row>
+      <div className="login">
+
+        <CreateAccountCard
+          IsAdmin={true}
+          OnCreateClicked={this.handleClick}
+        />
           <Button.List align="center">
             {this.state.isSubmitClicked ? (
               !this.isInputValid() ? (
@@ -199,8 +87,8 @@ class CreatePage extends Component {
               Submit details
             </Button>
           </Button.List>
-        </Page.Content>
-      </SiteWrapper>
+    
+        </div>
     );
   }
   isInputValid = () => {
