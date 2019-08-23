@@ -18,6 +18,6 @@ deploy:
   site: impact-map #Inspection-App-Test
   username: scrumpies
   user: scrumpies
-  password: scrumpies123456
+  password: scrumpies12345
   skip_cleanup: true
   verbose: true
