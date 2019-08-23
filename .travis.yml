@@ -15,9 +15,9 @@ before_deploy:
 deploy:
   provider: azure_web_apps
   on: master
-  site: impact-map #inspection-report-app
+  site: impact-map #Inspection-App-Test
   username: scrumpies
   user: scrumpies
-  password: scrumpies12345
+  password: scrumpies123456
   skip_cleanup: true
   verbose: true
