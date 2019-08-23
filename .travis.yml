@@ -15,7 +15,7 @@ before_deploy:
 deploy:
   provider: azure_web_apps
   on: master
-  site: impact-map #Inspection-App-Test
+  site: inspection-app-test
   username: scrumpies
   user: scrumpies
   password: scrumpies12345
