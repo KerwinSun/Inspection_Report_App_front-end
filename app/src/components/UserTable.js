@@ -21,7 +21,7 @@ class UserTable extends React.Component {
               <Table.Row key={user.id}>
                 <Table.Col alignContent={"center"}>{user.id}</Table.Col>
                 <Table.Col alignContent={"center"}>{user.name}</Table.Col>
-                <Table.Col alignContent={"center"}>{user.inspected.length}</Table.Col>
+                <Table.Col alignContent={"center"}>{user.lastName}</Table.Col>
                 <Table.Col alignContent={"center"}>
                   <Button variant="primary">Edit</Button>
                 </Table.Col>
