@@ -1,8 +1,6 @@
-import React, { Component } from "react";
-import { Container, Grid, Card, Button, Form, Avatar } from "tabler-react";
-import SiteWrapper from "../SiteWrapper";
+import React from "react";
+import { Card } from "tabler-react";
 import UserTable from "../components/UserTable";
-import Loader from "react-loader-spinner";
 class UserManagePage extends React.Component {
     
     constructor(props) {

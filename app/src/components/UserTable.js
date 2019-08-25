@@ -1,12 +1,5 @@
 import React from 'react';
-import { Table, Button, Form } from "tabler-react";
-import ReportSharing from "./ReportSharing"
-import Modal from 'react-bootstrap/Modal'
-import NumberFormat from "react-number-format";
-import API from "../api";
-
-
-
+import { Table, Button } from "tabler-react";
 
 //User card can be stateless (functional component)
 const UserTable = ({ users }) => {
