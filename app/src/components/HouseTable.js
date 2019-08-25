@@ -4,6 +4,7 @@ import ReportSharing from "./ReportSharing"
 
 //House card can be stateless (functional component)
 const HouseTable = ({ houses }) => {
+    const youngsun = 0
     return (
         <Table cards={true} responsive={true} className="table-vcenter">
             <Table.Body>
