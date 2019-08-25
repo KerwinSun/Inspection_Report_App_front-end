@@ -20,8 +20,8 @@ class UserTable extends React.Component {
             {this.props.users.map(user => (
               <Table.Row key={user.id}>
                 <Table.Col alignContent={"center"}>{user.id}</Table.Col>
-                <Table.Col alignContent={"center"}>{user.firstName}</Table.Col>
-                <Table.Col alignContent={"center"}>{user.lastName}</Table.Col>
+                <Table.Col alignContent={"center"}>{user.name}</Table.Col>
+                <Table.Col alignContent={"center"}>{user.inspected.length}</Table.Col>
                 <Table.Col alignContent={"center"}>
                   <Button variant="primary">Edit</Button>
                 </Table.Col>

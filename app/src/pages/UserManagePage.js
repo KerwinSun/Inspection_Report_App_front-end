@@ -1,33 +1,32 @@
 import React from "react";
 import { Card } from "tabler-react";
 import UserTable from "../components/UserTable";
+import API from "../api";
+import Loader from "react-loader-spinner";
 class UserManagePage extends React.Component {
     
     constructor(props) {
         super(props);
         this.state = {
-            users: [
-                {
-                    id:"1",
-                    firstName:"nikhil",
-                    lastName:"don",
-                    email:"nikhil@hotmail.com"
-                },
-                {
-                    id:"2",
-                    firstName:"akhil",
-                    lastName:"don",
-                    email:"nikhil@hotmail.com"
-                }
-            ]
-    
+            isLoaded:false,
+            empData: []
         };
     }
     
-    
+    componentDidMount() {
+        API.getUsers()
+          .then(res => {
+            this.setState({
+             empData: res,
+             isLoaded:true
+            });
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }
 
     render() {
-        const { users } = this.state;
         return (
             <div>
                 <h1>Admin</h1>
@@ -39,10 +38,17 @@ class UserManagePage extends React.Component {
                             <Card.Title>Users</Card.Title>
                          </Card.Header>
                          {this.state.isLoaded ? (
-                            <UserTable users={users} />
+                            <UserTable users={this.state.empData} />
                     ) : (
                   <Card.Body>
-                  <UserTable users={users} />
+                    <div className="btn-list text-center">
+                      <Loader
+                        type="ThreeDots"
+                        color="#316CBE"
+                        height={30}
+                        width={30}
+                      />
+                    </div>
                   </Card.Body>
                 )}
               </Card>
