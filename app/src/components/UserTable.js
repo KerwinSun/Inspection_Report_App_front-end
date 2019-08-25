@@ -3,6 +3,27 @@ import { Table, Button } from "tabler-react";
 import Modal from "react-bootstrap/Modal";
 
 class UserTable extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
+    this.state = {
+      show: false
+    };
+  }
+
+  handleClose() {
+    console.log("handleclose");
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    console.log("handleshow");
+    this.setState({ show: true });
+  }
+
   render() {
     //User card can be stateless (functional component)
     return (
@@ -21,22 +42,30 @@ class UserTable extends React.Component {
               <Table.Row key={user.id}>
                 <Table.Col alignContent={"center"}>{user.id}</Table.Col>
                 <Table.Col alignContent={"center"}>{user.name}</Table.Col>
-                <Table.Col alignContent={"center"}>{user.lastName}</Table.Col>
                 <Table.Col alignContent={"center"}>
-                  <Button variant="primary">Edit</Button>
+                  {user.inspected.length}
+                </Table.Col>
+                <Table.Col alignContent={"center"}>
+                  <Button variant="primary" onClick={this.handleShow}>
+                    Edit
+                  </Button>
                 </Table.Col>
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
-        <Modal show={true}>
+        <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary">Close</Button>
-            <Button variant="primary">Save Changes</Button>
+            <Button variant="secondary" onClick={this.handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={this.handleClose}>
+              Save Changes
+            </Button>
           </Modal.Footer>
         </Modal>
       </div>
