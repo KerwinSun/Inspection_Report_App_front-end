@@ -16,7 +16,7 @@ class CreateAccountCard extends Component {
           lastName: "",
           phoneNumber: "",
           emailAddress: "",
-          accountType: "",
+          accountType: accountTypes[0],
           password: "",
           confirmPassword: "",
           isSubmitClicked: false,
@@ -43,7 +43,7 @@ class CreateAccountCard extends Component {
     };
 
     render() {
-        const { SubmitClicked, IsAdmin, CancelClicked } = this.props;
+        const { IsAdmin, CancelClicked } = this.props;
 
         return (
             <div className="create_card">
@@ -133,13 +133,6 @@ class CreateAccountCard extends Component {
                             ))}
                             </Form.Select>
                         </Form.Group>
-                        // <Form.Group label="Account Type">
-                        //     <select>
-                        //         <option value="Client">Client</option>
-                        //         <option value="Inspector">Inspector</option>
-                        //         <option value="Admin">Admin</option>
-                        //     </select>
-                        //     </Form.Group>
                             :
                             <div></div>
                         }
@@ -210,13 +203,14 @@ class CreateAccountCard extends Component {
                 </Button>
                 <Button
                 onClick={() => {
+                    console.log(this.state.accountType)
                     this.setState(
                     {
                         isSubmitClicked: true
                     },
                     () => {
                         if (this.isInputValid()) {
-                        this.setState({isLoaded: false},() => SubmitClicked());
+                        this.setState({isLoaded: false},() => this.submitClicked());
                         }
                     }
                     );
@@ -230,6 +224,19 @@ class CreateAccountCard extends Component {
                 </Card>
             </div>
         );
+    }
+
+    submitClicked = () => {
+        let user = {};
+        user.id = this.state.userId;
+        user.firstName = this.state.firstName;
+        user.lastName = this.state.lastName;
+        user.phoneNumber = this.state.phoneNumber;
+        user.emailAddress = this.state.emailAddress;
+        user.password = this.state.password;
+        user.accountType = this.state.accountType;
+
+        this.props.SubmitClicked(user)
     }
 }
 

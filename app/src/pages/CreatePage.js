@@ -58,7 +58,8 @@ class CreatePage extends Component {
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   }
-  handleClick = () => {
+  handleClick = (userInfo) => {
+    console.log(userInfo)
     console.log("handleClick called ('Submit' clicked)");
     // @@@@@@@
     // Replace this part with how we handle the information
