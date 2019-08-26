@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Icon } from "tabler-react";
-import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
+import { Card, Button, Form, Alert } from "tabler-react";
 import "./Custom.css";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import PropTypes from 'prop-types';
+import { accountTypes } from "../config";
 
 class CreateAccountCard extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class CreateAccountCard extends Component {
             this.state.lastName !== "" &&
             this.state.phoneNumber !== "" &&
             this.state.password !== "" &&
-            this.state.confirmPassword == this.state.password
+            this.state.confirmPassword === this.state.password
         );
     };
     isEmail = email => {
@@ -123,13 +123,23 @@ class CreateAccountCard extends Component {
                             />
                         </Form.Group>
                         {IsAdmin ?
-                        <Form.Group label="Account Type">
-                            <select>
-                                <option value="Client">Client</option>
-                                <option value="Inspector">Inspector</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                            </Form.Group>
+                        <Form.Group>
+                        <Form.Label>User Type</Form.Label>
+                            <Form.Select
+                            onChange={e => this.setState({ accountType: e.target.value })}>
+
+                            {accountTypes.map((dynamicData, i) => (
+                            <option key={dynamicData}>{dynamicData}</option>
+                            ))}
+                            </Form.Select>
+                        </Form.Group>
+                        // <Form.Group label="Account Type">
+                        //     <select>
+                        //         <option value="Client">Client</option>
+                        //         <option value="Inspector">Inspector</option>
+                        //         <option value="Admin">Admin</option>
+                        //     </select>
+                        //     </Form.Group>
                             :
                             <div></div>
                         }
@@ -222,6 +232,7 @@ class CreateAccountCard extends Component {
         );
     }
 }
+
 
 CreateAccountCard.PropTypes = {
     SubmitClicked: PropTypes.func,
