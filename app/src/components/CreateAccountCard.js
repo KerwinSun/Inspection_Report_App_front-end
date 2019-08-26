@@ -21,8 +21,7 @@ class CreateAccountCard extends Component {
           confirmPassword: "",
           isSubmitClicked: false,
           isLoaded: true,
-          loggedIn: false,
-          newUserType: "Client"
+          loggedIn: false
         };
     }
 
@@ -43,10 +42,10 @@ class CreateAccountCard extends Component {
     };
 
     render() {
-        const { SubmitClicked, IsAdmin, CancelClicked } = this.props;
+        const { ContainerStyle, SubmitClicked, IsAdmin, CancelClicked } = this.props;
 
         return (
-            <div className="create_card">
+            <div className={ContainerStyle}>
                 <Card title="Create Account">
                     <Card.Body>
                         <Form.Group label="First Name">
@@ -227,6 +226,7 @@ CreateAccountCard.PropTypes = {
     SubmitClicked: PropTypes.func,
     CancelClicked: PropTypes.func,
     IsAdmin: PropTypes.bool,
+    ContainerStyle: PropTypes.string
 }
 
 export default CreateAccountCard;

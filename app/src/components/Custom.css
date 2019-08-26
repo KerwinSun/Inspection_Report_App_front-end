@@ -199,7 +199,16 @@ div.login {
   align-items: center;
 }
 
-div.create_card {
+div.admin_create {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 40%;
+}
+
+div.client_create {
   display: flex;
   flex-direction: column;
   justify-content: center;
