@@ -39,6 +39,7 @@ class CreatePage extends Component {
           IsAdmin={false} // default false - for client creation page
           SubmitClicked={this.handleClick}
           CancelClicked={this.cancelClick}
+          ContainerStyle="client_create"
         />
         </div>
     );
