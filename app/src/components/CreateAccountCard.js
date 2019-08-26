@@ -42,7 +42,7 @@ class CreateAccountCard extends Component {
     };
 
     render() {
-        const { ContainerStyle, SubmitClicked, IsAdmin, CancelClicked } = this.props;
+        const { ContainerStyle, IsAdmin, CancelClicked } = this.props;
 
 
         return (

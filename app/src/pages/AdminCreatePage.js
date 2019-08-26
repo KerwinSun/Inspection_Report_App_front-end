@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Button } from "tabler-react";
+import { Page, } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
-import API from "../api";
-import HouseTable from "../components/HouseTable";
-import Loader from "react-loader-spinner";
+// import API from "../api";
+// import Loader from "react-loader-spinner";
 import CreateAccountCard from "../components/CreateAccountCard";
 
 class AdminCreatePage extends Component {
