@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import api from "../api";
-import "../components/Custom.css";
-import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
-import SiteWrapper from "../SiteWrapper";
-import { jsonHouse, realEstateOptions } from "../config";
-// import store from "store";
-import Loader from "react-loader-spinner";
-import NumberFormat from "react-number-format";
 import CreateAccountCard from "../components/CreateAccountCard";
+// import { Redirect } from "react-router-dom";
+// import api from "../api";
+// import "../components/Custom.css";
+// import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
+// import SiteWrapper from "../SiteWrapper";
+// import { jsonHouse, realEstateOptions } from "../config";
+// import store from "store";
+// import Loader from "react-loader-spinner";
+// import NumberFormat from "react-number-format";
+
 
 
 class CreatePage extends Component {
@@ -35,7 +36,7 @@ class CreatePage extends Component {
       <div className="login">
 
         <CreateAccountCard
-          IsAdmin={false} // default false - for client creation page
+          IsAdmin={true} // default false - for client creation page
           SubmitClicked={this.handleClick}
           CancelClicked={this.cancelClick}
           ContainerStyle="client_create"
@@ -58,7 +59,8 @@ class CreatePage extends Component {
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   }
-  handleClick = () => {
+  handleClick = (userInfo) => {
+    console.log(userInfo)
     console.log("handleClick called ('Submit' clicked)");
     // @@@@@@@
     // Replace this part with how we handle the information

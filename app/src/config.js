@@ -1,6 +1,12 @@
 export const server = "https://inspectionreportservice.azurewebsites.net/api";
 // export const server = "http://localhost:62163/api";
 
+export const accountTypes = [
+  "Client",
+  "Inspector",
+  "Admin"
+];
+
 const house = [
   {
     order: 0,

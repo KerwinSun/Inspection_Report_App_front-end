@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { Icon } from "tabler-react";
-import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
+import { Card, Button, Form, Alert } from "tabler-react";
 import "./Custom.css";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import PropTypes from 'prop-types';
+import { accountTypes } from "../config";
 
 class CreateAccountCard extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class CreateAccountCard extends Component {
           lastName: "",
           phoneNumber: "",
           emailAddress: "",
-          accountType: "",
+          accountType: accountTypes[0],
           password: "",
           confirmPassword: "",
           isSubmitClicked: false,
@@ -33,7 +33,7 @@ class CreateAccountCard extends Component {
             this.state.lastName !== "" &&
             this.state.phoneNumber !== "" &&
             this.state.password !== "" &&
-            this.state.confirmPassword == this.state.password
+            this.state.confirmPassword === this.state.password
         );
     };
     isEmail = email => {
@@ -43,6 +43,7 @@ class CreateAccountCard extends Component {
 
     render() {
         const { ContainerStyle, SubmitClicked, IsAdmin, CancelClicked } = this.props;
+
 
         return (
             <div className={ContainerStyle}>
@@ -122,13 +123,16 @@ class CreateAccountCard extends Component {
                             />
                         </Form.Group>
                         {IsAdmin ?
-                        <Form.Group label="Account Type">
-                            <select>
-                                <option value="Client">Client</option>
-                                <option value="Inspector">Inspector</option>
-                                <option value="Admin">Admin</option>
-                            </select>
-                            </Form.Group>
+                        <Form.Group>
+                        <Form.Label>User Type</Form.Label>
+                            <Form.Select
+                            onChange={e => this.setState({ accountType: e.target.value })}>
+
+                            {accountTypes.map((dynamicData, i) => (
+                            <option key={dynamicData}>{dynamicData}</option>
+                            ))}
+                            </Form.Select>
+                        </Form.Group>
                             :
                             <div></div>
                         }
@@ -199,13 +203,14 @@ class CreateAccountCard extends Component {
                 </Button>
                 <Button
                 onClick={() => {
+                    console.log(this.state.accountType)
                     this.setState(
                     {
                         isSubmitClicked: true
                     },
                     () => {
                         if (this.isInputValid()) {
-                        this.setState({isLoaded: false},() => SubmitClicked());
+                        this.setState({isLoaded: false},() => this.submitClicked());
                         }
                     }
                     );
@@ -220,7 +225,21 @@ class CreateAccountCard extends Component {
             </div>
         );
     }
+
+    submitClicked = () => {
+        let user = {};
+        user.id = this.state.userId;
+        user.firstName = this.state.firstName;
+        user.lastName = this.state.lastName;
+        user.phoneNumber = this.state.phoneNumber;
+        user.emailAddress = this.state.emailAddress;
+        user.password = this.state.password;
+        user.accountType = this.state.accountType;
+
+        this.props.SubmitClicked(user)
+    }
 }
+
 
 CreateAccountCard.PropTypes = {
     SubmitClicked: PropTypes.func,
