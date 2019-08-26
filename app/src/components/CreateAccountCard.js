@@ -21,7 +21,8 @@ class CreateAccountCard extends Component {
           confirmPassword: "",
           isSubmitClicked: false,
           isLoaded: true,
-          loggedIn: false
+          loggedIn: false,
+          newUserType: "Client"
         };
     }
 
