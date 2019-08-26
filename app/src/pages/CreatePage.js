@@ -12,101 +12,53 @@ import CreateAccountCard from "../components/CreateAccountCard";
 
 
 class CreatePage extends Component {
-    constructor(props) {
-    super(props);
-    this.state = {
-      userId: -1,
-      inspectionDate: "",
-      address: "",
-      // iName: "",
-      cName: "",
-      cHomePhone: "",
-      cMobilePhone: "",
-      cEmailAddress: "",
-      cAddress: "",
-      cRealEstate: "",
-      isSubmitClicked: false,
-      isLoaded: true,
-      loggedIn: false
-      // userId: -1,
-      // cName: "",
-      // cMobilePhone: "",
-      // cEmailAddress: "",
-      // inspectionDate: "",
-      // isSubmitClicked: false,
-      // isLoaded: true
-    };
-  }
+  //   constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     userId: -1,
+  //     inspectionDate: "",
+  //     firstName: "",
+  //     lastName: "",
+  //     phoneNumber: "",
+  //     emailAddress: "",
+  //     accountType: "",
+  //     password: "",
+  //     confirmPassword: "",
+  //     isSubmitClicked: false,
+  //     isLoaded: true,
+  //     loggedIn: false
+  //   };
+  // }
 
   render() {
     return (
       <div className="login">
 
         <CreateAccountCard
-          IsAdmin={true}
-          OnCreateClicked={this.handleClick}
+          IsAdmin={false} // default false - for client creation page
+          SubmitClicked={this.handleClick}
+          CancelClicked={this.cancelClick}
         />
-          <Button.List align="center">
-            {this.state.isSubmitClicked ? (
-              !this.isInputValid() ? (
-                <Alert type="danger" icon="alert-triangle">
-                  Invalid information
-                </Alert>
-              ) : this.state.isLoaded ? null : (
-                <div className="btn-list text-center">
-                  <Loader
-                    type="ThreeDots"
-                    color="#316CBE"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-              )
-            ) : null}
-            <Button
-              onClick={() => this.props.history.push("/home")}
-              color="secondary"
-            >
-              Back home
-            </Button>
-            <Button
-              onClick={() => {
-                this.setState(
-                  {
-                    isSubmitClicked: true
-                  },
-                  () => {
-                    if (this.isInputValid()) {
-                      this.setState({isLoaded: false},() => this.handleClick());
-                    }
-                  }
-                );
-              }}
-              color="secondary"
-            >
-              Submit details
-            </Button>
-          </Button.List>
-    
         </div>
     );
   }
   isInputValid = () => {
     return (
-      this.isEmail(this.state.cEmailAddress) &&
-      this.state.cEmailAddress !== "" &&
-      this.state.cAddress !== "" &&
-      this.state.cName !== "" &&
-      this.state.cHomePhone !== "" &&
-      this.state.cMobilePhone !== "" &&
-      this.state.address !== ""
+      this.isEmail(this.state.emailAddress) &&
+      this.state.emailAddress !== "" &&
+      this.state.firstName !== "" &&
+      this.state.lastName !== "" &&
+      this.state.phoneNumber !== "" &&
+      this.state.password !== "" &&
+      this.state.confirmPassword !== ""
     );
   };
   isEmail = email => {
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
-  };
+  }
   handleClick = () => {
+    console.log("handleClick called ('Submit' clicked)");
     // @@@@@@@
     // Replace this part with how we handle the information
     // @@@@@@@
@@ -146,7 +98,11 @@ class CreatePage extends Component {
     //     this.props.history.push("/inspect/" + id);
     //   })
     //   .catch(error => {});
-  };
+  }
+  cancelClick = () => {
+    console.log("cancelClick called ('Cancel' clicked)");
+    this.props.history.push("/login")
+  }
 }
 
 export default CreatePage;

@@ -10,38 +10,30 @@ class CreateAccountCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userId: -1,
-            inspectionDate: "",
-            address: "",
-            // iName: "",
-            cName: "",
-            cHomePhone: "",
-            cMobilePhone: "",
-            cEmailAddress: "",
-            cAddress: "",
-            cRealEstate: "",
-            isSubmitClicked: false,
-            isLoaded: true,
-            loggedIn: false
-            // userId: -1,
-            // cName: "",
-            // cMobilePhone: "",
-            // cEmailAddress: "",
-            // inspectionDate: "",
-            // isSubmitClicked: false,
-            // isLoaded: true
+          userId: -1,
+          inspectionDate: "",
+          firstName: "",
+          lastName: "",
+          phoneNumber: "",
+          emailAddress: "",
+          accountType: "",
+          password: "",
+          confirmPassword: "",
+          isSubmitClicked: false,
+          isLoaded: true,
+          loggedIn: false
         };
     }
 
     isInputValid = () => {
         return (
-            this.isEmail(this.state.cEmailAddress) &&
-            this.state.cEmailAddress !== "" &&
-            this.state.cAddress !== "" &&
-            this.state.cName !== "" &&
-            this.state.cHomePhone !== "" &&
-            this.state.cMobilePhone !== "" &&
-            this.state.address !== ""
+            this.isEmail(this.state.emailAddress) &&
+            this.state.emailAddress !== "" &&
+            this.state.firstName !== "" &&
+            this.state.lastName !== "" &&
+            this.state.phoneNumber !== "" &&
+            this.state.password !== "" &&
+            this.state.confirmPassword == this.state.password
         );
     };
     isEmail = email => {
@@ -50,7 +42,7 @@ class CreateAccountCard extends Component {
     };
 
     render() {
-        const { OnCreateClicked, IsAdmin } = this.props;
+        const { SubmitClicked, IsAdmin, CancelClicked } = this.props;
 
         return (
             <div className="create_card">
@@ -59,15 +51,15 @@ class CreateAccountCard extends Component {
                         <Form.Group label="First Name">
                             <Form.Input
                                 placeholder="First Name"
-                                onChange={e => this.setState({ cName: e.target.value })}
+                                onChange={e => this.setState({ firstName: e.target.value })}
                                 feedback={
-                                    this.state.cName === ""
+                                    this.state.firstName === ""
                                         ? "Please input the first name"
                                         : null
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.cName === ""
+                                        ? this.state.firstName === ""
                                         : null
                                 }
                             />
@@ -75,15 +67,15 @@ class CreateAccountCard extends Component {
                         <Form.Group label="Last Name">
                             <Form.Input
                                 placeholder="Last Name"
-                                onChange={e => this.setState({ cName: e.target.value })}
+                                onChange={e => this.setState({ lastName: e.target.value })}
                                 feedback={
-                                    this.state.cName === ""
+                                    this.state.lastName === ""
                                         ? "Please input the last name"
                                         : null
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.cName === ""
+                                        ? this.state.lastName === ""
                                         : null
                                 }
                             />
@@ -94,16 +86,16 @@ class CreateAccountCard extends Component {
                                 customInput={Form.Input}
                                 placeholder="Phone Number"
                                 onChange={e =>
-                                    this.setState({ cHomePhone: e.target.value })
+                                    this.setState({ phoneNumber: e.target.value })
                                 }
                                 feedback={
-                                    this.state.cHomePhone === ""
+                                    this.state.phoneNumber === ""
                                         ? "Please input the client's home number"
                                         : null
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.cHomePhone === ""
+                                        ? this.state.phoneNumber === ""
                                         : null
                                 }
                             />
@@ -112,20 +104,20 @@ class CreateAccountCard extends Component {
                             <Form.Input
                                 placeholder="Email Address"
                                 feedback={
-                                    this.state.cEmailAddress === ""
+                                    this.state.emailAddress === ""
                                         ? "Please input a valid email address"
                                         : "Invalid email"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? !this.isEmail(this.state.cEmailAddress)
+                                        ? !this.isEmail(this.state.emailAddress)
                                         : !(
-                                            this.isEmail(this.state.cEmailAddress) ||
-                                            this.state.cEmailAddress === ""
+                                            this.isEmail(this.state.emailAddress) ||
+                                            this.state.emailAddress === ""
                                         )
                                 }
                                 onBlur={e => {
-                                    this.setState({ cEmailAddress: e.target.value });
+                                    this.setState({ emailAddress: e.target.value });
                                 }}
                             />
                         </Form.Group>
@@ -144,15 +136,15 @@ class CreateAccountCard extends Component {
                             <Form.Input
                                 type='password'
                                 placeholder="Password"
-                                onChange={e => this.setState({ cName: e.target.value })}
+                                onChange={e => this.setState({ password: e.target.value })}
                                 feedback={
-                                    this.state.cName === ""
+                                    this.state.password === ""
                                         ? "Please input the password"
                                         : null
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.cName === ""
+                                        ? this.state.password === ""
                                         : null
                                 }
                             />
@@ -161,19 +153,68 @@ class CreateAccountCard extends Component {
                             <Form.Input
                                 type="password"
                                 placeholder="Confirm Password"
-                                onChange={e => this.setState({ cName: e.target.value })}
+                                onChange={e => this.setState({ confirmPassword: e.target.value })}
                                 feedback={
-                                    this.state.cName === ""
-                                        ? "Please input the password"
+                                    this.state.confirmPassword === ""
+                                        ? "Please confirm the password"
                                         : null
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.cName === ""
+                                        ? this.state.confirmPassword === ""
                                         : null
                                 }
                             />
                         </Form.Group>
+
+                        <Button.List align="center">
+                {this.state.isSubmitClicked ? (
+                    !this.isInputValid() ? (
+                        <Alert type="danger" icon="alert-triangle">
+                            Invalid information
+                        </Alert>
+                    ) : this.state.isLoaded ? null : (
+                     <div className="btn-list text-center">
+                       <Loader
+                           type="ThreeDots"
+                          color="#316CBE"
+                         height={30}
+                         width={30}
+                       />
+                     </div>
+                )
+                ) : null}
+                <Button
+                onClick={() => {
+                    this.setState(
+                        {
+                            isSubmitClicked: false
+                        }
+                    )
+                    CancelClicked()
+                }}
+                color="secondary"
+                >
+                Cancel
+                </Button>
+                <Button
+                onClick={() => {
+                    this.setState(
+                    {
+                        isSubmitClicked: true
+                    },
+                    () => {
+                        if (this.isInputValid()) {
+                        this.setState({isLoaded: false},() => SubmitClicked());
+                        }
+                    }
+                    );
+                }}
+                color="secondary"
+                >
+                Submit
+                </Button>
+            </Button.List>
                     </Card.Body>
                 </Card>
             </div>
@@ -182,7 +223,8 @@ class CreateAccountCard extends Component {
 }
 
 CreateAccountCard.PropTypes = {
-    OnCreateClicked: PropTypes.func,
+    SubmitClicked: PropTypes.func,
+    CancelClicked: PropTypes.func,
     IsAdmin: PropTypes.bool,
 }
 
