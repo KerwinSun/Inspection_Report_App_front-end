@@ -36,7 +36,7 @@ class CreatePage extends Component {
       <div className="login">
 
         <CreateAccountCard
-          IsAdmin={true} // default false - for client creation page
+          IsAdmin={false} // default false - for client creation page
           SubmitClicked={this.handleClick}
           CancelClicked={this.cancelClick}
         />
