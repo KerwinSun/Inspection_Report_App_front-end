@@ -23,33 +23,35 @@ class UserTable extends React.Component {
       <div>
         <Table>
           <Table.Header>
-            <Table.ColHeader alignContent={"center"}>ID</Table.ColHeader>
-            <Table.ColHeader alignContent={"center"}>
-              First Name
-            </Table.ColHeader>
+            <Table.ColHeader alignContent={"center"}>First Name</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Last Name</Table.ColHeader>
+            <Table.ColHeader alignContent={"center"}>Email</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Action</Table.ColHeader>
           </Table.Header>
           <Table.Body>
             {this.props.users.map(user => (
-              <Table.Row key={user.id}>
-                <Table.Col alignContent={"center"}>{user.id}</Table.Col>
-                <Table.Col alignContent={"center"}>{user.name}</Table.Col>
+              <Table.Row key={user.firstName}>
+                  <Table.Col alignContent={"center"}>
+                  {user.firstName}
+                </Table.Col>
                 <Table.Col alignContent={"center"}>
-                  {user.inspected.length}
+                  {user.lastName}
+                </Table.Col>
+                <Table.Col alignContent={"center"}>
+                  {user.email}
                 </Table.Col>
                 <Table.Col alignContent={"center"}>
                   <Button variant="primary" onClick={this.togggleShowModal}>
                     Edit
                   </Button>
                 </Table.Col>
+                {this.state.showModal ? (
+                 <UserEditModal togggleShowModal={this.togggleShowModal} user = {user}/>
+                ) : null}
               </Table.Row>
             ))}
           </Table.Body>
         </Table>
-        {this.state.showModal ? (
-          <UserEditModal togggleShowModal={this.togggleShowModal} />
-        ) : null}
       </div>
     );
   }

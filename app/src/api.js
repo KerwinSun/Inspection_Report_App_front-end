@@ -35,6 +35,16 @@ export default {
       return res.data;
     });
   },
+  postUser(json) {
+    let payload = {
+      data: json,
+      url: "/User",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
   postHouse(json) {
     let payload = {
       data: json,

@@ -2,7 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Card, Button, Form } from "tabler-react";
 import NumberFormat from "react-number-format";
-
+import API from "../api";
 class UserEditModal extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -10,12 +10,34 @@ class UserEditModal extends React.Component {
     this.handleShow = this.handleShow.bind(this);
 
     this.state = {
-      show: true
+      show: true,
+      cFirstName: this.props.user.firstName,
+      cLastName: this.props.user.lastName,
+      cEmailAddress: this.props.user.email,
+      cHomePhone: this.props.user.phone
     };
   }
 
   handleShow() {
-    this.setState({ show: true });
+    let userData = {
+      firstName: this.state.cFirstName,
+      lastName: this.state.cLastName,
+      email: this.state.cEmailAddress,
+      phone: this.state.cHomePhone,
+      id: this.props.user.id,
+      password: this.props.user.password
+    };
+    API.postUser(userData)
+    .then(res => {
+      this.setState({
+       cLastName: res.lastName,
+       isLoaded:true
+      });
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    this.setState({ show: false });
   }
 
   isEmail = email => {
@@ -35,29 +57,31 @@ class UserEditModal extends React.Component {
               <Form.Group label="First Name">
                 <Form.Input
                   placeholder="First Name"
-                  onChange={e => this.setState({ cName: e.target.value })}
+                  onChange={e => this.setState({ cFirstName: e.target.value })}
                   feedback={
                     this.state.cName === ""
                       ? "Please input the first name"
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked ? this.state.cName === "" : null
+                    this.state.isSubmitClicked ? this.state.cFirstName === "" : null
                   }
+                  defaultValue = {this.state.cFirstName}
                 />
               </Form.Group>
               <Form.Group label="Last Name">
                 <Form.Input
                   placeholder="Last Name"
-                  onChange={e => this.setState({ cName: e.target.value })}
+                  onChange={e => this.setState({ cLastName: e.target.value })}
                   feedback={
                     this.state.cName === ""
                       ? "Please input the last name"
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked ? this.state.cName === "" : null
+                    this.state.isSubmitClicked ? this.state.cLastName === "" : null
                   }
+                  defaultValue = {this.state.cLastName}
                 />
               </Form.Group>
               <Form.Group label="Phone Number">
@@ -76,6 +100,7 @@ class UserEditModal extends React.Component {
                       ? this.state.cHomePhone === ""
                       : null
                   }
+                  defaultValue = {this.state.cHomePhone}
                 />
               </Form.Group>
               <Form.Group label="Email Address">
@@ -97,6 +122,7 @@ class UserEditModal extends React.Component {
                   onBlur={e => {
                     this.setState({ cEmailAddress: e.target.value });
                   }}
+                  defaultValue = {this.state.cEmailAddress}
                 />
               </Form.Group>
               <Form.Group label="Account Type">
