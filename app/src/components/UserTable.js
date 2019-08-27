@@ -14,9 +14,7 @@ class UserTable extends React.Component {
   togggleShowModal = () => {
     this.setState(prevState => ({
       showModal: !prevState.showModal
-      //   showComponent: true
     }));
-    console.log(this.state.showModal);
   };
 
   render() {

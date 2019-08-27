@@ -7,7 +7,6 @@ class UserEditModal extends React.Component {
     super(props, context);
 
     this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
 
     this.state = {
       show: true
