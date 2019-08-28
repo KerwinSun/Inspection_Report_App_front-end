@@ -35,7 +35,7 @@ class UserEditModal extends React.Component {
           cLastName: res.lastName,
           isLoaded: true
         });
-        this.props.reload();
+        this.props.componentDidMount();
       })
       .catch(error => {
         console.log(error);

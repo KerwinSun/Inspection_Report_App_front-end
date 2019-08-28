@@ -8,11 +8,10 @@ class UserManagePage extends React.Component {
     super(props);
     this.state = {
       isLoaded: false,
-      empData: []
+      empData: [],
+      ogData: []
     };
-
-    // this.componentDidMount = this.componentDidMount.bind(this);
-    this.reload = this.reload.bind(this);
+    this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   componentDidMount() {
@@ -20,6 +19,7 @@ class UserManagePage extends React.Component {
       .then(res => {
         this.setState({
           empData: res,
+          ogData: res,
           isLoaded: true
         });
       })
@@ -28,20 +28,18 @@ class UserManagePage extends React.Component {
       });
   }
 
-  reload() {
-    console.log("reload");
-    API.getUsers()
-      .then(res => {
-        this.setState({
-          empData: res,
-          isLoaded: true
-        });
-        console.log(this.state.empData);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+  filterOnChange = e => {
+    let filter = e.target.value;
+    let filteredUsers = this.state.ogData.filter(user => {
+      return (
+        user.firstName.toLowerCase().includes(filter) ||
+        user.accountType.toLowerCase().includes(filter)
+      );
+    });
+    this.setState({
+      empData: filteredUsers
+    });
+  };
 
   render() {
     return (
@@ -53,9 +51,22 @@ class UserManagePage extends React.Component {
           <Card>
             <Card.Header>
               <Card.Title>Users</Card.Title>
+              <div style={{ flex: "1", padding: "5px", width: "100%" }}>
+                <input
+                  type="text"
+                  name="title"
+                  style={{ flex: "10", padding: "5px" }}
+                  placeholder="Filter Users"
+                  value={this.state.title}
+                  onChange={this.filterOnChange}
+                />
+              </div>
             </Card.Header>
             {this.state.isLoaded ? (
-              <UserTable users={this.state.empData} reload={this.reload} />
+              <UserTable
+                users={this.state.empData}
+                componentDidMount={this.componentDidMount}
+              />
             ) : (
               <Card.Body>
                 <div className="btn-list text-center">

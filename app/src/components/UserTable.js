@@ -38,7 +38,7 @@ class UserTable extends React.Component {
             <Table.ColHeader alignContent={"center"}>Email</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Phone</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>
-              AccountType
+              Account Type
             </Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Action</Table.ColHeader>
           </Table.Header>
@@ -65,7 +65,7 @@ class UserTable extends React.Component {
                   <UserEditModal
                     togggleShowModal={this.togggleShowModal}
                     user={this.props.users.find(x => x.id === this.state.id)}
-                    reload={this.props.reload}
+                    componentDidMount={this.props.componentDidMount}
                   />
                 ) : null}
               </Table.Row>
