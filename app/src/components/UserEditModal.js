@@ -38,33 +38,30 @@ class UserEditModal extends React.Component {
   };
 
   saveChanges() {
-    // console.log(this.state);
-    // if (this.isInputValid()) {
-    let userData = {
-      firstName: this.state.cFirstName,
-      lastName: this.state.cLastName,
-      email: this.state.cEmail,
-      phone: this.state.cPhone,
-      accountType: this.state.cAccountType,
-      id: this.props.user.id,
-      password: this.props.user.password
-    };
-    API.postUser(userData)
-      .then(res => {
-        this.setState({
-          cLastName: res.lastName,
-          isLoaded: true
+    if (this.isInputValid()) {
+      let userData = {
+        firstName: this.state.cFirstName,
+        lastName: this.state.cLastName,
+        email: this.state.cEmail,
+        phone: this.state.cPhone,
+        accountType: this.state.cAccountType,
+        id: this.props.user.id,
+        password: this.props.user.password
+      };
+      API.postUser(userData)
+        .then(res => {
+          this.setState({
+            cLastName: res.lastName,
+            isLoaded: true
+          });
+          this.props.componentDidMount();
+        })
+        .catch(error => {
+          console.log(error);
         });
-        this.props.componentDidMount();
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    this.setState({ show: false });
-    this.props.togggleShowModal();
-    // } else {
-    //   console.log("wrong");
-    // }
+      this.setState({ show: false });
+      this.props.togggleShowModal();
+    }
   }
 
   render() {
@@ -81,14 +78,14 @@ class UserEditModal extends React.Component {
                   placeholder="First Name"
                   onChange={e => this.setState({ cFirstName: e.target.value })}
                   feedback={
-                    this.state.cFirstName === ""
+                    this.state.cFirstName === "" ||
+                    this.state.cFirstName === null
                       ? "Please input the first name"
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked
-                      ? this.state.cFirstName === ""
-                      : null
+                    this.state.cFirstName === "" ||
+                    this.state.cFirstName === null
                   }
                   value={this.state.cFirstName}
                 />
@@ -98,14 +95,12 @@ class UserEditModal extends React.Component {
                   placeholder="Last Name"
                   onChange={e => this.setState({ cLastName: e.target.value })}
                   feedback={
-                    this.state.cLastName === ""
+                    this.state.cLastName === "" || this.state.cLastName === null
                       ? "Please input the last name"
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked
-                      ? this.state.cLastName === ""
-                      : null
+                    this.state.cLastName === "" || this.state.cLastName === null
                   }
                   value={this.state.cLastName}
                 />
@@ -115,15 +110,20 @@ class UserEditModal extends React.Component {
                   displayType={"input"}
                   customInput={Form.Input}
                   placeholder="Phone Number"
-                  onChange={e => this.setState({ cPhone: e.target.value })}
+                  onChange={e => {
+                    this.setState({ cPhone: e.target.value });
+                  }}
                   feedback={
-                    this.state.cPhone === ""
-                      ? "Please input the client's home number"
+                    this.state.cPhone === "" || this.state.cPhone === null
+                      ? "Please input the phone number"
                       : null
                   }
                   value={this.state.cPhone}
+                  // invalid={
+                  //   this.state.isSubmitClicked ? this.state.cPhone === "" : null
+                  // }
                   invalid={
-                    this.state.isSubmitClicked ? this.state.cPhone === "" : null
+                    this.state.cPhone === "" || this.state.cPhone === null
                   }
                 />
               </Form.Group>
@@ -139,15 +139,12 @@ class UserEditModal extends React.Component {
                   }
                   value={this.state.cEmail}
                   invalid={
-                    this.state.isSubmitClicked
-                      ? !this.isEmail(this.state.cEmail)
-                      : !(
-                          this.isEmail(this.state.cEmail) ||
-                          this.state.cEmail === ""
-                        )
+                    this.state.cPhone === "" ||
+                    this.state.cPhone === null ||
+                    !this.isEmail(this.state.cEmail)
                   }
                   onChange={e => {
-                    this.setState({ cEmailAddress: e.target.value });
+                    this.setState({ cEmail: e.target.value });
                   }}
                 />
               </Form.Group>
