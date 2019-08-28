@@ -30,16 +30,18 @@ class UserEditModal extends React.Component {
       password: this.props.user.password
     };
     API.postUser(userData)
-    .then(res => {
-      this.setState({
-       cLastName: res.lastName,
-       isLoaded:true
+      .then(res => {
+        this.setState({
+          cLastName: res.lastName,
+          isLoaded: true
+        });
+        this.props.reload();
+      })
+      .catch(error => {
+        console.log(error);
       });
-    })
-    .catch(error => {
-      console.log(error);
-    });
     this.setState({ show: false });
+    this.props.togggleShowModal();
   }
 
   isEmail = email => {
@@ -66,9 +68,11 @@ class UserEditModal extends React.Component {
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked ? this.state.cFirstName === "" : null
+                    this.state.isSubmitClicked
+                      ? this.state.cFirstName === ""
+                      : null
                   }
-                  value = {this.state.cFirstName}
+                  value={this.state.cFirstName}
                 />
               </Form.Group>
               <Form.Group label="Last Name">
@@ -81,9 +85,11 @@ class UserEditModal extends React.Component {
                       : null
                   }
                   invalid={
-                    this.state.isSubmitClicked ? this.state.cLastName === "" : null
+                    this.state.isSubmitClicked
+                      ? this.state.cLastName === ""
+                      : null
                   }
-                  value = {this.state.cLastName}
+                  value={this.state.cLastName}
                 />
               </Form.Group>
               <Form.Group label="Phone Number">
@@ -97,14 +103,13 @@ class UserEditModal extends React.Component {
                       ? "Please input the client's home number"
                       : null
                   }
-                  value = {this.state.cHomePhone}
+                  value={this.state.cHomePhone}
                   invalid={
                     this.state.isSubmitClicked
                       ? this.state.cHomePhone === ""
                       : null
                   }
                 />
-          
               </Form.Group>
               <Form.Group label="Email Address">
                 <Form.Input
@@ -116,7 +121,7 @@ class UserEditModal extends React.Component {
                       ? "Please input a valid email address"
                       : "Invalid email"
                   }
-                  value = {this.state.cEmailAddress}  
+                  value={this.state.cEmailAddress}
                   invalid={
                     this.state.isSubmitClicked
                       ? !this.isEmail(this.state.cEmailAddress)
@@ -131,7 +136,12 @@ class UserEditModal extends React.Component {
                 />
               </Form.Group>
               <Form.Group label="Account Type">
-                <select  onChange={e => this.setState({ cAccountType: e.target.value })} value={this.state.cAccountType}>
+                <select
+                  onChange={e =>
+                    this.setState({ cAccountType: e.target.value })
+                  }
+                  value={this.state.cAccountType}
+                >
                   <option value="Client">Client</option>
                   <option value="Inspector">Inspector</option>
                   <option value="Admin">Admin</option>
