@@ -1,8 +1,8 @@
-# SOFTENG 761 - Scrumdog Millionaires (Front end repo)
+# SOFTENG 761 - Scrumpies (Front end repo)
 
 ## Project Description
 
-Our team, "Scrumdog Millionaires," is building a tool for the company Hitch Building Inspections. The tool we are building is an inspection report automation tool for generating building inspection reports from pre-made templates. The goal is to reduce the manual effort required to turn raw inspection data into a report by automating the process.
+Our team, "Scrumpies," is building a tool for the company Hitch Building Inspections. The tool we are building is an inspection report automation tool for generating building inspection reports from pre-made templates. The goal is to reduce the manual effort required to turn raw inspection data into a report by automating the process.
 
 ## Build Status
 
@@ -21,13 +21,15 @@ Master branch: [![Build Status](https://travis-ci.com/Karim-C/Inspection_Report_
 3. run `yarn install`
 4. run `yarn start`
 
-## Link to Backend
+## Link to Backend Repo
 
-https://github.com/Karim-C/Inspection_Report_App_back-end
+https://github.com/KerwinSun/Inspection_Report_App_back-end
 
 ## Link to the App
 
 https://inspection-report-app.azurewebsites.net
+
+
 
 ## Code guidelines
 
