@@ -7,24 +7,44 @@ class UserEditModal extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.handleShow = this.handleShow.bind(this);
+    this.saveChanges = this.saveChanges.bind(this);
 
     this.state = {
       show: true,
       cFirstName: this.props.user.firstName,
       cLastName: this.props.user.lastName,
-      cEmailAddress: this.props.user.email,
-      cHomePhone: this.props.user.phone,
+      cEmail: this.props.user.email,
+      cPhone: this.props.user.phone,
       cAccountType: this.props.user.accountType
     };
+
+    this.isInputValid = this.isInputValid.bind(this);
   }
 
-  handleShow() {
+  isInputValid = () => {
+    return (
+      this.isEmail(this.state.cEmail) &&
+      this.state.cEmail !== "" &&
+      this.state.cFirstName !== "" &&
+      this.state.cLastName !== "" &&
+      this.state.cPhone !== "" &&
+      this.state.cAccountType !== ""
+    );
+  };
+
+  isEmail = email => {
+    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(email).toLowerCase());
+  };
+
+  saveChanges() {
+    // console.log(this.state);
+    // if (this.isInputValid()) {
     let userData = {
       firstName: this.state.cFirstName,
       lastName: this.state.cLastName,
-      email: this.state.cEmailAddress,
-      phone: this.state.cHomePhone,
+      email: this.state.cEmail,
+      phone: this.state.cPhone,
       accountType: this.state.cAccountType,
       id: this.props.user.id,
       password: this.props.user.password
@@ -42,12 +62,10 @@ class UserEditModal extends React.Component {
       });
     this.setState({ show: false });
     this.props.togggleShowModal();
+    // } else {
+    //   console.log("wrong");
+    // }
   }
-
-  isEmail = email => {
-    var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return regex.test(String(email).toLowerCase());
-  };
 
   render() {
     return (
@@ -97,17 +115,15 @@ class UserEditModal extends React.Component {
                   displayType={"input"}
                   customInput={Form.Input}
                   placeholder="Phone Number"
-                  onChange={e => this.setState({ cHomePhone: e.target.value })}
+                  onChange={e => this.setState({ cPhone: e.target.value })}
                   feedback={
-                    this.state.cHomePhone === ""
+                    this.state.cPhone === ""
                       ? "Please input the client's home number"
                       : null
                   }
-                  value={this.state.cHomePhone}
+                  value={this.state.cPhone}
                   invalid={
-                    this.state.isSubmitClicked
-                      ? this.state.cHomePhone === ""
-                      : null
+                    this.state.isSubmitClicked ? this.state.cPhone === "" : null
                   }
                 />
               </Form.Group>
@@ -117,17 +133,17 @@ class UserEditModal extends React.Component {
                   customInput={Form.Input}
                   placeholder="Email Address"
                   feedback={
-                    this.state.cEmailAddress === ""
+                    this.state.cEmail === ""
                       ? "Please input a valid email address"
                       : "Invalid email"
                   }
-                  value={this.state.cEmailAddress}
+                  value={this.state.cEmail}
                   invalid={
                     this.state.isSubmitClicked
-                      ? !this.isEmail(this.state.cEmailAddress)
+                      ? !this.isEmail(this.state.cEmail)
                       : !(
-                          this.isEmail(this.state.cEmailAddress) ||
-                          this.state.cEmailAddress === ""
+                          this.isEmail(this.state.cEmail) ||
+                          this.state.cEmail === ""
                         )
                   }
                   onChange={e => {
@@ -154,7 +170,7 @@ class UserEditModal extends React.Component {
           <Button variant="secondary" onClick={this.props.togggleShowModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={this.handleShow}>
+          <Button variant="primary" onClick={this.saveChanges}>
             Save Changes
           </Button>
         </Modal.Footer>

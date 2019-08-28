@@ -33,6 +33,9 @@ class UserManagePage extends React.Component {
     let filteredUsers = this.state.ogData.filter(user => {
       return (
         user.firstName.toLowerCase().includes(filter) ||
+        // user.lastName.toLowerCase().includes(filter) ||
+        // user.email.toLowerCase().includes(filter) ||
+        // user.phone.toLowerCase().includes(filter) ||
         user.accountType.toLowerCase().includes(filter)
       );
     });
