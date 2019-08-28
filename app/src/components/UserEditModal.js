@@ -14,7 +14,8 @@ class UserEditModal extends React.Component {
       cFirstName: this.props.user.firstName,
       cLastName: this.props.user.lastName,
       cEmailAddress: this.props.user.email,
-      cHomePhone: this.props.user.phone
+      cHomePhone: this.props.user.phone,
+      cAccountType: this.props.user.accountType
     };
   }
 
@@ -24,6 +25,7 @@ class UserEditModal extends React.Component {
       lastName: this.state.cLastName,
       email: this.state.cEmailAddress,
       phone: this.state.cHomePhone,
+      accountType: this.state.cAccountType,
       id: this.props.user.id,
       password: this.props.user.password
     };
@@ -49,24 +51,24 @@ class UserEditModal extends React.Component {
     return (
       <Modal show={this.state.show} onHide={this.props.togggleShowModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Edit Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Card title="Create Account">
+          <Card>
             <Card.Body>
               <Form.Group label="First Name">
                 <Form.Input
                   placeholder="First Name"
                   onChange={e => this.setState({ cFirstName: e.target.value })}
                   feedback={
-                    this.state.cName === ""
+                    this.state.cFirstName === ""
                       ? "Please input the first name"
                       : null
                   }
                   invalid={
                     this.state.isSubmitClicked ? this.state.cFirstName === "" : null
                   }
-                  defaultValue = {this.state.cFirstName}
+                  value = {this.state.cFirstName}
                 />
               </Form.Group>
               <Form.Group label="Last Name">
@@ -74,14 +76,14 @@ class UserEditModal extends React.Component {
                   placeholder="Last Name"
                   onChange={e => this.setState({ cLastName: e.target.value })}
                   feedback={
-                    this.state.cName === ""
+                    this.state.cLastName === ""
                       ? "Please input the last name"
                       : null
                   }
                   invalid={
                     this.state.isSubmitClicked ? this.state.cLastName === "" : null
                   }
-                  defaultValue = {this.state.cLastName}
+                  value = {this.state.cLastName}
                 />
               </Form.Group>
               <Form.Group label="Phone Number">
@@ -95,22 +97,26 @@ class UserEditModal extends React.Component {
                       ? "Please input the client's home number"
                       : null
                   }
+                  value = {this.state.cHomePhone}
                   invalid={
                     this.state.isSubmitClicked
                       ? this.state.cHomePhone === ""
                       : null
                   }
-                  defaultValue = {this.state.cHomePhone}
                 />
+          
               </Form.Group>
               <Form.Group label="Email Address">
                 <Form.Input
+                  displayType={"input"}
+                  customInput={Form.Input}
                   placeholder="Email Address"
                   feedback={
                     this.state.cEmailAddress === ""
                       ? "Please input a valid email address"
                       : "Invalid email"
                   }
+                  value = {this.state.cEmailAddress}  
                   invalid={
                     this.state.isSubmitClicked
                       ? !this.isEmail(this.state.cEmailAddress)
@@ -119,42 +125,17 @@ class UserEditModal extends React.Component {
                           this.state.cEmailAddress === ""
                         )
                   }
-                  onBlur={e => {
+                  onChange={e => {
                     this.setState({ cEmailAddress: e.target.value });
                   }}
-                  defaultValue = {this.state.cEmailAddress}
                 />
               </Form.Group>
               <Form.Group label="Account Type">
-                <select>
+                <select  onChange={e => this.setState({ cAccountType: e.target.value })} value={this.state.cAccountType}>
                   <option value="Client">Client</option>
                   <option value="Inspector">Inspector</option>
                   <option value="Admin">Admin</option>
                 </select>
-              </Form.Group>
-              <Form.Group label="Password">
-                <Form.Input
-                  placeholder="Password"
-                  onChange={e => this.setState({ cName: e.target.value })}
-                  feedback={
-                    this.state.cName === "" ? "Please input the password" : null
-                  }
-                  invalid={
-                    this.state.isSubmitClicked ? this.state.cName === "" : null
-                  }
-                />
-              </Form.Group>
-              <Form.Group label="Confirm Password">
-                <Form.Input
-                  placeholder="Confirm Password"
-                  onChange={e => this.setState({ cName: e.target.value })}
-                  feedback={
-                    this.state.cName === "" ? "Please input the password" : null
-                  }
-                  invalid={
-                    this.state.isSubmitClicked ? this.state.cName === "" : null
-                  }
-                />
               </Form.Group>
             </Card.Body>
           </Card>

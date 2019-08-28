@@ -26,6 +26,8 @@ class UserTable extends React.Component {
             <Table.ColHeader alignContent={"center"}>First Name</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Last Name</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Email</Table.ColHeader>
+            <Table.ColHeader alignContent={"center"}>Phone</Table.ColHeader>
+            <Table.ColHeader alignContent={"center"}>AccountType</Table.ColHeader>
             <Table.ColHeader alignContent={"center"}>Action</Table.ColHeader>
           </Table.Header>
           <Table.Body>
@@ -39,6 +41,12 @@ class UserTable extends React.Component {
                 </Table.Col>
                 <Table.Col alignContent={"center"}>
                   {user.email}
+                </Table.Col>
+                <Table.Col alignContent={"center"}>
+                  {user.phone}
+                </Table.Col>
+                <Table.Col alignContent={"center"}>
+                  {user.accountType}
                 </Table.Col>
                 <Table.Col alignContent={"center"}>
                   <Button variant="primary" onClick={this.togggleShowModal}>
