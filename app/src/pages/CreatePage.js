@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import CreateAccountCard from "../components/CreateAccountCard";
+import API from "../api";
 // import { Redirect } from "react-router-dom";
-// import api from "../api";
 // import "../components/Custom.css";
 // import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
 // import SiteWrapper from "../SiteWrapper";
@@ -41,7 +41,7 @@ class CreatePage extends Component {
           CancelClicked={this.cancelClick}
           ContainerStyle="client_create"
         />
-        </div>
+      </div>
     );
   }
   isInputValid = () => {
@@ -61,46 +61,22 @@ class CreatePage extends Component {
   }
   handleClick = (userInfo) => {
     console.log(userInfo)
-    console.log("handleClick called ('Submit' clicked)");
-    // @@@@@@@
-    // Replace this part with how we handle the information
-    // @@@@@@@
-
-    // const {
-    //   userId,
-    //   inspectionDate,
-    //   address,
-    //   cName,
-    //   cHomePhone,
-    //   cMobilePhone,
-    //   cEmailAddress,
-    //   cAddress,
-    //   cRealEstate
-    // } = this.state;
-
-    // var client = {};
-    // client.name = cName;
-    // client.homePhone = cHomePhone;
-    // client.mobilePhone = cMobilePhone;
-    // client.emailAddress = cEmailAddress;
-    // client.address = cAddress;
-    // client.realEstate = cRealEstate;
-
-    // var json = jsonHouse;
-    // var userObject = {
-    //   UserId: userId
-    // };
-    // json.inspectedBy = [userObject];
-    // json.inspectionDate = inspectionDate;
-    // json.address = address;
-    // json.summonsedBy = client;
-
-    // API.postHouse(json)
-    //   .then(id => {
-    //     this.setState({ isLoaded: true });
-    //     this.props.history.push("/inspect/" + id);
-    //   })
-    //   .catch(error => {});
+    console.log("fuck this");
+    let userData = {
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      email: userInfo.emailAddress,
+      phone: userInfo.phoneNumber,
+      accountType: userInfo.accountType,
+      password: userInfo.password
+    };
+    API.postUser(userData)
+      .then(res => {
+        this.props.history.push("/login")
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
   cancelClick = () => {
     console.log("cancelClick called ('Cancel' clicked)");
