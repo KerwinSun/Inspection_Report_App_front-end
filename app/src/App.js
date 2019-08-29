@@ -12,7 +12,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import CreatePage from "./pages/CreatePage";
 import API from "./api";
 import AdminCreate from "./pages/AdminCreatePage";
-
+import UserManagePage from "./pages/UserManagePage";
 import "tabler-react/dist/Tabler.css";
 import "./App.css";
 
@@ -42,6 +42,11 @@ class App extends Component {
             exact
             path="/login"
             render={props => <LoginPage {...props} />}
+          />
+          <Route
+            exact
+            path="/usermanage"
+            render={props => <UserManagePage {...props} />}
           />
           <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/create" component={CreatePage} />
