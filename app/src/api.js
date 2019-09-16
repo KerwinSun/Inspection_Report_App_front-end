@@ -45,6 +45,20 @@ export default {
       return response.data.id;
     });
   },
+  createAccount(json) {
+    let payload = {
+      data: json,
+      url: "/auth/createAccount",
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      json: true
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
   postHouse(json) {
     let payload = {
       data: json,

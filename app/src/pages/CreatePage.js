@@ -63,14 +63,15 @@ class CreatePage extends Component {
     console.log(userInfo)
     console.log("fuck this");
     let userData = {
-      firstName: userInfo.firstName,
-      lastName: userInfo.lastName,
-      email: userInfo.emailAddress,
-      phone: userInfo.phoneNumber,
-      accountType: userInfo.accountType,
-      password: userInfo.password
+      FirstName: userInfo.firstName,
+      LastName: userInfo.lastName,
+      Password: userInfo.password,
+      Phone: userInfo.phoneNumber,
+      Email: userInfo.emailAddress,
+      AccountType: userInfo.accountType,
     };
-    API.postUser(userData)
+    console.log(userData)
+    API.createAccount(userData)
       .then(res => {
         this.props.history.push("/login")
       })

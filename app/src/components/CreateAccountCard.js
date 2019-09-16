@@ -3,7 +3,7 @@ import { Card, Button, Form, Alert } from "tabler-react";
 import "./Custom.css";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 import { accountTypes } from "../config";
 
 class CreateAccountCard extends Component {
@@ -241,11 +241,11 @@ class CreateAccountCard extends Component {
 }
 
 
-CreateAccountCard.PropTypes = {
-    SubmitClicked: PropTypes.func,
-    CancelClicked: PropTypes.func,
-    IsAdmin: PropTypes.bool,
-    ContainerStyle: PropTypes.string
+CreateAccountCard.propTypes = {
+    SubmitClicked: propTypes.func,
+    CancelClicked: propTypes.func,
+    IsAdmin: propTypes.bool,
+    ContainerStyle: propTypes.string
 }
 
 export default CreateAccountCard;
