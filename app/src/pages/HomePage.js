@@ -4,6 +4,7 @@ import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import HouseTable from "../components/HouseTable";
 import Loader from "react-loader-spinner";
+import store from "store";
 
 class Home extends Component {
   constructor(props) {
@@ -16,12 +17,13 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    var id = 1; //Hard coded value for now.
+    var id = store.get("user").id;
     API.getPerson(id)
       .then(res => {
         var houses = res.inspected;
         var wipHouses = [];
         var completedHouses = [];
+
         houses.forEach(value => {
           value.house.completed
             ? completedHouses.push(value.house)
