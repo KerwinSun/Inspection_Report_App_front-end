@@ -12,7 +12,8 @@ class Home extends Component {
     this.state = {
       wipHouses: [],
       completedHouses: [],
-      isLoaded: false
+      isLoaded: false,
+      account: {}
     };
   }
 
@@ -23,7 +24,7 @@ class Home extends Component {
         var houses = res.inspected;
         var wipHouses = [];
         var completedHouses = [];
-
+        console.log(res);
         houses.forEach(value => {
           value.house.completed
             ? completedHouses.push(value.house)
@@ -32,7 +33,8 @@ class Home extends Component {
         this.setState({
           wipHouses: wipHouses,
           completedHouses: completedHouses,
-          isLoaded: true
+          isLoaded: true,
+          account: res
         });
       })
       .catch(error => {
