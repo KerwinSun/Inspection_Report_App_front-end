@@ -11,7 +11,6 @@ import LogoutPage from "./pages/LogoutPage";
 import PrivateRoute from "./components/PrivateRoute";
 import CreatePage from "./pages/CreatePage";
 import API from "./api";
-import AdminCreate from "./pages/AdminCreatePage";
 import UserManagePage from "./pages/UserManagePage";
 import "tabler-react/dist/Tabler.css";
 import "./App.css";

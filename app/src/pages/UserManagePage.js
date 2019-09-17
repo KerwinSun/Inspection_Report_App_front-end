@@ -5,7 +5,7 @@ import API from "../api";
 import Loader from "react-loader-spinner";
 import SiteWrapper from "../SiteWrapper";
 import { Page, } from "tabler-react";
-import CreateAccountCard from "../components/CreateAccountCard";
+import AdminCreateUserModal from "../components/AdminCreateUserModal";
 import "../components/Custom.css"
 
 class UserManagePage extends React.Component {
@@ -14,9 +14,11 @@ class UserManagePage extends React.Component {
     this.state = {
       isLoaded: false,
       empData: [],
-      ogData: []
+      ogData: [],
+      showModal: false,
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.togggleShowModal = this.togggleShowModal.bind(this);
   }
 
   componentDidMount() {
@@ -25,13 +27,19 @@ class UserManagePage extends React.Component {
         this.setState({
           empData: res,
           ogData: res,
-          isLoaded: true
+          isLoaded: true,
         });
       })
       .catch(error => {
         console.log(error);
       });
   }
+
+  togggleShowModal = () => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal
+    }));
+  };
 
   filterOnChange = e => {
     let filter = e.target.value;
@@ -49,10 +57,13 @@ class UserManagePage extends React.Component {
     });
   };
 
-  createClicked = () => {
+  createUserClicked = () => {
     console.log("can this work?");
-
+    this.setState({
+      showModal: true,
+    });
   }
+
 
   render() {
     return (
@@ -71,10 +82,16 @@ class UserManagePage extends React.Component {
                   onChange={this.filterOnChange}
                 />
               </div>
-              <button className="create" type="submit" onClick={this.createClicked}>
+              <button className="create" type="submit" onClick={()=>this.createUserClicked()}>
                 Create Account
               </button>
             </Card.Header>
+            {this.state.showModal ? (
+                  <AdminCreateUserModal
+                    togggleShowModal={this.togggleShowModal}
+                    componentDidMount={this.componentDidMount}
+                  />
+                ) : null}
             {this.state.isLoaded ? (
               <UserTable
                 users={this.state.empData}
