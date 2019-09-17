@@ -32,6 +32,7 @@ class CreateAccountCard extends Component {
             this.state.firstName !== "" &&
             this.state.lastName !== "" &&
             this.state.phoneNumber !== "" &&
+            this.isPassword(this.state.password) &&
             this.state.password !== "" &&
             this.state.confirmPassword === this.state.password
         );
@@ -40,6 +41,11 @@ class CreateAccountCard extends Component {
         var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(String(email).toLowerCase());
     };
+
+    isPassword = password => {
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+        return regex.test(String(password))
+    }
 
     render() {
         const { ContainerStyle, IsAdmin, CancelClicked } = this.props;
@@ -144,12 +150,15 @@ class CreateAccountCard extends Component {
                                 feedback={
                                     this.state.password === ""
                                         ? "Please input the password"
-                                        : null
+                                        : "Invalid password (Must contain at least 8 characters, 1 uppercase, 1 lowercase, 1 special character and 1 number)"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.password === ""
-                                        : null
+                                    ? !this.isPassword(this.state.password)
+                                    : !(
+                                        this.isPassword(this.state.password) ||
+                                        this.state.password === ""
+                                    )
                                 }
                             />
                         </Form.Group>
