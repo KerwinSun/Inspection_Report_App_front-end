@@ -13,8 +13,8 @@ const navBarItems = [
     LinkComponent: NavLink
   },
   {
-    value: "New User",
-    to: "/admin-create",
+    value: "Manage User",
+    to: "/manage-user",
     icon: "user",
     LinkComponent: NavLink
   }
