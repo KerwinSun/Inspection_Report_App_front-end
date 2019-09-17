@@ -3,15 +3,22 @@ import { Card } from "tabler-react";
 import UserTable from "../components/UserTable";
 import API from "../api";
 import Loader from "react-loader-spinner";
+import SiteWrapper from "../SiteWrapper";
+import { Page, } from "tabler-react";
+import AdminCreateUserModal from "../components/AdminCreateUserModal";
+import "../components/Custom.css"
+
 class UserManagePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
       empData: [],
-      ogData: []
+      ogData: [],
+      showModal: false,
     };
     this.componentDidMount = this.componentDidMount.bind(this);
+    this.togggleShowModal = this.togggleShowModal.bind(this);
   }
 
   componentDidMount() {
@@ -20,13 +27,19 @@ class UserManagePage extends React.Component {
         this.setState({
           empData: res,
           ogData: res,
-          isLoaded: true
+          isLoaded: true,
         });
       })
       .catch(error => {
         console.log(error);
       });
   }
+
+  togggleShowModal = () => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal
+    }));
+  };
 
   filterOnChange = e => {
     let filter = e.target.value;
@@ -44,13 +57,17 @@ class UserManagePage extends React.Component {
     });
   };
 
+  createUserClicked = () => {
+    this.setState({
+      showModal: true,
+    });
+  }
+
+
   render() {
     return (
-      <div>
-        <h1>Admin</h1>
-        <p>This page can only be accessed by administrators.</p>
-        <div>
-          All users from secure (admin only) api end point:
+      <SiteWrapper>
+        <Page.Content title="Manage User">
           <Card>
             <Card.Header>
               <Card.Title>Users</Card.Title>
@@ -64,27 +81,36 @@ class UserManagePage extends React.Component {
                   onChange={this.filterOnChange}
                 />
               </div>
+              <button className="create" type="submit" onClick={()=>this.createUserClicked()}>
+                Create Account
+              </button>
             </Card.Header>
+            {this.state.showModal ? (
+                  <AdminCreateUserModal
+                    togggleShowModal={this.togggleShowModal}
+                    componentDidMount={this.componentDidMount}
+                  />
+                ) : null}
             {this.state.isLoaded ? (
               <UserTable
                 users={this.state.empData}
                 componentDidMount={this.componentDidMount}
               />
             ) : (
-              <Card.Body>
-                <div className="btn-list text-center">
-                  <Loader
-                    type="ThreeDots"
-                    color="#316CBE"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-              </Card.Body>
-            )}
+                <Card.Body>
+                  <div className="btn-list text-center">
+                    <Loader
+                      type="ThreeDots"
+                      color="#316CBE"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                </Card.Body>
+              )}
           </Card>
-        </div>
-      </div>
+        </Page.Content>
+      </SiteWrapper>
     );
   }
 }

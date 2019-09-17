@@ -28,10 +28,12 @@ class CreateAccountCard extends Component {
     isInputValid = () => {
         return (
             this.isEmail(this.state.emailAddress) &&
+            this.isPassword(this.state.password) &&
             this.state.emailAddress !== "" &&
             this.state.firstName !== "" &&
             this.state.lastName !== "" &&
             this.state.phoneNumber !== "" &&
+            this.isPassword(this.state.password) &&
             this.state.password !== "" &&
             this.state.confirmPassword === this.state.password
         );
@@ -40,6 +42,11 @@ class CreateAccountCard extends Component {
         var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(String(email).toLowerCase());
     };
+
+    isPassword = password => {
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
+        return regex.test(String(password))
+    }
 
     render() {
         const { ContainerStyle, IsAdmin, CancelClicked } = this.props;
@@ -83,6 +90,7 @@ class CreateAccountCard extends Component {
                         </Form.Group>
                         <Form.Group label="Phone Number">
                             <NumberFormat
+                                allowLeadingZeros={true}
                                 displayType={"input"}
                                 customInput={Form.Input}
                                 placeholder="Phone Number"
@@ -91,7 +99,7 @@ class CreateAccountCard extends Component {
                                 }
                                 feedback={
                                     this.state.phoneNumber === ""
-                                        ? "Please input the client's home number"
+                                        ? "Please input a phone number"
                                         : null
                                 }
                                 invalid={
@@ -143,13 +151,16 @@ class CreateAccountCard extends Component {
                                 onChange={e => this.setState({ password: e.target.value })}
                                 feedback={
                                     this.state.password === ""
-                                        ? "Please input the password"
-                                        : null
+                                        ? "Please input a password"
+                                        : "Please input a valid password (At least 1 uppercase, 1 lowercase, 1 number, 1 special character, and a minimum of 8 characters)"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.password === ""
-                                        : null
+                                        ? !this.isPassword(this.state.password)
+                                        : !(
+                                            this.isPassword(this.state.password) ||
+                                            this.state.password === ""
+                                        )
                                 }
                             />
                         </Form.Group>
@@ -161,12 +172,12 @@ class CreateAccountCard extends Component {
                                 feedback={
                                     this.state.confirmPassword === ""
                                         ? "Please confirm the password"
-                                        : null
+                                        : "Passwords do not match"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
                                         ? this.state.confirmPassword === ""
-                                        : null
+                                        : !(this.state.confirmPassword === this.state.password)
                                 }
                             />
                         </Form.Group>
