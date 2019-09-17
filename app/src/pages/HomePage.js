@@ -28,7 +28,7 @@ class Home extends Component {
           var completedHouses = [];
           houses.forEach(house => {
             if (house.summonsedBy.emailAddress === email) {
-              if (!house.inspectedBy) {
+              if (house.inspectedBy.length == 0) {
                 pendingHouses.push(house);
               } else {
                 house.completed
