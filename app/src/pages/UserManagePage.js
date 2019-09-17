@@ -58,7 +58,6 @@ class UserManagePage extends React.Component {
   };
 
   createUserClicked = () => {
-    console.log("can this work?");
     this.setState({
       showModal: true,
     });

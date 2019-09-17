@@ -1,35 +1,9 @@
 import React, { Component } from "react";
 import CreateAccountCard from "../components/CreateAccountCard";
 import API from "../api";
-// import { Redirect } from "react-router-dom";
-// import "../components/Custom.css";
-// import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
-// import SiteWrapper from "../SiteWrapper";
-// import { jsonHouse, realEstateOptions } from "../config";
-// import store from "store";
-// import Loader from "react-loader-spinner";
-// import NumberFormat from "react-number-format";
-
 
 
 class CreatePage extends Component {
-  //   constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     userId: -1,
-  //     inspectionDate: "",
-  //     firstName: "",
-  //     lastName: "",
-  //     phoneNumber: "",
-  //     emailAddress: "",
-  //     accountType: "",
-  //     password: "",
-  //     confirmPassword: "",
-  //     isSubmitClicked: false,
-  //     isLoaded: true,
-  //     loggedIn: false
-  //   };
-  // }
 
   render() {
     return (
@@ -60,8 +34,6 @@ class CreatePage extends Component {
     return regex.test(String(email).toLowerCase());
   }
   handleClick = (userInfo) => {
-    console.log(userInfo)
-    console.log("fuck this");
     let userData = {
       FirstName: userInfo.firstName,
       LastName: userInfo.lastName,
@@ -70,7 +42,6 @@ class CreatePage extends Component {
       Email: userInfo.emailAddress,
       AccountType: userInfo.accountType,
     };
-    console.log(userData)
     API.createAccount(userData)
       .then(res => {
         this.props.history.push("/login")
@@ -80,7 +51,6 @@ class CreatePage extends Component {
       });
   }
   cancelClick = () => {
-    console.log("cancelClick called ('Cancel' clicked)");
     this.props.history.push("/login")
   }
 }
