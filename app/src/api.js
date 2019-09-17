@@ -8,6 +8,15 @@ const axiosInstance = axios.create({
 });
 
 export default {
+  getHouses() {
+    let payload = {
+      url: "/house",
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    });
+  },
   getHouse(houseId) {
     let payload = {
       url: "/house/" + houseId,

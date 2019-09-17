@@ -6,6 +6,7 @@ import { jsonHouse, realEstateOptions } from "../config";
 // import store from "store";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
+import store from "store";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class InspectionDetailsPage extends Component {
   componentDidMount() {
     // let user = store.get("user");
     this.setState({
-      userId: 1, //Hard coded user id for now.
+      userId: store.get("user").id,
       iName: "Jake Miller", //hard coded inspector for now\
       inspectionDate: new Date().toJSON(),
       cRealEstate: realEstateOptions[0]
@@ -221,7 +222,9 @@ class InspectionDetailsPage extends Component {
                   },
                   () => {
                     if (this.isInputValid()) {
-                      this.setState({isLoaded: false},() => this.handleClick());
+                      this.setState({ isLoaded: false }, () =>
+                        this.handleClick()
+                      );
                     }
                   }
                 );

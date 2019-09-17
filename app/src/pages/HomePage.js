@@ -19,26 +19,65 @@ class Home extends Component {
 
   componentDidMount() {
     var id = store.get("user").id;
-    API.getPerson(id)
-      .then(res => {
-        var houses = res.inspected;
+    if (store.get("user").accountType === "Client") {
+      API.getHouses().then(houses => {
+        var pendingHouses = [];
         var wipHouses = [];
         var completedHouses = [];
-        houses.forEach(value => {
-          value.house.completed
-            ? completedHouses.push(value.house)
-            : wipHouses.push(value.house);
+        console.log(houses);
+        houses.forEach(house => {
+          if (house.summonsedBy.id === id) {
+            if (!house.inspectedBy) {
+              pendingHouses.push(house);
+            } else {
+              house.completed
+                ? completedHouses.push(house)
+                : wipHouses.push(house);
+            }
+          }
         });
         this.setState({
+          pendingHouses: pendingHouses,
           wipHouses: wipHouses,
           completedHouses: completedHouses,
           isLoaded: true,
-          account: res
+          account: store.get("user")
         });
-      })
-      .catch(error => {
-        console.log(error);
       });
+    } else {
+      API.getPerson(id)
+        .then(res => {
+          var houses = res.inspected;
+          console.log("inspected");
+          console.log(houses);
+          var pendingHouses = [];
+          var wipHouses = [];
+          var completedHouses = [];
+
+          houses.forEach(value => {
+            // if (!value.house.inspectedBy) {
+            //   pendingHouses.push(value.house);
+            // } else {
+            //   value.house.completed
+            //     ? completedHouses.push(value.house)
+            //     : wipHouses.push(value.house);
+            // }
+
+            value.house.completed
+              ? completedHouses.push(value.house)
+              : wipHouses.push(value.house);
+          });
+          this.setState({
+            wipHouses: wipHouses,
+            completedHouses: completedHouses,
+            isLoaded: true,
+            account: res
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   }
 
   render() {
@@ -53,7 +92,7 @@ class Home extends Component {
                     <Card.Title>Pending Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.completedHouses} />
+                    <HouseTable houses={this.state.pendingHouses} />
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
