@@ -28,7 +28,7 @@ class Home extends Component {
           var completedHouses = [];
           houses.forEach(house => {
             if (house.summonsedBy.emailAddress === email) {
-              if (house.inspectedBy.length == 0) {
+              if (house.inspectedBy.length === 0) {
                 pendingHouses.push(house);
               } else {
                 house.completed
@@ -62,11 +62,20 @@ class Home extends Component {
               ? completedHouses.push(value.house)
               : wipHouses.push(value.house);
           });
-          this.setState({
-            wipHouses: wipHouses,
-            completedHouses: completedHouses,
-            isLoaded: true,
-            account: res
+          API.getHouses().then(houses => {
+            var pendingHouses = [];
+            houses.forEach(house => {
+              if (house.inspectedBy.length === 0) {
+                pendingHouses.push(house);
+              }
+            });
+            this.setState({
+              pendingHouses: pendingHouses,
+              wipHouses: wipHouses,
+              completedHouses: completedHouses,
+              isLoaded: true,
+              account: res
+            });
           });
         })
         .catch(error => {
@@ -165,6 +174,29 @@ class Home extends Component {
       return (
         <SiteWrapper>
           <Page.Content title="Dashboard">
+            <Grid.Row cards={true}>
+              <Grid.Col>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Available Inspections</Card.Title>
+                  </Card.Header>
+                  {this.state.isLoaded ? (
+                    <HouseTable houses={this.state.pendingHouses} />
+                  ) : (
+                    <Card.Body>
+                      <div className="btn-list text-center">
+                        <Loader
+                          type="ThreeDots"
+                          color="#316CBE"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </Card.Body>
+                  )}
+                </Card>
+              </Grid.Col>
+            </Grid.Row>
             <Grid.Row cards={true}>
               <Grid.Col>
                 <Card>
