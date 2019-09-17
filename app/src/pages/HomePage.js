@@ -43,7 +43,90 @@ class Home extends Component {
 
   render() {
     if (this.state.account.accountType === "Client") {
-      return <h1>yo</h1>;
+      return (
+        <SiteWrapper>
+          <Page.Content title="Dashboard yoza">
+            <Grid.Row cards={true}>
+              <Grid.Col>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Pending Inspections</Card.Title>
+                  </Card.Header>
+                  {this.state.isLoaded ? (
+                    <HouseTable houses={this.state.completedHouses} />
+                  ) : (
+                    <Card.Body>
+                      <div className="btn-list text-center">
+                        <Loader
+                          type="ThreeDots"
+                          color="#316CBE"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </Card.Body>
+                  )}
+                </Card>
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row cards={true}>
+              <Grid.Col>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>In Progress Inspections</Card.Title>
+                  </Card.Header>
+                  {this.state.isLoaded ? (
+                    <HouseTable houses={this.state.wipHouses} />
+                  ) : (
+                    <Card.Body>
+                      <div className="btn-list text-center">
+                        <Loader
+                          type="ThreeDots"
+                          color="#316CBE"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </Card.Body>
+                  )}
+                </Card>
+              </Grid.Col>
+            </Grid.Row>
+            <Grid.Row cards={true}>
+              <Grid.Col>
+                <Card>
+                  <Card.Header>
+                    <Card.Title>Completed Inspections</Card.Title>
+                  </Card.Header>
+                  {this.state.isLoaded ? (
+                    <HouseTable houses={this.state.completedHouses} />
+                  ) : (
+                    <Card.Body>
+                      <div className="btn-list text-center">
+                        <Loader
+                          type="ThreeDots"
+                          color="#316CBE"
+                          height={30}
+                          width={30}
+                        />
+                      </div>
+                    </Card.Body>
+                  )}
+                </Card>
+              </Grid.Col>
+            </Grid.Row>
+            <Button.List align="center">
+              <Button
+                RootComponent="a"
+                onClick={() => this.props.history.push("/new-inspection")}
+                color="secondary"
+              >
+                Begin New Inspection
+              </Button>
+            </Button.List>
+          </Page.Content>
+        </SiteWrapper>
+      );
     } else {
       return (
         <SiteWrapper>
