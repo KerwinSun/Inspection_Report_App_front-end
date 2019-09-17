@@ -11,6 +11,12 @@ const navBarItems = [
     to: "/new-inspection",
     icon: "check-square",
     LinkComponent: NavLink
+  },
+  {
+    value: "Manage User",
+    to: "/manage-user",
+    icon: "user",
+    LinkComponent: NavLink
   }
 ];
 
