@@ -89,6 +89,7 @@ class CreateAccountCard extends Component {
                         </Form.Group>
                         <Form.Group label="Phone Number">
                             <NumberFormat
+                                allowLeadingZeros={true}
                                 displayType={"input"}
                                 customInput={Form.Input}
                                 placeholder="Phone Number"
