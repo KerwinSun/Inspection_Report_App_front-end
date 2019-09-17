@@ -52,8 +52,6 @@ class Home extends Component {
       API.getPerson(id)
         .then(res => {
           var houses = res.inspected;
-          console.log("inspected");
-          console.log(houses);
           var wipHouses = [];
           var completedHouses = [];
 
@@ -88,7 +86,7 @@ class Home extends Component {
     if (this.state.account.accountType === "Client") {
       return (
         <SiteWrapper>
-          <Page.Content title="Dashboard yoza">
+          <Page.Content title="Dashboard Client">
             <Grid.Row cards={true}>
               <Grid.Col>
                 <Card>
