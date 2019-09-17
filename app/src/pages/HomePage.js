@@ -19,50 +19,45 @@ class Home extends Component {
 
   componentDidMount() {
     var id = store.get("user").id;
+    var email = store.get("user").email;
     if (store.get("user").accountType === "Client") {
-      API.getHouses().then(houses => {
-        var pendingHouses = [];
-        var wipHouses = [];
-        var completedHouses = [];
-        console.log(houses);
-        houses.forEach(house => {
-          if (house.summonsedBy.id === id) {
-            if (!house.inspectedBy) {
-              pendingHouses.push(house);
-            } else {
-              house.completed
-                ? completedHouses.push(house)
-                : wipHouses.push(house);
+      API.getHouses()
+        .then(houses => {
+          var pendingHouses = [];
+          var wipHouses = [];
+          var completedHouses = [];
+          houses.forEach(house => {
+            if (house.summonsedBy.emailAddress === email) {
+              if (!house.inspectedBy) {
+                pendingHouses.push(house);
+              } else {
+                house.completed
+                  ? completedHouses.push(house)
+                  : wipHouses.push(house);
+              }
             }
-          }
+          });
+          this.setState({
+            pendingHouses: pendingHouses,
+            wipHouses: wipHouses,
+            completedHouses: completedHouses,
+            isLoaded: true,
+            account: store.get("user")
+          });
+        })
+        .catch(error => {
+          console.log(error);
         });
-        this.setState({
-          pendingHouses: pendingHouses,
-          wipHouses: wipHouses,
-          completedHouses: completedHouses,
-          isLoaded: true,
-          account: store.get("user")
-        });
-      });
     } else {
       API.getPerson(id)
         .then(res => {
           var houses = res.inspected;
           console.log("inspected");
           console.log(houses);
-          var pendingHouses = [];
           var wipHouses = [];
           var completedHouses = [];
 
           houses.forEach(value => {
-            // if (!value.house.inspectedBy) {
-            //   pendingHouses.push(value.house);
-            // } else {
-            //   value.house.completed
-            //     ? completedHouses.push(value.house)
-            //     : wipHouses.push(value.house);
-            // }
-
             value.house.completed
               ? completedHouses.push(value.house)
               : wipHouses.push(value.house);

@@ -262,7 +262,7 @@ class InspectionDetailsPage extends Component {
       cName,
       cHomePhone,
       cMobilePhone,
-      cEmailAddress,
+      // cEmailAddress,
       cAddress,
       cRealEstate
     } = this.state;
@@ -271,7 +271,7 @@ class InspectionDetailsPage extends Component {
     client.name = cName;
     client.homePhone = cHomePhone;
     client.mobilePhone = cMobilePhone;
-    client.emailAddress = cEmailAddress;
+    client.emailAddress = store.get("user").email;
     client.address = cAddress;
     client.realEstate = cRealEstate;
 
