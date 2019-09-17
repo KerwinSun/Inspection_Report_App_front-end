@@ -145,7 +145,6 @@ class CategoryPage extends Component {
 
   saveHouse = isComplete => {
     if (!this.state.house.completed && isComplete) {
-      console.log("a");
       this.setState(
         {
           house: update(this.state.house, {
@@ -155,11 +154,9 @@ class CategoryPage extends Component {
         () => this.postHouse()
       );
     } else {
-      console.log("b");
       var userObject = {
         UserId: store.get("user").id
       };
-      // json.inspectedBy = null;
       this.setState(
         {
           house: update(this.state.house, {

@@ -484,9 +484,9 @@ class InspectionDetailsPage extends Component {
     client.realEstate = cRealEstate;
 
     var json = jsonHouse;
-    var userObject = {
-      UserId: userId
-    };
+    // var userObject = {
+    //   UserId: userId
+    // };
     json.inspectedBy = null;
     json.inspectionDate = inspectionDate;
     json.address = address;
