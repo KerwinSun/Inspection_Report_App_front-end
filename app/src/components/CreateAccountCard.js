@@ -28,6 +28,7 @@ class CreateAccountCard extends Component {
     isInputValid = () => {
         return (
             this.isEmail(this.state.emailAddress) &&
+            this.isPassword(this.state.password) &&
             this.state.emailAddress !== "" &&
             this.state.firstName !== "" &&
             this.state.lastName !== "" &&
@@ -39,6 +40,15 @@ class CreateAccountCard extends Component {
     isEmail = email => {
         var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return regex.test(String(email).toLowerCase());
+    };
+
+    isPassword = pw => {
+        // Requires at least one digit, one uppercase, one lowercase, one special character
+        var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&])[0-9a-zA-Z!@#$%^&]{8,}$/;
+        console.log("password is: ")
+        console.log(pw)
+        console.log(regex.test(String(pw)))
+        return regex.test(String(pw));
     };
 
     render() {
@@ -91,7 +101,7 @@ class CreateAccountCard extends Component {
                                 }
                                 feedback={
                                     this.state.phoneNumber === ""
-                                        ? "Please input the client's home number"
+                                        ? "Please input a phone number"
                                         : null
                                 }
                                 invalid={
@@ -143,13 +153,16 @@ class CreateAccountCard extends Component {
                                 onChange={e => this.setState({ password: e.target.value })}
                                 feedback={
                                     this.state.password === ""
-                                        ? "Please input the password"
-                                        : null
+                                        ? "Please input a password"
+                                        : "Please input a valid password (At least 1 uppercase, 1 lowercase, 1 number, 1 special character, and a minimum of 8 characters)"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.password === ""
-                                        : null
+                                        ? !this.isPassword(this.state.password)
+                                        : !(
+                                            this.isPassword(this.state.password) ||
+                                            this.state.password === ""
+                                        )
                                 }
                             />
                         </Form.Group>
@@ -161,12 +174,12 @@ class CreateAccountCard extends Component {
                                 feedback={
                                     this.state.confirmPassword === ""
                                         ? "Please confirm the password"
-                                        : null
+                                        : "Password does not match"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
                                         ? this.state.confirmPassword === ""
-                                        : null
+                                        : !(this.state.confirmPassword === this.state.password)
                                 }
                             />
                         </Form.Group>
