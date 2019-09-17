@@ -43,7 +43,7 @@ class CreateAccountCard extends Component {
     };
 
     isPassword = password => {
-        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})")
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
         return regex.test(String(password))
     }
 
