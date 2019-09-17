@@ -170,11 +170,11 @@ class CreateAccountCard extends Component {
                                 feedback={
                                     this.state.confirmPassword === ""
                                         ? "Please confirm the password"
-                                        : null
+                                        : "Passwords do not match"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
-                                        ? this.state.confirmPassword === ""
+                                        ? this.state.confirmPassword === "" || (this.state.confirmPassword !== this.state.password)
                                         : null
                                 }
                             />
