@@ -33,6 +33,7 @@ class CreateAccountCard extends Component {
             this.state.firstName !== "" &&
             this.state.lastName !== "" &&
             this.state.phoneNumber !== "" &&
+            this.isPassword(this.state.password) &&
             this.state.password !== "" &&
             this.state.confirmPassword === this.state.password
         );
@@ -42,14 +43,10 @@ class CreateAccountCard extends Component {
         return regex.test(String(email).toLowerCase());
     };
 
-    isPassword = pw => {
-        // Requires at least one digit, one uppercase, one lowercase, one special character
-        var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&])[0-9a-zA-Z!@#$%^&]{8,}$/;
-        console.log("password is: ")
-        console.log(pw)
-        console.log(regex.test(String(pw)))
-        return regex.test(String(pw));
-    };
+    isPassword = password => {
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
+        return regex.test(String(password))
+    }
 
     render() {
         const { ContainerStyle, IsAdmin, CancelClicked } = this.props;
@@ -93,6 +90,7 @@ class CreateAccountCard extends Component {
                         </Form.Group>
                         <Form.Group label="Phone Number">
                             <NumberFormat
+                                allowLeadingZeros={true}
                                 displayType={"input"}
                                 customInput={Form.Input}
                                 placeholder="Phone Number"
@@ -174,7 +172,7 @@ class CreateAccountCard extends Component {
                                 feedback={
                                     this.state.confirmPassword === ""
                                         ? "Please confirm the password"
-                                        : "Password does not match"
+                                        : "Passwords do not match"
                                 }
                                 invalid={
                                     this.state.isSubmitClicked
