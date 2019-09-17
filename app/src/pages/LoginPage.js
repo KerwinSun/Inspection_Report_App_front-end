@@ -20,6 +20,16 @@ class LoginPage extends Component {
       });
   }
 
+  createClicked = () => {
+    console.log("can this work?");
+    // this.setState({ loggedIn: true });
+    // const { from } = this.props.location.state || {
+    //   from: { pathname: "/create" }
+    // };
+    // return <Redirect to={"/create"} />;
+    this.props.history.push("/create")
+  }
+
   render() {
     const { from } = this.props.location.state || {
       from: { pathname: "/home" }
@@ -67,7 +77,7 @@ class LoginPage extends Component {
                 errors={errors}
                 touched={touched}
               />
-              <button className="create" type="submit" disabled={isSubmitting}>
+              <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked}>
                 Create Account
               </button>
               <button className="create" type="submit" disabled={isSubmitting} onClick={() => this.props.history.push("/usermanage")}>
