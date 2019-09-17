@@ -41,7 +41,7 @@ class AdminCreatePage extends Component {
     render() {
         return (
             <SiteWrapper>
-                <Page.Content title="New User">
+                <Page.Content title="Manage User">
                     <div className="login">
                         <CreateAccountCard
                             IsAdmin={true} // default false - for client creation page

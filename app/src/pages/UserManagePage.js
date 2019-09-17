@@ -3,6 +3,11 @@ import { Card } from "tabler-react";
 import UserTable from "../components/UserTable";
 import API from "../api";
 import Loader from "react-loader-spinner";
+import SiteWrapper from "../SiteWrapper";
+import { Page, } from "tabler-react";
+import CreateAccountCard from "../components/CreateAccountCard";
+import "../components/Custom.css"
+
 class UserManagePage extends React.Component {
   constructor(props) {
     super(props);
@@ -44,13 +49,15 @@ class UserManagePage extends React.Component {
     });
   };
 
+  createClicked = () => {
+    console.log("can this work?");
+
+  }
+
   render() {
     return (
-      <div>
-        <h1>Admin</h1>
-        <p>This page can only be accessed by administrators.</p>
-        <div>
-          All users from secure (admin only) api end point:
+      <SiteWrapper>
+        <Page.Content title="Manage User">
           <Card>
             <Card.Header>
               <Card.Title>Users</Card.Title>
@@ -64,6 +71,9 @@ class UserManagePage extends React.Component {
                   onChange={this.filterOnChange}
                 />
               </div>
+              <button className="create" type="submit" onClick={this.createClicked}>
+                Create Account
+              </button>
             </Card.Header>
             {this.state.isLoaded ? (
               <UserTable
@@ -71,20 +81,20 @@ class UserManagePage extends React.Component {
                 componentDidMount={this.componentDidMount}
               />
             ) : (
-              <Card.Body>
-                <div className="btn-list text-center">
-                  <Loader
-                    type="ThreeDots"
-                    color="#316CBE"
-                    height={30}
-                    width={30}
-                  />
-                </div>
-              </Card.Body>
-            )}
+                <Card.Body>
+                  <div className="btn-list text-center">
+                    <Loader
+                      type="ThreeDots"
+                      color="#316CBE"
+                      height={30}
+                      width={30}
+                    />
+                  </div>
+                </Card.Body>
+              )}
           </Card>
-        </div>
-      </div>
+        </Page.Content>
+      </SiteWrapper>
     );
   }
 }

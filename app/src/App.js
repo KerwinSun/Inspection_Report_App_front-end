@@ -50,7 +50,7 @@ class App extends Component {
           />
           <Route exact path="/logout" component={LogoutPage} />
           <Route exact path="/create" component={CreatePage} />
-          <Route exact path="/admin-create" component={AdminCreate} />
+          <Route exact path="/manage-user" component={UserManagePage} />
           <PrivateRoute exact path="/" component={HomePage} />
           <Route
             exact
