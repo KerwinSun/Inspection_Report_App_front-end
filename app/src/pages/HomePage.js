@@ -86,7 +86,7 @@ class Home extends Component {
     if (this.state.account.accountType === "Client") {
       return (
         <SiteWrapper>
-          <Page.Content title="Dashboard Client">
+          <Page.Content title="Dashboard">
             <Grid.Row cards={true}>
               <Grid.Col>
                 <Card>
@@ -241,15 +241,6 @@ class Home extends Component {
                 </Card>
               </Grid.Col>
             </Grid.Row>
-            <Button.List align="center">
-              <Button
-                RootComponent="a"
-                onClick={() => this.props.history.push("/new-inspection")}
-                color="secondary"
-              >
-                Begin New Inspection
-              </Button>
-            </Button.List>
           </Page.Content>
         </SiteWrapper>
       );

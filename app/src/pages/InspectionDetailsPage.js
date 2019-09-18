@@ -43,7 +43,7 @@ class InspectionDetailsPage extends Component {
     if (this.state.account.accountType === "Client") {
       return (
         <SiteWrapper>
-          <Page.Content title="New inspection">
+          <Page.Content title="New Inspection">
             <Grid.Row cards={true}>
               <Grid.Col width={12} lg={6}>
                 <Card title="Inspection Information">
@@ -129,7 +129,7 @@ class InspectionDetailsPage extends Component {
     } else {
       return (
         <SiteWrapper>
-          <Page.Content title="New inspection">
+          <Page.Content title="New Inspection">
             <Grid.Row cards={true}>
               <Grid.Col width={12} lg={6}>
                 <Card title="Inspection Information">
@@ -382,7 +382,8 @@ class InspectionDetailsPage extends Component {
     API.postHouse(json)
       .then(id => {
         this.setState({ isLoaded: true });
-        this.props.history.push("/inspect/" + id);
+        // this.props.history.push("/inspect/" + id);
+        this.props.history.push("/home");
       })
       .catch(error => {});
   };
