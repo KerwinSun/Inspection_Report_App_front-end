@@ -162,7 +162,7 @@ class Home extends Component {
                 onClick={() => this.props.history.push("/new-inspection")}
                 color="secondary"
               >
-                Begin New Inspection
+                Request Inspection
               </Button>
             </Button.List>
           </Page.Content>
