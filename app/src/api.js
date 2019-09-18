@@ -8,6 +8,15 @@ const axiosInstance = axios.create({
 });
 
 export default {
+  getHouses() {
+    let payload = {
+      url: "/house",
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    });
+  },
   getHouse(houseId) {
     let payload = {
       url: "/house/" + houseId,
@@ -78,7 +87,9 @@ export default {
         "feature-id": featureId
       }
     };
-    return axiosInstance(payload).then().catch();
+    return axiosInstance(payload)
+      .then()
+      .catch();
   },
   getImages(featureId) {
     let payload = {
@@ -113,14 +124,14 @@ export default {
     let payload = {
       url: "/export/" + houseId,
       method: "GET",
-      responseType: 'blob',
+      responseType: "blob"
     };
     return axiosInstance(payload)
       .then(response => {
         const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
+        const link = document.createElement("a");
         link.href = url;
-        link.setAttribute('download', 'InspectionReport_' + houseId + '.pdf');
+        link.setAttribute("download", "InspectionReport_" + houseId + ".pdf");
         document.body.appendChild(link);
         link.click();
       })

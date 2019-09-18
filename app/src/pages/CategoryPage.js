@@ -7,6 +7,7 @@ import API from "../api.js";
 import { commentOptions } from "../config";
 import Loader from "react-loader-spinner";
 import update from "immutability-helper";
+import store from "store";
 
 class CategoryPage extends Component {
   constructor(props) {
@@ -143,16 +144,28 @@ class CategoryPage extends Component {
   };
 
   saveHouse = isComplete => {
+    var userObject = {
+      UserId: store.get("user").id
+    };
     if (!this.state.house.completed && isComplete) {
       this.setState(
         {
           house: update(this.state.house, {
-            completed: { $set: isComplete }
+            completed: { $set: isComplete },
+            inspectedBy: { $set: [userObject] }
           })
         },
         () => this.postHouse()
       );
     } else {
+      this.setState(
+        {
+          house: update(this.state.house, {
+            inspectedBy: { $set: [userObject] }
+          })
+        },
+        () => this.postHouse()
+      );
       this.postHouse();
     }
   };
