@@ -1,8 +1,8 @@
 import React from "react";
+import { Button } from "tabler-react";
 import Modal from "react-bootstrap/Modal";
-import { Card, Button, Form } from "tabler-react";
-import NumberFormat from "react-number-format";
-import API from "../api";
+
+
 class DialogBox extends React.Component {
   constructor(props, context) {
     super(props, context);

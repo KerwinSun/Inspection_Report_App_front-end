@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CreateAccountCard from "../components/CreateAccountCard";
 import DialogBox from "../components/DialogBox"
-import AdminCreateUserModal from "../components/AdminCreateUserModal"
 import API from "../api";
 
 
