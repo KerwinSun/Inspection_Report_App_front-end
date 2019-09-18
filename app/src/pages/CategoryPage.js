@@ -144,19 +144,20 @@ class CategoryPage extends Component {
   };
 
   saveHouse = isComplete => {
+    var userObject = {
+      UserId: store.get("user").id
+    };
     if (!this.state.house.completed && isComplete) {
       this.setState(
         {
           house: update(this.state.house, {
-            completed: { $set: isComplete }
+            completed: { $set: isComplete },
+            inspectedBy: { $set: [userObject] }
           })
         },
         () => this.postHouse()
       );
     } else {
-      var userObject = {
-        UserId: store.get("user").id
-      };
       this.setState(
         {
           house: update(this.state.house, {
