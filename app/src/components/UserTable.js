@@ -60,7 +60,7 @@ class UserTable extends React.Component {
                   >
                     Edit
                   </Button>
-                </Table.Col>
+                </Table.Col> {}
                 {this.state.showModal ? (
                   <UserEditModal
                     togggleShowModal={this.togggleShowModal}
