@@ -6,7 +6,7 @@ Our team, "Scrumpies," is building a tool for the company Hitch Building Inspect
 
 ## Build Status
 
-Master branch: [![Build Status](https://travis-ci.com/Karim-C/Inspection_Report_App_front-end.svg?token=aUW8TwnwNhqKCHbwaCXT&branch=master)](https://travis-ci.com/Karim-C/Inspection_Report_App_front-end)
+Master branch: [![Build Status](https://travis-ci.com/KerwinSun/Inspection_Report_App_front-end.svg?token=c3caqrCK8sioyXRUrirP&branch=master)](https://travis-ci.com/KerwinSun/Inspection_Report_App_front-end)
 
 ## Quick start
 
