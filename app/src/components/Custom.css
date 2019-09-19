@@ -216,3 +216,15 @@ div.client_create {
   padding: 70px;
   width: 40%;
 }
+
+div.inspection-board {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
