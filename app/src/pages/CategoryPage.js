@@ -97,7 +97,7 @@ class CategoryPage extends Component {
               className="ml-auto"
               onClick={this.saveHouse.bind(this, true)}
             >
-              Finish Inspection
+              Finish and Email Inspection
             </Button>
           </div>
         </Page.Content>
@@ -147,7 +147,7 @@ class CategoryPage extends Component {
     var userObject = {
       UserId: store.get("user").id
     };
-    if (!this.state.house.completed && isComplete) {
+    if (isComplete) {
       this.setState(
         {
           house: update(this.state.house, {
@@ -155,7 +155,10 @@ class CategoryPage extends Component {
             inspectedBy: { $set: [userObject] }
           })
         },
-        () => this.postHouse()
+        () => {
+          this.postHouse();
+          this.emailHouse();
+        }
       );
     } else {
       this.setState(
@@ -169,6 +172,16 @@ class CategoryPage extends Component {
       this.postHouse();
     }
   };
+
+  emailHouse() {
+    API.getReportEmail(this.props.match.params.id)
+    .then(res => {
+        console.log(res);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }
 
   postHouse() {
     API.postHouse(this.state.house)
