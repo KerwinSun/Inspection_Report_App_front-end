@@ -117,7 +117,10 @@ class Home extends Component {
                     <Card.Title>In Progress Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.wipHouses} />
+                    <HouseTable 
+                    houses={this.state.wipHouses}
+                    accountType={this.state.account.accountType}
+                    />
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
