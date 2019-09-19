@@ -9,9 +9,8 @@ class CreatePage extends Component {
     super(props);
     this.state = {
       isLoaded: false,
-      empData: [],
-      ogData: [],
       showModal: false,
+      errorMessage: ""
     };
   }
 
@@ -30,7 +29,7 @@ class CreatePage extends Component {
                   <DialogBox
                   togggleShowModal={this.togggleShowModal}
                   dialogOkClick = {this.dialogOkClick}
-                  title={"Account Created."}
+                  title={this.state.errorMessage}
                   /> 
                 ) : null}
        
@@ -77,10 +76,15 @@ class CreatePage extends Component {
       .then(res => {
        
         this.setState({
+          errorMessage: "Account Created.",
           showModal: true,
         });
       })
       .catch(error => {
+        this.setState({
+          errorMessage: "Account Creation failed.",
+          showModal: true,
+        });
         console.log(error);
       });
   }
