@@ -148,7 +148,7 @@ export default {
       return res.data;
     })
     .catch(err => {
-      return error;
+      return err;
     })
   },
   login(email, password) {
