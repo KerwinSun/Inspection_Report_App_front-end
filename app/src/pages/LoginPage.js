@@ -79,7 +79,7 @@ class LoginPage extends Component {
               />
               {this.state.showErrorModal ? (
                         <Alert type="danger" icon="alert-triangle">
-                            Invalid information
+                            Incorrect email address or password
                         </Alert>) :
                         null}
               <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked}>
