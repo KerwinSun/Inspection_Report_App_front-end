@@ -66,7 +66,6 @@ class LoginPage extends Component {
           handleChange,
           handleBlur,
           handleSubmit,
-          isSubmitting
         }) => (
             <div className="login">
               <TablerLoginPage
@@ -82,7 +81,7 @@ class LoginPage extends Component {
                             Incorrect email address or password
                         </Alert>) :
                         null}
-              <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked}>
+              <button className="create" type="submit" onClick={this.createClicked}>
                 Create Account
               </button>
             </div>
