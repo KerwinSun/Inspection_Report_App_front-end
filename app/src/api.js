@@ -139,6 +139,18 @@ export default {
         return error;
       });
   },
+  getReportEmail(houseId) {
+    let payload = {
+      url: "/export/email/" + houseId,
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return error;
+    })
+  },
   login(email, password) {
     var payload = {
       data: {
