@@ -54,11 +54,12 @@ class UserTable extends React.Component {
     }
     api.disableAccount(userData)
       .then(res => {
-        this.props.componentDidMount
+        this.props.componentDidMount();
       })
       .catch(error => {
         console.log(error);
       });
+    this.forceUpdate();
   }
 
   disableButton(user) {
