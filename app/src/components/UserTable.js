@@ -2,6 +2,7 @@ import React from "react";
 import { Table, Button } from "tabler-react";
 import UserEditModal from "./UserEditModal";
 import ChangePasswordModal from "./ChangePasswordModal"
+import api from "../api";
 
 class UserTable extends React.Component {
   constructor(props) {
@@ -34,11 +35,40 @@ class UserTable extends React.Component {
     });
   }
 
-  disableButtonClicked(buttonId) {
+  pwButtonClicked(buttonId) {
     this.setState({
       showPwModal: true,
       id: buttonId
     })
+  }
+
+  disableButtonClicked(user) {
+    let userData = {
+      id : user.id,
+      firstName : user.firstName,
+      lastName : user.lastName,
+      phoneNumber : user.phoneNumber,
+      emailAddress : user.emailAddress,
+      password : user.password,
+      accountType : user.accountType
+    }
+    api.disableAccount(userData)
+      .then(res => {
+        this.props.componentDidMount
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  disableButton(user) {
+    let button;
+    if(user.isDisabled) {
+      button = <Button color="success" onClick={() => this.disableButtonClicked(user)} id={user.id}>Enable</Button>
+    } else {
+      button = <Button color="danger" onClick={() => this.disableButtonClicked(user)} id={user.id}>Disable</Button>
+    }
+    return button;
   }
 
   render() {
@@ -78,13 +108,13 @@ class UserTable extends React.Component {
                       Edit
                     </Button>
                     <Button
-                      color="danger"
-                      icon="trash"
-                      onClick={() => this.disableButtonClicked(user.id)}
+                      color="info"
+                      onClick={() => this.pwButtonClicked(user.id)}
                       id={user.id}
                     >
-                      Disable
+                      Change Password
                     </Button>
+                    {this.disableButton(user)}
                   </Button.List>
                 </Table.Col> {}
                 {this.state.showModal ? (

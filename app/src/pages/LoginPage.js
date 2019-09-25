@@ -8,16 +8,22 @@ import "../components/Custom.css"
 class LoginPage extends Component {
   state = {
     loggedIn: false,
-    showErrorModal: false
+    showErrorModal: false,
+    showDisabledModal: false
   };
   login(email, password) {
     api
       .login(email, password)
       .then(res => {
-        this.setState({ loggedIn: true });
+        // console.log(res);
+        if (res === "Disabled") {
+          this.setState({showDisabledModal: true});
+        } else {
+          this.setState({ loggedIn: true });
+        }
       })
       .catch(error => {
-        // console.log(error.response);
+        // console.log(error);
         if (error.response.status === 401){
           this.setState({showErrorModal: true})
         }
@@ -82,6 +88,11 @@ class LoginPage extends Component {
                             Incorrect email address or password
                         </Alert>) :
                         null}
+              {this.state.showDisabledModal ? (
+                <Alert type="danger" icon="alert-triangle">
+                  Account Disabled
+                </Alert>
+              ) : null}
               <button className="create" type="submit" disabled={isSubmitting} onClick={this.createClicked}>
                 Create Account
               </button>
