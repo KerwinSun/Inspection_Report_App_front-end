@@ -11,8 +11,10 @@ const HouseTable = ({ houses, accountType, houseState }) => {
                         <div className="inspection-board">
                             {house.inspectionDate.substring(0, 10).split("-").reverse().join("/")}
 
-                            {accountType === "Client" && houseState !== "pending"? <a>{house.address}</a> : <a href={"/inspect/" + house.id}>{house.address}</a>}
-                        
+                            {accountType !== "Client" ? <a href={"/inspect/" + house.id}>{house.address}</a> : ""}
+                            {accountType === "Client" && houseState === "pending"? <a href={"/new-inspection"}>{house.address}</a> : ""}
+                            {accountType === "Client" && houseState !== "pending"? <a>{house.address}</a> : ""}
+                            
                             {houseState === "completed" || accountType !== "Client" && houseState !== "pending" ? <ReportSharing house={house}></ReportSharing> : ""}
                         </div>
                     </Table.Row>
