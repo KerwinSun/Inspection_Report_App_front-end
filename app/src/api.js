@@ -68,6 +68,16 @@ export default {
       return response.data.id;
     });
   },
+  changePassword(json) {
+    let payload = {
+      data: json,
+      url: "/auth/changePw",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
   postHouse(json) {
     let payload = {
       data: json,

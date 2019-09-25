@@ -1,15 +1,18 @@
 import React from "react";
 import { Table, Button } from "tabler-react";
 import UserEditModal from "./UserEditModal";
+import ChangePasswordModal from "./ChangePasswordModal"
 
 class UserTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       showModal: false,
+      showPwModal: false,
       id: null
     };
     this.togggleShowModal = this.togggleShowModal.bind(this);
+    this.toggleShowPwModal = this.toggleShowPwModal.bind(this);
   }
 
   togggleShowModal = () => {
@@ -18,11 +21,24 @@ class UserTable extends React.Component {
     }));
   };
 
+  toggleShowPwModal = () => {
+    this.setState(prevState => ({
+      showPwModal: !prevState.showPwModal
+    }));
+  };
+
   editButtonClicked(buttonId) {
     this.setState({
       showModal: true,
       id: buttonId
     });
+  }
+
+  disableButtonClicked(buttonId) {
+    this.setState({
+      showPwModal: true,
+      id: buttonId
+    })
   }
 
   render() {
@@ -53,18 +69,35 @@ class UserTable extends React.Component {
                   {user.accountType}
                 </Table.Col>
                 <Table.Col alignContent={"center"}>
-                  <Button
-                    variant="primary"
-                    onClick={() => this.editButtonClicked(user.id)}
-                    id={user.id}
-                  >
-                    Edit
-                  </Button>
+                  <Button.List align="center">
+                    <Button
+                      color="primary"
+                      onClick={() => this.editButtonClicked(user.id)}
+                      id={user.id}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      color="danger"
+                      icon="trash"
+                      onClick={() => this.disableButtonClicked(user.id)}
+                      id={user.id}
+                    >
+                      Disable
+                    </Button>
+                  </Button.List>
                 </Table.Col> {}
                 {this.state.showModal ? (
                   <UserEditModal
                     togggleShowModal={this.togggleShowModal}
                     user={this.props.users.find(x => x.id === this.state.id)}
+                    componentDidMount={this.props.componentDidMount}
+                  />
+                ) : null}
+                {this.state.showPwModal ? (
+                  <ChangePasswordModal
+                    toggleShowPwModal={this.toggleShowPwModal}
+                    user={this.props.users.find(x=> x.id === this.state.id)}
                     componentDidMount={this.props.componentDidMount}
                   />
                 ) : null}
