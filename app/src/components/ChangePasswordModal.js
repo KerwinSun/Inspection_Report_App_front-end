@@ -53,8 +53,8 @@ class ChangePasswordModal extends React.Component {
   render() {
     return (
       <Modal show={this.state.show} onHide={this.props.toggleShowPwModal}>
-        <Modal.Header closeButton>
-          <Modal.Title>Disable Account</Modal.Title>
+        <Modal.Header>
+          <Modal.Title>Change Password</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Card>
@@ -104,7 +104,7 @@ class ChangePasswordModal extends React.Component {
             Cancel
           </Button>
           <Button variant="primary" onClick={this.saveChanges}>
-            Disable
+            Save new password
           </Button>
         </Modal.Footer>
       </Modal>
