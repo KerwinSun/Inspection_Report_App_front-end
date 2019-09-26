@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import CreateAccountCard from "../components/CreateAccountCard";
-import DialogBox from "../components/DialogBox"
+import DialogBox from "../components/DialogBox";
+import { Alert } from "tabler-react";
 import API from "../api";
 
 
@@ -10,7 +11,8 @@ class CreatePage extends Component {
     this.state = {
       isLoaded: false,
       showModal: false,
-      errorMessage: ""
+      errorMessage: "",
+      showAlert: false
     };
   }
 
@@ -32,7 +34,12 @@ class CreatePage extends Component {
                   title={this.state.errorMessage}
                   /> 
                 ) : null}
-       
+
+      {this.state.showAlert ? (
+        <Alert type="danger" icon="alert-triangle">
+          Account already registered
+        </Alert>
+      ) : null}
       </div>
       
     );
@@ -58,10 +65,15 @@ class CreatePage extends Component {
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   }
+
   dialogOkClick = () => {
-    
-    this.props.history.push("/login")
+    if(this.state.errorMessage === "Account Created.") {
+      this.props.history.push("/login")
+    } else {
+      this.togggleShowModal();
+    }
   }
+
   handleClick = (userInfo) => {
     
     let userData = {
@@ -72,21 +84,34 @@ class CreatePage extends Component {
       Email: userInfo.emailAddress,
       AccountType: userInfo.accountType,
     };
-    API.createAccount(userData)
+    API.checkAccount(userInfo.emailAddress)
       .then(res => {
-       
+        // valid account (unregistered)
         this.setState({
-          errorMessage: "Account Created.",
-          showModal: true,
+          showAlert: false
         });
+        API.createAccount(userData)
+          .then(res => {
+            if (res !== "User created failed") {
+              this.setState({errorMessage: "Account Created."})
+            } else {
+              this.setState({errorMessage: "Account creation failed."})
+            }
+            this.setState({showModal: true});
+          })
+          .catch(error => {
+            this.setState({
+              errorMessage: "Account creation failed.",
+              showModal: true
+            })
+          })
       })
       .catch(error => {
+        // invalid account (registered)
         this.setState({
-          errorMessage: "Account Creation failed.",
-          showModal: true,
+          showAlert: true
         });
-        console.log(error);
-      });
+      })
   }
   cancelClick = () => {
     this.props.history.push("/login")
