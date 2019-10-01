@@ -79,7 +79,8 @@ export default {
     };
     return axiosInstance(payload).then(response => {
       return response.data;
-    })    
+    });
+  },    
 
   changePassword(json) {
     let payload = {
