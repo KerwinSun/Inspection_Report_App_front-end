@@ -65,9 +65,22 @@ export default {
       json: true
     };
     return axiosInstance(payload).then(response => {
-      return response.data.id;
+      return response.data;
     });
   },
+
+  checkAccount(email) {
+    let payload = {
+      data: {
+        email: email
+      },
+      url: "/auth/checkAcc",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data;
+    })    
+
   changePassword(json) {
     let payload = {
       data: json,

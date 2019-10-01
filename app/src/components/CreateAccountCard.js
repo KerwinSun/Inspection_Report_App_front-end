@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Card, Button, Form, Alert } from "tabler-react";
 import "./Custom.css";
-import Loader from "react-loader-spinner";
+// import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import propTypes from 'prop-types';
 import { accountTypes } from "../config";
@@ -188,16 +188,17 @@ class CreateAccountCard extends Component {
                         <Alert type="danger" icon="alert-triangle">
                             Invalid information
                         </Alert>
-                    ) : this.state.isLoaded ? null : (
-                     <div className="btn-list text-center">
-                       <Loader
-                           type="ThreeDots"
-                          color="#316CBE"
-                         height={30}
-                         width={30}
-                       />
-                     </div>
-                )
+                    ) : null
+                //     ) : this.state.isLoaded ? null : (
+                //      <div className="btn-list text-center">
+                //        <Loader
+                //            type="ThreeDots"
+                //           color="#316CBE"
+                //          height={30}
+                //          width={30}
+                //        />
+                //      </div>
+                // )
                 ) : null}
                 <Button
                 onClick={() => {
