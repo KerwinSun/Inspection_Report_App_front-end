@@ -68,6 +68,26 @@ export default {
       return response.data.id;
     });
   },
+  changePassword(json) {
+    let payload = {
+      data: json,
+      url: "/auth/changePw",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
+  disableAccount(json) {
+    let payload = {
+      data: json,
+      url: "/auth/disable",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
   postHouse(json) {
     let payload = {
       data: json,
@@ -161,8 +181,12 @@ export default {
       method: "POST"
     };
     return axiosInstance(payload).then(res => {
-      store.set("user", res.data);
-      store.set("loggedIn", true);
+      if (res.data !== "Disabled") {
+        store.set("user", res.data);
+        store.set("loggedIn", true);
+      } else {
+        return res.data;
+      }
     });
   },
   isUserAuthenticated() {
