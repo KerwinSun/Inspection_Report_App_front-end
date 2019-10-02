@@ -70,6 +70,7 @@ class ReportSharing extends Component {
               disabled={!this.state.isLoaded}
             >
               <Icon prefix="fe" name="download" />
+              Download Report
             </Button>
             {/* ADD ONCE REPORTS CAN BE STORED IN BACKEND
             {isMobile ? (

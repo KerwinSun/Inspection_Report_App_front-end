@@ -65,6 +65,40 @@ export default {
       json: true
     };
     return axiosInstance(payload).then(response => {
+      return response.data;
+    });
+  },
+
+  checkAccount(email) {
+    let payload = {
+      data: {
+        email: email
+      },
+      url: "/auth/checkAcc",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data;
+    });
+  },    
+
+  changePassword(json) {
+    let payload = {
+      data: json,
+      url: "/auth/changePw",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
+      return response.data.id;
+    });
+  },
+  disableAccount(json) {
+    let payload = {
+      data: json,
+      url: "/auth/disable",
+      method: "POST"
+    };
+    return axiosInstance(payload).then(response => {
       return response.data.id;
     });
   },
@@ -161,8 +195,12 @@ export default {
       method: "POST"
     };
     return axiosInstance(payload).then(res => {
-      store.set("user", res.data);
-      store.set("loggedIn", true);
+      if (res.data !== "Disabled") {
+        store.set("user", res.data);
+        store.set("loggedIn", true);
+      } else {
+        return res.data;
+      }
     });
   },
   isUserAuthenticated() {

@@ -90,7 +90,7 @@ class UserEditModal extends React.Component {
   render() {
     return (
       <Modal show={this.state.show} onHide={this.props.togggleShowModal}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Edit Account</Modal.Title>
         </Modal.Header>
         <Modal.Body>

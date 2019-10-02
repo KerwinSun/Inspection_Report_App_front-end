@@ -2,17 +2,19 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import API from "../api";
 import CreateAccountCard from "./CreateAccountCard";
+import { Alert } from "tabler-react";
+
 class AdminCreateUserModal extends React.Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
             show: true,
+            showAlert: false,
+            errorMessage: ""
         };
     }
 
     handleClick = (userInfo) => {
-        console.log(userInfo)
-        console.log("added")
         let userData = {
             FirstName: userInfo.firstName,
             LastName: userInfo.lastName,
@@ -21,16 +23,39 @@ class AdminCreateUserModal extends React.Component {
             Email: userInfo.emailAddress,
             AccountType: userInfo.accountType,
         };
-        console.log(userData)
-        API.createAccount(userData)
+
+        API.checkAccount(userInfo.emailAddress)
             .then(res => {
-                this.props.componentDidMount();
+                // valid account (unregistered)
+                this.setState({showAlert: false});
+                API.createAccount(userData)
+                .then(res => {
+                    if (res === "User created failed") {
+                        this.setState({
+                            errorMessage: "Account creation failed.",
+                            showAlert: true
+                        })
+                    } else {
+                        this.props.componentDidMount();
+                        this.setState({ show: false});
+                        this.props.toggleShowModal();
+                    }
+                })
+                .catch(error => {
+                    this.setState({
+                        errorMessage: "Account creation failed.",
+                        showAlert: true
+                    })
+                })
             })
             .catch(error => {
-                console.log(error);
-            });
-        this.setState({ show: false });
-        this.props.togggleShowModal();
+                // invalid account (registered)
+                this.setState({
+                    errorMessage: "Account already registered",
+                    showAlert: true
+                });
+            })
+
     }
 
     render() {
@@ -47,6 +72,11 @@ class AdminCreateUserModal extends React.Component {
                             CancelClicked={this.props.togggleShowModal}
                             ContainerStyle="admin_create"
                         />
+                        {this.state.showAlert ? (
+                            <Alert type="danger" icon="alert-triangle">
+                                {this.state.errorMessage}
+                            </Alert>
+                        ) : null}
                     </div>
                 </Modal.Body>
             </Modal>
