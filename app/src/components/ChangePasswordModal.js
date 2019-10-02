@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Card, Button, Form } from "tabler-react";
 import API from "../api";
+import AlertModal from "./AlertModal";
 
 class ChangePasswordModal extends React.Component {
   constructor(props, context) {
@@ -13,10 +14,12 @@ class ChangePasswordModal extends React.Component {
       show: true,
       password: "",
       confirmPassword: "",
-      isSubmitClicked: false
+      isSubmitClicked: false,
+      showAlert: false
     };
 
     this.isInputValid = this.isInputValid.bind(this);
+    this.toggleAlertModal = this.toggleAlertModal.bind(this);
   }
 
   isInputValid = () => {
@@ -48,6 +51,18 @@ class ChangePasswordModal extends React.Component {
       this.setState({ show: false });
       this.props.toggleShowPwModal();
     }
+  }
+
+  toggleAlertModal = () => {
+    this.setState(prevState => ({
+      showAlert: !prevState.showAlert
+    }));
+  };
+
+  saveButtonClicked() {
+    this.setState({
+      showAlert: true,
+    });
   }
 
   render() {
@@ -98,12 +113,19 @@ class ChangePasswordModal extends React.Component {
              </Form.Group>
             </Card.Body>
           </Card>
+          {this.state.showAlert ? (
+                  <AlertModal
+                    toggleAlertModal={this.toggleAlertModal}
+                    proceedClicked={this.saveChanges}
+                    componentDidMount={this.props.componentDidMount}
+                  />
+                ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.toggleShowPwModal}>
             Cancel
           </Button>
-          <Button variant="primary" onClick={this.saveChanges}>
+          <Button variant="primary" onClick={() => this.saveButtonClicked()}>
             Save new password
           </Button>
         </Modal.Footer>

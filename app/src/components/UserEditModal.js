@@ -24,7 +24,6 @@ class UserEditModal extends React.Component {
 
     this.isInputValid = this.isInputValid.bind(this);
     this.toggleAlertModal = this.toggleAlertModal.bind(this);
-    this.proceedClicked = this.proceedClicked.bind(this);
   }
 
   isInputValid = () => {
@@ -80,11 +79,6 @@ class UserEditModal extends React.Component {
     this.setState({
       showAlert: true,
     });
-  }
-
-  proceedClicked() {
-    // Generic function to be called from AlertModal.js when proceed is called -- link to action in current page
-    this.saveChanges()
   }
 
   render() {
@@ -188,7 +182,7 @@ class UserEditModal extends React.Component {
           {this.state.showAlert ? (
                   <AlertModal
                     toggleAlertModal={this.toggleAlertModal}
-                    proceedClicked={this.proceedClicked}
+                    proceedClicked={this.saveChanges}
                     componentDidMount={this.props.componentDidMount}
                   />
                 ) : null}
