@@ -13,7 +13,8 @@ class Home extends Component {
       wipHouses: [],
       completedHouses: [],
       isLoaded: false,
-      account: {}
+      account: {},
+      houseState: ""
     };
   }
 
@@ -94,7 +95,9 @@ class Home extends Component {
                     <Card.Title>Pending Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.pendingHouses} />
+                    <HouseTable houses={this.state.pendingHouses}
+                    accountType={this.state.account.accountType}
+                    houseState="pending"/>
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
@@ -120,6 +123,7 @@ class Home extends Component {
                     <HouseTable 
                     houses={this.state.wipHouses}
                     accountType={this.state.account.accountType}
+                    houseState="inprogress"
                     />
                   ) : (
                     <Card.Body>
@@ -143,7 +147,9 @@ class Home extends Component {
                     <Card.Title>Completed Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.completedHouses} />
+                    <HouseTable houses={this.state.completedHouses}
+                    accountType={this.state.account.accountType} 
+                    houseState="completed"/>
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
@@ -182,7 +188,9 @@ class Home extends Component {
                     <Card.Title>Available Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.pendingHouses} />
+                    <HouseTable houses={this.state.pendingHouses} 
+                    accountType={this.state.account.accountType} 
+                    houseState="pending"/>
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
@@ -205,7 +213,9 @@ class Home extends Component {
                     <Card.Title>Inspections in Progress</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.wipHouses} />
+                    <HouseTable houses={this.state.wipHouses}
+                    accountType={this.state.account.accountType} 
+                    houseState="inprogress"/>
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
@@ -228,7 +238,9 @@ class Home extends Component {
                     <Card.Title>Completed Inspections</Card.Title>
                   </Card.Header>
                   {this.state.isLoaded ? (
-                    <HouseTable houses={this.state.completedHouses} />
+                    <HouseTable houses={this.state.completedHouses}
+                    accountType={this.state.account.accountType} 
+                    houseState="completed"/>
                   ) : (
                     <Card.Body>
                       <div className="btn-list text-center">
