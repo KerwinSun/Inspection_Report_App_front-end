@@ -1,15 +1,7 @@
 import React from "react";
-import Modal from "react-bootstrap/Modal";
 import { Button, Alert, Header } from "tabler-react";
 
 class AlertModal extends React.Component {
-    constructor(props, context) {
-      super(props, context);
-      this.state = {
-        show: true,
-      };
-    }
-
     render() {
       return (
         <Alert type={this.props.type} icon={this.props.icon}>

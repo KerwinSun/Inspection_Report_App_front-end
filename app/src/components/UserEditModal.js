@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { Card, Button, Form, Alert, Header } from "tabler-react";
+import { Card, Button, Form } from "tabler-react";
 import NumberFormat from "react-number-format";
 import API from "../api";
 import AlertModal from "./AlertModal";
