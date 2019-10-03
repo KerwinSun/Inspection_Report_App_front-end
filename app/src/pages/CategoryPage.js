@@ -174,7 +174,12 @@ class CategoryPage extends Component {
       userObject = {
         UserId: store.get("user").id
       };
+    } else {
+      userObject ={
+        UserId: this.state.house.inspectedBy[0].userId
+      }
     }
+
     if (isComplete) {
       this.setState(
         {
@@ -184,8 +189,7 @@ class CategoryPage extends Component {
           })
         },
         () => {
-          this.postHouse();
-          this.emailHouse();
+          this.postHouse(true)
         }
       );
     } else {
@@ -195,9 +199,9 @@ class CategoryPage extends Component {
             inspectedBy: { $set: [userObject] }
           })
         },
-        () => this.postHouse()
+        () => this.postHouse(false)
       );
-      this.postHouse();
+      this.postHouse(false);
     }
   };
 
@@ -211,10 +215,13 @@ class CategoryPage extends Component {
     })
   }
 
-  postHouse() {
+  postHouse(sendEmail) {
     API.postHouse(this.state.house)
       .then(() => {
         this.props.history.push("/");
+        if(sendEmail) {
+          this.emailHouse();
+        }
       })
       .catch(error => {
         console.log(error);
