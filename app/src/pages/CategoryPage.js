@@ -168,9 +168,13 @@ class CategoryPage extends Component {
   };
 
   saveHouse = isComplete => {
-    var userObject = {
-      UserId: store.get("user").id
-    };
+    let userObject;
+    if(store.get("user").accountType !== "Admin") {
+      // Don't put admin's details on the inspection  
+      userObject = {
+        UserId: store.get("user").id
+      };
+    }
     if (isComplete) {
       this.setState(
         {
