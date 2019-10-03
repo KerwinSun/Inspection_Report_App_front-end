@@ -28,7 +28,15 @@ class HouseTable extends React.Component {
 
     checkAccountType(accountType, house, houseState) {
         let res = [];
-        if (accountType !== "Client") {
+        if (accountType === "Admin") {
+            // Unable to touch pending inspections
+            if (houseState === "pending") {
+                return <a>{house.address}</a>;
+            } else {
+                res.push(<a href={"/inspect/" + house.id}>{house.address}</a>);
+                res.push(<ReportSharing house={house}></ReportSharing>);
+            }
+        } else if (accountType === "Inspector") {
             // Inspectors should be able to edit anywhere and download in progress & completed
             res.push(<a href={"/inspect/" + house.id}>{house.address}</a>);
             if (houseState === "completed" || houseState === "inprogress") {
