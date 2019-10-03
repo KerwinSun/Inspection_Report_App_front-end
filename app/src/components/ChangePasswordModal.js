@@ -60,9 +60,11 @@ class ChangePasswordModal extends React.Component {
   };
 
   saveButtonClicked() {
-    this.setState({
-      showAlert: true,
-    });
+    if (this.isInputValid()) {
+      this.setState({
+        showAlert: true,
+      });
+    }
   }
 
   render() {
@@ -115,9 +117,12 @@ class ChangePasswordModal extends React.Component {
           </Card>
           {this.state.showAlert ? (
                   <AlertModal
-                    toggleAlertModal={this.toggleAlertModal}
-                    proceedClicked={this.saveChanges}
-                    componentDidMount={this.props.componentDidMount}
+                    type="warning"
+                    icon="bell"
+                    title="Confirmation"
+                    body="Are you sure you want to change this account's password?"
+                    backClicked={this.toggleAlertModal}
+                    confirmClicked={this.saveChanges}
                   />
                 ) : null}
         </Modal.Body>

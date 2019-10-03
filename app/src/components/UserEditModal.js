@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { Card, Button, Form } from "tabler-react";
+import { Card, Button, Form, Alert, Header } from "tabler-react";
 import NumberFormat from "react-number-format";
 import API from "../api";
 import AlertModal from "./AlertModal";
@@ -77,7 +77,7 @@ class UserEditModal extends React.Component {
 
   saveButtonClicked() {
     this.setState({
-      showAlert: true,
+      showAlert: true
     });
   }
 
@@ -180,12 +180,15 @@ class UserEditModal extends React.Component {
             </Card.Body>
           </Card>
           {this.state.showAlert ? (
-                  <AlertModal
-                    toggleAlertModal={this.toggleAlertModal}
-                    proceedClicked={this.saveChanges}
-                    componentDidMount={this.props.componentDidMount}
-                  />
-                ) : null}
+            <AlertModal
+              type="warning"
+              icon="bell"
+              title="Confirmation"
+              body="Are you sure you want to edit this account?"
+              backClicked={this.toggleAlertModal}
+              confirmClicked={this.saveChanges}
+            />
+          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.togggleShowModal}>
@@ -198,8 +201,11 @@ class UserEditModal extends React.Component {
             Save changes
           </Button>
         </Modal.Footer>
+
       </Modal>
+      
     );
+
   }
 }
 

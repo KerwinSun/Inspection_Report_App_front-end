@@ -8,7 +8,7 @@ import { commentOptions } from "../config";
 import Loader from "react-loader-spinner";
 import update from "immutability-helper";
 import store from "store";
-import AlertModal from "../components/AlertModal";
+import DialogBox from "../components/DialogBox";
 
 class CategoryPage extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class CategoryPage extends Component {
     this.state = {
       house: {},
       isLoaded: false,
-
       showAlert: false
     };
   }
@@ -117,10 +116,12 @@ class CategoryPage extends Component {
             </Button>
           </div>
           {this.state.showAlert ? (
-                  <AlertModal
-                    toggleAlertModal={this.toggleAlertModal}
-                    proceedClicked={this.saveHouse.bind(this, true)}
-                    componentDidMount={this.props.componentDidMount}
+                  <DialogBox
+                    toggleShowModal={this.toggleAlertModal}
+                    addBackButton={true}
+                    dialogCancelClick={this.toggleAlertModal}
+                    dialogOkClick={this.saveHouse.bind(this, true)}
+                    title="Are you sure you want to e-mail the inspection?"
                   />
                 ) : null}
         </Page.Content>
