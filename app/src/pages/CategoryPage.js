@@ -8,13 +8,15 @@ import { commentOptions } from "../config";
 import Loader from "react-loader-spinner";
 import update from "immutability-helper";
 import store from "store";
+import DialogBox from "../components/DialogBox";
 
 class CategoryPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
       house: {},
-      isLoaded: false
+      isLoaded: false,
+      showAlert: false
     };
   }
 
@@ -43,6 +45,18 @@ class CategoryPage extends Component {
         }
       );
     }
+  }
+
+  toggleAlertModal = () => {
+    this.setState(prevState => ({
+      showAlert: !prevState.showAlert
+    }));
+  };
+
+  saveButtonClicked() {
+    this.setState({
+      showAlert: true,
+    });
   }
 
   render() {
@@ -95,11 +109,21 @@ class CategoryPage extends Component {
               type="submit"
               color="primary"
               className="ml-auto"
-              onClick={this.saveHouse.bind(this, true)}
+              onClick={() => this.saveButtonClicked(this)}
+
             >
               Finish and Email Inspection
             </Button>
           </div>
+          {this.state.showAlert ? (
+                  <DialogBox
+                    toggleShowModal={this.toggleAlertModal}
+                    addBackButton={true}
+                    dialogCancelClick={this.toggleAlertModal}
+                    dialogOkClick={this.saveHouse.bind(this, true)}
+                    title="Are you sure you want to e-mail the inspection?"
+                  />
+                ) : null}
         </Page.Content>
       </SiteWrapper>
     );

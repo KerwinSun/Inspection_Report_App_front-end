@@ -48,6 +48,11 @@ class DialogBox extends React.Component {
         {this.props.title}
         </Modal.Body>
         <Modal.Footer>
+          {this.props.addBackButton ? (
+            <Button variant="secondary" onClick={this.props.dialogCancelClick}>
+            Back
+          </Button>
+          ) : null}
           <Button variant="primary" onClick={this.props.dialogOkClick}>
             OK
           </Button>
