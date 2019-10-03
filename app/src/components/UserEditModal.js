@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import { Card, Button, Form } from "tabler-react";
 import NumberFormat from "react-number-format";
 import API from "../api";
+import AlertModal from "./AlertModal";
+
 class UserEditModal extends React.Component {
   constructor(props, context) {
     super(props, context);
@@ -15,10 +17,13 @@ class UserEditModal extends React.Component {
       cLastName: this.props.user.lastName,
       cEmail: this.props.user.email,
       cPhone: this.props.user.phone,
-      cAccountType: this.props.user.accountType
+      cAccountType: this.props.user.accountType,
+
+      showAlert: false
     };
 
     this.isInputValid = this.isInputValid.bind(this);
+    this.toggleAlertModal = this.toggleAlertModal.bind(this);
   }
 
   isInputValid = () => {
@@ -62,6 +67,18 @@ class UserEditModal extends React.Component {
       this.setState({ show: false });
       this.props.togggleShowModal();
     }
+  }
+
+  toggleAlertModal = () => {
+    this.setState(prevState => ({
+      showAlert: !prevState.showAlert
+    }));
+  };
+
+  saveButtonClicked() {
+    this.setState({
+      showAlert: true
+    });
   }
 
   render() {
@@ -162,17 +179,33 @@ class UserEditModal extends React.Component {
               </Form.Group>
             </Card.Body>
           </Card>
+          {this.state.showAlert ? (
+            <AlertModal
+              type="warning"
+              icon="bell"
+              title="Confirmation"
+              body="Are you sure you want to edit this account?"
+              backClicked={this.toggleAlertModal}
+              confirmClicked={this.saveChanges}
+            />
+          ) : null}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={this.props.togggleShowModal}>
             Close
           </Button>
-          <Button variant="primary" onClick={this.saveChanges}>
-            Save Changes
+          <Button
+            variant="primary"
+            onClick={() => this.saveButtonClicked()}
+          >
+            Save changes
           </Button>
         </Modal.Footer>
+
       </Modal>
+      
     );
+
   }
 }
 
