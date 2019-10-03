@@ -49,7 +49,7 @@ class Home extends Component {
         .catch(error => {
           console.log(error);
         });
-    } else {
+    } else if (store.get("user").accountType === "Inspector") {
       API.getPerson(id)
         .then(res => {
           var houses = res.inspected;
@@ -80,6 +80,28 @@ class Home extends Component {
         .catch(error => {
           console.log(error);
         });
+    } else if (store.get("user").accountType === "Admin") {
+      API.getHouses().then(houses => {
+        var pendingHouses = [];
+        var wipHouses = [];
+        var completedHouses = [];
+        houses.forEach(house => {
+          if (house.inspectedBy.length === 0) {
+            pendingHouses.push(house);
+          } else {
+            house.completed
+              ? completedHouses.push(house)
+              : wipHouses.push(house);
+          }
+        });
+        this.setState({
+          pendingHouses: pendingHouses,
+          wipHouses: wipHouses,
+          completedHouses: completedHouses,
+          isLoaded: true,
+          account: store.get("user")
+        })
+      })
     }
   }
 
