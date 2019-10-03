@@ -12,11 +12,16 @@ class ChangeAddressModal extends React.Component {
     this.state = {
       show: true,
       address: "",
-      isSubmitClicked: false
+      submitClicked: false
     };
   }
 
   saveChanges() {
+
+    this.setState({
+      submitClicked: true
+    })
+
     if (this.state.address !== "") {
       let houseData = this.props.house;
       houseData.address = this.state.address;
@@ -51,11 +56,8 @@ class ChangeAddressModal extends React.Component {
                         ? "Please input an address"
                         : null
                     }
-                    invalid={
-                        this.state.isSubmitClicked
-                            ? this.state.address === ""
-                            : false
-                    }
+                    invalid={this.state.submitClicked ?
+                      this.state.address === "" : false}
                 />
               </Form.Group>
             </Card.Body>
@@ -66,7 +68,7 @@ class ChangeAddressModal extends React.Component {
             Cancel
           </Button>
           <Button variant="primary" onClick={this.saveChanges}>
-            Change Address
+            Confirm
           </Button>
         </Modal.Footer>
       </Modal>
