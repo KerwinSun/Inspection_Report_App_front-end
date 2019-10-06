@@ -7,6 +7,7 @@ import { jsonHouse, realEstateOptions } from "../config";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import store from "store";
+import DialogBox from "../components/DialogBox";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -337,14 +338,7 @@ class InspectionDetailsPage extends Component {
                 onClick={() => {
                   this.setState(
                     {
-                      isSubmitClicked: true
-                    },
-                    () => {
-                      if (this.isInputValid()) {
-                        this.setState({ isLoaded: false }, () =>
-                          this.handleClick()
-                        );
-                      }
+                      showAlert: true
                     }
                   );
                 }}
@@ -357,12 +351,8 @@ class InspectionDetailsPage extends Component {
                     toggleShowModal={this.toggleAlertModal}
                     addBackButton={true}
                     dialogCancelClick={this.toggleAlertModal}
-                    dialogOkClick={this.setState(
-                      {
-                        isSubmitClicked: true
-                      }
-                    )}
-                    title="Are you sure you want to e-mail the inspection?"
+                    dialogOkClick={this.dialogOkClick}
+                    title="Are you sure you want to begin a new inspection?"
                   />
                 ) : null}
             </Button.List>
