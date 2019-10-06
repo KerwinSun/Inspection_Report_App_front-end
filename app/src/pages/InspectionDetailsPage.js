@@ -24,7 +24,8 @@ class InspectionDetailsPage extends Component {
       cRealEstate: "",
       isSubmitClicked: false,
       isLoaded: true,
-      account: {}
+      account: {},
+      showAlert: false
     };
   }
 
@@ -37,6 +38,33 @@ class InspectionDetailsPage extends Component {
       cRealEstate: realEstateOptions[0],
       account: store.get("user")
     });
+  }
+
+  toggleAlertModal = () => {
+    this.setState(prevState => ({
+      showAlert: !prevState.showAlert
+    }));
+  };
+
+  saveButtonClicked() {
+    this.setState({
+      showAlert: true,
+    });
+  }
+
+  dialogOkClick = () => {
+    this.setState(
+      {
+        isSubmitClicked: true
+      },
+      () => {
+        if (this.isAddressValid()) {
+          this.setState({ isLoaded: false }, () =>
+            this.handleClick()
+          );
+        }
+      }
+    );
   }
 
   render() {
@@ -105,18 +133,18 @@ class InspectionDetailsPage extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  this.setState(
-                    {
-                      isSubmitClicked: true
-                    },
-                    () => {
-                      if (this.isAddressValid()) {
-                        this.setState({ isLoaded: false }, () =>
-                          this.handleClick()
-                        );
-                      }
-                    }
-                  );
+                  // this.setState(
+                  //   {
+                  //     isSubmitClicked: true
+                  //   },
+                  //   () => {
+                  //     if (this.isAddressValid()) {
+                  //       this.setState({ isLoaded: false }, () =>
+                  //         this.handleClick()
+                  //       );
+                  //     }
+                  //   }
+                  // );
                 }}
                 color="secondary"
               >
@@ -324,6 +352,19 @@ class InspectionDetailsPage extends Component {
               >
                 Begin Inspection
               </Button>
+              {this.state.showAlert ? (
+                  <DialogBox
+                    toggleShowModal={this.toggleAlertModal}
+                    addBackButton={true}
+                    dialogCancelClick={this.toggleAlertModal}
+                    dialogOkClick={this.setState(
+                      {
+                        isSubmitClicked: true
+                      }
+                    )}
+                    title="Are you sure you want to e-mail the inspection?"
+                  />
+                ) : null}
             </Button.List>
           </Page.Content>
         </SiteWrapper>
