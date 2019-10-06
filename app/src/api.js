@@ -35,6 +35,17 @@ export default {
       return res.data;
     });
   },
+
+  getCategory() {
+    let payload = {
+      url: "/category/",
+      method: "GET"
+    };
+    return axiosInstance(payload).then(res => {
+      return res.data;
+    });
+  },
+  
   getUsers() {
     let payload = {
       url: "/user/",
@@ -108,6 +119,7 @@ export default {
       url: "/House",
       method: "POST"
     };
+ //   console.log(payload)
     return axiosInstance(payload).then(response => {
       return response.data.id;
     });

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Page, Grid, Card, Button, Form, Alert } from "tabler-react";
+import Form from "react-jsonschema-form";
+import { Page, Grid, Card, Button, Form as TablerForm, Alert } from "tabler-react";
 import SiteWrapper from "../SiteWrapper";
 import API from "../api";
 import { jsonHouse, realEstateOptions } from "../config";
@@ -7,6 +8,17 @@ import { jsonHouse, realEstateOptions } from "../config";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import store from "store";
+
+
+const schema = {
+  title: "Todo",
+  type: "object",
+  required: ["title"],
+  properties: {
+    title: {type: "string", title: "Title", default: "A new task"},
+    done: {type: "boolean", title: "Done?", default: false}
+  }
+};
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -43,89 +55,87 @@ class InspectionDetailsPage extends Component {
     if (this.state.account.accountType === "Client") {
       return (
         <SiteWrapper>
-          <Page.Content title="New Inspection">
-            <Grid.Row cards={true}>
-              <Grid.Col width={12} lg={6}>
-                <Card title="Inspection Information">
-                  <Card.Body>
-                    <Form.Group label="Date">
-                      <Form.Input
-                        readOnly
-                        value={this.state.inspectionDate
-                          .substring(0, 10)
-                          .split("-")
-                          .reverse()
-                          .join("/")}
-                      />
-                    </Form.Group>
-                    <Form.Group label="Address">
-                      <Form.Input
-                        placeholder="Address"
-                        onChange={e =>
-                          this.setState({ address: e.target.value })
-                        }
-                        feedback={
-                          this.state.address === ""
-                            ? "Please input an address"
-                            : null
-                        }
-                        invalid={
-                          this.state.isSubmitClicked
-                            ? this.state.address === ""
-                            : null
-                        }
-                      />
-                    </Form.Group>
-                  </Card.Body>
-                </Card>
-              </Grid.Col>
-            </Grid.Row>
-            <Button.List align="center">
-              {this.state.isSubmitClicked ? (
-                !this.isAddressValid() ? (
-                  <Alert type="danger" icon="alert-triangle">
-                    Invalid information
-                  </Alert>
-                ) : this.state.isLoaded ? null : (
-                  <div className="btn-list text-center">
-                    <Loader
-                      type="ThreeDots"
-                      color="#316CBE"
-                      height={30}
-                      width={30}
+        <Page.Content title="New Inspection">
+          <Grid.Row cards={true}>
+              <Card title="Inspection Information">
+                <Card.Body>
+                  <TablerForm.Group label="Date">
+                    <TablerForm.Input
+                      readOnly
+                      value={this.state.inspectionDate
+                        .substring(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("/")}
                     />
-                  </div>
-                )
-              ) : null}
-              <Button
-                onClick={() => this.props.history.push("/home")}
-                color="secondary"
-              >
-                Back
-              </Button>
-              <Button
-                onClick={() => {
-                  this.setState(
-                    {
-                      isSubmitClicked: true
-                    },
-                    () => {
-                      if (this.isAddressValid()) {
-                        this.setState({ isLoaded: false }, () =>
-                          this.handleClick()
-                        );
+                  </TablerForm.Group>
+                  <TablerForm.Group label="Address">
+                    <TablerForm.Input
+                      placeholder="Address"
+                      onChange={e =>
+                        this.setState({ address: e.target.value })
                       }
+                      feedback={
+                        this.state.address === ""
+                          ? "Please input an address"
+                          : null
+                      }
+                      invalid={
+                        this.state.isSubmitClicked
+                          ? this.state.address === ""
+                          : null
+                      }
+                    />
+                  </TablerForm.Group>
+                </Card.Body>
+              </Card>
+          </Grid.Row>
+          <Button.List align="center">
+            {this.state.isSubmitClicked ? (
+              !this.isAddressValid() ? (
+                <Alert type="danger" icon="alert-triangle">
+                  Invalid information
+                </Alert>
+              ) : this.state.isLoaded ? null : (
+                <div className="btn-list text-center">
+                  <Loader
+                    type="ThreeDots"
+                    color="#316CBE"
+                    height={30}
+                    width={30}
+                  />
+                </div>
+              )
+            ) : null}
+            <Button
+              onClick={() => this.props.history.push("/home")}
+              color="secondary"
+            >
+              Back
+            </Button>
+            <Button
+              onClick={() => {
+                this.setState(
+                  {
+                    isSubmitClicked: true
+                  },
+                  () => {
+                    if (this.isAddressValid()) {
+                      this.setState({ isLoaded: false }, () =>
+                        this.handleClick()
+                      );
                     }
-                  );
-                }}
-                color="secondary"
-              >
-                Send Request
-              </Button>
-            </Button.List>
-          </Page.Content>
-        </SiteWrapper>
-      );
+                  }
+                );
+              }}
+              color="secondary"
+            >
+              Send Request
+            </Button>
+          </Button.List>
+        </Page.Content>
+      </SiteWrapper>
+    );
     } else {
       return (
         <SiteWrapper>
@@ -134,11 +144,11 @@ class InspectionDetailsPage extends Component {
               <Grid.Col width={12} lg={6}>
                 <Card title="Inspection Information">
                   <Card.Body>
-                    <Form.Group label="Inspector">
-                      <Form.Input readOnly value={this.state.iName} />
-                    </Form.Group>
-                    <Form.Group label="Date">
-                      <Form.Input
+                    <TablerForm.Group label="Inspector">
+                      <TablerForm.Input readOnly value={this.state.iName} />
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Date">
+                      <TablerForm.Input
                         readOnly
                         value={this.state.inspectionDate
                           .substring(0, 10)
@@ -146,9 +156,9 @@ class InspectionDetailsPage extends Component {
                           .reverse()
                           .join("/")}
                       />
-                    </Form.Group>
-                    <Form.Group label="Address">
-                      <Form.Input
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Address">
+                      <TablerForm.Input
                         placeholder="Address"
                         onChange={e =>
                           this.setState({ address: e.target.value })
@@ -164,15 +174,15 @@ class InspectionDetailsPage extends Component {
                             : null
                         }
                       />
-                    </Form.Group>
+                    </TablerForm.Group>
                   </Card.Body>
                 </Card>
               </Grid.Col>
               <Grid.Col width={12} lg={6}>
                 <Card title="Client Details">
                   <Card.Body>
-                    <Form.Group label="Summonsed By">
-                      <Form.Input
+                    <TablerForm.Group label="Summonsed By">
+                      <TablerForm.Input
                         placeholder="Name"
                         onChange={e => this.setState({ cName: e.target.value })}
                         feedback={
@@ -186,8 +196,8 @@ class InspectionDetailsPage extends Component {
                             : null
                         }
                       />
-                    </Form.Group>
-                    <Form.Group label="Home Phone">
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Home Phone">
                       <NumberFormat
                         displayType={"input"}
                         customInput={Form.Input}
@@ -206,8 +216,8 @@ class InspectionDetailsPage extends Component {
                             : null
                         }
                       />
-                    </Form.Group>
-                    <Form.Group label="Mobile Phone">
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Mobile Phone">
                       <NumberFormat
                         placeholder="Mobile Number"
                         displayType={"input"}
@@ -226,9 +236,9 @@ class InspectionDetailsPage extends Component {
                             : null
                         }
                       />
-                    </Form.Group>
-                    <Form.Group label="Address">
-                      <Form.Input
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Address">
+                      <TablerForm.Input
                         placeholder="Address"
                         onChange={e =>
                           this.setState({ cAddress: e.target.value })
@@ -244,9 +254,9 @@ class InspectionDetailsPage extends Component {
                             : null
                         }
                       />
-                    </Form.Group>
-                    <Form.Group label="Email Address">
-                      <Form.Input
+                    </TablerForm.Group>
+                    <TablerForm.Group label="Email Address">
+                      <TablerForm.Input
                         placeholder="Email Address"
                         feedback={
                           this.state.cEmailAddress === ""
@@ -265,10 +275,10 @@ class InspectionDetailsPage extends Component {
                           this.setState({ cEmailAddress: e.target.value });
                         }}
                       />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Real Estate</Form.Label>
-                      <Form.Select
+                    </TablerForm.Group>
+                    <TablerForm.Group>
+                      <TablerForm.Label>Real Estate</TablerForm.Label>
+                      <TablerForm.Select
                         onChange={e =>
                           this.setState({ cRealEstate: e.target.value })
                         }
@@ -276,8 +286,8 @@ class InspectionDetailsPage extends Component {
                         {realEstateOptions.map((dynamicData, i) => (
                           <option key={dynamicData}>{dynamicData}</option>
                         ))}
-                      </Form.Select>
-                    </Form.Group>
+                      </TablerForm.Select>
+                    </TablerForm.Group>
                   </Card.Body>
                 </Card>
               </Grid.Col>
@@ -349,7 +359,7 @@ class InspectionDetailsPage extends Component {
     return this.state.address !== "";
   };
 
-  handleClick = () => {
+ handleClick = () => {
     const {
       // userId,
       inspectionDate,
@@ -378,7 +388,17 @@ class InspectionDetailsPage extends Component {
     json.inspectionDate = inspectionDate;
     json.address = address;
     json.summonsedBy = client;
+    
+    API.getCategory()
+    .then(res => {
+      json.categories = res; 
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    json.inspectedBy = null;
 
+    console.log(json)
     API.postHouse(json)
       .then(id => {
         this.setState({ isLoaded: true });
