@@ -96,7 +96,7 @@ class UserEditModal extends React.Component {
                   onChange={e => this.setState({ cFirstName: e.target.value })}
                   feedback={
                     this.state.cFirstName === "" ||
-                    this.state.cFirstName === null
+                      this.state.cFirstName === null
                       ? "Please input the first name"
                       : null
                   }
@@ -136,9 +136,6 @@ class UserEditModal extends React.Component {
                       : null
                   }
                   value={this.state.cPhone}
-                  // invalid={
-                  //   this.state.isSubmitClicked ? this.state.cPhone === "" : null
-                  // }
                   invalid={
                     this.state.cPhone === "" || this.state.cPhone === null
                   }
@@ -190,20 +187,25 @@ class UserEditModal extends React.Component {
             />
           ) : null}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.togggleShowModal}>
-            Close
+        {this.state.showAlert ?
+          <Modal.Footer>
+          </Modal.Footer>
+          :
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.togggleShowModal} color='secondary'>
+              Close
           </Button>
-          <Button
-            variant="primary"
-            onClick={() => this.saveButtonClicked()}
-          >
-            Save changes
+            <Button
+              variant="primary"
+              onClick={() => this.saveButtonClicked()}
+              color="primary"
+            >
+              Save changes
           </Button>
-        </Modal.Footer>
-
+          </Modal.Footer>
+        }
       </Modal>
-      
+
     );
 
   }

@@ -27,21 +27,21 @@ class CreatePage extends Component {
           ContainerStyle="client_create"
         />
 
-      {this.state.showModal ? (
-                  <DialogBox
-                  togggleShowModal={this.togggleShowModal}
-                  dialogOkClick = {this.dialogOkClick}
-                  title={this.state.errorMessage}
-                  /> 
-                ) : null}
+        {this.state.showModal ? (
+          <DialogBox
+            togggleShowModal={this.togggleShowModal}
+            dialogOkClick={this.dialogOkClick}
+            title={this.state.errorMessage}
+          />
+        ) : null}
 
-      {this.state.showAlert ? (
-        <Alert type="danger" icon="alert-triangle">
-          Account already registered
+        {this.state.showAlert ? (
+          <Alert type="danger" icon="alert-triangle">
+            Account already registered
         </Alert>
-      ) : null}
+        ) : null}
       </div>
-      
+
     );
   }
   togggleShowModal = () => {
@@ -60,14 +60,14 @@ class CreatePage extends Component {
       this.state.confirmPassword !== ""
     );
   };
-  
+
   isEmail = email => {
     var regex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return regex.test(String(email).toLowerCase());
   }
 
   dialogOkClick = () => {
-    if(this.state.errorMessage === "Account Created.") {
+    if (this.state.errorMessage === "Account Created.") {
       this.props.history.push("/login")
     } else {
       this.togggleShowModal();
@@ -75,7 +75,7 @@ class CreatePage extends Component {
   }
 
   handleClick = (userInfo) => {
-    
+
     let userData = {
       FirstName: userInfo.firstName,
       LastName: userInfo.lastName,
@@ -86,18 +86,17 @@ class CreatePage extends Component {
     };
     API.checkAccount(userInfo.emailAddress)
       .then(res => {
-        // valid account (unregistered)
         this.setState({
           showAlert: false
         });
         API.createAccount(userData)
           .then(res => {
             if (res !== "User created failed") {
-              this.setState({errorMessage: "Account Created."})
+              this.setState({ errorMessage: "Account Created." })
             } else {
-              this.setState({errorMessage: "Account creation failed."})
+              this.setState({ errorMessage: "Account creation failed." })
             }
-            this.setState({showModal: true});
+            this.setState({ showModal: true });
           })
           .catch(error => {
             this.setState({
@@ -107,7 +106,6 @@ class CreatePage extends Component {
           })
       })
       .catch(error => {
-        // invalid account (registered)
         this.setState({
           showAlert: true
         });

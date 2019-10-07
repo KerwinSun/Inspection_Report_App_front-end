@@ -208,7 +208,6 @@ class CategoryPage extends Component {
   emailHouse() {
     API.getReportEmail(this.props.match.params.id)
     .then(res => {
-        console.log(res);
     })
     .catch(error => {
       console.log(error);

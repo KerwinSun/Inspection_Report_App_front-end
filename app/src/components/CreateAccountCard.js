@@ -10,18 +10,18 @@ class CreateAccountCard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          userId: -1,
-          inspectionDate: "",
-          firstName: "",
-          lastName: "",
-          phoneNumber: "",
-          emailAddress: "",
-          accountType: accountTypes[0],
-          password: "",
-          confirmPassword: "",
-          isSubmitClicked: false,
-          isLoaded: true,
-          loggedIn: false
+            userId: -1,
+            inspectionDate: "",
+            firstName: "",
+            lastName: "",
+            phoneNumber: "",
+            emailAddress: "",
+            accountType: accountTypes[0],
+            password: "",
+            confirmPassword: "",
+            isSubmitClicked: false,
+            isLoaded: true,
+            loggedIn: false
         };
     }
 
@@ -131,16 +131,16 @@ class CreateAccountCard extends Component {
                             />
                         </Form.Group>
                         {IsAdmin ?
-                        <Form.Group>
-                        <Form.Label>User Type</Form.Label>
-                            <Form.Select
-                            onChange={e => this.setState({ accountType: e.target.value })}>
+                            <Form.Group>
+                                <Form.Label>User Type</Form.Label>
+                                <Form.Select
+                                    onChange={e => this.setState({ accountType: e.target.value })}>
 
-                            {accountTypes.map((dynamicData, i) => (
-                            <option key={dynamicData}>{dynamicData}</option>
-                            ))}
-                            </Form.Select>
-                        </Form.Group>
+                                    {accountTypes.map((dynamicData, i) => (
+                                        <option key={dynamicData}>{dynamicData}</option>
+                                    ))}
+                                </Form.Select>
+                            </Form.Group>
                             :
                             <div></div>
                         }
@@ -183,55 +183,45 @@ class CreateAccountCard extends Component {
                         </Form.Group>
 
                         <Button.List align="center">
-                {this.state.isSubmitClicked ? (
-                    !this.isInputValid() ? (
-                        <Alert type="danger" icon="alert-triangle">
-                            Invalid information
+                            {this.state.isSubmitClicked ? (
+                                !this.isInputValid() ? (
+                                    <Alert type="danger" icon="alert-triangle">
+                                        Invalid information
                         </Alert>
-                    ) : null
-                //     ) : this.state.isLoaded ? null : (
-                //      <div className="btn-list text-center">
-                //        <Loader
-                //            type="ThreeDots"
-                //           color="#316CBE"
-                //          height={30}
-                //          width={30}
-                //        />
-                //      </div>
-                // )
-                ) : null}
-                <Button
-                onClick={() => {
-                    this.setState(
-                        {
-                            isSubmitClicked: false
-                        }
-                    )
-                    CancelClicked()
-                }}
-                color="secondary"
-                >
-                Cancel
+                                ) : null
+                            ) : null}
+                            <Button
+                                onClick={() => {
+                                    this.setState(
+                                        {
+                                            isSubmitClicked: false
+                                        }
+                                    )
+                                    CancelClicked()
+                                }}
+                                color="secondary"
+                            >
+                                Cancel
                 </Button>
-                <Button
-                onClick={() => {
-                    console.log(this.state.accountType)
-                    this.setState(
-                    {
-                        isSubmitClicked: true
-                    },
-                    () => {
-                        if (this.isInputValid()) {
-                        this.setState({isLoaded: false},() => this.submitClicked());
-                        }
-                    }
-                    );
-                }}
-                color="secondary"
-                >
-                Submit
+                            <Button
+                                onClick={() => {
+                                    console.log(this.state.accountType)
+                                    this.setState(
+                                        {
+                                            isSubmitClicked: true
+                                        },
+                                        () => {
+                                            if (this.isInputValid()) {
+                                                this.setState({ isLoaded: false }, () => this.submitClicked());
+                                            }
+                                        }
+                                    );
+                                }}
+                                color="secondary"
+                            >
+                                Submit
                 </Button>
-            </Button.List>
+                        </Button.List>
                     </Card.Body>
                 </Card>
             </div>

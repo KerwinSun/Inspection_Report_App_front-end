@@ -47,16 +47,16 @@ class HouseTable extends React.Component {
             if (houseState === "pending") {
                 //Client should be able to edit the address here
                 res.push(
-                <Button
-                    variant="primary"
-                    onClick={() => this.addressClicked(house)}    
-                >
-                    Change address
+                    <Button
+                        variant="primary"
+                        onClick={() => this.addressClicked(house)}
+                    >
+                        Change address
                 </Button>)
             } else if (houseState === "completed") {
                 //Client should be able to download report
                 res.push(<ReportSharing house={house}></ReportSharing>)
-            } 
+            }
         }
         return res;
     }
@@ -64,24 +64,24 @@ class HouseTable extends React.Component {
     render() {
         return (
             <Table cards={true} responsive={true} className="table-vcenter">
-            <Table.Body>
-                {this.props.houses.map(house => (
-                    <Table.Row key={house.id}>
-                        <div className="inspection-board">
-                            {house.inspectionDate.substring(0, 10).split("-").reverse().join("/")}
-                            {this.checkAccountType(this.props.accountType, house, this.props.houseState)}
-                            {this.state.showModal ? (
-                                <ChangeAddressModal 
-                                    toggleModal={this.toggleModal}
-                                    house={this.state.houseData}
-                                    componentDidMount={this.props.componentDidMount}
-                                />
-                            ) : null}
-                        </div>
-                    </Table.Row>
-                ))}
-            </Table.Body>
-        </Table>
+                <Table.Body>
+                    {this.props.houses.map(house => (
+                        <Table.Row key={house.id}>
+                            <div className="inspection-board">
+                                {house.inspectionDate.substring(0, 10).split("-").reverse().join("/")}
+                                {this.checkAccountType(this.props.accountType, house, this.props.houseState)}
+                                {this.state.showModal ? (
+                                    <ChangeAddressModal
+                                        toggleModal={this.toggleModal}
+                                        house={this.state.houseData}
+                                        componentDidMount={this.props.componentDidMount}
+                                    />
+                                ) : null}
+                            </div>
+                        </Table.Row>
+                    ))}
+                </Table.Body>
+            </Table>
         );
     }
 

@@ -29,7 +29,7 @@ class ReportSharing extends Component {
   simulateLoad = () => {
     this.setState({ isLoaded: false });
     setTimeout(
-      function() {
+      function () {
         this.setState({
           isLoaded: true
         });
@@ -86,8 +86,8 @@ class ReportSharing extends Component {
               ) : null} */}
           </div>
         ) : (
-          <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
-        )}
+            <Loader type="ThreeDots" color="#316CBE" height={30} width={30} />
+          )}
       </div>
     );
   }
@@ -100,16 +100,6 @@ class ReportSharing extends Component {
         isLoaded: false
       },
       () => {
-        // MOCK DOWNLOAD
-        // setTimeout(
-        //   function() {
-        //     this.setState({
-        //       reportURL: url,
-        //       isLoaded: true
-        //     });
-        //   }.bind(this),
-        //   1500
-        // );
         API.getReport(this.state.house.id).then(response => {
           this.setState({
             reportURL: url,

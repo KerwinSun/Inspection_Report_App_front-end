@@ -33,7 +33,7 @@ class ChangePasswordModal extends React.Component {
   isPassword = password => {
     var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})")
     return regex.test(String(password))
-    };
+  };
 
   saveChanges() {
     if (this.isInputValid()) {
@@ -78,62 +78,71 @@ class ChangePasswordModal extends React.Component {
             <Card.Body>
               <Form.Group label="Password">
                 <Form.Input
-                    type='password'
-                    placeholder="Password"
-                    onChange={e => this.setState({password: e.target.value})}
-                    feedback={
+                  type='password'
+                  placeholder="Password"
+                  onChange={e => this.setState({ password: e.target.value })}
+                  feedback={
+                    this.state.password === ""
+                      ? "Please input a password"
+                      : "Please input a valid password (At least 1 uppercase, 1 lowercase, 1 number, 1 special character, and a minimum of 8 characters)"
+                  }
+                  invalid={
+                    this.state.isSubmitClicked
+                      ? !this.isPassword(this.state.password)
+                      : !(
+                        this.isPassword(this.state.password) ||
                         this.state.password === ""
-                        ? "Please input a password"
-                        : "Please input a valid password (At least 1 uppercase, 1 lowercase, 1 number, 1 special character, and a minimum of 8 characters)"
-                    }
-                    invalid={
-                        this.state.isSubmitClicked
-                            ? !this.isPassword(this.state.password)
-                            : !(
-                                this.isPassword(this.state.password) ||
-                                this.state.password === ""
-                            )
-                    }
+                      )
+                  }
                 />
               </Form.Group>
               <Form.Group label="Confirm Password">
                 <Form.Input
-                    type="password"
-                    placeholder="Confirm Password"
-                    onChange={e => this.setState({ confirmPassword: e.target.value })}
-                    feedback={
-                        this.state.confirmPassword === ""
-                            ? "Please confirm the password"
-                            : "Passwords do not match"
-                    }
-                    invalid={
-                        this.state.isSubmitClicked
-                            ? this.state.confirmPassword === ""
-                            : !(this.state.confirmPassword === this.state.password)
-                    }
+                  type="password"
+                  placeholder="Confirm Password"
+                  onChange={e => this.setState({ confirmPassword: e.target.value })}
+                  feedback={
+                    this.state.confirmPassword === ""
+                      ? "Please confirm the password"
+                      : "Passwords do not match"
+                  }
+                  invalid={
+                    this.state.isSubmitClicked
+                      ? this.state.confirmPassword === ""
+                      : !(this.state.confirmPassword === this.state.password)
+                  }
                 />
-             </Form.Group>
+              </Form.Group>
             </Card.Body>
           </Card>
           {this.state.showAlert ? (
-                  <AlertModal
-                    type="warning"
-                    icon="bell"
-                    title="Confirmation"
-                    body="Are you sure you want to change this account's password?"
-                    backClicked={this.toggleAlertModal}
-                    confirmClicked={this.saveChanges}
-                  />
-                ) : null}
+            <AlertModal
+              type="warning"
+              icon="bell"
+              title="Confirmation"
+              body="Are you sure you want to change this account's password?"
+              backClicked={this.toggleAlertModal}
+              confirmClicked={this.saveChanges}
+            />
+          ) : null}
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.toggleShowPwModal}>
-            Cancel
+        {this.state.showAlert ?
+          <Modal.Footer>
+          </Modal.Footer>
+          :
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.props.toggleShowPwModal} color='secondary'>
+              Close
           </Button>
-          <Button variant="primary" onClick={() => this.saveButtonClicked()}>
-            Save new password
+            <Button
+              variant="primary"
+              onClick={() => this.saveButtonClicked()}
+              color="primary"
+            >
+              Save changes
           </Button>
-        </Modal.Footer>
+          </Modal.Footer>
+        }
       </Modal>
     );
   }

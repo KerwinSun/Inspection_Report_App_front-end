@@ -7,36 +7,12 @@ class DialogBox extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    // this.saveChanges = this.saveChanges.bind(this);
-
     this.state = {
       show: true,
       userdata: {}
     };
 
   }
-
-
-
-//   saveChanges() {
-//     let userData = {
-//         FirstName: userInfo.firstName,
-//         LastName: userInfo.lastName,
-//         Password: userInfo.password,
-//         Phone: userInfo.phoneNumber,
-//         Email: userInfo.emailAddress,
-//         AccountType: userInfo.accountType,
-//       };
-//       API.createAccount(userData)
-//         .then(res => {
-//           this.props.history.push("/login")
-//         })
-//         .catch(error => {
-//           console.log(error);
-//         });
-//   }
-
-  
 
   render() {
     return (
@@ -45,20 +21,20 @@ class DialogBox extends React.Component {
           <Modal.Title>Confirmation</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        {this.props.title}
+          {this.props.title}
         </Modal.Body>
         <Modal.Footer>
           {this.props.addBackButton ? (
             <Button variant="secondary" onClick={this.props.dialogCancelClick}>
-            Back
+              Back
           </Button>
           ) : null}
           <Button variant="primary" onClick={this.props.dialogOkClick}>
             OK
           </Button>
         </Modal.Footer>
-        
-          
+
+
       </Modal>
     );
   }
