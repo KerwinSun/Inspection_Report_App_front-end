@@ -7,6 +7,7 @@ import { jsonHouse, realEstateOptions } from "../config";
 import Loader from "react-loader-spinner";
 import NumberFormat from "react-number-format";
 import store from "store";
+import DialogBox from "../components/DialogBox";
 
 class InspectionDetailsPage extends Component {
   constructor(props) {
@@ -24,7 +25,8 @@ class InspectionDetailsPage extends Component {
       cRealEstate: "",
       isSubmitClicked: false,
       isLoaded: true,
-      account: {}
+      account: {},
+      showAlert: false
     };
   }
 
@@ -37,6 +39,33 @@ class InspectionDetailsPage extends Component {
       cRealEstate: realEstateOptions[0],
       account: store.get("user")
     });
+  }
+
+  toggleAlertModal = () => {
+    this.setState(prevState => ({
+      showAlert: !prevState.showAlert
+    }));
+  };
+
+  saveButtonClicked() {
+    this.setState({
+      showAlert: true,
+    });
+  }
+
+  dialogOkClick = () => {
+    this.setState(
+      {
+        isSubmitClicked: true
+      },
+      () => {
+        if (this.isAddressValid()) {
+          this.setState({ isLoaded: false }, () =>
+            this.handleClick()
+          );
+        }
+      }
+    );
   }
 
   render() {
@@ -105,18 +134,18 @@ class InspectionDetailsPage extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  this.setState(
-                    {
-                      isSubmitClicked: true
-                    },
-                    () => {
-                      if (this.isAddressValid()) {
-                        this.setState({ isLoaded: false }, () =>
-                          this.handleClick()
-                        );
-                      }
-                    }
-                  );
+                  // this.setState(
+                  //   {
+                  //     isSubmitClicked: true
+                  //   },
+                  //   () => {
+                  //     if (this.isAddressValid()) {
+                  //       this.setState({ isLoaded: false }, () =>
+                  //         this.handleClick()
+                  //       );
+                  //     }
+                  //   }
+                  // );
                 }}
                 color="secondary"
               >
@@ -309,14 +338,7 @@ class InspectionDetailsPage extends Component {
                 onClick={() => {
                   this.setState(
                     {
-                      isSubmitClicked: true
-                    },
-                    () => {
-                      if (this.isInputValid()) {
-                        this.setState({ isLoaded: false }, () =>
-                          this.handleClick()
-                        );
-                      }
+                      showAlert: true
                     }
                   );
                 }}
@@ -324,6 +346,15 @@ class InspectionDetailsPage extends Component {
               >
                 Begin Inspection
               </Button>
+              {this.state.showAlert ? (
+                  <DialogBox
+                    toggleShowModal={this.toggleAlertModal}
+                    addBackButton={true}
+                    dialogCancelClick={this.toggleAlertModal}
+                    dialogOkClick={this.dialogOkClick}
+                    title="Are you sure you want to begin a new inspection?"
+                  />
+                ) : null}
             </Button.List>
           </Page.Content>
         </SiteWrapper>
