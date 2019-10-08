@@ -134,23 +134,25 @@ class InspectionDetailsPage extends Component {
               </Button>
               <Button
                 onClick={() => {
-                  // this.setState(
-                  //   {
-                  //     isSubmitClicked: true
-                  //   },
-                  //   () => {
-                  //     if (this.isAddressValid()) {
-                  //       this.setState({ isLoaded: false }, () =>
-                  //         this.handleClick()
-                  //       );
-                  //     }
-                  //   }
-                  // );
+                  this.setState(
+                    {
+                      showAlert: true
+                    }
+                  );
                 }}
                 color="secondary"
               >
                 Send Request
               </Button>
+              {this.state.showAlert ? (
+                  <DialogBox
+                    toggleShowModal={this.toggleAlertModal}
+                    addBackButton={true}
+                    dialogCancelClick={this.toggleAlertModal}
+                    dialogOkClick={this.dialogOkClick}
+                    title="Are you sure you want to begin a new inspection?"
+                  />
+                ) : null}
             </Button.List>
           </Page.Content>
         </SiteWrapper>
